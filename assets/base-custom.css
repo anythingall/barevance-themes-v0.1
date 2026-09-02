@@ -1,0 +1,175 @@
+/*
+ * base-custom.css — Base theme shared utilities for custom-* sections.
+ * MOBILE-FIRST: base rules target mobile; min-width media queries add desktop.
+ * Never hard-code brand colors/fonts here — consume CSS variables (design tokens +
+ * Dawn color schemes). Colors come from the section's color_scheme wrapper.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Layout primitives
+ * ------------------------------------------------------------------ */
+
+/* Section vertical rhythm (mobile value first, desktop via token) */
+.custom-section {
+  padding-block: var(--custom-section-padding-block);
+}
+
+/* Constrained text/content column, centered */
+.custom-container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .custom-container {
+    padding-inline: 5rem;
+  }
+}
+
+.custom-container--narrow {
+  max-width: var(--custom-content-width);
+}
+
+/* ------------------------------------------------------------------ *
+ * Typography helpers
+ * ------------------------------------------------------------------ */
+
+/* Eyebrow / handwritten accent label */
+.custom-eyebrow {
+  font-family: var(--font-accent-family);
+  font-style: var(--font-accent-style);
+  font-weight: var(--font-accent-weight);
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+/*
+ * Fluid heading: smaller on mobile (via --heading-mobile-scale), grows to full
+ * size on larger viewports. Multiply by Dawn's --font-heading-scale so global
+ * heading-scale setting still applies.
+ */
+.custom-h1 {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-style: var(--font-heading-style);
+  line-height: 1.15;
+  font-size: calc(
+    clamp(2.8rem, 6vw + 1rem, 5.2rem) * var(--font-heading-scale) * var(--heading-mobile-scale)
+  );
+}
+
+.custom-h2 {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-style: var(--font-heading-style);
+  line-height: 1.2;
+  font-size: calc(
+    clamp(2.4rem, 4vw + 1rem, 3.6rem) * var(--font-heading-scale) * var(--heading-mobile-scale)
+  );
+}
+
+@media screen and (min-width: 990px) {
+  /* On desktop, drop the mobile shrink factor. */
+  .custom-h1,
+  .custom-h2 {
+    --heading-mobile-scale: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Cards & tap targets
+ * ------------------------------------------------------------------ */
+
+.custom-card {
+  border-radius: var(--custom-card-radius);
+  overflow: hidden;
+}
+
+/* Ensure interactive controls meet the 44px touch minimum on mobile. */
+.custom-tap {
+  min-height: var(--tap-target);
+  min-width: var(--tap-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Full-width CTA on mobile, auto on desktop */
+.custom-cta {
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .custom-cta {
+    width: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Responsive grid (mobile: 1 col → scales up)
+ * ------------------------------------------------------------------ */
+
+.custom-grid {
+  display: grid;
+  gap: var(--grid-mobile-horizontal-spacing, 1rem);
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .custom-grid {
+    gap: var(--grid-desktop-horizontal-spacing, 2rem);
+    grid-template-columns: repeat(var(--custom-grid-cols-tablet, 2), 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .custom-grid {
+    grid-template-columns: repeat(var(--custom-grid-cols-desktop, 4), 1fr);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Horizontal scroll-snap carousel (mobile pattern for grids/galleries)
+ * Prefer this over shrinking many columns on small screens.
+ * ------------------------------------------------------------------ */
+
+.custom-scroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--custom-scroller-item, 78%);
+  gap: 1.2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.5rem;
+  padding-inline: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.custom-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scroller > * {
+  scroll-snap-align: start;
+}
+
+/* On desktop, a scroller becomes a static grid (no horizontal scroll). */
+@media screen and (min-width: 990px) {
+  .custom-scroller--grid-on-desktop {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(var(--custom-scroller-cols-desktop, 4), 1fr);
+    grid-auto-columns: auto;
+    overflow: visible;
+    padding-inline: 0;
+  }
+}
+
+/* Wide tables (comparison / size chart): scroll horizontally on mobile
+   instead of overflowing the viewport. */
+.custom-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

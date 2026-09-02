@@ -1,0 +1,120 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
+        "quantity_selector": { "type": "quantity_selector" },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "description": { "type": "description" }
+      },
+      "block_order": ["title", "price", "variant_picker", "quantity_selector", "buy_buttons", "description"],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_position": "left",
+        "gallery_layout": "thumbnail",
+        "media_size": "large",
+        "mobile_thumbnails": "hide",
+        "image_zoom": "lightbox",
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "benefits": {
+      "type": "custom-icon-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "eye", "title": "Peekaboo Window", "text": "Let your pet see the world." } },
+        "b2": { "type": "benefit", "settings": { "icon": "leaf", "title": "Breathable & Airy", "text": "Mesh panels keep fresh air flowing." } },
+        "b3": { "type": "benefit", "settings": { "icon": "padlock", "title": "Secure & Safe", "text": "Zipper closure keeps your pet secure." } },
+        "b4": { "type": "benefit", "settings": { "icon": "heart", "title": "Lightweight Design", "text": "Easy to carry all day." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Why Customers Love It", "columns": 4, "source": "product_metafield" }
+    },
+    "problem": {
+      "type": "custom-image-with-text",
+      "blocks": {
+        "l1": { "type": "list_item", "settings": { "icon_style": "cross", "text": "Hard and uncomfortable materials" } },
+        "l2": { "type": "list_item", "settings": { "icon_style": "cross", "text": "Limited visibility for your pet" } },
+        "l3": { "type": "list_item", "settings": { "icon_style": "cross", "text": "Not stylish for everyday use" } }
+      },
+      "block_order": ["l1", "l2", "l3"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "The Problem",
+        "heading": "Your Pet Deserves Better.",
+        "text": "<p>Tired of bulky, uncomfortable carriers that stress your pet? It's time for a better way.</p>",
+        "desktop_media_placement": "left"
+      }
+    },
+    "solution": {
+      "type": "custom-image-with-text",
+      "blocks": {
+        "l1": { "type": "list_item", "settings": { "icon_style": "check", "text": "Peekaboo window your pet will love" } },
+        "l2": { "type": "list_item", "settings": { "icon_style": "check", "text": "Soft & breathable interior" } },
+        "l3": { "type": "list_item", "settings": { "icon_style": "check", "text": "Secure and sturdy construction" } },
+        "l4": { "type": "list_item", "settings": { "icon_style": "check", "text": "Perfect for daily outings and travel" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "The Solution",
+        "heading": "Meet the Product",
+        "text": "<p>A playful and practical design made for comfort, safety and style.</p>",
+        "desktop_media_placement": "right"
+      }
+    },
+    "how": {
+      "type": "custom-how-it-works",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "text": "Place your pet inside the tote." } },
+        "s2": { "type": "step", "settings": { "text": "Secure the zipper and adjust the strap." } },
+        "s3": { "type": "step", "settings": { "text": "Head out and enjoy the journey together!" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "color_scheme": "scheme-2", "heading": "How It Works", "subheading": "Simple steps for stress-free adventures." }
+    },
+    "comparison": {
+      "type": "custom-comparison-table",
+      "blocks": {
+        "c1": { "type": "row", "settings": { "feature": "Peekaboo window", "us": "check", "others": "cross" } },
+        "c2": { "type": "row", "settings": { "feature": "Soft material", "us": "check", "others": "partial" } },
+        "c3": { "type": "row", "settings": { "feature": "Breathable panels", "us": "check", "others": "cross" } },
+        "c4": { "type": "row", "settings": { "feature": "Lightweight & portable", "us": "check", "others": "partial" } },
+        "c5": { "type": "row", "settings": { "feature": "Secure closure", "us": "check", "others": "check" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Why Choose Us?", "us_label": "Our Brand", "others_label": "Standard" }
+    },
+    "reviews": {
+      "type": "custom-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "name": "Jessica M.", "stars": 5, "text": "My pet absolutely loves it and looks so cute. Perfect for daily walks!" } },
+        "r2": { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "text": "The quality is amazing and it's so well designed." } },
+        "r3": { "type": "review", "settings": { "name": "Sophie L.", "stars": 5, "text": "Perfect for our weekend trips and loves the design!" } },
+        "r4": { "type": "review", "settings": { "name": "Ethan B.", "stars": 5, "text": "Stylish, comfortable and practical. Highly recommend!" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Real Reviews", "columns": 4, "source": "product_metafield" }
+    },
+    "faq": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "Is this suitable for my pet?", "answer": "<p>Designed for small to medium pets.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "What are the dimensions?", "answer": "<p>See the size guide for full dimensions and weight capacity.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "How breathable is it?", "answer": "<p>Mesh panels keep air flowing for comfort.</p>" } },
+        "q4": { "type": "item", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe clean or hand wash.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Frequently Asked Questions", "columns": "2", "source": "product_metafield" }
+    },
+    "sticky_atc": {
+      "type": "custom-sticky-atc",
+      "settings": { "color_scheme": "scheme-1", "button_label": "Add to Cart" }
+    }
+  },
+  "order": ["main", "benefits", "problem", "solution", "how", "comparison", "reviews", "faq", "sticky_atc"]
+}

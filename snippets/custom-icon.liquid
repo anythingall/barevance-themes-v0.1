@@ -1,0 +1,12 @@
+{% doc %}
+  Renders a Dawn icon SVG by name. Shared by custom-* sections so the icon option list
+  stays consistent. Returns nothing when icon is 'none' or the asset is missing.
+  @param {string} icon - Icon key (e.g. 'leaf', 'check_mark', 'paw_print')
+  @example
+  {% render 'custom-icon', icon: 'leaf' %}
+{% enddoc %}
+
+{%- if icon != blank and icon != 'none' -%}
+  {%- assign file = icon | replace: '_', '-' | prepend: 'icon-' | append: '.svg' -%}
+  <span class="svg-wrapper">{{ file | inline_asset_content }}</span>
+{%- endif -%}

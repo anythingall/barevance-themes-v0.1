@@ -1,0 +1,55 @@
+{% doc %}
+  Renders a 5-star rating using the color scheme's accent color.
+  @param {number} rating - Rating value 0–5 (supports halves, e.g. 4.5)
+  @example
+  {% render 'custom-stars', rating: 4.5 %}
+{% enddoc %}
+
+{%- liquid
+  assign value = rating | default: 5 | times: 1.0
+  assign full = value | floor
+  assign remainder = value | minus: full
+  assign half_index = full | plus: 1
+-%}
+<span class="custom-stars" role="img" aria-label="{{ value }} / 5">
+  {%- for i in (1..5) -%}
+    {%- if i <= full -%}
+      <span class="custom-stars__star is-full">★</span>
+    {%- elsif i == half_index and remainder >= 0.5 -%}
+      <span class="custom-stars__star is-half">★</span>
+    {%- else -%}
+      <span class="custom-stars__star">★</span>
+    {%- endif -%}
+  {%- endfor -%}
+</span>
+
+{% stylesheet %}
+  .custom-stars {
+    display: inline-flex;
+    line-height: 1;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .custom-stars__star {
+    color: rgba(var(--color-foreground), 0.25);
+  }
+
+  .custom-stars__star.is-full {
+    color: rgb(var(--color-button));
+  }
+
+  .custom-stars__star.is-half {
+    position: relative;
+    color: rgba(var(--color-foreground), 0.25);
+  }
+
+  .custom-stars__star.is-half::before {
+    content: '★';
+    position: absolute;
+    inset: 0;
+    width: 50%;
+    overflow: hidden;
+    color: rgb(var(--color-button));
+  }
+{% endstylesheet %}

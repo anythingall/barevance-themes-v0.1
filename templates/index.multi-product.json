@@ -1,0 +1,122 @@
+{
+  "sections": {
+    "hero": {
+      "type": "custom-hero",
+      "blocks": {
+        "rating": { "type": "rating", "settings": { "stars": 5, "text": "Loved by 10,000+ happy customers" } },
+        "btn1": { "type": "button", "settings": { "label": "Shop Now", "style": "primary", "link": "shopify://collections/all" } },
+        "btn2": { "type": "button", "settings": { "label": "Explore Collections", "style": "secondary" } }
+      },
+      "block_order": ["rating", "btn1", "btn2"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "For the love of it.",
+        "heading": "Made for You.",
+        "heading_highlight": "Loved by Everyone.",
+        "subheading": "<p>Playful, practical and adorable finds for you and the people you love.</p>",
+        "footnote": "",
+        "content_alignment": "left",
+        "desktop_media_placement": "right"
+      }
+    },
+    "shop_the_life": {
+      "type": "multicolumn",
+      "blocks": {
+        "col1": { "type": "column", "settings": { "title": "For You", "text": "<p>Everyday essentials for a happy, healthy life.</p>", "link_label": "Shop Now", "link": "shopify://collections/all" } },
+        "col2": { "type": "column", "settings": { "title": "For Gifts", "text": "<p>Accessories and more to show off your love.</p>", "link_label": "Shop Now", "link": "shopify://collections/all" } },
+        "col3": { "type": "column", "settings": { "title": "For Every Occasion", "text": "<p>Perfect gifts for every occasion.</p>", "link_label": "Shop Gifts", "link": "shopify://collections/all" } }
+      },
+      "block_order": ["col1", "col2", "col3"],
+      "settings": {
+        "title": "Shop the Collection",
+        "heading_size": "h2",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "button_label": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "trust": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "tb1": { "type": "badge", "settings": { "icon": "heart", "title": "Loved by 10,000+", "subtitle": "Happy customers" } },
+        "tb2": { "type": "badge", "settings": { "icon": "star", "title": "4.9/5 Rating", "subtitle": "Based on 2,000+ reviews" } },
+        "tb3": { "type": "badge", "settings": { "icon": "check_mark", "title": "Designed with Care", "subtitle": "Every detail matters" } },
+        "tb4": { "type": "badge", "settings": { "icon": "padlock", "title": "Safe & High Quality", "subtitle": "Premium materials" } }
+      },
+      "block_order": ["tb1", "tb2", "tb3", "tb4"],
+      "settings": { "color_scheme": "scheme-2" }
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "heading_size": "h2",
+        "collection": "best-sellers",
+        "products_to_show": 6,
+        "columns_desktop": 6,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "view_all_style": "link",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "shop_by_category": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": { "type": "featured_collection" },
+        "c2": { "type": "featured_collection" },
+        "c3": { "type": "featured_collection" },
+        "c4": { "type": "featured_collection" },
+        "c5": { "type": "featured_collection" },
+        "c6": { "type": "featured_collection" }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
+      "settings": {
+        "title": "Shop by Category",
+        "image_ratio": "square",
+        "columns_desktop": 6,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 28,
+        "padding_bottom": 40
+      }
+    },
+    "reviews": {
+      "type": "custom-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "name": "Jessica M.", "stars": 5, "text": "Absolutely love it! Great quality." } },
+        "r2": { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "text": "So cute and super comfortable." } },
+        "r3": { "type": "review", "settings": { "name": "Sophie L.", "stars": 5, "text": "Best purchase for my little one!" } },
+        "r4": { "type": "review", "settings": { "name": "Ethan B.", "stars": 4.5, "text": "Adorable and great quality." } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Real Stories from Real Customers", "columns": 4 }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Join the Family" } },
+        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Get 10% off your first order and exclusive offers.</p>" } },
+        "email_form": { "type": "email_form" }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": { "color_scheme": "scheme-2", "full_width": true, "padding_top": 40, "padding_bottom": 40 }
+    }
+  },
+  "order": ["hero", "shop_the_life", "trust", "best_sellers", "shop_by_category", "reviews", "newsletter"]
+}

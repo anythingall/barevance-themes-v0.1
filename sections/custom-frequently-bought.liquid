@@ -1,0 +1,226 @@
+{%- comment -%}
+  custom-frequently-bought — "Frequently bought together" bundle (mobile-first).
+  Products chosen via blocks (Shopify-native, no hard-coded prices). Adds all items to
+  cart in one POST. Mobile: cards stack vertically; desktop: inline row with + separators.
+{%- endcomment -%}
+
+{%- liquid
+  assign total = 0
+  assign total_compare = 0
+  for block in section.blocks
+    assign p = block.settings.product
+    assign v = p.selected_or_first_available_variant
+    if v != blank
+      assign total = total | plus: v.price
+      assign c = v.compare_at_price | default: v.price
+      assign total_compare = total_compare | plus: c
+    endif
+  endfor
+-%}
+
+<div class="custom-fbt color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="custom-h2 custom-fbt__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="custom-fbt__layout">
+      <div class="custom-fbt__items">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign p = block.settings.product
+            assign v = p.selected_or_first_available_variant
+          -%}
+          <div class="custom-fbt__item" {{ block.shopify_attributes }}>
+            <div class="custom-fbt__media">
+              {%- if p.featured_image != blank -%}
+                {{ p.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', class: 'custom-fbt__img', alt: p.title }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'custom-fbt__img placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="custom-fbt__meta">
+              <span class="custom-fbt__title">{{ p.title | default: 'Select a product' }}</span>
+              {%- if v != blank -%}<span class="custom-fbt__price">{{ v.price | money }}</span>{%- endif -%}
+            </div>
+          </div>
+          {%- unless forloop.last -%}
+            <span class="custom-fbt__plus" aria-hidden="true">+</span>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="custom-fbt__summary custom-card">
+        <div class="custom-fbt__total">
+          <span class="custom-fbt__total-label">Total price:</span>
+          <span class="custom-fbt__total-value">{{ total | money }}</span>
+          {%- if total_compare > total -%}
+            <s class="custom-fbt__total-was">{{ total_compare | money }}</s>
+          {%- endif -%}
+        </div>
+        {%- if total_compare > total -%}
+          {%- assign saved = total_compare | minus: total | times: 100 | divided_by: total_compare -%}
+          <span class="custom-fbt__save">You save {{ saved }}%</span>
+        {%- endif -%}
+
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-fbt__form">
+          {%- for block in section.blocks -%}
+            {%- assign v = block.settings.product.selected_or_first_available_variant -%}
+            {%- if v != blank -%}
+              <input type="hidden" name="items[{{ forloop.index0 }}][id]" value="{{ v.id }}">
+              <input type="hidden" name="items[{{ forloop.index0 }}][quantity]" value="1">
+            {%- endif -%}
+          {%- endfor -%}
+          <button type="submit" class="button button--primary custom-cta">{{ section.settings.button_label }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-fbt__heading {
+    margin: 0 0 2.4rem;
+  }
+
+  .custom-fbt__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .custom-fbt__items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .custom-fbt__item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  .custom-fbt__media {
+    width: 7rem;
+    height: 7rem;
+    flex: 0 0 auto;
+  }
+
+  .custom-fbt__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    display: block;
+  }
+
+  .custom-fbt__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .custom-fbt__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .custom-fbt__plus {
+    font-size: 2rem;
+    opacity: 0.5;
+  }
+
+  .custom-fbt__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 2rem;
+    background: rgba(var(--color-foreground), 0.04);
+    border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+    text-align: center;
+  }
+
+  .custom-fbt__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .custom-fbt__total-value {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .custom-fbt__total-was {
+    opacity: 0.55;
+  }
+
+  .custom-fbt__save {
+    color: rgb(var(--color-button));
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-fbt__layout {
+      flex-direction: row;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .custom-fbt__items {
+      flex-direction: row;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .custom-fbt__item {
+      flex-direction: column;
+      text-align: center;
+      width: auto;
+      flex: 0 1 14rem;
+    }
+
+    .custom-fbt__media {
+      width: 12rem;
+      height: 12rem;
+    }
+
+    .custom-fbt__summary {
+      flex: 0 0 26rem;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Bought together",
+  "tag": "section",
+  "class": "custom-fbt-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Bought Together" },
+    { "type": "text", "id": "button_label", "label": "Nút", "default": "Add All to Cart" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 5,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bought together",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
+    }
+  ]
+}
+{% endschema %}

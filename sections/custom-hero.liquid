@@ -1,0 +1,559 @@
+{%- comment -%}
+  custom-hero — Shared hero section (mobile-first) used by One Product / Multi Style /
+  Multi Product templates and PDP. Media + content two-column on desktop, stacked on mobile.
+  Colors/fonts come from the color scheme + global design tokens (never hard-coded).
+{%- endcomment -%}
+
+{%- liquid
+  assign media_placement = section.settings.desktop_media_placement
+  assign mobile_pos = section.settings.mobile_media_position
+  assign align = section.settings.content_alignment
+  if align == 'center'
+    assign align_items = 'center'
+  else
+    assign align_items = 'flex-start'
+  endif
+-%}
+
+<div
+  class="custom-hero color-{{ section.settings.color_scheme }} gradient custom-section custom-hero--h-{{ section.settings.section_height }}"
+  style="--hero-align: {{ align }}; --hero-align-items: {{ align_items }};"
+>
+  <div class="custom-container custom-hero__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
+    <div class="custom-hero__media custom-card">
+      {%- if section.settings.image != blank -%}
+        <picture>
+          {%- if section.settings.mobile_image != blank -%}
+            <source
+              media="(max-width: 749px)"
+              srcset="{{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1100 }} 1100w"
+            >
+          {%- endif -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '450, 660, 900, 1100, 1400, 1600',
+              class: 'custom-hero__image',
+              alt: section.settings.image.alt | default: section.settings.heading
+          }}
+        </picture>
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'custom-hero__image placeholder-svg' }}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' -%}
+          <div class="custom-hero__badge" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <span class="custom-hero__badge-title">{{ block.settings.title }}</span>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <span class="custom-hero__badge-text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="custom-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="custom-eyebrow custom-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="custom-h1 custom-hero__heading">
+          {{ section.settings.heading }}
+          {%- if section.settings.heading_highlight != blank -%}
+            <span class="custom-hero__heading-accent">{{ section.settings.heading_highlight }}</span>
+          {%- endif -%}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="custom-hero__subheading rte">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+
+      {%- assign feature_blocks = section.blocks | where: 'type', 'feature' -%}
+      {%- if feature_blocks.size > 0 -%}
+        <ul class="custom-hero__features" role="list">
+          {%- for block in feature_blocks -%}
+            <li class="custom-hero__feature" {{ block.shopify_attributes }}>
+              <span class="custom-hero__feature-icon">
+                {%- render 'icon-accordion', icon: block.settings.icon -%}
+              </span>
+              {%- if block.settings.text != blank -%}
+                <span class="custom-hero__feature-text">{{ block.settings.text }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- assign rating_blocks = section.blocks | where: 'type', 'rating' -%}
+      {%- for block in rating_blocks -%}
+        <div class="custom-hero__rating" {{ block.shopify_attributes }}>
+          {%- if block.settings.avatars != blank -%}
+            {{
+              block.settings.avatars
+              | image_url: width: 240
+              | image_tag: loading: 'lazy', class: 'custom-hero__avatars', alt: ''
+            }}
+          {%- endif -%}
+          <span class="custom-hero__rating-body">
+            {%- render 'custom-stars', rating: block.settings.stars -%}
+            {%- if block.settings.text != blank -%}
+              <span class="custom-hero__rating-text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </span>
+        </div>
+      {%- endfor -%}
+
+      {%- assign button_blocks = section.blocks | where: 'type', 'button' -%}
+      {%- if button_blocks.size > 0 -%}
+        <div class="custom-hero__buttons">
+          {%- for block in button_blocks -%}
+            {%- if block.settings.label != blank -%}
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="button custom-cta {% if block.settings.style == 'secondary' %}button--secondary{% else %}button--primary{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {{- block.settings.label -}}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.footnote != blank -%}
+        <p class="custom-hero__footnote">{{ section.settings.footnote }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    align-items: stretch;
+  }
+
+  /* Mobile media order */
+  .custom-hero__inner.mobile-bottom {
+    flex-direction: column-reverse;
+  }
+
+  .custom-hero__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+
+  .custom-hero__image,
+  .custom-hero__media .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .custom-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    text-align: var(--hero-align, left);
+    align-items: var(--hero-align-items, flex-start);
+  }
+
+  .custom-hero__eyebrow {
+    color: rgb(var(--color-button));
+    margin: 0;
+  }
+
+  .custom-hero__heading {
+    margin: 0;
+  }
+
+  .custom-hero__heading-accent {
+    color: rgb(var(--color-button));
+    display: inline;
+  }
+
+  .custom-hero__subheading {
+    max-width: 52rem;
+    opacity: 0.85;
+  }
+
+  .custom-hero__features {
+    list-style: none;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem 2rem;
+  }
+
+  .custom-hero__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+    flex: 0 0 auto;
+    min-width: 7rem;
+    font-size: 1.3rem;
+  }
+
+  .custom-hero__feature .svg-wrapper {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .custom-hero__rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .custom-hero__avatars {
+    height: 3.2rem;
+    width: auto;
+    border-radius: 999px;
+  }
+
+  .custom-hero__rating-body {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .custom-hero__rating-text {
+    font-size: 1.3rem;
+    opacity: 0.85;
+  }
+
+  .custom-hero__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 0.4rem;
+  }
+
+  .custom-hero__footnote {
+    font-size: 1.3rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Circular callout badge over media */
+  .custom-hero__badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 9.5rem;
+    height: 9.5rem;
+    border-radius: 999px;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 0.3rem;
+  }
+
+  .custom-hero__badge-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+
+  .custom-hero__badge-text {
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  /* Section height modifiers (min-heights on desktop) */
+  @media screen and (min-width: 750px) {
+    .custom-hero__badge {
+      width: 12rem;
+      height: 12rem;
+      top: 2rem;
+      right: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .custom-hero__inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .custom-hero__inner.media-left {
+      flex-direction: row-reverse;
+    }
+
+    .custom-hero__media,
+    .custom-hero__content {
+      flex: 1 1 50%;
+      min-width: 0;
+    }
+
+    .custom-hero__media {
+      aspect-ratio: 1 / 1;
+    }
+
+    .custom-hero--h-large .custom-hero__media {
+      aspect-ratio: 4 / 5;
+    }
+
+    .custom-hero--h-small .custom-hero__media {
+      aspect-ratio: 3 / 2;
+    }
+
+    .custom-hero__buttons {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "custom-hero-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Image (mobile, optional)",
+      "info": "Ảnh riêng cho mobile để tối ưu khung hình & dung lượng."
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_placement",
+      "label": "Vị trí ảnh (desktop)",
+      "options": [
+        { "value": "right", "label": "Bên phải" },
+        { "value": "left", "label": "Bên trái" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_position",
+      "label": "Vị trí ảnh (mobile)",
+      "options": [
+        { "value": "top", "label": "Trên nội dung" },
+        { "value": "bottom", "label": "Dưới nội dung" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Chiều cao ảnh (desktop)",
+      "options": [
+        { "value": "small", "label": "Thấp" },
+        { "value": "medium", "label": "Vừa" },
+        { "value": "large", "label": "Cao" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (accent font)",
+      "default": "Made for cats."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Cutest Way To Take Your Cat"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight",
+      "info": "Phần này hiển thị theo màu nhấn của color scheme.",
+      "default": "Everywhere."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>A cozy and breathable design that keeps your pet safe, comfy, and part of every adventure.</p>"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote (dưới nút)",
+      "default": "🚚 Free shipping today!"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Căn nội dung",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature icon",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "leaf",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "check_mark", "label": "Check" },
+            { "value": "eye", "label": "Eye" },
+            { "value": "paw_print", "label": "Paw" },
+            { "value": "plane", "label": "Plane" },
+            { "value": "star", "label": "Star" },
+            { "value": "fire", "label": "Fire" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "padlock", "label": "Padlock (secure)" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Lightweight & Easy to Carry"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating / social proof",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatars",
+          "label": "Avatars (ảnh nhóm khách hàng)"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Số sao",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "4.9/5 from 10,000+ happy customers"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Kiểu nút",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary (outline)" }
+          ],
+          "default": "primary"
+        }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Circular badge",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tiêu đề",
+          "default": "PEEKABOO WINDOW"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Mô tả",
+          "default": "So your kitty can see the world"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "leaf", "text": "Lightweight & Easy to Carry" } },
+        { "type": "feature", "settings": { "icon": "eye", "text": "Breathable Mesh" } },
+        { "type": "feature", "settings": { "icon": "lock", "text": "Secure & Escape-Resistant" } },
+        { "type": "feature", "settings": { "icon": "heart", "text": "Adorable Design" } },
+        { "type": "rating" },
+        { "type": "button", "settings": { "label": "Shop now", "style": "primary" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

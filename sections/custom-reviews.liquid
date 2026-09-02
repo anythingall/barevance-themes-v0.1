@@ -1,0 +1,209 @@
+{%- comment -%}
+  custom-reviews — Testimonial / review cards (mobile-first).
+  Mobile: horizontal scroll-snap carousel. Desktop: grid of N columns.
+  Manual blocks now; a metafield/app source can be added later without markup changes.
+{%- endcomment -%}
+
+<div class="custom-reviews color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="custom-reviews__head" style="text-align: {{ section.settings.heading_alignment }};">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="custom-h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div
+      class="custom-reviews__grid custom-scroller custom-scroller--grid-on-desktop list-unstyled"
+      style="--custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 82%;"
+    >
+      {%- liquid
+        assign mf_reviews = product.metafields.custom.reviews.value
+        assign use_mf = false
+        if section.settings.source == 'product_metafield' and mf_reviews != blank
+          assign use_mf = true
+        endif
+      -%}
+      {%- if use_mf -%}
+        {%- for review in mf_reviews -%}
+          <div class="custom-reviews__card custom-card">
+            <div class="custom-reviews__stars">{%- render 'custom-stars', rating: review.rating -%}</div>
+            {%- if review.text != blank -%}
+              <p class="custom-reviews__text">{{ review.text }}</p>
+            {%- endif -%}
+            <div class="custom-reviews__author">
+              {%- if review.avatar != blank -%}
+                {{ review.avatar | image_url: width: 120 | image_tag: loading: 'lazy', class: 'custom-reviews__avatar', alt: review.author }}
+              {%- endif -%}
+              <span class="custom-reviews__author-body">
+                {%- if review.author != blank -%}
+                  <span class="custom-reviews__name">{{ review.author }}</span>
+                {%- endif -%}
+                {%- if review.badge != blank -%}
+                  <span class="custom-reviews__verified">{{ review.badge }}</span>
+                {%- endif -%}
+              </span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          <div class="custom-reviews__card custom-card" {{ block.shopify_attributes }}>
+            <div class="custom-reviews__stars">{%- render 'custom-stars', rating: block.settings.stars -%}</div>
+            {%- if block.settings.text != blank -%}
+              <p class="custom-reviews__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            <div class="custom-reviews__author">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 120
+                  | image_tag: loading: 'lazy', class: 'custom-reviews__avatar', alt: block.settings.name
+                }}
+              {%- endif -%}
+              <span class="custom-reviews__author-body">
+                {%- if block.settings.name != blank -%}
+                  <span class="custom-reviews__name">{{ block.settings.name }}</span>
+                {%- endif -%}
+                {%- if block.settings.badge != blank -%}
+                  <span class="custom-reviews__verified">{{ block.settings.badge }}</span>
+                {%- endif -%}
+              </span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-reviews__head {
+    margin-bottom: 2.8rem;
+  }
+
+  .custom-reviews__head .custom-eyebrow {
+    margin: 0 0 0.6rem;
+    color: rgb(var(--color-button));
+  }
+
+  .custom-reviews__head .custom-h2 {
+    margin: 0;
+  }
+
+  .custom-reviews__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2rem;
+    background: rgba(var(--color-foreground), 0.04);
+    border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    height: 100%;
+  }
+
+  .custom-reviews__text {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.55;
+  }
+
+  .custom-reviews__author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .custom-reviews__avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+
+  .custom-reviews__author-body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .custom-reviews__name {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  .custom-reviews__verified {
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": "section",
+  "class": "custom-reviews-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Nguồn dữ liệu",
+      "info": "Product metafield: đọc product.custom.reviews (metaobject) khi ở trang sản phẩm. Fallback về blocks.",
+      "options": [
+        { "value": "blocks", "label": "Blocks (nhập tay)" },
+        { "value": "product_metafield", "label": "Product metafield (reviews)" }
+      ],
+      "default": "blocks"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by Thousands of Customers" },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Căn tiêu đề",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Số cột (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Avatar" },
+        { "type": "range", "id": "stars", "label": "Số sao", "min": 0, "max": 5, "step": 0.5, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Absolutely love it! Great quality and looks amazing." },
+        { "type": "text", "id": "name", "label": "Tên", "default": "Jessica M." },
+        { "type": "text", "id": "badge", "label": "Nhãn", "default": "Verified Buyer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Jessica M." } },
+        { "type": "review", "settings": { "name": "Daniel K." } },
+        { "type": "review", "settings": { "name": "Sophie L." } },
+        { "type": "review", "settings": { "name": "Ethan B." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

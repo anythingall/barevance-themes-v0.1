@@ -1,0 +1,230 @@
+{%- comment -%}
+  custom-pricing-tiers — Bundle / quantity offers (1× / 2× / 3×) for One Product stores.
+  Each tier is a real product (or variant) added to cart with a chosen quantity — no
+  hard-coded prices. Mobile: tiers stack; the highlighted tier is emphasised.
+{%- endcomment -%}
+
+<div class="custom-tiers color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="custom-h2 custom-tiers__heading" style="text-align: {{ section.settings.heading_alignment }};">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    <div class="custom-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 3 }};">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign product = block.settings.product
+          assign qty = block.settings.quantity | at_least: 1
+          assign variant = product.selected_or_first_available_variant
+          assign unit_price = variant.price | default: product.price
+          assign total_price = unit_price | times: qty
+          assign compare = variant.compare_at_price | default: product.compare_at_price
+          assign total_compare = compare | times: qty
+        -%}
+        <div class="custom-tiers__card custom-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.badge != blank -%}
+            <span class="custom-tiers__badge">{{ block.settings.badge }}</span>
+          {%- endif -%}
+
+          <div class="custom-tiers__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-tiers__img', alt: block.settings.label }}
+            {%- elsif product.featured_image != blank -%}
+              {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-tiers__img', alt: product.title }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'custom-tiers__img placeholder-svg' }}
+            {%- endif -%}
+          </div>
+
+          <h3 class="custom-tiers__label">{{ block.settings.label | default: product.title }}</h3>
+
+          <div class="custom-tiers__price">
+            <span class="custom-tiers__price-now">{{ total_price | money }}</span>
+            {%- if total_compare > total_price -%}
+              <s class="custom-tiers__price-was">{{ total_compare | money }}</s>
+            {%- endif -%}
+          </div>
+
+          {%- if total_compare > total_price -%}
+            {%- assign saved = total_compare | minus: total_price | times: 100 | divided_by: total_compare -%}
+            <span class="custom-tiers__save">Save {{ saved }}%</span>
+          {%- endif -%}
+
+          {%- if product != blank and variant != blank -%}
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-tiers__form">
+              <input type="hidden" name="id" value="{{ variant.id }}">
+              <input type="hidden" name="quantity" value="{{ qty }}">
+              <button
+                type="submit"
+                name="add"
+                class="button custom-cta {% if block.settings.highlight %}button--primary{% else %}button--secondary{% endif %}"
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {%- if variant.available -%}
+                  {{ section.settings.button_label }}
+                {%- else -%}
+                  Sold out
+                {%- endif -%}
+              </button>
+            </form>
+          {%- else -%}
+            <p class="custom-tiers__empty">Chọn product cho tier này.</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-tiers__heading {
+    margin: 0 0 2.8rem;
+  }
+
+  .custom-tiers__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .custom-tiers__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    text-align: center;
+    padding: 2.4rem 1.6rem 2rem;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    background: rgb(var(--color-background));
+  }
+
+  .custom-tiers__card.is-highlight {
+    border-color: rgb(var(--color-button));
+    border-width: 0.2rem;
+  }
+
+  .custom-tiers__badge {
+    position: absolute;
+    top: -1.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .custom-tiers__media {
+    width: 100%;
+    max-width: 18rem;
+    aspect-ratio: 1 / 1;
+  }
+
+  .custom-tiers__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .custom-tiers__label {
+    margin: 0;
+    font-size: 1.7rem;
+  }
+
+  .custom-tiers__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+
+  .custom-tiers__price-now {
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+
+  .custom-tiers__price-was {
+    opacity: 0.55;
+  }
+
+  .custom-tiers__save {
+    color: rgb(var(--color-button));
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .custom-tiers__form {
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+
+  .custom-tiers__form .custom-cta {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-tiers__grid {
+      grid-template-columns: repeat(var(--tier-cols, 3), 1fr);
+      align-items: center;
+    }
+
+    .custom-tiers__card.is-highlight {
+      transform: scale(1.04);
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Pricing tiers",
+  "tag": "section",
+  "class": "custom-tiers-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your Set" },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Căn tiêu đề",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "center"
+    },
+    { "type": "text", "id": "button_label", "label": "Nút", "default": "Add to Cart" }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Tier",
+      "limit": 4,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "quantity", "label": "Số lượng thêm vào giỏ", "min": 1, "max": 10, "step": 1, "default": 1 },
+        { "type": "text", "id": "label", "label": "Nhãn tier", "default": "1 × Product" },
+        { "type": "text", "id": "badge", "label": "Badge (vd MOST POPULAR)" },
+        { "type": "checkbox", "id": "highlight", "label": "Nổi bật tier này", "default": false },
+        { "type": "image_picker", "id": "image", "label": "Ảnh riêng (tuỳ chọn)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing tiers",
+      "blocks": [
+        { "type": "tier", "settings": { "quantity": 1, "label": "1 × Product" } },
+        { "type": "tier", "settings": { "quantity": 2, "label": "2 × Product", "badge": "MOST POPULAR", "highlight": true } },
+        { "type": "tier", "settings": { "quantity": 3, "label": "3 × Product" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+{%- comment -%}
+  custom-sticky-atc — Mobile sticky Add-to-Cart bar for product pages.
+  Shows product title + price and an Add-to-cart button that triggers the real
+  product form (preserving the selected variant). Hidden on desktop and while the
+  main buy button is on screen. Respects the global `enable_sticky_atc` setting.
+{%- endcomment -%}
+
+{%- if settings.enable_sticky_atc and product != blank -%}
+  <sticky-atc class="custom-sticky-atc color-{{ section.settings.color_scheme }} gradient" hidden>
+    <div class="custom-sticky-atc__inner">
+      <div class="custom-sticky-atc__info">
+        {%- if product.featured_image != blank -%}
+          {{ product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy', class: 'custom-sticky-atc__img', alt: '' }}
+        {%- endif -%}
+        <span class="custom-sticky-atc__text">
+          <span class="custom-sticky-atc__title">{{ product.title }}</span>
+          <span class="custom-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+        </span>
+      </div>
+      <button type="button" class="button button--primary custom-sticky-atc__btn" data-sticky-atc-trigger>
+        {{ section.settings.button_label }}
+      </button>
+    </div>
+  </sticky-atc>
+
+  <script>
+    (function () {
+      class StickyAtc extends HTMLElement {
+        connectedCallback() {
+          this.trigger = this.querySelector('[data-sticky-atc-trigger]');
+          this.mainForm = document.querySelector('product-form .product-form__submit, .product-form__submit');
+          this.mainButtons = document.querySelector('.product-form__buttons, product-form');
+
+          if (this.trigger && this.mainForm) {
+            this.trigger.addEventListener('click', () => this.mainForm.click());
+          }
+
+          if (this.mainButtons && 'IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                this.hidden = entry.isIntersecting;
+              });
+            }, { rootMargin: '0px 0px -80px 0px' });
+            this.observer.observe(this.mainButtons);
+          } else {
+            this.hidden = false;
+          }
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+      }
+
+      if (!customElements.get('sticky-atc')) {
+        customElements.define('sticky-atc', StickyAtc);
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .custom-sticky-atc {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    box-shadow: 0 -0.2rem 1.2rem rgba(0, 0, 0, 0.12);
+    background: rgb(var(--color-background));
+    padding: 1rem 1.4rem calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  .custom-sticky-atc[hidden] {
+    display: none;
+  }
+
+  .custom-sticky-atc__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .custom-sticky-atc__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .custom-sticky-atc__img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.6rem;
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+
+  .custom-sticky-atc__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+  }
+
+  .custom-sticky-atc__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .custom-sticky-atc__price {
+    font-size: 1.4rem;
+  }
+
+  .custom-sticky-atc__btn {
+    flex: 0 0 auto;
+    min-height: var(--tap-target);
+  }
+
+  /* Mobile-only surface */
+  @media screen and (min-width: 750px) {
+    .custom-sticky-atc {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Sticky add to cart",
+  "tag": "section",
+  "class": "custom-sticky-atc-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "button_label", "label": "Nút", "default": "Add to Cart" },
+    { "type": "paragraph", "content": "Chỉ hiển thị trên mobile ở trang sản phẩm. Bật/tắt chung ở Theme settings > Base theme." }
+  ]
+}
+{% endschema %}

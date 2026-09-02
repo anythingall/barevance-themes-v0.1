@@ -1,0 +1,143 @@
+{%- comment -%}
+  custom-cta-banner — Full-width CTA with background image + overlay (mobile-first).
+  Text stacks and centers on mobile; button is full-width on mobile.
+{%- endcomment -%}
+
+<div class="custom-cta-banner color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    <div class="custom-cta-banner__box custom-card" style="--overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'lazy',
+            sizes: '100vw',
+            widths: '750, 1100, 1500, 2000',
+            class: 'custom-cta-banner__bg',
+            alt: ''
+        }}
+      {%- endif -%}
+      <div class="custom-cta-banner__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="custom-h2 custom-cta-banner__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="custom-cta-banner__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <div class="custom-cta-banner__actions">
+            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary custom-cta">
+              {{- section.settings.button_label -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-cta-banner__box {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-height: 32rem;
+    padding: 4rem 2rem;
+  }
+
+  .custom-cta-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .custom-cta-banner__box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--color-foreground));
+    opacity: var(--overlay, 0.4);
+    z-index: 1;
+  }
+
+  .custom-cta-banner__box:not(:has(.custom-cta-banner__bg))::after {
+    display: none;
+  }
+
+  .custom-cta-banner__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 60rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    color: rgb(var(--color-background));
+  }
+
+  .custom-cta-banner__box:not(:has(.custom-cta-banner__bg)) .custom-cta-banner__content {
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-cta-banner__heading {
+    margin: 0;
+  }
+
+  .custom-cta-banner__actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-cta-banner__box {
+      min-height: 40rem;
+      padding: 6rem;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "CTA banner",
+  "tag": "section",
+  "class": "custom-cta-banner-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Độ mờ overlay",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready for Your Next Adventure?" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Căn nội dung",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [{ "name": "CTA banner" }]
+}
+{% endschema %}

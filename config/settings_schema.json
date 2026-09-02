@@ -143,6 +143,72 @@
         "unit": "%",
         "label": "t:settings_schema.typography.settings.body_scale.label",
         "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Accent font (base theme)"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_accent_font",
+        "default": "assistant_n4",
+        "label": "Accent font",
+        "info": "Dùng cho eyebrow / label kiểu viết tay (vd 'Made for Cats')."
+      }
+    ]
+  },
+  {
+    "name": "Base theme",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Mobile-first"
+      },
+      {
+        "type": "paragraph",
+        "content": "Các tuỳ chọn điều khiển trải nghiệm mobile toàn cục. Base theme được thiết kế mobile-first."
+      },
+      {
+        "type": "range",
+        "id": "heading_mobile_scale",
+        "min": 60,
+        "max": 100,
+        "step": 5,
+        "unit": "%",
+        "label": "Heading size trên mobile",
+        "info": "Thu nhỏ heading trên mobile so với desktop để không quá to. 100% = giữ nguyên.",
+        "default": 80
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sticky_atc",
+        "label": "Sticky Add to Cart trên mobile (PDP)",
+        "info": "Hiện thanh Add to Cart cố định ở đáy màn hình trên mobile khi cuộn.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Spacing & shape (custom sections)"
+      },
+      {
+        "type": "range",
+        "id": "custom_section_content_width",
+        "min": 60,
+        "max": 120,
+        "step": 5,
+        "unit": "rem",
+        "label": "Bề rộng nội dung text (custom sections)",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "custom_card_radius",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Bo góc card (custom sections)",
+        "default": 16
       }
     ]
   },

@@ -1,0 +1,45 @@
+{%- comment -%}
+  Base theme design tokens.
+  Render global CSS variables that custom (`custom-*`) sections consume so branding is
+  controlled in one place (Theme settings > Base theme). Mobile-first by design.
+  Include once in <head> of layout/theme.liquid, after Dawn's :root block.
+{%- endcomment -%}
+
+{%- liquid
+  assign accent_font = settings.type_accent_font
+  assign accent_font_bold = accent_font | font_modify: 'weight', 'bold'
+-%}
+
+{% style %}
+  {%- unless accent_font.system? -%}
+    {{ accent_font | font_face: font_display: 'swap' }}
+    {{ accent_font_bold | font_face: font_display: 'swap' }}
+  {%- endunless -%}
+
+  :root {
+    /* Accent font (eyebrow / handwritten labels) */
+    --font-accent-family: {{ accent_font.family }}, {{ accent_font.fallback_families }};
+    --font-accent-style: {{ accent_font.style }};
+    --font-accent-weight: {{ accent_font.weight }};
+
+    /* Mobile-first heading scale: shrink headings on small screens */
+    --heading-mobile-scale: {{ settings.heading_mobile_scale | divided_by: 100.0 }};
+
+    /* Custom section layout tokens */
+    --custom-content-width: {{ settings.custom_section_content_width }}rem;
+    --custom-card-radius: {{ settings.custom_card_radius }}px;
+
+    /* Touch-target minimum (accessibility on mobile) */
+    --tap-target: 4.4rem;
+
+    /* Fluid section rhythm — reuse Dawn's spacing settings.
+       Mobile value is already reduced by Dawn (--spacing-sections-mobile). */
+    --custom-section-padding-block: var(--spacing-sections-mobile);
+  }
+
+  @media screen and (min-width: 750px) {
+    :root {
+      --custom-section-padding-block: var(--spacing-sections-desktop);
+    }
+  }
+{% endstyle %}

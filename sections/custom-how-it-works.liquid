@@ -1,0 +1,227 @@
+{%- comment -%}
+  custom-how-it-works — Numbered steps (auto-numbered) + optional media (mobile-first).
+  Mobile: steps stack vertically. Desktop: steps in a row, optional media beside.
+{%- endcomment -%}
+
+<div class="custom-hiw color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="custom-hiw__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="custom-h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="custom-hiw__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="custom-hiw__layout {% if section.settings.image != blank %}has-media{% endif %}">
+      <ol class="custom-hiw__steps list-unstyled">
+        {%- for block in section.blocks -%}
+          <li class="custom-hiw__step" {{ block.shopify_attributes }}>
+            <span class="custom-hiw__num">{{ forloop.index }}</span>
+            <span class="custom-hiw__step-body">
+              {%- if block.settings.title != blank -%}
+                <span class="custom-hiw__step-title">{{ block.settings.title }}</span>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <span class="custom-hiw__step-text">{{ block.settings.text }}</span>
+              {%- endif -%}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ol>
+
+      {%- if section.settings.image != blank -%}
+        <div class="custom-hiw__media custom-card">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 40vw, 100vw',
+              widths: '450, 660, 900, 1200',
+              class: 'custom-hiw__image',
+              alt: section.settings.image.alt
+          }}
+          {%- if section.settings.video_url != blank -%}
+            <a href="{{ section.settings.video_url }}" class="custom-hiw__play" target="_blank" rel="noopener" aria-label="Play video">
+              {%- render 'custom-icon', icon: 'play' -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-hiw__head {
+    margin-bottom: 2.8rem;
+    text-align: center;
+  }
+
+  .custom-hiw__head .custom-eyebrow {
+    margin: 0 0 0.6rem;
+    color: rgb(var(--color-button));
+  }
+
+  .custom-hiw__head .custom-h2 {
+    margin: 0;
+  }
+
+  .custom-hiw__sub {
+    margin: 0.8rem 0 0;
+    opacity: 0.8;
+  }
+
+  .custom-hiw__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  .custom-hiw__steps {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    flex: 1;
+  }
+
+  .custom-hiw__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .custom-hiw__num {
+    flex: 0 0 auto;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 999px;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  .custom-hiw__step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .custom-hiw__step-title {
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  .custom-hiw__step-text {
+    font-size: 1.4rem;
+    opacity: 0.82;
+    line-height: 1.5;
+  }
+
+  .custom-hiw__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+  }
+
+  .custom-hiw__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .custom-hiw__play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 999px;
+    background: rgba(var(--color-background), 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-hiw__play .svg-wrapper {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: rgb(var(--color-button));
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-hiw__steps {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .custom-hiw__step {
+      flex: 1 1 26rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .custom-hiw__layout.has-media {
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .custom-hiw__layout.has-media .custom-hiw__steps {
+      flex-direction: column;
+      flex: 1 1 55%;
+    }
+
+    .custom-hiw__layout.has-media .custom-hiw__media {
+      flex: 1 1 45%;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "How it works",
+  "tag": "section",
+  "class": "custom-hiw-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How It Works" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Simple steps to get started." },
+    { "type": "header", "content": "Media (optional)" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "url", "id": "video_url", "label": "Video link (play button)" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Describe this step." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How it works",
+      "blocks": [
+        { "type": "step", "settings": { "text": "Place your item inside." } },
+        { "type": "step", "settings": { "text": "Secure and adjust." } },
+        { "type": "step", "settings": { "text": "Head out and enjoy!" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

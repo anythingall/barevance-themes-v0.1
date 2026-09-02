@@ -1,0 +1,152 @@
+{%- comment -%}
+  custom-comparison-table — "Us vs others" comparison (mobile-first).
+  Rows of feature + our value + competitor value. Mobile: table scrolls horizontally
+  and the first column stays readable.
+{%- endcomment -%}
+
+<div class="custom-compare color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="custom-h2 custom-compare__heading" style="text-align: {{ section.settings.heading_alignment }};">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    <div class="custom-table-scroll">
+      <table class="custom-compare__table">
+        <thead>
+          <tr>
+            <th class="custom-compare__feature-col">{{ section.settings.feature_label }}</th>
+            <th class="custom-compare__us-col">{{ section.settings.us_label }}</th>
+            <th>{{ section.settings.others_label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <td class="custom-compare__feature">{{ block.settings.feature }}</td>
+              <td class="custom-compare__us">
+                {%- render 'custom-compare-mark', state: block.settings.us -%}
+              </td>
+              <td class="custom-compare__other">
+                {%- render 'custom-compare-mark', state: block.settings.others -%}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-compare__heading {
+    margin: 0 0 2.4rem;
+  }
+
+  .custom-compare__table {
+    width: 100%;
+    min-width: 42rem;
+    border-collapse: collapse;
+  }
+
+  .custom-compare__table th,
+  .custom-compare__table td {
+    padding: 1.2rem 1.4rem;
+    text-align: center;
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  }
+
+  .custom-compare__table th {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .custom-compare__feature-col,
+  .custom-compare__feature {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: rgb(var(--color-background));
+  }
+
+  .custom-compare__us-col,
+  .custom-compare__us {
+    background: rgba(var(--color-button), 0.08);
+  }
+
+  .custom-compare__us-col {
+    color: rgb(var(--color-button));
+  }
+
+  .custom-compare__table .svg-wrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": "section",
+  "class": "custom-compare-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Choose Us Over Others?" },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Căn tiêu đề",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "center"
+    },
+    { "type": "text", "id": "feature_label", "label": "Cột đặc điểm", "default": "Features" },
+    { "type": "text", "id": "us_label", "label": "Cột của bạn", "default": "Our Brand" },
+    { "type": "text", "id": "others_label", "label": "Cột đối thủ", "default": "Others" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "Đặc điểm", "default": "Premium quality" },
+        {
+          "type": "select",
+          "id": "us",
+          "label": "Của bạn",
+          "options": [
+            { "value": "check", "label": "✓ Có" },
+            { "value": "partial", "label": "△ Một phần" },
+            { "value": "cross", "label": "✗ Không" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "select",
+          "id": "others",
+          "label": "Đối thủ",
+          "options": [
+            { "value": "check", "label": "✓ Có" },
+            { "value": "partial", "label": "△ Một phần" },
+            { "value": "cross", "label": "✗ Không" }
+          ],
+          "default": "cross"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "blocks": [
+        { "type": "row", "settings": { "feature": "Premium quality", "us": "check", "others": "cross" } },
+        { "type": "row", "settings": { "feature": "Lightweight & portable", "us": "check", "others": "partial" } },
+        { "type": "row", "settings": { "feature": "Durable & long-lasting", "us": "check", "others": "cross" } },
+        { "type": "row", "settings": { "feature": "Easy to clean", "us": "check", "others": "partial" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

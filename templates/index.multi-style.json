@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "hero": {
+      "type": "custom-hero",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "leaf", "text": "Lightweight & Easy to Carry" } },
+        "f2": { "type": "feature", "settings": { "icon": "heart", "text": "Breathable & Cozy" } },
+        "f3": { "type": "feature", "settings": { "icon": "padlock", "text": "Secure & Safe" } },
+        "f4": { "type": "feature", "settings": { "icon": "star", "text": "Adorable Designs" } },
+        "rating": { "type": "rating", "settings": { "stars": 5, "text": "4.9/5 from 878+ reviews" } },
+        "btn1": { "type": "button", "settings": { "label": "Shop All Styles", "style": "primary", "link": "shopify://collections/all" } },
+        "btn2": { "type": "button", "settings": { "label": "Explore Collections", "style": "secondary" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "rating", "btn1", "btn2"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Made for you.",
+        "heading": "Loved by",
+        "heading_highlight": "Everyone.",
+        "subheading": "<p>Playful, practical designs for every style and every adventure.</p>",
+        "footnote": "",
+        "content_alignment": "left",
+        "desktop_media_placement": "right"
+      }
+    },
+    "shop_by_style": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": { "type": "featured_collection", "settings": { "collection": "best-sellers" } },
+        "c2": { "type": "featured_collection" },
+        "c3": { "type": "featured_collection" }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "title": "Shop by Style",
+        "image_ratio": "square",
+        "columns_desktop": 6,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 28
+      }
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "heading_size": "h2",
+        "collection": "best-sellers",
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "view_all_style": "link",
+        "image_ratio": "portrait",
+        "show_secondary_image": true,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 28,
+        "padding_bottom": 40
+      }
+    },
+    "benefits": {
+      "type": "custom-icon-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "heart", "title": "Designed for Comfort", "text": "Soft, breathable materials." } },
+        "b2": { "type": "benefit", "settings": { "icon": "padlock", "title": "Safe & Secure", "text": "Reinforced stitching and safety straps." } },
+        "b3": { "type": "benefit", "settings": { "icon": "leaf", "title": "Lightweight", "text": "Easy to carry wherever you go." } },
+        "b4": { "type": "benefit", "settings": { "icon": "star", "title": "Stylish & Unique", "text": "Designs made to turn heads." } },
+        "b5": { "type": "benefit", "settings": { "icon": "check_mark", "title": "Easy to Clean", "text": "Wipe it, wash it, done!" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5"],
+      "settings": { "color_scheme": "scheme-2", "heading": "Why Customers Love Us", "columns": 5 }
+    },
+    "trust": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "tb1": { "type": "badge", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On orders over $40" } },
+        "tb2": { "type": "badge", "settings": { "icon": "return", "title": "30-Day Guarantee", "subtitle": "Love it or get a full refund" } },
+        "tb3": { "type": "badge", "settings": { "icon": "padlock", "title": "Secure Checkout", "subtitle": "100% safe & encrypted" } },
+        "tb4": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "24/7 Support", "subtitle": "We're here anytime" } }
+      },
+      "block_order": ["tb1", "tb2", "tb3", "tb4"],
+      "settings": { "color_scheme": "scheme-1" }
+    },
+    "story": {
+      "type": "custom-image-with-text",
+      "blocks": {
+        "l1": { "type": "list_item", "settings": { "text": "Thoughtful design, every detail." } },
+        "l2": { "type": "list_item", "settings": { "text": "Quality you can trust." } },
+        "l3": { "type": "list_item", "settings": { "text": "A community of happy customers." } }
+      },
+      "block_order": ["l1", "l2", "l3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "Our Story",
+        "heading": "Built with love for you.",
+        "text": "<p>Every product is designed with care, tested for real life, and made for unforgettable moments.</p>",
+        "button_label": "Learn More About Us",
+        "desktop_media_placement": "left"
+      }
+    }
+  },
+  "order": ["hero", "shop_by_style", "best_sellers", "benefits", "trust", "story"]
+}

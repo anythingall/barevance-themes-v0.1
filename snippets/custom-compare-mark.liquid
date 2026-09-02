@@ -1,0 +1,45 @@
+{% doc %}
+  Renders a comparison cell mark: check / partial / cross, colored via the color scheme.
+  @param {string} state - One of 'check', 'partial', 'cross'
+  @example
+  {% render 'custom-compare-mark', state: 'check' %}
+{% enddoc %}
+
+{%- case state -%}
+  {%- when 'check' -%}
+    <span class="custom-mark custom-mark--check" role="img" aria-label="Yes">
+      {{- 'icon-check-mark.svg' | inline_asset_content -}}
+    </span>
+  {%- when 'partial' -%}
+    <span class="custom-mark custom-mark--partial" role="img" aria-label="Partial">△</span>
+  {%- else -%}
+    <span class="custom-mark custom-mark--cross" role="img" aria-label="No">
+      {{- 'icon-close.svg' | inline_asset_content -}}
+    </span>
+{%- endcase -%}
+
+{% stylesheet %}
+  .custom-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-mark svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .custom-mark--check {
+    color: rgb(var(--color-button));
+  }
+
+  .custom-mark--partial {
+    font-size: 1.8rem;
+    opacity: 0.6;
+  }
+
+  .custom-mark--cross {
+    opacity: 0.45;
+  }
+{% endstylesheet %}
