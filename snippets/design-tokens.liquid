@@ -32,14 +32,15 @@
     /* Touch-target minimum (accessibility on mobile) */
     --tap-target: 4.4rem;
 
-    /* Fluid section rhythm — reuse Dawn's spacing settings.
-       Mobile value is already reduced by Dawn (--spacing-sections-mobile). */
-    --custom-section-padding-block: var(--spacing-sections-mobile);
+    /* Section vertical rhythm. Driven by the theme "spacing between sections"
+       setting (Theme settings > Layout) so the merchant can tune all sections at
+       once, with a small floor so sections never touch/overlap when set to 0. */
+    --custom-section-padding-block: max(2.4rem, var(--spacing-sections-mobile));
   }
 
   @media screen and (min-width: 750px) {
     :root {
-      --custom-section-padding-block: var(--spacing-sections-desktop);
+      --custom-section-padding-block: max(3.2rem, var(--spacing-sections-desktop));
     }
   }
 {% endstyle %}

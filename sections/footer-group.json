@@ -3,22 +3,45 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "type": "custom-footer",
+      "blocks": {
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        },
+        "care": {
+          "type": "menu",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "footer-help"
+          }
+        },
+        "about": {
+          "type": "menu",
+          "settings": {
+            "heading": "About",
+            "menu": "footer-company"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "care",
+        "about"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
+        "color_scheme": "scheme-5",
+        "tagline": "Cute. Cozy. Adventure.",
+        "description": "Designed for pets who love to explore and the humans who love them.",
         "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "newsletter_enable": true,
+        "newsletter_heading": "Join the Family",
+        "newsletter_text": "Get 10% off your first order and exclusive offers.",
         "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "show_policy": true
       }
     }
   },

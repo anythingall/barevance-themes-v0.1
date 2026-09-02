@@ -107,6 +107,32 @@ Ngoài ra Dawn cho chỉnh: button radius, card/media radius, shadow, spacing, p
 
 ---
 
+## Global chrome — Header & Footer (giống nhau trên MỌI page)
+
+Header và Footer là **section groups** (`header-group.json`, `footer-group.json`) được Dawn
+render tự động trên **mọi trang** qua `{% sections 'header-group' %}` / `{% sections 'footer-group' %}`
+trong `theme.liquid`. → Không cần cấu hình lại từng page; sửa 1 lần áp toàn site.
+
+**Footer** — section tuỳ biến `custom-footer` (đẹp, brand-first), đặt trong `footer-group`:
+- Cột **Brand**: logo (settings `logo`, fallback tên store) + tagline + description + social
+  icons (từ Theme settings → Social media links).
+- 3 cột menu (block `menu`) trỏ tới **navigation menu**: `footer-shop`, `footer-help`,
+  `footer-company`. Đổi link = sửa menu trong **Online Store → Navigation** (KHÔNG sửa code).
+  Thêm/bớt cột = thêm/xoá block `menu` trong Theme Editor.
+- Newsletter "Join the Family" + Payment icons + Policy links: bật/tắt trong settings.
+  (Payment icons hiện theo cổng thanh toán bật trong Admin; Policy links theo Store policies.)
+- Màu: `scheme-5` (nâu đậm nhất) để tách khỏi CTA phía trên.
+
+**Header:** menu chính = navigation menu `main-menu`. Sửa items trong Navigation.
+
+**→ Tạo store mới, phần footer/header chỉ cần:**
+1. Sửa 3–4 menu trong **Navigation** (main-menu, footer-shop, footer-help, footer-company).
+2. Set **Logo** + **Social media links** trong Theme settings.
+3. Xong — footer/header giống nhau trên mọi page, đúng brand, không đụng code.
+
+> Các menu trên là **store data** (như product/collection), nằm ở Admin → Navigation — đúng
+> nguyên tắc Shopify-native, tách khỏi theme code.
+
 ## Ghi chú
 
 - **Reviews**: hiện dùng block nhập tay. Có thể thay bằng app (Judge.me/Loox) sau.
