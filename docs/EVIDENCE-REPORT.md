@@ -12,7 +12,8 @@ Report này ghi nhận bằng chứng thực tế cho cả 3 loại store, chụ
 3. Chụp homepage + product page cho từng loại (product dùng `?view=<template>` trên cùng 1
    sản phẩm Lion Mane Cat Tote).
 
-> Đã chụp 6 ảnh full-page (V1/V2/V3 homepage + V1/V2/V3 product) — xem trong hội thoại.
+> 6 ảnh full-page (V1/V2/V3 homepage + product) nhúng bên dưới. Bản gửi khách:
+> [base-theme-v1-v2-v3-report.pdf](evidence/base-theme-v1-v2-v3-report.pdf).
 
 ---
 
@@ -53,6 +54,10 @@ Why Choose Us? → **Real Reviews (2 từ METAFIELD)** → **FAQ (3 từ METAFIE
 
 **Đặc thù V1:** section `custom-pricing-tiers` (bundle), layout landing dài, PDP có sticky Add-to-Cart (mobile).
 
+| Homepage | Product page |
+|---|---|
+| ![V1 homepage](evidence/v1-home.png) | ![V1 product](evidence/v1-product.png) |
+
 ---
 
 ## V2 — Multi Style
@@ -74,6 +79,10 @@ Gọn, variant-focused: Product info (ảnh lớn, variant S/M nổi bật, Shar
 Why Customers Love It (4 blocks) → See It In Action (3 steps) → Real Reviews (4).
 
 **Đặc thù V2:** tái dùng Dawn `collection-list` + `featured-collection` cho commerce grid (Shop by Style, Best Sellers với product thật).
+
+| Homepage | Product page |
+|---|---|
+| ![V2 homepage](evidence/v2-home.png) | ![V2 product](evidence/v2-product.png) |
 
 ---
 
@@ -98,6 +107,10 @@ How It Works → **Frequently Bought Together** (Lion $34.95 + Kitty $32.95 + Bl
 **Total $97.85 ~~$122.27~~ Save 19% + Add All to Cart**) → Real Reviews (4).
 
 **Đặc thù V3:** section `custom-frequently-bought` (bundle nhiều sản phẩm), nhiều commerce section nhất (giống store hoàn chỉnh).
+
+| Homepage | Product page |
+|---|---|
+| ![V3 homepage](evidence/v3-home.png) | ![V3 product](evidence/v3-product.png) |
 
 ---
 
