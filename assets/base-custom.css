@@ -173,3 +173,18 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/* ------------------------------------------------------------------ *
+ * Adaptive commerce grids (Dawn featured-collection / collection-list)
+ * When the number of products/collections is fewer than the column
+ * count, Dawn left-aligns them and leaves an empty gap on the right
+ * ("cụt"). Centering the flex grid on desktop makes any count look
+ * balanced — full rows are unaffected, partial rows center. Excludes
+ * real desktop sliders. Mobile (< 990px) keeps its slider/scroll.
+ * ------------------------------------------------------------------ */
+@media screen and (min-width: 990px) {
+  .product-grid:not(.slider--desktop),
+  .collection-list:not(.slider--desktop) {
+    justify-content: center;
+  }
+}
