@@ -7,9 +7,9 @@ Quy trình tạo một store mới **không cần sửa source code**. Ước t�
 
 ---
 
-## Bước 1 — Chọn loại template
+## Bước 1 — Chọn loại store (V1 / V2 / V3)
 
-Có 3 loại, khác nhau bởi **file JSON template** (không phải code):
+Có 3 loại, khác nhau bởi **file JSON template**:
 
 | Loại | Homepage | Product page | Dùng khi |
 |---|---|---|---|
@@ -17,11 +17,32 @@ Có 3 loại, khác nhau bởi **file JSON template** (không phải code):
 | **V2 Multi Style** | `index.multi-style` | `product.multi-style` | 1 concept, nhiều màu/style/variant |
 | **V3 Multi Product** | `index.multi-product` | `product.multi-product` | Nhiều sản phẩm cùng niche |
 
-**Gán homepage:** Theme Editor → dropdown chọn template ở trên cùng → chọn 1 trong 3 `index.*`.
-Hoặc đặt làm mặc định: copy nội dung file `templates/index.<loại>.json` vào `templates/index.json`.
+> ⚠️ **Quan trọng — Shopify dùng 2 cơ chế KHÁC nhau:**
+> Trang chủ (index) và cart **không hỗ trợ** "alternate template" chọn qua UI — trang chủ luôn
+> render `templates/index.json`. Còn **product / collection / page** thì chọn template qua
+> dropdown **Theme template** trong Admin (native, không cần code).
 
-**Gán product page:** Admin → Products → mở product → **Theme template** → chọn `landing` /
-`multi-style` / `multi-product`. Mỗi product có thể dùng layout khác nhau.
+### A. Product page — chọn qua dropdown (native, no-code) ✅
+Admin → **Products** → mở product → panel bên phải mục **Theme template** → chọn `landing` /
+`multi-style` / `multi-product` → **Save**. Mỗi product có thể dùng layout khác nhau.
+(Tương tự cho Collection và Page: mỗi resource có dropdown Theme template riêng.)
+
+### B. Homepage — set 1 lần lúc setup (KHÔNG dán JSON)
+Trang chủ không có dropdown template. Nhưng **không cần dán JSON** — dùng script 1 lệnh:
+
+```bash
+scripts/use-store-type.sh v2          # v1=One Product · v2=Multi Style · v3=Multi Product
+scripts/use-store-type.sh v2 --push   # kèm push lên theme luôn
+```
+Script tự set `templates/index.json` = layout đúng loại + nhắc bước còn lại. Chạy không tham số
+để xem loại hiện tại. Đây là **quyết định 1 lần khi tạo store**; user cuối không đụng tới.
+
+Các cách thay thế (nếu không dùng terminal):
+- **Theme Editor (thuần click):** Customize → Home → thêm/xoá/kéo section (mọi section có preset).
+- **Admin Edit code:** Online Store → Themes → ⋯ → Edit code → `templates/index.json` → dán nội
+  dung `templates/index.<loại>.json`.
+
+→ Sau khi chọn xong (1 lần), **mọi thứ còn lại là settings/menu/media** (Bước 3–8) — 100% click.
 
 ---
 
