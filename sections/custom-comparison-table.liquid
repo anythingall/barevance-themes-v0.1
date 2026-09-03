@@ -37,7 +37,7 @@
           {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'custom-compare__img', alt: section.settings.heading }}
         </div>
       {%- endif -%}
-      <div class="custom-table-scroll">
+      <div class="custom-table-scroll" tabindex="0" role="region" aria-label="Comparison table (scroll horizontally)">
       <table class="custom-compare__table">
         <thead>
           <tr>

@@ -19,19 +19,19 @@
         </div>
       {%- endif -%}
 
-      <div class="custom-table-scroll custom-sizeguide__tablewrap">
+      <div class="custom-table-scroll custom-sizeguide__tablewrap" tabindex="0" role="region" aria-label="Size chart (scroll horizontally)">
         <table class="custom-sizeguide__table">
           <thead>
             <tr>
-              <th>{{ section.settings.attr_label }}</th>
-              <th>{{ section.settings.size1_label }}</th>
-              <th>{{ section.settings.size2_label }}</th>
+              <th scope="col">{{ section.settings.attr_label }}</th>
+              <th scope="col">{{ section.settings.size1_label }}</th>
+              <th scope="col">{{ section.settings.size2_label }}</th>
             </tr>
           </thead>
           <tbody>
             {%- for block in section.blocks -%}
               <tr {{ block.shopify_attributes }}>
-                <td class="custom-sizeguide__attr">{{ block.settings.attribute }}</td>
+                <th scope="row" class="custom-sizeguide__attr">{{ block.settings.attribute }}</th>
                 <td>{{ block.settings.size1_value }}</td>
                 <td>{{ block.settings.size2_value }}</td>
               </tr>
@@ -79,6 +79,14 @@
   }
   .custom-sizeguide__table th { font-weight: 700; }
   .custom-sizeguide__attr { font-weight: 600; }
+  /* Keep the attribute (first) column in view while the size columns scroll. */
+  .custom-sizeguide__table th:first-child,
+  .custom-sizeguide__table td:first-child {
+    position: sticky;
+    left: 0;
+    background: rgb(var(--color-background));
+    text-align: left;
+  }
 
   .custom-sizeguide__perfect {
     padding: 2rem;

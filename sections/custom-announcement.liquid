@@ -4,7 +4,7 @@
   Used in the header group. Mobile: shows the first message only (or scrolls).
 {%- endcomment -%}
 
-<div class="custom-ann color-{{ section.settings.color_scheme }} gradient">
+<announcement-bar class="custom-ann color-{{ section.settings.color_scheme }} gradient">
   <div class="custom-ann__inner">
     {%- for block in section.blocks -%}
       <span class="custom-ann__item" {{ block.shopify_attributes }}>
@@ -15,7 +15,48 @@
       </span>
     {%- endfor -%}
   </div>
-</div>
+  <script>
+    (function () {
+      class AnnouncementBar extends HTMLElement {
+        connectedCallback() {
+          this.items = Array.prototype.slice.call(this.querySelectorAll('.custom-ann__item'));
+          if (this.items.length < 2) return;
+          this.i = 0;
+          this.mq = window.matchMedia('(max-width: 749px)');
+          this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+          this.update = this.update.bind(this);
+          this.update();
+          this.mq.addEventListener('change', this.update);
+          this.reduce.addEventListener('change', this.update);
+        }
+        update() {
+          var rotate = this.mq.matches && !this.reduce.matches;
+          if (rotate) {
+            this.classList.add('is-rotating');
+            this.show(this.i);
+            if (!this.timer) {
+              this.timer = setInterval(() => {
+                this.i = (this.i + 1) % this.items.length;
+                this.show(this.i);
+              }, 3500);
+            }
+          } else {
+            this.classList.remove('is-rotating');
+            if (this.timer) { clearInterval(this.timer); this.timer = null; }
+            this.items.forEach((el) => el.removeAttribute('data-ann-active'));
+          }
+        }
+        show(n) {
+          this.items.forEach((el, idx) => el.toggleAttribute('data-ann-active', idx === n));
+        }
+        disconnectedCallback() { if (this.timer) clearInterval(this.timer); }
+      }
+      if (!customElements.get('announcement-bar')) {
+        customElements.define('announcement-bar', AnnouncementBar);
+      }
+    })();
+  </script>
+</announcement-bar>
 
 {% stylesheet %}
   .custom-ann {
@@ -71,16 +112,38 @@
     fill: currentColor;
   }
 
-  /* Mobile: keep only the first item to avoid crowding */
+  .custom-ann { display: block; }
+
+  /* Mobile: no-JS / reduced-motion fallback shows every message, wrapped (nothing hidden). */
   @media screen and (max-width: 749px) {
     .custom-ann__inner {
-      gap: 0;
-    }
-    .custom-ann__item + .custom-ann__item {
-      display: none;
+      gap: 0.6rem 1.4rem;
+      flex-wrap: wrap;
     }
     .custom-ann__item + .custom-ann__item::before {
       display: none;
+    }
+
+    /* With JS + motion allowed, rotate one message at a time (all still reachable). */
+    .custom-ann.is-rotating .custom-ann__inner {
+      flex-wrap: nowrap;
+      position: relative;
+      min-height: 1.8rem;
+    }
+    .custom-ann.is-rotating .custom-ann__item {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .custom-ann.is-rotating .custom-ann__item[data-ann-active] {
+      position: relative;
+      left: auto;
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 {% endstylesheet %}

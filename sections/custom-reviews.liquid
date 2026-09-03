@@ -39,6 +39,9 @@
     <div
       class="custom-reviews__grid custom-scroller custom-scroller--grid-on-desktop list-unstyled"
       style="--custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 82%;"
+      tabindex="0"
+      role="group"
+      aria-label="Customer reviews (scroll to see more)"
     >
       {%- liquid
         assign mf_reviews = product.metafields.custom.reviews.value

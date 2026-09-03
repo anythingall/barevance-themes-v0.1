@@ -38,6 +38,7 @@
     <ul
       class="custom-benefits__grid {% if section.settings.card_container %}is-carded{% endif %} {% if section.settings.mobile_layout == 'carousel' %}custom-scroller custom-scroller--grid-on-desktop{% else %}custom-grid{% endif %} list-unstyled"
       role="list"
+      {%- if section.settings.mobile_layout == 'carousel' %} tabindex="0" aria-label="Benefits (scroll to see more)"{% endif %}
       style="--custom-grid-cols-desktop: {{ section.settings.columns }}; --custom-grid-cols-tablet: {{ section.settings.columns | at_most: 3 }}; --custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 60%;"
     >
       {%- liquid
