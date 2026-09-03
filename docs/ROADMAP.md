@@ -66,4 +66,8 @@ The curated per-type templates already exist and avoid all three.
   reviews (Google merges with main-product's Product node).
 - [x] **P2-2** Hero heading is `h2` on the home page (no duplicate `h1`).
 - [x] **P2-3** CTA overlay floored at 35%; background capped at 1600px.
-- [-] **P2-4** Trim `base.css` (81 KB inherited Dawn). *Large / inherited.*
+- [x] **P2-4 — DECIDED: won't trim `base.css`.** On inspection base.css is Dawn's *foundation*
+  (reset, typography, buttons, forms, grid, layout, utilities, cards) used on every page — not
+  unused features (Dawn ships per-section/component CSS separately). A PurgeCSS trim would risk
+  breaking JS-added classes (cart drawer, predictive search, form errors) that don't appear in
+  static HTML. High risk, low safe reward → keep as-is.
