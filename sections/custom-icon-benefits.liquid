@@ -1,7 +1,8 @@
-{%- comment -%} Base theme: home-layout gate — on the home page, hide this section when the Store type dropdown (settings.home_layout) is not included in home_visibility. {%- endcomment -%}
+{%- comment -%} Base theme: store-type gate — on home/product pages, hide this section when settings.store_type is not in this section's type_visibility. Falls back to showing everything if store_type is blank. {%- endcomment -%}
 {%- liquid
   assign hl_hide = false
   assign hl_vis = section.settings.type_visibility | default: 'all'
+  assign hl_st = settings.store_type | default: 'v1'
   assign hl_on = false
   if template.name == 'index'
     assign hl_on = true
@@ -10,7 +11,7 @@
     assign hl_on = true
   endif
   if hl_on and hl_vis != 'all'
-    unless hl_vis contains settings.store_type
+    unless hl_vis contains hl_st
       assign hl_hide = true
     endunless
   endif

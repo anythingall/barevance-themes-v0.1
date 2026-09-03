@@ -28,11 +28,37 @@
       class StickyAtc extends HTMLElement {
         connectedCallback() {
           this.trigger = this.querySelector('[data-sticky-atc-trigger]');
+          this.priceEl = this.querySelector('.custom-sticky-atc__price');
           this.mainForm = document.querySelector('product-form .product-form__submit, .product-form__submit');
           this.mainButtons = document.querySelector('.product-form__buttons, product-form');
+          this.mainPrice = document.querySelector('.product__info-container .price, .product .price, [id^="price-"]');
 
           if (this.trigger && this.mainForm) {
             this.trigger.addEventListener('click', () => this.mainForm.click());
+          }
+
+          // Keep price + availability in sync with the main buy area when the variant changes.
+          this.sync = () => {
+            if (this.priceEl && this.mainPrice) {
+              var onSale = this.mainPrice.classList.contains('price--on-sale');
+              var sale = this.mainPrice.querySelector('.price-item--sale');
+              var reg = this.mainPrice.querySelector('.price-item--regular');
+              var node = onSale && sale ? sale : reg;
+              var txt = node ? node.textContent.trim() : '';
+              if (txt) this.priceEl.textContent = txt;
+            }
+            if (this.trigger && this.mainForm) {
+              this.trigger.toggleAttribute('disabled', this.mainForm.hasAttribute('disabled'));
+            }
+          };
+          this.sync();
+
+          if (this.mainPrice && 'MutationObserver' in window) {
+            this.priceObserver = new MutationObserver(this.sync);
+            this.priceObserver.observe(this.mainPrice, { childList: true, subtree: true, characterData: true, attributes: true });
+            if (this.mainForm) {
+              this.priceObserver.observe(this.mainForm, { attributes: true, attributeFilter: ['disabled'] });
+            }
           }
 
           if (this.mainButtons && 'IntersectionObserver' in window) {
@@ -49,6 +75,7 @@
 
         disconnectedCallback() {
           if (this.observer) this.observer.disconnect();
+          if (this.priceObserver) this.priceObserver.disconnect();
         }
       }
 

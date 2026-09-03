@@ -58,15 +58,17 @@
     assign card_radius = 24
 
   when 'custom'
-    assign c_bg = settings.custom_bg
-    assign c_surface = settings.custom_surface
-    assign c_text = settings.custom_text
-    assign c_primary = settings.custom_primary
-    assign c_primary_text = settings.custom_primary_text
-    assign c_dark = settings.custom_dark
-    assign c_dark_text = settings.custom_dark_text
-    assign c_accent = settings.custom_accent
-    assign c_accent_text = settings.custom_accent_text
+    # Guard each swatch: a merchant can clear a color setting, which would emit an empty
+    # var and break the whole scheme. Fall back to sensible defaults.
+    assign c_bg = settings.custom_bg | default: '#FFFFFF'
+    assign c_surface = settings.custom_surface | default: '#F5F5F3'
+    assign c_text = settings.custom_text | default: '#1A1A1A'
+    assign c_primary = settings.custom_primary | default: '#1A1A1A'
+    assign c_primary_text = settings.custom_primary_text | default: '#FFFFFF'
+    assign c_dark = settings.custom_dark | default: '#141414'
+    assign c_dark_text = settings.custom_dark_text | default: '#FFFFFF'
+    assign c_accent = settings.custom_accent | default: '#C87A45'
+    assign c_accent_text = settings.custom_accent_text | default: '#FFFFFF'
     assign font_heading = settings.type_header_font
     assign font_body = settings.type_body_font
     assign font_accent = settings.type_accent_font
@@ -135,6 +137,7 @@
       --color-badge-foreground: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --color-badge-background: {{ s_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --color-badge-border: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --payment-terms-background-color: {{ s_bg | color_to_rgb }};
     }
   {%- endfor -%}
 
