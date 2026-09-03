@@ -50,7 +50,7 @@
           {%- endif -%}
 
           <div class="custom-tiers__card-top">
-            <div class="custom-tiers__media">
+            <a href="{{ product.url | default: '#' }}" class="custom-tiers__media" aria-label="{{ product.title | default: block.settings.label }}">
               {%- if block.settings.image != blank -%}
                 {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-tiers__img', alt: block.settings.label }}
               {%- elsif product.featured_image != blank -%}
@@ -58,10 +58,12 @@
               {%- else -%}
                 {{ 'product-1' | placeholder_svg_tag: 'custom-tiers__img placeholder-svg' }}
               {%- endif -%}
-            </div>
+            </a>
 
             <div class="custom-tiers__info">
-              <h3 class="custom-tiers__label">{{ block.settings.label | default: product.title }}</h3>
+              <h3 class="custom-tiers__label">
+                <a href="{{ product.url | default: '#' }}" class="custom-tiers__label-link">{{ block.settings.label | default: product.title }}</a>
+              </h3>
 
               <div class="custom-tiers__price">
                 <span class="custom-tiers__price-now">{{ pay_total | money }}</span>
@@ -163,9 +165,20 @@
   }
 
   .custom-tiers__media {
+    display: block;
     width: 8.5rem;
     flex: 0 0 8.5rem;
     aspect-ratio: 1 / 1;
+  }
+
+  .custom-tiers__label-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .custom-tiers__label-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
   }
 
   .custom-tiers__img {
