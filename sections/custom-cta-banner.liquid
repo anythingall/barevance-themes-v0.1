@@ -1,3 +1,21 @@
+{%- comment -%} Base theme: store-type gate — on home/product pages, hide this section when the Store type setting (settings.store_type) is not in type_visibility. {%- endcomment -%}
+{%- liquid
+  assign hl_hide = false
+  assign hl_vis = section.settings.type_visibility | default: 'all'
+  assign hl_on = false
+  if template.name == 'index'
+    assign hl_on = true
+  endif
+  if template.name == 'product'
+    assign hl_on = true
+  endif
+  if hl_on and hl_vis != 'all'
+    unless hl_vis contains settings.store_type
+      assign hl_hide = true
+    endunless
+  endif
+-%}
+{%- unless hl_hide -%}
 {%- comment -%}
   custom-cta-banner — Full-width CTA with background image + overlay (mobile-first).
   Text stacks and centers on mobile; button is full-width on mobile.
@@ -39,6 +57,7 @@
     </div>
   </div>
 </div>
+{%- endunless -%}
 
 {% stylesheet %}
   .custom-cta-banner__box {
@@ -110,6 +129,23 @@
   "tag": "section",
   "class": "custom-cta-banner-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "type_visibility",
+      "label": "Show on store type",
+      "info": "Which store types (V1/V2/V3) show this section. Affects home + product pages via the Store type setting.",
+      "options": [
+        { "value": "all", "label": "All types" },
+        { "value": "v1", "label": "V1 only" },
+        { "value": "v2", "label": "V2 only" },
+        { "value": "v3", "label": "V3 only" },
+        { "value": "v1v2", "label": "V1 + V2" },
+        { "value": "v1v3", "label": "V1 + V3" },
+        { "value": "v2v3", "label": "V2 + V3" }
+      ],
+      "default": "all"
+    },
+
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
     { "type": "image_picker", "id": "image", "label": "Background image" },
     {

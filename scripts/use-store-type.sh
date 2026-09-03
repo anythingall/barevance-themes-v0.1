@@ -3,12 +3,21 @@
 # use-store-type.sh — Switch the homepage layout of this base theme in ONE command.
 # Replaces the "paste JSON into templates/index.json" step at store setup.
 #
+# There are two ways to run the homepage:
+#   • dropdown (default homepage) — one union template controlled in the admin by
+#     Theme settings → "Store type (home page)". Merchants switch V1/V2/V3 by clicking,
+#     no code. Trade-off: the editor lists every layout's sections.
+#   • curated (this script) — a single-type template with only that type's sections,
+#     in the exact designed order and nothing else. Cleaner editor, but switching is
+#     a command, not an admin click. Use "dropdown" to restore the admin-switch version.
+#
 # Usage:
 #   scripts/use-store-type.sh <type> [--push]
 #
-#   <type>   one of:  v1 | one-product        (One Product store)
-#                     v2 | multi-style        (Multi Style store)
-#                     v3 | multi-product      (Multi Product store)
+#   <type>   one of:  v1 | one-product        (One Product — curated)
+#                     v2 | multi-style        (Multi Style — curated)
+#                     v3 | multi-product      (Multi Product — curated)
+#                     dropdown                (restore the admin-switchable union home)
 #   --push   after swapping, run `shopify theme push --only templates/index.json`
 #            (otherwise just updates the local file; `shopify theme dev` hot-reloads it)
 #
@@ -54,11 +63,16 @@ case "${1:-}" in
   v1|one-product|oneproduct)     TYPE="one-product" ;;
   v2|multi-style|multistyle)     TYPE="multi-style" ;;
   v3|multi-product|multiproduct) TYPE="multi-product" ;;
+  dropdown|union|a)              TYPE="dropdown" ;;
   -h|--help)                     usage; exit 0 ;;
   *) echo "${c_red}✗ Loại không hợp lệ: '$1'${c_off}"; echo ""; usage; exit 1 ;;
 esac
 
-SRC="$TPL/index.$TYPE.json"
+if [ "$TYPE" = "dropdown" ]; then
+  SRC="$TPL/index.dropdown.json"
+else
+  SRC="$TPL/index.$TYPE.json"
+fi
 DST="$TPL/index.json"
 
 if [ ! -f "$SRC" ]; then
@@ -73,6 +87,7 @@ case "$TYPE" in
   one-product)   PROD_TPL="landing" ;;
   multi-style)   PROD_TPL="multi-style" ;;
   multi-product) PROD_TPL="multi-product" ;;
+  dropdown)      PROD_TPL="(pick per product)" ;;
 esac
 
 if [ "${2:-}" = "--push" ]; then

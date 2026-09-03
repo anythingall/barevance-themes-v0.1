@@ -194,7 +194,8 @@
     "header_tagline": "Cute. Cozy. Adventure.",
     "header_cta_label": "SHOP NOW",
     "header_cta_link": "shopify://collections/all",
-    "style_preset": "warm"
+    "style_preset": "warm",
+    "store_type": "v1"
   },
   "presets": {
     "Default": {

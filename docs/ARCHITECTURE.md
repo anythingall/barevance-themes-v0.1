@@ -72,19 +72,25 @@ See **[SECTIONS.md](SECTIONS.md)** for the full section list and which templates
 
 ## 4. How store types work
 
-Shopify chooses a template by **file**, not by code:
+A single **Theme settings → Store type** dropdown (`settings.store_type` = v1/v2/v3) switches
+the whole store. It drives two **union** templates:
 
-- **Product / collection / page** templates use the native **"Theme template"** dropdown in
-  the admin. Each product can pick `landing`, `multi-style`, or `multi-product`.
-- **The homepage (index) has no template picker** — Shopify always renders
-  `templates/index.json`. To make the homepage a given type you make `index.json` contain that
-  layout. Use the helper:
+- `templates/index.json` — the home page.
+- `templates/product.json` — the **default** product page.
 
-  ```bash
-  scripts/use-store-type.sh v2        # copies index.multi-style.json → index.json
-  ```
+Each union template contains the sections for all three types. Every switchable section carries
+a `type_visibility` setting ("Show on store type"); a small gate at the top of the section
+(`snippets`-free, ~8 lines of Liquid) checks `template.name` (index/product) against
+`settings.store_type` and renders nothing when the type doesn't match. So one dropdown re-lays
+out both pages, no code and no theme push.
 
-  This is a one-time decision at store setup; the merchant never touches it afterwards.
+- **Products** on the default template follow the dropdown. Assigning a product a specific
+  template (`landing` / `multi-style` / `multi-product`) via the native **Theme template**
+  dropdown opts it out — useful for per-product exceptions.
+- **Trade-off:** the editor lists every type's sections (unused ones just hide on the
+  storefront). For a cleaner single-type template in the exact curated order, swap in
+  `index.<type>.json` / `product.<type>.json` with `scripts/use-store-type.sh <type>` and
+  restore the union with `scripts/use-store-type.sh dropdown`.
 
 ---
 

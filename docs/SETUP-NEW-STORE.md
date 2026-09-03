@@ -17,17 +17,16 @@ shopify theme push --store YOUR-STORE.myshopify.com --unpublished --theme "Base 
 # 2. Create the store's data structure (metafields, metaobjects, footer menus) — one command
 SHOPIFY_STORE=YOUR-STORE.myshopify.com SHOPIFY_TOKEN=shpat_xxx \
   node scripts/bootstrap-store.mjs
-
-# 3. Choose the store type (sets the homepage layout)
-scripts/use-store-type.sh v1        # v1 = One Product · v2 = Multi Style · v3 = Multi Product
-shopify theme push --store YOUR-STORE.myshopify.com --theme <theme-id> --only templates/index.json
 ```
 
 Then, in the admin (all clicks, no code):
 
-4. **Branding** — Theme settings → **Theme style** dropdown (Warm / Minimal / Playful / Custom) + logo.
-5. **Products** — import your catalog, then set each product's **Theme template**
-   (`landing` / `multi-style` / `multi-product`).
+3. **Store type** — Theme settings → **Store type** → V1 / V2 / V3. One dropdown sets the home
+   page and the default product page.
+4. **Style** — Theme settings → **Theme style** → Warm / Minimal / Playful / Custom + logo.
+5. **Products** — import your catalog. Leave products on the **default** product template so they
+   follow the Store type; assign a specific template (`landing`/`multi-style`/`multi-product`)
+   only for per-product exceptions.
 6. **Sections** — connect products/collections to the pricing tiers, best-sellers, and other
    sections in the theme editor.
 7. **Media** — upload your hero and lifestyle images.
@@ -44,27 +43,30 @@ Then, in the admin (all clicks, no code):
 
 ### Step 1 — Choose the store type (V1 / V2 / V3)
 
-| Type | Homepage | Product page | Use when |
-|------|----------|--------------|----------|
-| **V1 One Product** | `index.one-product` | `product.landing` | One hero / trending product |
-| **V2 Multi Style** | `index.multi-style` | `product.multi-style` | One concept, many styles/variants |
-| **V3 Multi Product** | `index.multi-product` | `product.multi-product` | Many products in one niche |
+| Type | Home page | Product page | Use when |
+|------|-----------|--------------|----------|
+| **V1 One Product** | Full landing | Full landing | One hero / trending product |
+| **V2 Multi Style** | Shop by Style + Best Sellers | Variant-focused | One concept, many styles/variants |
+| **V3 Multi Product** | Shop by Category + rows | Frequently Bought Together | Many products in one niche |
 
-**Product / collection / page templates — native dropdown (no code):**
-Admin → Products → open a product → right panel → **Theme template** → choose `landing` /
-`multi-style` / `multi-product` → Save. Each product can use a different layout.
+**One dropdown, no code:** Theme settings → **Store type** → V1 / V2 / V3 → Save. This drives
+both the home page (`templates/index.json`) and the **default** product page
+(`templates/product.json`) — they are union templates whose sections show/hide by the chosen
+type. The theme editor lists every type's sections; the unused ones are hidden on the
+storefront (each section has a "Show on store type" control).
 
-**Homepage — set once at setup:** Shopify has no template picker for the homepage (it always
-renders `templates/index.json`). Pick the layout with the helper script:
+**Product templates — the default follows Store type.** Products left on the default template
+follow the dropdown. To give a specific product a different layout, assign it a template:
+Admin → Products → open a product → **Theme template** → `landing` / `multi-style` /
+`multi-product`. Those products keep that template regardless of Store type.
+
+**Prefer a single-type template?** For a cleaner editor (only that type's sections, exact
+curated order), swap the union for a curated template — and back — with the helper script:
 
 ```bash
-scripts/use-store-type.sh v2          # v1 / v2 / v3, or one-product / multi-style / multi-product
-scripts/use-store-type.sh v2 --push   # also push templates/index.json
+scripts/use-store-type.sh v2 --push       # curated V2 home page (only V2 sections)
+scripts/use-store-type.sh dropdown --push # restore the admin-switchable union home page
 ```
-
-No-terminal alternatives: build the page in the theme editor by adding sections (each has a
-preset), or paste `templates/index.<type>.json` into `templates/index.json` via Admin → Edit
-code.
 
 ### Step 2 — Import products & collections
 

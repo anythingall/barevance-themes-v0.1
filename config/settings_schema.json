@@ -108,6 +108,39 @@
     ]
   },
   {
+    "name": "Store type",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "One dropdown for the whole store. Controls the home page AND the default product page (products keep any template you assign them individually)."
+      },
+      {
+        "type": "select",
+        "id": "store_type",
+        "label": "Store type (home + product)",
+        "options": [
+          {
+            "value": "v1",
+            "label": "V1 - One Product"
+          },
+          {
+            "value": "v2",
+            "label": "V2 - Multi Style"
+          },
+          {
+            "value": "v3",
+            "label": "V3 - Multi Product"
+          }
+        ],
+        "default": "v1"
+      },
+      {
+        "type": "paragraph",
+        "content": "Sections not used by the chosen type stay listed below but are hidden on the storefront. Each section's \"Show on store type\" controls this."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
