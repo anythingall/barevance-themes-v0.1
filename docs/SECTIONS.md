@@ -43,7 +43,8 @@ Legend for "Used by": **V1** One Product · **V2** Multi Style · **V3** Multi P
 
 | Snippet | Purpose |
 |---------|---------|
-| **design-tokens** | Emits global CSS variables from theme settings (accent font, mobile heading scale, card radius, tap target, section rhythm). Included in `layout/theme.liquid`. |
+| **brand-style** | **Style engine / single source of truth.** Reads the `Theme style` dropdown (Warm/Minimal/Playful/Custom) and maps ~9 brand role colors + 3 fonts + 2 radii onto Dawn's 5 color schemes + `--font-*` / radius variables. Rendered after Dawn's scheme block so it drives the whole store's look. Add a preset = one `{% when %}` branch here. |
+| **design-tokens** | Emits global CSS variables from theme settings (mobile heading scale, content width, tap target, section rhythm). Included in `layout/theme.liquid`. |
 | **custom-icon** | Renders a Dawn icon SVG by name (shared icon list for `custom-*` sections). |
 | **custom-stars** | 5-star rating (supports halves), colored by the scheme accent. |
 | **custom-compare-mark** | Check / partial / cross mark for the comparison table. |

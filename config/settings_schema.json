@@ -8,6 +8,106 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Theme style",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Pick a ready-made style (colours + fonts + corners) for the whole store. Choose \"Custom\" to use your own colours from \"Custom style\" below."
+      },
+      {
+        "type": "select",
+        "id": "style_preset",
+        "label": "Theme style",
+        "options": [
+          {
+            "value": "warm",
+            "label": "Warm — luxury serif (brown / cream)"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal — clean mono (black / white)"
+          },
+          {
+            "value": "playful",
+            "label": "Playful — bold rounded (pink / purple)"
+          },
+          {
+            "value": "custom",
+            "label": "Custom — use my own colours & fonts"
+          }
+        ],
+        "default": "warm"
+      }
+    ]
+  },
+  {
+    "name": "Custom style",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used only when Theme style = Custom. Fonts come from the Typography panel; corner radius from Buttons and \"Base theme\"."
+      },
+      {
+        "type": "header",
+        "content": "Brand colours"
+      },
+      {
+        "type": "color",
+        "id": "custom_bg",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "custom_surface",
+        "label": "Surface (cards, bands)",
+        "default": "#F5F5F3"
+      },
+      {
+        "type": "color",
+        "id": "custom_text",
+        "label": "Text",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "custom_primary",
+        "label": "Primary (buttons, links, stars)",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "custom_primary_text",
+        "label": "Text on primary",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "custom_dark",
+        "label": "Dark sections (footer, CTA, announcement)",
+        "default": "#141414"
+      },
+      {
+        "type": "color",
+        "id": "custom_dark_text",
+        "label": "Text on dark",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "custom_accent",
+        "label": "Accent (badges, sale)",
+        "default": "#C87A45"
+      },
+      {
+        "type": "color",
+        "id": "custom_accent_text",
+        "label": "Text on accent",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {
@@ -238,19 +338,91 @@
         "type": "paragraph",
         "content": "Thanh tiến trình 'mua thêm giảm thêm' trong cart drawer. Mỗi mốc PHẢI khớp Automatic discount trong Admin (cùng min quantity), nếu không thanh này hứa giảm giá mà thực tế không áp."
       },
-      { "type": "checkbox", "id": "cart_promo_enabled", "label": "Bật thanh tiến trình giảm giá", "default": false },
-      { "type": "collection", "id": "cart_promo_collection", "label": "Chỉ đếm sản phẩm trong collection (trống = cả giỏ)" },
-      { "type": "header", "content": "Tiers (quantity = 0 để tắt tier)" },
-      { "type": "range", "id": "cart_tier1_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 1 — số lượng", "default": 2 },
-      { "type": "text", "id": "cart_tier1_label", "label": "Tier 1 — nhãn", "default": "10% OFF" },
-      { "type": "range", "id": "cart_tier2_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 2 — số lượng", "default": 3 },
-      { "type": "text", "id": "cart_tier2_label", "label": "Tier 2 — nhãn", "default": "15% OFF" },
-      { "type": "range", "id": "cart_tier3_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 3 — số lượng", "default": 4 },
-      { "type": "text", "id": "cart_tier3_label", "label": "Tier 3 — nhãn", "default": "20% OFF" },
-      { "type": "header", "content": "Messages" },
-      { "type": "text", "id": "cart_promo_incomplete_text", "label": "Khi chưa đạt tier nào", "info": "[n] = số lượng còn thiếu, [next] = nhãn tier kế.", "default": "Add [n] more and receive [next]" },
-      { "type": "text", "id": "cart_promo_mid_text", "label": "Khi đã đạt 1 tier (còn tier cao hơn)", "info": "[n], [next], [current] = tier cao nhất đã đạt.", "default": "You've unlocked [current] — add [n] more for [next]" },
-      { "type": "text", "id": "cart_promo_complete_text", "label": "Khi đạt tier cao nhất", "info": "[current] = tier cao nhất.", "default": "You've unlocked [current] 🎉" }
+      {
+        "type": "checkbox",
+        "id": "cart_promo_enabled",
+        "label": "Bật thanh tiến trình giảm giá",
+        "default": false
+      },
+      {
+        "type": "collection",
+        "id": "cart_promo_collection",
+        "label": "Chỉ đếm sản phẩm trong collection (trống = cả giỏ)"
+      },
+      {
+        "type": "header",
+        "content": "Tiers (quantity = 0 để tắt tier)"
+      },
+      {
+        "type": "range",
+        "id": "cart_tier1_qty",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "label": "Tier 1 — số lượng",
+        "default": 2
+      },
+      {
+        "type": "text",
+        "id": "cart_tier1_label",
+        "label": "Tier 1 — nhãn",
+        "default": "10% OFF"
+      },
+      {
+        "type": "range",
+        "id": "cart_tier2_qty",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "label": "Tier 2 — số lượng",
+        "default": 3
+      },
+      {
+        "type": "text",
+        "id": "cart_tier2_label",
+        "label": "Tier 2 — nhãn",
+        "default": "15% OFF"
+      },
+      {
+        "type": "range",
+        "id": "cart_tier3_qty",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "label": "Tier 3 — số lượng",
+        "default": 4
+      },
+      {
+        "type": "text",
+        "id": "cart_tier3_label",
+        "label": "Tier 3 — nhãn",
+        "default": "20% OFF"
+      },
+      {
+        "type": "header",
+        "content": "Messages"
+      },
+      {
+        "type": "text",
+        "id": "cart_promo_incomplete_text",
+        "label": "Khi chưa đạt tier nào",
+        "info": "[n] = số lượng còn thiếu, [next] = nhãn tier kế.",
+        "default": "Add [n] more and receive [next]"
+      },
+      {
+        "type": "text",
+        "id": "cart_promo_mid_text",
+        "label": "Khi đã đạt 1 tier (còn tier cao hơn)",
+        "info": "[n], [next], [current] = tier cao nhất đã đạt.",
+        "default": "You've unlocked [current] — add [n] more for [next]"
+      },
+      {
+        "type": "text",
+        "id": "cart_promo_complete_text",
+        "label": "Khi đạt tier cao nhất",
+        "info": "[current] = tier cao nhất.",
+        "default": "You've unlocked [current] 🎉"
+      }
     ]
   },
   {
@@ -1571,6 +1743,33 @@
         "id": "customer_account_menu",
         "default": "customer-account-main-menu",
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
+      }
+    ]
+  },
+  {
+    "name": "Preset fonts (advanced)",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Fonts used by the Warm / Minimal / Playful presets. You normally never change these — presets reference them."
+      },
+      {
+        "type": "font_picker",
+        "id": "pfont_serif",
+        "label": "Preset serif — Warm heading",
+        "default": "playfair_display_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "pfont_serif_body",
+        "label": "Preset serif body — Warm body",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "pfont_sans",
+        "label": "Preset sans — Minimal / Playful",
+        "default": "poppins_n4"
       }
     ]
   }

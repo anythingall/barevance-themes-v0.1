@@ -120,12 +120,29 @@ heading scale, card radius, tap-target minimum, section rhythm — included once
 `custom-*` section uses (`.custom-container`, `.custom-grid`, `.custom-scroller`, `.custom-h1`,
 `.custom-tap`, …).
 
-### Style presets
+### Style presets — one dropdown, whole-store re-skin
 
-`config/settings_data.json` ships three full presets — **Warm** (brown + Playfair serif,
-default), **Minimal** (monochrome + Poppins, square), **Playful** (coral/pink + Poppins,
-rounded). Each carries the complete configuration; only colors, fonts and radius differ, so
-switching a preset re-skins the store in one step.
+Branding is driven by a single **Theme settings → Theme style** dropdown
+(`settings.style_preset`): **Warm** (brown + Playfair serif, default), **Minimal**
+(monochrome + Poppins, square), **Playful** (pink/purple + Poppins, rounded), or **Custom**.
+Changing it in the admin re-skins the entire store — no code, no theme push.
+
+How it works (the "brand token" layer):
+
+- `snippets/brand-style.liquid` is the **single source of truth**. For the chosen preset it
+  sets ~9 semantic role colors + 3 fonts + 2 radii; for **Custom** it reads the simple
+  "Custom style" settings (8 labelled brand colors) instead of the raw 5-scheme editor.
+- Those tokens are mapped onto Dawn's five color schemes (by role) and the `--font-*` /
+  `--buttons-radius` / `--custom-card-radius` variables. `brand-style` renders in `<head>`
+  **after** Dawn's scheme block, so its values win the cascade and drive every section
+  (Dawn and `custom-*`) at once.
+- **Add a new preset** = add one `{% when %}` branch in `brand-style.liquid` + one option in
+  the `style_preset` select. No new theme, no duplicated color data, no section edits. (The
+  case-block can later be swapped for a metaobject lookup so non-developers add presets from
+  the admin.)
+
+The native Colors/Typography panels are overridden while a named preset is active; pick
+**Custom** to hand-tune via the "Custom style" colors + the Typography fonts.
 
 ---
 

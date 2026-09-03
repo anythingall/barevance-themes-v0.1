@@ -281,6 +281,9 @@
     {%- comment -%} Base theme: global design tokens for custom-* sections (mobile-first) {%- endcomment -%}
     {%- render 'design-tokens' -%}
 
+    {%- comment -%} Base theme: style engine — maps the chosen preset (or Custom) onto Dawn's color schemes + fonts. Must render after Dawn's scheme block and design-tokens. {%- endcomment -%}
+    {%- render 'brand-style' -%}
+
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'base-custom.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

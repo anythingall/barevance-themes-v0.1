@@ -25,7 +25,7 @@ shopify theme push --store YOUR-STORE.myshopify.com --theme <theme-id> --only te
 
 Then, in the admin (all clicks, no code):
 
-4. **Branding** — Theme settings → pick a color **preset** (Warm / Minimal / Playful) + logo.
+4. **Branding** — Theme settings → **Theme style** dropdown (Warm / Minimal / Playful / Custom) + logo.
 5. **Products** — import your catalog, then set each product's **Theme template**
    (`landing` / `multi-style` / `multi-product`).
 6. **Sections** — connect products/collections to the pricing tiers, best-sellers, and other
@@ -94,21 +94,22 @@ All in the theme editor — no code:
 - **Product images** — on the product (admin).
 - **CTA background** — the CTA banner section.
 
-### Step 5 — Colors
+### Step 5 — Colors & fonts (Theme style)
 
-Theme settings → **Colors**. Either pick a **preset** (Warm / Minimal / Playful) or edit the
-five schemes by role:
+Theme settings → **Theme style** dropdown. This is the main branding control:
 
-| Scheme | Role |
-|--------|------|
-| scheme-1 | Base background |
-| scheme-2 | Surface (cards / bands) |
-| scheme-3 | Brand / dark (footer, CTA, announcement bar) |
-| scheme-4 | Accent (badges, sale) |
-| scheme-5 | Inverse / darkest |
+- **Warm / Minimal / Playful** — a ready-made look (colors + fonts + corner radius). Pick one
+  and the whole store re-skins instantly. No code, no theme push.
+- **Custom** — set your own: fill the simple **Custom style** group (8 labelled brand colors —
+  Background, Text, Primary, Dark sections, Accent…) and choose fonts in **Typography**. The
+  theme derives all five Dawn color schemes from those 8 colors for you.
 
-Changing a scheme updates the whole store — highlights, buttons, stars, badges, icons, footer.
-You never edit colors inside a section.
+Either way, one control updates the whole store — highlights, buttons, stars, badges, icons,
+footer. You never edit colors inside a section, and you don't need Dawn's raw 5-scheme editor.
+
+> **Adding your own preset (developer):** add one `{% when %}` branch in
+> `snippets/brand-style.liquid` and one option to the `style_preset` select in
+> `config/settings_schema.json`. It then appears in the dropdown for everyone — no extra theme.
 
 ### Step 6 — Fonts
 

@@ -1,0 +1,163 @@
+{%- comment -%}
+  Base theme — style engine (single source of truth for the store look).
+
+  `settings.style_preset` picks a preset (colors + fonts + corner radius). "custom" reads
+  the "Custom style" settings instead. Everything below feeds one small set of brand role
+  tokens, which are then mapped onto Dawn's 5 color schemes — so every section (Dawn and
+  custom-*) re-skins from ONE control in Theme settings, with no code and no push.
+
+  Rendered in <head> AFTER Dawn's color-scheme block and after design-tokens, so these
+  rules win the cascade (same selector, later in source order).
+
+  ── HOW TO ADD A NEW PRESET ─────────────────────────────────────────────────────────
+  1. Copy a `{% when %}` block below, rename it, and set the 9 role colors + fonts + radii.
+  2. Add a matching option to `style_preset` in config/settings_schema.json ("Theme style").
+  No new theme, no duplicated color data, no section edits. (To let non-developers add
+  presets from the admin later, this case-block can be swapped for a metaobject lookup.)
+  ─────────────────────────────────────────────────────────────────────────────────────
+{%- endcomment -%}
+
+{%- liquid
+  assign sp = settings.style_preset | default: 'warm'
+
+  assign poppins = settings.pfont_sans
+  assign poppins_semi = settings.pfont_sans | font_modify: 'weight', '600'
+  assign poppins_bold = settings.pfont_sans | font_modify: 'weight', '700'
+
+  case sp
+  when 'minimal'
+    assign c_bg = '#FFFFFF'
+    assign c_surface = '#F4F4F2'
+    assign c_text = '#141414'
+    assign c_primary = '#141414'
+    assign c_primary_text = '#FFFFFF'
+    assign c_dark = '#141414'
+    assign c_dark_text = '#FFFFFF'
+    assign c_accent = '#141414'
+    assign c_accent_text = '#FFFFFF'
+    assign font_heading = poppins_semi
+    assign font_body = poppins
+    assign font_accent = poppins_semi
+    assign btn_radius = 2
+    assign card_radius = 4
+
+  when 'playful'
+    assign c_bg = '#FFF8F5'
+    assign c_surface = '#FFEDF3'
+    assign c_text = '#2E2140'
+    assign c_primary = '#FF5A8A'
+    assign c_primary_text = '#FFFFFF'
+    assign c_dark = '#2E2140'
+    assign c_dark_text = '#FFF8F5'
+    assign c_accent = '#FF5A8A'
+    assign c_accent_text = '#FFFFFF'
+    assign font_heading = poppins_bold
+    assign font_body = poppins
+    assign font_accent = poppins_bold
+    assign btn_radius = 40
+    assign card_radius = 24
+
+  when 'custom'
+    assign c_bg = settings.custom_bg
+    assign c_surface = settings.custom_surface
+    assign c_text = settings.custom_text
+    assign c_primary = settings.custom_primary
+    assign c_primary_text = settings.custom_primary_text
+    assign c_dark = settings.custom_dark
+    assign c_dark_text = settings.custom_dark_text
+    assign c_accent = settings.custom_accent
+    assign c_accent_text = settings.custom_accent_text
+    assign font_heading = settings.type_header_font
+    assign font_body = settings.type_body_font
+    assign font_accent = settings.type_accent_font
+    assign btn_radius = settings.buttons_radius
+    assign card_radius = settings.custom_card_radius
+
+  else
+    assign c_bg = '#FBF6EF'
+    assign c_surface = '#F3E7D8'
+    assign c_text = '#3A2A1E'
+    assign c_primary = '#6E4A2E'
+    assign c_primary_text = '#FBF6EF'
+    assign c_dark = '#5A3E28'
+    assign c_dark_text = '#FBF6EF'
+    assign c_accent = '#C87A45'
+    assign c_accent_text = '#FFFFFF'
+    assign font_heading = settings.pfont_serif
+    assign font_body = settings.pfont_serif_body
+    assign font_accent = settings.pfont_serif
+    assign btn_radius = 2
+    assign card_radius = 10
+  endcase
+
+  assign body_font_bold = font_body | font_modify: 'weight', 'bold'
+  assign body_font_italic = font_body | font_modify: 'style', 'italic'
+
+  assign row1 = c_bg | append: ';' | append: c_text | append: ';' | append: c_primary | append: ';' | append: c_primary_text | append: ';' | append: c_primary
+  assign row2 = c_surface | append: ';' | append: c_text | append: ';' | append: c_primary | append: ';' | append: c_primary_text | append: ';' | append: c_primary
+  assign row3 = c_dark | append: ';' | append: c_dark_text | append: ';' | append: c_accent | append: ';' | append: c_accent_text | append: ';' | append: c_dark_text
+  assign row4 = c_accent | append: ';' | append: c_accent_text | append: ';' | append: c_dark | append: ';' | append: c_dark_text | append: ';' | append: c_accent_text
+  assign row5 = c_dark | append: ';' | append: c_dark_text | append: ';' | append: c_accent | append: ';' | append: c_accent_text | append: ';' | append: c_dark_text
+  assign scheme_rows = row1 | append: '||' | append: row2 | append: '||' | append: row3 | append: '||' | append: row4 | append: '||' | append: row5 | split: '||'
+-%}
+
+{% style %}
+  {%- unless font_heading.system? -%}{{ font_heading | font_face: font_display: 'swap' }}{%- endunless -%}
+  {%- unless font_body.system? -%}
+    {{ font_body | font_face: font_display: 'swap' }}
+    {{ body_font_bold | font_face: font_display: 'swap' }}
+    {{ body_font_italic | font_face: font_display: 'swap' }}
+  {%- endunless -%}
+  {%- unless font_accent.system? -%}{{ font_accent | font_face: font_display: 'swap' }}{%- endunless -%}
+
+  {% for row in scheme_rows -%}
+    {%- assign cols = row | split: ';' -%}
+    {%- assign s_bg = cols[0] -%}
+    {%- assign s_text = cols[1] -%}
+    {%- assign s_btn = cols[2] -%}
+    {%- assign s_btn_text = cols[3] -%}
+    {%- assign s_sec_text = cols[4] -%}
+    {%- assign br = s_bg | color_brightness -%}
+    {%- if br <= 26 -%}{%- assign s_contrast = s_bg | color_lighten: 50 -%}
+    {%- elsif br <= 65 -%}{%- assign s_contrast = s_bg | color_lighten: 5 -%}
+    {%- else -%}{%- assign s_contrast = s_bg | color_darken: 12 -%}{%- endif -%}
+    .color-scheme-{{ forloop.index }} {
+      --color-background: {{ s_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --gradient-background: {{ s_bg }};
+      --color-foreground: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-background-contrast: {{ s_contrast | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-shadow: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-button: {{ s_btn | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-button-text: {{ s_btn_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-secondary-button: {{ s_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-secondary-button-text: {{ s_sec_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-link: {{ s_btn | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-badge-foreground: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-badge-background: {{ s_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-badge-border: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    }
+  {%- endfor -%}
+
+  :root {
+    --font-heading-family: {{ font_heading.family }}, {{ font_heading.fallback_families }};
+    --font-heading-style: {{ font_heading.style }};
+    --font-heading-weight: {{ font_heading.weight }};
+    --font-body-family: {{ font_body.family }}, {{ font_body.fallback_families }};
+    --font-body-style: {{ font_body.style }};
+    --font-body-weight: {{ font_body.weight }};
+    --font-body-weight-bold: {{ font_body.weight | plus: 300 | at_most: 1000 }};
+    --font-accent-family: {{ font_accent.family }}, {{ font_accent.fallback_families }};
+    --font-accent-style: {{ font_accent.style }};
+    --font-accent-weight: {{ font_accent.weight }};
+
+    --buttons-radius: {{ btn_radius }}px;
+    --buttons-radius-outset: {{ btn_radius }}px;
+    --custom-card-radius: {{ card_radius }}px;
+
+    --brand-bg: {{ c_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-text: {{ c_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-primary: {{ c_primary | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-dark: {{ c_dark | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-accent: {{ c_accent | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+  }
+{% endstyle %}
