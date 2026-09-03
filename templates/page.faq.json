@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Frequently Asked Questions", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Everything you need to know about orders, shipping, returns and fit.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 20 }
+    },
+    "faq_orders": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "How long does shipping take?", "answer": "<p>Orders typically arrive within 6–11 business days, including processing and transit time.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "Do you offer free shipping?", "answer": "<p>Yes — enjoy free shipping on all orders over $40, with no code needed.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "Can I change or cancel my order?", "answer": "<p>You can change or cancel your order within about 12 hours of placing it. Just email us with your order number.</p>" } },
+        "q4": { "type": "item", "settings": { "question": "Do you ship internationally?", "answer": "<p>Yes, we ship to most countries. Shipping times and fees are calculated at checkout.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Orders & Shipping", "heading_alignment": "left", "columns": "1", "narrow": true }
+    },
+    "faq_returns": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>You have 30 days from delivery to request a return for a full refund.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "How do I return an item?", "answer": "<p>Email us your order number and we'll send return instructions. You then have 14 days to post the unused item back with its tags.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "Can I exchange for a different size?", "answer": "<p>The fastest way is to return the original and place a new order for the size you'd like.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Returns & Exchanges", "heading_alignment": "left", "columns": "1", "narrow": true }
+    },
+    "faq_fit": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "What size fits my pet?", "answer": "<p>Our totes are designed for small to medium pets up to 8 kg (17 lbs). Check the size guide on each product page for exact dimensions.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "Is the tote comfortable and safe?", "answer": "<p>Yes — soft breathable interior, a peekaboo window so your pet can see out, and a secure zipper closure.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe clean for everyday care, or hand wash cold and air dry. Avoid tumble drying.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Size & Fit", "heading_alignment": "left", "columns": "1", "narrow": true }
+    },
+    "contact": {
+      "type": "custom-cta-banner",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "heading": "Still have questions?",
+        "text": "<p>Our team is here to help. Email us at info@gleamgarage.com — we reply within 24 hours.</p>",
+        "button_label": "Contact Us",
+        "button_link": "/pages/contact",
+        "content_alignment": "center",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": ["intro", "faq_orders", "faq_returns", "faq_fit", "contact"]
+}
