@@ -167,16 +167,22 @@
   }
 }
 
-/* Header CTA button (SHOP NOW) */
-.header__cta {
-  margin-left: 0.6rem;
-  padding: 0.9rem 1.8rem;
-  font-size: 1.2rem;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
+/* Header CTA button (SHOP NOW) — keep clear of the cart icon/bubble */
+.header__icons {
+  align-items: center;
 }
 
-@media screen and (max-width: 749px) {
+.header__cta {
+  margin-left: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  align-self: center;
+}
+
+@media screen and (max-width: 989px) {
   .header__cta {
     display: none;
   }
