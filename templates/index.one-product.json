@@ -44,6 +44,13 @@
             "label": "Shop Now",
             "style": "primary"
           }
+        },
+        "badge": {
+          "type": "badge",
+          "settings": {
+            "title": "PEEKABOO WINDOW",
+            "text": "So your kitty can see the world"
+          }
         }
       },
       "block_order": [
@@ -52,17 +59,19 @@
         "f3",
         "f4",
         "rating",
-        "btn"
+        "btn",
+        "badge"
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "The Peekaboo Cat Tote",
+        "eyebrow": "The Peekaboo Cat Tote ♡",
         "heading": "The Cutest Way To Take Your Cat",
         "heading_highlight": "Everywhere.",
         "subheading": "<p>A cozy and breathable design that keeps your pet safe, comfy, and part of every adventure.</p>",
         "footnote": "🚚 Free shipping today!",
         "content_alignment": "left",
-        "desktop_media_placement": "right"
+        "desktop_media_placement": "right",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
       }
     },
     "benefits": {
@@ -118,8 +127,9 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "heading": "Why Customers Love It",
-        "columns": 5
+        "heading": "Why Customers Love It ♡",
+        "columns": 5,
+        "card_container": true
       }
     },
     "story": {
@@ -166,7 +176,8 @@
         "heading": "From coffee runs to weekend getaways.",
         "text": "<p>Whether it's a trip to the vet, a stroll in the park, or a visit to a friend — every outing stays cozy, safe and memorable.</p>",
         "button_label": "See It In Action",
-        "desktop_media_placement": "left"
+        "desktop_media_placement": "left",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
       }
     },
     "reviews": {
@@ -281,7 +292,8 @@
         "color_scheme": "scheme-1",
         "heading": "Why Choose Us Over Others?",
         "us_label": "Our Brand",
-        "others_label": "Others"
+        "others_label": "Others",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
       }
     },
     "pricing": {
@@ -432,7 +444,13 @@
       "settings": {
         "color_scheme": "scheme-1",
         "heading": "Frequently Asked Questions",
-        "columns": "1"
+        "columns": "1",
+        "heading_alignment": "left",
+        "show_guarantee": true,
+        "guarantee_scheme": "scheme-2",
+        "guarantee_badge": "30 DAYS",
+        "guarantee_heading": "Love It or Get Your Money Back",
+        "guarantee_text": "We're confident you and your pet will love it. If not, return it within 30 days for a full refund."
       }
     }
   },

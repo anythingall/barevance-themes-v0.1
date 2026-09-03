@@ -4,7 +4,9 @@
 {%- endcomment -%}
 
 <div class="custom-faq color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container {% if section.settings.narrow %}custom-container--narrow{% endif %}">
+  <div class="custom-container {% if section.settings.narrow and section.settings.show_guarantee == false %}custom-container--narrow{% endif %}">
+    <div class="custom-faq__wrap {% if section.settings.show_guarantee %}has-guarantee{% endif %}">
+    <div class="custom-faq__main">
     {%- if section.settings.heading != blank -%}
       <h2 class="custom-h2 custom-faq__heading" style="text-align: {{ section.settings.heading_alignment }};">
         {{ section.settings.heading }}
@@ -41,12 +43,103 @@
         {%- endfor -%}
       {%- endif -%}
     </div>
+    </div>
+
+    {%- if section.settings.show_guarantee -%}
+      <aside class="custom-faq__guarantee custom-card color-{{ section.settings.guarantee_scheme }} gradient">
+        <div class="custom-faq__guarantee-body">
+          {%- if section.settings.guarantee_badge != blank -%}
+            <span class="custom-faq__seal">{{ section.settings.guarantee_badge }}</span>
+          {%- endif -%}
+          {%- if section.settings.guarantee_heading != blank -%}
+            <h3 class="custom-faq__guarantee-heading">{{ section.settings.guarantee_heading }}</h3>
+          {%- endif -%}
+          {%- if section.settings.guarantee_text != blank -%}
+            <p class="custom-faq__guarantee-text">{{ section.settings.guarantee_text }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.guarantee_image != blank -%}
+          {{ section.settings.guarantee_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'custom-faq__guarantee-img', alt: '' }}
+        {%- endif -%}
+      </aside>
+    {%- endif -%}
+    </div>
   </div>
 </div>
 
 {% stylesheet %}
   .custom-faq__heading {
     margin: 0 0 2.4rem;
+  }
+
+  .custom-faq__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  .custom-faq__main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .custom-faq__guarantee {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 2.4rem;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
+  .custom-faq__seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.2rem;
+    height: 5.2rem;
+    border-radius: 999px;
+    border: 0.2rem solid rgb(var(--color-button));
+    color: rgb(var(--color-button));
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.1;
+    flex: 0 0 auto;
+    margin-bottom: 1.2rem;
+  }
+
+  .custom-faq__guarantee-heading {
+    margin: 0 0 0.8rem;
+    font-size: 2rem;
+  }
+
+  .custom-faq__guarantee-text {
+    margin: 0;
+    font-size: 1.4rem;
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+
+  .custom-faq__guarantee-img {
+    width: 10rem;
+    height: auto;
+    flex: 0 0 auto;
+  }
+
+  @media screen and (min-width: 990px) {
+    .custom-faq__wrap.has-guarantee {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 4rem;
+    }
+
+    .custom-faq__wrap.has-guarantee .custom-faq__main {
+      flex: 1 1 60%;
+    }
+
+    .custom-faq__wrap.has-guarantee .custom-faq__guarantee {
+      flex: 0 0 34%;
+    }
   }
 
   .custom-faq__list {
@@ -117,6 +210,13 @@
       "default": "blocks"
     },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "header", "content": "Money-back guarantee (bên phải)" },
+    { "type": "checkbox", "id": "show_guarantee", "label": "Hiện box bảo đảm hoàn tiền", "default": false },
+    { "type": "color_scheme", "id": "guarantee_scheme", "label": "Color scheme của box", "default": "scheme-2" },
+    { "type": "text", "id": "guarantee_badge", "label": "Badge (vd 30 DAYS)", "default": "30 DAYS" },
+    { "type": "text", "id": "guarantee_heading", "label": "Tiêu đề", "default": "Love It or Get Your Money Back" },
+    { "type": "textarea", "id": "guarantee_text", "label": "Mô tả", "default": "We're confident you'll love it. If not, return it within 30 days for a full refund." },
+    { "type": "image_picker", "id": "guarantee_image", "label": "Ảnh (tuỳ chọn)" },
     {
       "type": "select",
       "id": "heading_alignment",

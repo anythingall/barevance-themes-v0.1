@@ -17,7 +17,7 @@
     {%- endif -%}
 
     <ul
-      class="custom-benefits__grid {% if section.settings.mobile_layout == 'carousel' %}custom-scroller custom-scroller--grid-on-desktop{% else %}custom-grid{% endif %} list-unstyled"
+      class="custom-benefits__grid {% if section.settings.card_container %}is-carded{% endif %} {% if section.settings.mobile_layout == 'carousel' %}custom-scroller custom-scroller--grid-on-desktop{% else %}custom-grid{% endif %} list-unstyled"
       role="list"
       style="--custom-grid-cols-desktop: {{ section.settings.columns }}; --custom-grid-cols-tablet: {{ section.settings.columns | at_most: 3 }}; --custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 60%;"
     >
@@ -80,6 +80,14 @@
     padding: 0;
   }
 
+  /* Optional card container wrapping the whole grid (matches reference) */
+  .custom-benefits__grid.is-carded {
+    background: rgba(var(--color-foreground), 0.04);
+    border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-radius: var(--custom-card-radius, 1.6rem);
+    padding: 2.8rem 2rem;
+  }
+
   .custom-benefits__item {
     display: flex;
     flex-direction: column;
@@ -91,9 +99,21 @@
     align-items: flex-start;
   }
 
+  /* Icon in a soft circle (matches reference) */
+  .custom-benefits__icon {
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 999px;
+    background: rgba(var(--color-button), 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+  }
+
   .custom-benefits__icon .svg-wrapper {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: 2.8rem;
+    height: 2.8rem;
     color: rgb(var(--color-button));
   }
 
@@ -157,6 +177,12 @@
       "max": 5,
       "step": 1,
       "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "card_container",
+      "label": "Bọc trong card (nền + viền)",
+      "default": false
     },
     {
       "type": "select",
