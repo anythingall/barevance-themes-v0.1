@@ -3,14 +3,57 @@
     "hero": {
       "type": "custom-hero",
       "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "leaf", "text": "Lightweight & Easy to Carry" } },
-        "f2": { "type": "feature", "settings": { "icon": "eye", "text": "Breathable Mesh" } },
-        "f3": { "type": "feature", "settings": { "icon": "padlock", "text": "Secure & Escape-Resistant" } },
-        "f4": { "type": "feature", "settings": { "icon": "heart", "text": "Adorable Design" } },
-        "rating": { "type": "rating", "settings": { "stars": 5, "text": "4.9/5 from 10,000+ happy customers" } },
-        "btn": { "type": "button", "settings": { "label": "Shop Now", "style": "primary" } }
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "text": "Lightweight & Easy to Carry"
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "eye",
+            "text": "Breathable Mesh"
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "padlock",
+            "text": "Secure & Escape-Resistant"
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "text": "Adorable Design"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "stars": 5,
+            "text": "4.9/5 from 10,000+ happy customers"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Now",
+            "style": "primary"
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3", "f4", "rating", "btn"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "rating",
+        "btn"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "eyebrow": "The Peekaboo Cat Tote",
@@ -25,24 +68,98 @@
     "benefits": {
       "type": "custom-icon-benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "heart", "title": "Cozy & Comfy", "text": "Soft interior keeps them calm and relaxed." } },
-        "b2": { "type": "benefit", "settings": { "icon": "eye", "title": "Breathe Easy", "text": "Mesh panels for maximum airflow." } },
-        "b3": { "type": "benefit", "settings": { "icon": "padlock", "title": "Built for Safety", "text": "Secure closure for peace of mind." } },
-        "b4": { "type": "benefit", "settings": { "icon": "leaf", "title": "Lightweight", "text": "Carry with comfort, wherever life takes you." } },
-        "b5": { "type": "benefit", "settings": { "icon": "star", "title": "Super Adorable", "text": "A design that turns heads everywhere." } }
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Cozy & Comfy",
+            "text": "Soft interior keeps them calm and relaxed."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "eye",
+            "title": "Breathe Easy",
+            "text": "Mesh panels for maximum airflow."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "padlock",
+            "title": "Built for Safety",
+            "text": "Secure closure for peace of mind."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Lightweight",
+            "text": "Carry with comfort, wherever life takes you."
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "title": "Super Adorable",
+            "text": "A design that turns heads everywhere."
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Why Customers Love It", "columns": 5 }
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Why Customers Love It",
+        "columns": 5
+      }
     },
     "story": {
       "type": "custom-image-with-text",
       "blocks": {
-        "l1": { "type": "list_item", "settings": { "icon_style": "check", "text": "Perfect for everyday adventures" } },
-        "l2": { "type": "list_item", "settings": { "icon_style": "check", "text": "Great for travel & daily use" } },
-        "l3": { "type": "list_item", "settings": { "icon_style": "check", "text": "Fits comfortably on your shoulder" } },
-        "l4": { "type": "list_item", "settings": { "icon_style": "check", "text": "Easy to clean & quick to fold" } }
+        "l1": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "check",
+            "text": "Perfect for everyday adventures"
+          }
+        },
+        "l2": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "check",
+            "text": "Great for travel & daily use"
+          }
+        },
+        "l3": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "check",
+            "text": "Fits comfortably on your shoulder"
+          }
+        },
+        "l4": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "check",
+            "text": "Easy to clean & quick to fold"
+          }
+        }
       },
-      "block_order": ["l1", "l2", "l3", "l4"],
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "eyebrow": "Made for every adventure",
@@ -55,71 +172,278 @@
     "reviews": {
       "type": "custom-reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "name": "Jessica M.", "stars": 5, "text": "My cat actually loves being in this tote! She feels safe and looks so cute." } },
-        "r2": { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "text": "Perfect for our weekend trips. Lightweight and adorable." } },
-        "r3": { "type": "review", "settings": { "name": "Sophie L.", "stars": 5, "text": "Great quality and super breathable. My kitten doesn't want to get out!" } },
-        "r4": { "type": "review", "settings": { "name": "Ethan B.", "stars": 5, "text": "Everyone stops to ask where I got it. Best purchase this year!" } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "name": "Jessica M.",
+            "stars": 5,
+            "text": "My cat actually loves being in this tote! She feels safe and looks so cute."
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel K.",
+            "stars": 5,
+            "text": "Perfect for our weekend trips. Lightweight and adorable."
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "name": "Sophie L.",
+            "stars": 5,
+            "text": "Great quality and super breathable. My kitten doesn't want to get out!"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "name": "Ethan B.",
+            "stars": 5,
+            "text": "Everyone stops to ask where I got it. Best purchase this year!"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Loved by Thousands of Customers", "columns": 4 }
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Loved by Thousands of Customers",
+        "columns": 4
+      }
     },
     "comparison": {
       "type": "custom-comparison-table",
       "blocks": {
-        "c1": { "type": "row", "settings": { "feature": "Peekaboo Window", "us": "check", "others": "cross" } },
-        "c2": { "type": "row", "settings": { "feature": "Breathable & Airy", "us": "check", "others": "partial" } },
-        "c3": { "type": "row", "settings": { "feature": "Lightweight & Portable", "us": "check", "others": "partial" } },
-        "c4": { "type": "row", "settings": { "feature": "Durable & Long-Lasting", "us": "check", "others": "cross" } },
-        "c5": { "type": "row", "settings": { "feature": "Stylish & Unique Design", "us": "check", "others": "cross" } },
-        "c6": { "type": "row", "settings": { "feature": "Easy to Clean", "us": "check", "others": "partial" } }
+        "c1": {
+          "type": "row",
+          "settings": {
+            "feature": "Peekaboo Window",
+            "us": "check",
+            "others": "cross"
+          }
+        },
+        "c2": {
+          "type": "row",
+          "settings": {
+            "feature": "Breathable & Airy",
+            "us": "check",
+            "others": "partial"
+          }
+        },
+        "c3": {
+          "type": "row",
+          "settings": {
+            "feature": "Lightweight & Portable",
+            "us": "check",
+            "others": "partial"
+          }
+        },
+        "c4": {
+          "type": "row",
+          "settings": {
+            "feature": "Durable & Long-Lasting",
+            "us": "check",
+            "others": "cross"
+          }
+        },
+        "c5": {
+          "type": "row",
+          "settings": {
+            "feature": "Stylish & Unique Design",
+            "us": "check",
+            "others": "cross"
+          }
+        },
+        "c6": {
+          "type": "row",
+          "settings": {
+            "feature": "Easy to Clean",
+            "us": "check",
+            "others": "partial"
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Why Choose Us Over Others?", "us_label": "Our Brand", "others_label": "Others" }
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Why Choose Us Over Others?",
+        "us_label": "Our Brand",
+        "others_label": "Others"
+      }
     },
     "pricing": {
       "type": "custom-pricing-tiers",
       "blocks": {
-        "t1": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 1, "label": "1 × Lion Mane Tote", "discount_percent": 0 } },
-        "t2": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 2, "label": "2 × Lion Mane Tote", "badge": "MOST POPULAR", "highlight": true, "discount_percent": 10 } },
-        "t3": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 3, "label": "3 × Lion Mane Tote", "discount_percent": 15 } },
-        "t4": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 4, "label": "4 × Lion Mane Tote", "discount_percent": 20 } }
+        "t1": {
+          "type": "tier",
+          "settings": {
+            "product": "lion-mane-cat-tote",
+            "quantity": 1,
+            "label": "1 × Lion Mane Tote",
+            "discount_percent": 0
+          }
+        },
+        "t2": {
+          "type": "tier",
+          "settings": {
+            "product": "lion-mane-cat-tote",
+            "quantity": 2,
+            "label": "2 × Lion Mane Tote",
+            "badge": "MOST POPULAR",
+            "highlight": true,
+            "discount_percent": 10
+          }
+        },
+        "t3": {
+          "type": "tier",
+          "settings": {
+            "product": "lion-mane-cat-tote",
+            "quantity": 3,
+            "label": "3 × Lion Mane Tote",
+            "discount_percent": 15
+          }
+        },
+        "t4": {
+          "type": "tier",
+          "settings": {
+            "product": "lion-mane-cat-tote",
+            "quantity": 4,
+            "label": "4 × Lion Mane Tote",
+            "discount_percent": 20
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3", "t4"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Choose Your Set" }
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Choose Your Set"
+      }
     },
     "trust": {
       "type": "custom-trust-badges",
       "blocks": {
-        "tb1": { "type": "badge", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On orders over $40" } },
-        "tb2": { "type": "badge", "settings": { "icon": "return", "title": "30-Day Guarantee", "subtitle": "Love it or get a full refund" } },
-        "tb3": { "type": "badge", "settings": { "icon": "padlock", "title": "Secure Checkout", "subtitle": "100% safe & encrypted" } },
-        "tb4": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "24/7 Support", "subtitle": "We're here anytime" } }
+        "tb1": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $40"
+          }
+        },
+        "tb2": {
+          "type": "badge",
+          "settings": {
+            "icon": "return",
+            "title": "30-Day Guarantee",
+            "subtitle": "Love it or get a full refund"
+          }
+        },
+        "tb3": {
+          "type": "badge",
+          "settings": {
+            "icon": "padlock",
+            "title": "Secure Checkout",
+            "subtitle": "100% safe & encrypted"
+          }
+        },
+        "tb4": {
+          "type": "badge",
+          "settings": {
+            "icon": "chat_bubble",
+            "title": "24/7 Support",
+            "subtitle": "We're here anytime"
+          }
+        }
       },
-      "block_order": ["tb1", "tb2", "tb3", "tb4"],
-      "settings": { "color_scheme": "scheme-2" }
+      "block_order": [
+        "tb1",
+        "tb2",
+        "tb3",
+        "tb4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
     },
     "faq": {
       "type": "custom-faq",
       "blocks": {
-        "q1": { "type": "item", "settings": { "question": "What size fits my pet?", "answer": "<p>Designed for small to medium pets. See the size guide for details.</p>" } },
-        "q2": { "type": "item", "settings": { "question": "How does the peekaboo window work?", "answer": "<p>A breathable mesh window lets your pet see out while staying safe inside.</p>" } },
-        "q3": { "type": "item", "settings": { "question": "Is it safe for my pet?", "answer": "<p>Yes — secure closure and reinforced stitching keep your pet safe.</p>" } },
-        "q4": { "type": "item", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe clean or hand wash. Air dry for best results.</p>" } },
-        "q5": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>30-day money-back guarantee, no questions asked.</p>" } }
+        "q1": {
+          "type": "item",
+          "settings": {
+            "question": "What size fits my pet?",
+            "answer": "<p>Designed for small to medium pets. See the size guide for details.</p>"
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "question": "How does the peekaboo window work?",
+            "answer": "<p>A breathable mesh window lets your pet see out while staying safe inside.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Is it safe for my pet?",
+            "answer": "<p>Yes — secure closure and reinforced stitching keep your pet safe.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "How do I clean it?",
+            "answer": "<p>Wipe clean or hand wash. Air dry for best results.</p>"
+          }
+        },
+        "q5": {
+          "type": "item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>30-day money-back guarantee, no questions asked.</p>"
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Frequently Asked Questions", "columns": "1" }
-    },
-    "cta": {
-      "type": "custom-cta-banner",
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
-        "color_scheme": "scheme-3",
-        "heading": "Ready for Your Next Adventure?",
-        "text": "<p>Join thousands of happy customers today.</p>",
-        "button_label": "Shop Now",
-        "content_alignment": "center"
+        "color_scheme": "scheme-1",
+        "heading": "Frequently Asked Questions",
+        "columns": "1"
       }
     }
   },
-  "order": ["hero", "benefits", "story", "reviews", "comparison", "pricing", "trust", "faq", "cta"]
+  "order": [
+    "hero",
+    "benefits",
+    "story",
+    "reviews",
+    "comparison",
+    "pricing",
+    "trust",
+    "faq"
+  ]
 }
