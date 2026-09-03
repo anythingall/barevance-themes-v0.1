@@ -315,7 +315,7 @@
           "type": "range",
           "id": "discount_percent",
           "label": "Giảm giá tier này (%)",
-          "info": "Phải khớp Automatic discount trong Admin (vd buy 2 → 10%). 0 = dùng compare-at price.",
+          "info": "Display only — must match an Automatic discount in Admin → Discounts (e.g. buy 2 → 10%), or checkout won't apply it. Run bootstrap-store.mjs with BOOTSTRAP_QTY_DISCOUNTS=1 to create the matching buy-2/3/4 discounts. 0 = use the product's compare-at price instead.",
           "min": 0,
           "max": 90,
           "step": 5,

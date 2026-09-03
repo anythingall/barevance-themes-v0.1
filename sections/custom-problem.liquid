@@ -1,0 +1,275 @@
+{%- comment -%} Base theme: store-type gate — on home/product pages, hide this section when settings.store_type is not in this section's type_visibility. Falls back to showing everything if store_type is blank. {%- endcomment -%}
+{%- liquid
+  assign hl_hide = false
+  assign hl_vis = section.settings.type_visibility | default: 'all'
+  assign hl_st = settings.store_type | default: 'v1'
+  assign hl_on = false
+  if template.name == 'index'
+    assign hl_on = true
+  endif
+  if template.name == 'product'
+    assign hl_on = true
+  endif
+  if hl_on and hl_vis != 'all'
+    unless hl_vis contains hl_st
+      assign hl_hide = true
+    endunless
+  endif
+-%}
+{%- unless hl_hide -%}
+{%- comment -%}
+  custom-problem — Problem block (pain points) (mobile-first). Self-contained variant of image-with-text
+  Media + content (eyebrow, heading, richtext, checklist blocks, button).
+  Mobile: stacked (media position selectable). Desktop: two columns.
+{%- endcomment -%}
+
+{%- liquid
+  assign media_placement = section.settings.desktop_media_placement
+  assign mobile_pos = section.settings.mobile_media_position
+-%}
+
+<div class="custom-iwt color-{{ section.settings.color_scheme }} gradient custom-section">
+  <div class="custom-container custom-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
+    <div class="custom-iwt__media custom-card">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            widths: '450, 660, 900, 1100, 1400',
+            class: 'custom-iwt__image',
+            alt: section.settings.image.alt | default: section.settings.heading
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'custom-iwt__image placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <div class="custom-iwt__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="custom-eyebrow custom-iwt__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="custom-h2 custom-iwt__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="custom-iwt__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="custom-iwt__list list-unstyled" role="list">
+          {%- for block in section.blocks -%}
+            <li class="custom-iwt__list-item" {{ block.shopify_attributes }}>
+              <span class="custom-iwt__list-icon custom-iwt__list-icon--{{ block.settings.icon_style }}">
+                {%- if block.settings.icon_style == 'cross' -%}
+                  {%- render 'custom-icon', icon: 'close' -%}
+                {%- else -%}
+                  {%- render 'custom-icon', icon: 'check_mark' -%}
+                {%- endif -%}
+              </span>
+              <span class="custom-iwt__list-text">{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="custom-iwt__actions">
+          <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary custom-cta">
+            {{- section.settings.button_label -}}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+
+{% stylesheet %}
+  .custom-iwt__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  .custom-iwt__inner.mobile-bottom {
+    flex-direction: column-reverse;
+  }
+
+  .custom-iwt__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .custom-iwt__image,
+  .custom-iwt__media .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .custom-iwt__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .custom-iwt__eyebrow {
+    margin: 0;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+  }
+
+  .custom-iwt__heading {
+    margin: 0;
+  }
+
+  .custom-iwt__text {
+    opacity: 0.85;
+  }
+
+  .custom-iwt__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .custom-iwt__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .custom-iwt__list-icon .svg-wrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .custom-iwt__list-icon--check .svg-wrapper {
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+  }
+
+  .custom-iwt__list-icon--cross .svg-wrapper {
+    opacity: 0.55;
+  }
+
+  .custom-iwt__list-text {
+    font-size: 1.5rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    .custom-iwt__inner {
+      flex-direction: row;
+      align-items: center;
+      gap: 4.5rem;
+    }
+
+    .custom-iwt__inner.media-left {
+      flex-direction: row-reverse;
+    }
+
+    .custom-iwt__media,
+    .custom-iwt__content {
+      flex: 1 1 50%;
+      min-width: 0;
+    }
+
+    .custom-iwt__media {
+      aspect-ratio: 1 / 1;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Problem",
+  "tag": "section",
+  "class": "custom-problem-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "type_visibility",
+      "label": "Show on store type",
+      "info": "Which store types (V1/V2/V3) show this section. Affects home + product pages via the Store type setting.",
+      "options": [
+        { "value": "all", "label": "All layouts" },
+        { "value": "v1", "label": "V1 only" },
+        { "value": "v2", "label": "V2 only" },
+        { "value": "v3", "label": "V3 only" },
+        { "value": "v1v2", "label": "V1 + V2" },
+        { "value": "v1v3", "label": "V1 + V3" },
+        { "value": "v2v3", "label": "V2 + V3" }
+      ],
+      "default": "all"
+    },
+
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "desktop_media_placement",
+      "label": "Vị trí ảnh (desktop)",
+      "options": [
+        { "value": "left", "label": "Bên trái" },
+        { "value": "right", "label": "Bên phải" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_position",
+      "label": "Vị trí ảnh (mobile)",
+      "options": [
+        { "value": "top", "label": "Trên nội dung" },
+        { "value": "bottom", "label": "Dưới nội dung" }
+      ],
+      "default": "top"
+    },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The problem" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>A playful and practical design made for comfort, safety and style.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "Kiểu icon",
+          "options": [
+            { "value": "check", "label": "Check (tích)" },
+            { "value": "cross", "label": "Cross (gạch)" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Soft & breathable interior" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem",
+      "blocks": [
+        { "type": "list_item", "settings": { "icon_style": "cross", "text": "Peekaboo window your pet will love" } },
+        { "type": "list_item", "settings": { "icon_style": "cross", "text": "Soft & breathable interior" } },
+        { "type": "list_item", "settings": { "icon_style": "cross", "text": "Secure and sturdy construction" } },
+        { "type": "list_item", "settings": { "icon_style": "cross", "text": "Perfect for daily outings and travel" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

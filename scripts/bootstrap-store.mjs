@@ -153,6 +153,38 @@ async function ensureMenus() {
   }
 }
 
+// ---- Quantity discounts (for the pricing-tiers section) ---------------------
+// The tier "% off" shown in the theme is display-only; the real discount is an
+// Automatic discount. These create the matching ones so the two can't drift.
+// Opt-in (set BOOTSTRAP_QTY_DISCOUNTS=1) so non-tier stores don't get surprise
+// store-wide discounts. Non-combinable; Shopify applies the best qualifying tier.
+const QTY_DISCOUNTS = [
+  { title: 'Buy 2+ Save 10%', quantity: 2, percentage: 0.1 },
+  { title: 'Buy 3+ Save 15%', quantity: 3, percentage: 0.15 },
+  { title: 'Buy 4+ Save 20%', quantity: 4, percentage: 0.2 },
+];
+
+async function ensureQuantityDiscounts() {
+  const existing = await gql(
+    `{ automaticDiscountNodes(first:100){ nodes{ automaticDiscount{ ... on DiscountAutomaticBasic{ title } } } } }`);
+  const have = new Set(
+    existing.automaticDiscountNodes.nodes.map((n) => n.automaticDiscount && n.automaticDiscount.title).filter(Boolean));
+  for (const d of QTY_DISCOUNTS) {
+    if (have.has(d.title)) { console.log(`= discount '${d.title}' exists`); continue; }
+    const r = await gql(
+      `mutation($d:DiscountAutomaticBasicInput!){ discountAutomaticBasicCreate(automaticBasicDiscount:$d){ automaticDiscountNode{ id } userErrors{ field message } } }`,
+      { d: {
+        title: d.title,
+        startsAt: '2024-01-01T00:00:00Z',
+        combinesWith: { orderDiscounts: false, productDiscounts: false, shippingDiscounts: true },
+        minimumRequirement: { quantity: { greaterThanOrEqualToQuantity: String(d.quantity) } },
+        customerGets: { value: { percentage: d.percentage }, items: { all: true } },
+      } });
+    const err = r.discountAutomaticBasicCreate.userErrors;
+    console.log(err.length ? `! discount '${d.title}': ${err[0].message}` : `+ discount '${d.title}' created`);
+  }
+}
+
 // ---- Run --------------------------------------------------------------------
 (async () => {
   console.log(`\nBootstrapping ${STORE} …\n`);
@@ -162,5 +194,11 @@ async function ensureMenus() {
   await ensureMetafieldDefs(moIds);
   console.log('\nNavigation menus:');
   await ensureMenus();
+  if (process.env.BOOTSTRAP_QTY_DISCOUNTS === '1') {
+    console.log('\nQuantity discounts (pricing tiers):');
+    await ensureQuantityDiscounts();
+  } else {
+    console.log('\nQuantity discounts: skipped. Set BOOTSTRAP_QTY_DISCOUNTS=1 to also create the\n  buy-2/3/4 automatic discounts that back the pricing-tiers section.');
+  }
   console.log('\n✓ Done. Next: import products (CSV), assign product Theme templates,\n  connect products/collections to sections, pick a color preset, add media.\n');
 })().catch((e) => { console.error('✗', e.message); process.exit(1); });

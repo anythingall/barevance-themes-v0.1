@@ -100,6 +100,29 @@
         {%- endfor -%}
       {%- endif -%}
     </div>
+
+    {%- comment -%} SEO: on a product page, expose product reviews as AggregateRating + Review on
+      a Product node keyed to this product's URL (merges with main-product's Product JSON-LD).
+      Only from product-metafield reviews (block reviews are generic testimonials). {%- endcomment -%}
+    {%- if template.name == 'product' and product != blank and use_mf -%}
+      {%- assign r_count = 0 -%}
+      {%- assign r_sum = 0 -%}
+      {%- assign r_items = '' -%}
+      {%- for review in mf_reviews -%}
+        {%- assign rr = review.rating | plus: 0 -%}
+        {%- if rr <= 0 -%}{%- assign rr = 5 -%}{%- endif -%}
+        {%- assign r_count = r_count | plus: 1 -%}
+        {%- assign r_sum = r_sum | plus: rr -%}
+        {%- capture r_one -%}{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":{{ rr }},"bestRating":5},"author":{"@type":"Person","name":{{ review.author | default: 'Verified Buyer' | json }}}{%- if review.text != blank -%},"reviewBody":{{ review.text | strip_html | strip_newlines | json }}{%- endif -%}}{%- endcapture -%}
+        {%- assign r_items = r_items | append: ',' | append: r_one -%}
+      {%- endfor -%}
+      {%- assign r_items = r_items | remove_first: ',' -%}
+      {%- if r_count > 0 -%}
+        {%- assign r_avg = r_sum | times: 1.0 | divided_by: r_count -%}
+        {%- capture r_url -%}{{ product.url | prepend: request.origin }}{%- endcapture -%}
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","@id":{{ r_url | json }},"url":{{ r_url | json }},"name":{{ product.title | json }},"aggregateRating":{"@type":"AggregateRating","ratingValue":{{ r_avg | round: 1 }},"reviewCount":{{ r_count }},"bestRating":5},"review":[{{ r_items }}]}</script>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </div>
 

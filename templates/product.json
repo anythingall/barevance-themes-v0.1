@@ -165,7 +165,7 @@
       }
     },
     "problem": {
-      "type": "custom-image-with-text",
+      "type": "custom-problem",
       "blocks": {
         "l1": {
           "type": "list_item",
@@ -205,7 +205,7 @@
       }
     },
     "solution": {
-      "type": "custom-image-with-text",
+      "type": "custom-solution",
       "blocks": {
         "l1": {
           "type": "list_item",

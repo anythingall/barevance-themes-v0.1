@@ -383,7 +383,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Thanh tiến trình 'mua thêm giảm thêm' trong cart drawer. Mỗi mốc PHẢI khớp Automatic discount trong Admin (cùng min quantity), nếu không thanh này hứa giảm giá mà thực tế không áp."
+        "content": "\"Spend/buy more, save more\" progress bar in the cart drawer. Each tier MUST match an Automatic discount in Admin → Discounts (same minimum), or the bar promises a discount checkout won't apply. Run bootstrap-store.mjs with BOOTSTRAP_QTY_DISCOUNTS=1 to create the matching discounts. (Thanh tiến trình cart: mỗi mốc phải khớp Automatic discount trong Admin.)"
       },
       {
         "type": "checkbox",
