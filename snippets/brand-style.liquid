@@ -137,7 +137,17 @@
     {%- if br <= 26 -%}{%- assign s_contrast = s_bg | color_lighten: 50 -%}
     {%- elsif br <= 65 -%}{%- assign s_contrast = s_bg | color_lighten: 5 -%}
     {%- else -%}{%- assign s_contrast = s_bg | color_darken: 12 -%}{%- endif -%}
+    {%- comment -%} Accent that is safe as TEXT/ICON on this scheme's background (>= 4.5:1). Nudges the button color darker/lighter only when it fails. {%- endcomment -%}
+    {%- assign s_accent = s_btn -%}
+    {%- assign s_accent_ratio = s_btn | color_contrast: s_bg -%}
+    {%- if s_accent_ratio < 4.5 -%}
+      {%- if br > 128 -%}{%- assign s_accent = s_btn | color_darken: 30 -%}
+      {%- else -%}{%- assign s_accent = s_btn | color_lighten: 30 -%}{%- endif -%}
+      {%- assign s_accent_ratio = s_accent | color_contrast: s_bg -%}
+      {%- if s_accent_ratio < 4.5 -%}{%- assign s_accent = s_text -%}{%- endif -%}
+    {%- endif -%}
     .color-scheme-{{ forloop.index }} {
+      --color-accent-strong: {{ s_accent | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --color-background: {{ s_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --gradient-background: {{ s_bg }};
       --color-foreground: {{ s_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
