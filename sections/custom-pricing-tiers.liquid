@@ -28,6 +28,7 @@
   the product's compare-at price. No hard-coded prices.
 {%- endcomment -%}
 
+{%- render 'custom-cart-ajax' -%}
 <div class="custom-tiers color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
     {%- if section.settings.heading != blank -%}
@@ -102,7 +103,7 @@
           </div>
 
           {%- if product != blank and variant != blank -%}
-            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-tiers__form">
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-tiers__form" data-ajax-cart>
               <input type="hidden" name="id" value="{{ variant.id }}">
               <input type="hidden" name="quantity" value="{{ qty }}">
               <button

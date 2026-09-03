@@ -37,6 +37,7 @@
   endfor
 -%}
 
+{%- render 'custom-cart-ajax' -%}
 <div class="custom-fbt color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
     {%- if section.settings.heading != blank -%}
@@ -82,7 +83,7 @@
           <span class="custom-fbt__save">You save {{ saved }}%</span>
         {%- endif -%}
 
-        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-fbt__form">
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-fbt__form" data-ajax-cart>
           {%- for block in section.blocks -%}
             {%- assign v = block.settings.product.selected_or_first_available_variant -%}
             {%- if v != blank -%}
