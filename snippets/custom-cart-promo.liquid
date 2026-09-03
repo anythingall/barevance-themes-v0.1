@@ -1,0 +1,286 @@
+{% doc %}
+  Tiered "buy more save more" progress bar for the cart drawer / cart page.
+  Nudges customers toward quantity-based automatic discounts. Config in
+  Theme settings > Cart discount promo. Tier quantities MUST match the real
+  Automatic discounts in Admin, or the bar promises a discount that won't apply.
+  Place inside the cart's live-updating contents so it refreshes on quantity change.
+  @example
+  {% render 'custom-cart-promo' %}
+{% enddoc %}
+
+{%- if settings.cart_promo_enabled and cart != empty -%}
+  {%- capture tierdata -%}
+    {%- if settings.cart_tier1_qty > 0 %}{{ settings.cart_tier1_qty }}~{{ settings.cart_tier1_label }}|{% endif -%}
+    {%- if settings.cart_tier2_qty > 0 %}{{ settings.cart_tier2_qty }}~{{ settings.cart_tier2_label }}|{% endif -%}
+    {%- if settings.cart_tier3_qty > 0 %}{{ settings.cart_tier3_qty }}~{{ settings.cart_tier3_label }}|{% endif -%}
+  {%- endcapture -%}
+  {%- assign tierdata = tierdata | strip -%}
+  {%- assign tiers = tierdata | split: '|' -%}
+
+  {%- if tiers.size > 0 -%}
+    {%- liquid
+      assign promo_collection = settings.cart_promo_collection
+      assign qty = 0
+      if promo_collection == blank
+        assign qty = cart.item_count
+      else
+        for item in cart.items
+          assign in_col = false
+          for col in item.product.collections
+            if col.handle == promo_collection.handle
+              assign in_col = true
+              break
+            endif
+          endfor
+          if in_col
+            assign qty = qty | plus: item.quantity
+          endif
+        endfor
+      endif
+
+      assign n = tiers.size
+      assign reached = 0
+      assign prevq = 0
+      assign nextq = 0
+      assign remaining = 0
+      assign current_label = ''
+      assign next_label = ''
+      assign has_next = false
+      for tier in tiers
+        assign parts = tier | split: '~'
+        assign tq = parts[0] | plus: 0
+        assign tl = parts[1]
+        if qty >= tq
+          assign reached = forloop.index
+          assign prevq = tq
+          assign current_label = tl
+        else
+          if has_next == false
+            assign nextq = tq
+            assign next_label = tl
+            assign remaining = tq | minus: qty
+            assign has_next = true
+          endif
+        endif
+      endfor
+
+      assign nextindex = reached | plus: 1
+
+      if reached == 0
+        assign startpos = 0
+      else
+        assign startpos = reached | times: 100 | minus: 50 | divided_by: n
+      endif
+      if has_next
+        assign endpos = reached | times: 100 | plus: 50 | divided_by: n
+        assign span = nextq | minus: prevq
+        if span <= 0
+          assign span = 1
+        endif
+        assign into = qty | minus: prevq
+        assign segfrac = into | times: 100 | divided_by: span
+        assign delta = endpos | minus: startpos
+        assign fillpct = delta | times: segfrac | divided_by: 100 | plus: startpos
+      else
+        assign fillpct = 100
+      endif
+
+      if has_next == false
+        assign headline = settings.cart_promo_complete_text | replace: '[current]', current_label
+      elsif reached > 0
+        assign headline = settings.cart_promo_mid_text | replace: '[n]', remaining | replace: '[next]', next_label | replace: '[current]', current_label
+      else
+        assign headline = settings.cart_promo_incomplete_text | replace: '[n]', remaining | replace: '[next]', next_label
+      endif
+    -%}
+
+    <div class="custom-promo{% if has_next == false %} custom-promo--complete{% endif %}">
+      <p class="custom-promo__head">{{ headline }}</p>
+      <div class="custom-promo__rail" style="--tiers: {{ n }};">
+        <div class="custom-promo__row custom-promo__row--above">
+          {%- for tier in tiers -%}
+            {%- assign parts = tier | split: '~' -%}
+            {%- assign tq = parts[0] | plus: 0 -%}
+            <span class="custom-promo__count{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ tq }} {% if tq == 1 %}item{% else %}items{% endif %}</span>
+          {%- endfor -%}
+        </div>
+        <div class="custom-promo__row custom-promo__row--nodes">
+          <span class="custom-promo__fill" style="--fill: {{ fillpct }}%;"></span>
+          {%- for tier in tiers -%}
+            {%- assign parts = tier | split: '~' -%}
+            {%- assign tq = parts[0] | plus: 0 -%}
+            {%- assign done = false -%}
+            {%- if qty >= tq -%}{%- assign done = true -%}{%- endif -%}
+            {%- assign is_next = false -%}
+            {%- if forloop.index == nextindex and has_next -%}{%- assign is_next = true -%}{%- endif -%}
+            <span class="custom-promo__node{% if done %} is-done{% elsif is_next %} is-next{% endif %}" aria-hidden="true">
+              {%- if done -%}
+                <svg viewBox="0 0 24 24" fill="none" class="custom-promo__mark"><path d="M6 12.5l3.6 3.6L18 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- else -%}
+                <svg viewBox="0 0 34 34" class="custom-promo__seal"><path class="custom-promo__seal-bg" d="M17 3l2.5 2.1 3.2-.5 1.2 3 3 1.2-.5 3.2L31 17l-2.1 2.5.5 3.2-3 1.2-1.2 3-3.2-.5L17 31l-2.5-2.1-3.2.5-1.2-3-3-1.2.5-3.2L3 17l2.1-2.5-.5-3.2 3-1.2 1.2-3 3.2.5z"/><text x="17" y="21" text-anchor="middle" class="custom-promo__seal-mark">%</text></svg>
+              {%- endif -%}
+            </span>
+          {%- endfor -%}
+        </div>
+        <div class="custom-promo__row custom-promo__row--below">
+          {%- for tier in tiers -%}
+            {%- assign parts = tier | split: '~' -%}
+            {%- assign tq = parts[0] | plus: 0 -%}
+            <span class="custom-promo__label{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ parts[1] }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .custom-promo {
+    margin: 0 0 1.8rem;
+    padding: 1.3rem 1.8rem 1.4rem;
+    border-radius: var(--custom-card-radius, 0.6rem);
+    background: rgba(var(--color-foreground), 0.05);
+  }
+
+  .custom-promo__head {
+    margin: 0 0 1rem;
+    font-size: 1.35rem;
+    line-height: 1.3;
+  }
+
+  .custom-promo__rail {
+    --tiers: 1;
+  }
+
+  .custom-promo__row {
+    display: grid;
+    grid-template-columns: repeat(var(--tiers), 1fr);
+    align-items: center;
+  }
+
+  .custom-promo__row > * {
+    justify-self: center;
+    text-align: center;
+  }
+
+  .custom-promo__row--above {
+    margin-bottom: 0.7rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .custom-promo__row--below {
+    margin-top: 0.7rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .custom-promo__count,
+  .custom-promo__label {
+    color: rgba(var(--color-foreground), 0.4);
+    transition: color 0.3s ease;
+  }
+
+  .custom-promo__count.is-next {
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-promo__count.is-done {
+    color: rgba(var(--color-foreground), 0.55);
+  }
+
+  .custom-promo__label.is-done {
+    color: rgb(var(--color-button));
+    font-weight: 700;
+  }
+
+  .custom-promo__label.is-next {
+    color: rgba(var(--color-foreground), 0.8);
+    font-weight: 700;
+  }
+
+  .custom-promo__row--nodes {
+    position: relative;
+  }
+
+  .custom-promo__row--nodes::before {
+    content: '';
+    position: absolute;
+    left: calc(50% / var(--tiers));
+    right: calc(50% / var(--tiers));
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0.25rem;
+    border-radius: 999px;
+    background: rgba(var(--color-foreground), 0.14);
+    z-index: 0;
+  }
+
+  .custom-promo__fill {
+    position: absolute;
+    left: calc(50% / var(--tiers));
+    width: clamp(0px, calc(var(--fill, 0%) - 50% / var(--tiers)), calc(100% - 100% / var(--tiers)));
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0.25rem;
+    border-radius: 999px;
+    background: rgb(var(--color-button));
+    z-index: 0;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .custom-promo__node {
+    position: relative;
+    z-index: 1;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+    background: rgb(var(--color-background));
+    border: 0.15rem solid rgba(var(--color-foreground), 0.22);
+    display: grid;
+    place-items: center;
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .custom-promo__seal {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .custom-promo__seal-bg {
+    fill: none;
+    stroke: rgba(var(--color-foreground), 0.35);
+    stroke-width: 1;
+  }
+
+  .custom-promo__seal-mark {
+    fill: rgba(var(--color-foreground), 0.5);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .custom-promo__node.is-next {
+    border-color: rgb(var(--color-button));
+    box-shadow: 0 0 0 0.4rem rgba(var(--color-button), 0.1);
+  }
+
+  .custom-promo__node.is-next .custom-promo__seal-bg {
+    stroke: rgba(var(--color-button), 0.8);
+  }
+
+  .custom-promo__node.is-next .custom-promo__seal-mark {
+    fill: rgb(var(--color-button));
+  }
+
+  .custom-promo__node.is-done {
+    background: rgb(var(--color-button));
+    border-color: rgb(var(--color-button));
+  }
+
+  .custom-promo__mark {
+    width: 1.8rem;
+    height: 1.8rem;
+    color: rgb(var(--color-button-text));
+  }
+{% endstylesheet %}

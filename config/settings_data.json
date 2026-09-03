@@ -191,7 +191,8 @@
           }
         }
       },
-      "type_accent_font": "playfair_display_i4"
+      "type_accent_font": "playfair_display_i4",
+      "cart_promo_enabled": true
     }
   }
 }

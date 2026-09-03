@@ -213,6 +213,28 @@
     ]
   },
   {
+    "name": "Cart discount promo",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Thanh tiến trình 'mua thêm giảm thêm' trong cart drawer. Mỗi mốc PHẢI khớp Automatic discount trong Admin (cùng min quantity), nếu không thanh này hứa giảm giá mà thực tế không áp."
+      },
+      { "type": "checkbox", "id": "cart_promo_enabled", "label": "Bật thanh tiến trình giảm giá", "default": false },
+      { "type": "collection", "id": "cart_promo_collection", "label": "Chỉ đếm sản phẩm trong collection (trống = cả giỏ)" },
+      { "type": "header", "content": "Tiers (quantity = 0 để tắt tier)" },
+      { "type": "range", "id": "cart_tier1_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 1 — số lượng", "default": 2 },
+      { "type": "text", "id": "cart_tier1_label", "label": "Tier 1 — nhãn", "default": "10% OFF" },
+      { "type": "range", "id": "cart_tier2_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 2 — số lượng", "default": 3 },
+      { "type": "text", "id": "cart_tier2_label", "label": "Tier 2 — nhãn", "default": "15% OFF" },
+      { "type": "range", "id": "cart_tier3_qty", "min": 0, "max": 12, "step": 1, "label": "Tier 3 — số lượng", "default": 4 },
+      { "type": "text", "id": "cart_tier3_label", "label": "Tier 3 — nhãn", "default": "20% OFF" },
+      { "type": "header", "content": "Messages" },
+      { "type": "text", "id": "cart_promo_incomplete_text", "label": "Khi chưa đạt tier nào", "info": "[n] = số lượng còn thiếu, [next] = nhãn tier kế.", "default": "Add [n] more and receive [next]" },
+      { "type": "text", "id": "cart_promo_mid_text", "label": "Khi đã đạt 1 tier (còn tier cao hơn)", "info": "[n], [next], [current] = tier cao nhất đã đạt.", "default": "You've unlocked [current] — add [n] more for [next]" },
+      { "type": "text", "id": "cart_promo_complete_text", "label": "Khi đạt tier cao nhất", "info": "[current] = tier cao nhất.", "default": "You've unlocked [current] 🎉" }
+    ]
+  },
+  {
     "name": "t:settings_schema.layout.name",
     "settings": [
       {
