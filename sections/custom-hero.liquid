@@ -25,6 +25,11 @@
   else
     assign align_items = 'flex-start'
   endif
+  # On the home page the logo is the h1 (Dawn), so the hero heading is an h2 to avoid two h1s.
+  assign hero_tag = 'h1'
+  if template.name == 'index'
+    assign hero_tag = 'h2'
+  endif
 -%}
 
 <div
@@ -77,12 +82,12 @@
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <h1 class="custom-h1 custom-hero__heading">
+        <{{ hero_tag }} class="custom-h1 custom-hero__heading">
           {{ section.settings.heading }}
           {%- if section.settings.heading_highlight != blank -%}
             <span class="custom-hero__heading-accent">{{ section.settings.heading_highlight }}</span>
           {%- endif -%}
-        </h1>
+        </{{ hero_tag }}>
       {%- endif -%}
 
       {%- if section.settings.subheading != blank -%}

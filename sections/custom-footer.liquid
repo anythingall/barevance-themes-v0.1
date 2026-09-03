@@ -208,8 +208,11 @@
     color: rgb(var(--color-foreground));
     text-decoration: none;
     font-size: 1.4rem;
-    opacity: 0.75;
+    opacity: 0.8;
     transition: opacity 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0;
   }
 
   .custom-footer__link:hover {
@@ -251,6 +254,11 @@
 
   .custom-footer__field input:focus {
     outline: none;
+  }
+
+  .custom-footer__field:focus-within {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.2rem;
   }
 
   .custom-footer__submit {

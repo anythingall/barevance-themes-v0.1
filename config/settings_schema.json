@@ -49,61 +49,71 @@
       },
       {
         "type": "header",
-        "content": "Brand colours"
+        "content": "Brand colours",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_bg",
         "label": "Background",
-        "default": "#FFFFFF"
+        "default": "#FFFFFF",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_surface",
         "label": "Surface (cards, bands)",
-        "default": "#F5F5F3"
+        "default": "#F5F5F3",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_text",
         "label": "Text",
-        "default": "#1A1A1A"
+        "default": "#1A1A1A",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_primary",
         "label": "Primary (buttons, links, stars)",
-        "default": "#1A1A1A"
+        "default": "#1A1A1A",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_primary_text",
         "label": "Text on primary",
-        "default": "#FFFFFF"
+        "default": "#FFFFFF",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_dark",
         "label": "Dark sections (footer, CTA, announcement)",
-        "default": "#141414"
+        "default": "#141414",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_dark_text",
         "label": "Text on dark",
-        "default": "#FFFFFF"
+        "default": "#FFFFFF",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_accent",
         "label": "Accent (badges, sale)",
-        "default": "#C87A45"
+        "default": "#C87A45",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       },
       {
         "type": "color",
         "id": "custom_accent_text",
         "label": "Text on accent",
-        "default": "#FFFFFF"
+        "default": "#FFFFFF",
+        "visible_if": "{{ settings.style_preset == 'custom' }}"
       }
     ]
   },
@@ -112,7 +122,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "One dropdown for the whole store. Controls the home page AND the default product page (products keep any template you assign them individually)."
+        "content": "One dropdown for the whole store: it sets the home page and the default product page. IMPORTANT: a product only follows this if it stays on the DEFAULT product template — assigning a product the landing / multi-style / multi-product template opts it out."
       },
       {
         "type": "select",
@@ -169,6 +179,10 @@
   {
     "name": "t:settings_schema.colors.name",
     "settings": [
+      {
+        "type": "paragraph",
+        "content": "Tip: this store is themed by Theme settings → Theme style (and Custom style). These raw color schemes are only used when Theme style = Custom."
+      },
       {
         "type": "color_scheme_group",
         "id": "color_schemes",
@@ -291,7 +305,7 @@
     ]
   },
   {
-    "name": "Base theme",
+    "name": "Header, mobile & sections",
     "settings": [
       {
         "type": "text",

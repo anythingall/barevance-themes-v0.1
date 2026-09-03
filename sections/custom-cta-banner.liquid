@@ -24,15 +24,15 @@
 
 <div class="custom-cta-banner color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
-    <div class="custom-cta-banner__box custom-card" style="--overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
+    <div class="custom-cta-banner__box custom-card" style="--overlay: {{ section.settings.overlay_opacity | at_least: 35 | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
       {%- if section.settings.image != blank -%}
         {{
           section.settings.image
-          | image_url: width: 2000
+          | image_url: width: 1600
           | image_tag:
             loading: 'lazy',
             sizes: '100vw',
-            widths: '750, 1100, 1500, 2000',
+            widths: '750, 1100, 1500',
             class: 'custom-cta-banner__bg',
             alt: ''
         }}
