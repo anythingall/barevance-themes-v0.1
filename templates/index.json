@@ -71,7 +71,7 @@
         "footnote": "🚚 Free shipping today!",
         "content_alignment": "left",
         "desktop_media_placement": "right",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
+        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png"
       }
     },
     "benefits": {
@@ -177,7 +177,7 @@
         "text": "<p>Whether it's a trip to the vet, a stroll in the park, or a visit to a friend — every outing stays cozy, safe and memorable.</p>",
         "button_label": "See It In Action",
         "desktop_media_placement": "left",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
+        "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png"
       }
     },
     "reviews": {
@@ -327,22 +327,12 @@
             "label": "3 × Lion Mane Tote",
             "discount_percent": 15
           }
-        },
-        "t4": {
-          "type": "tier",
-          "settings": {
-            "product": "lion-mane-cat-tote",
-            "quantity": 4,
-            "label": "4 × Lion Mane Tote",
-            "discount_percent": 20
-          }
         }
       },
       "block_order": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "settings": {
         "color_scheme": "scheme-1",
