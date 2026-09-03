@@ -16,10 +16,13 @@ the ones marked `[-]` — each needs a decision or is a large standalone effort.
 V1/V2/V3). Costs: dead section CSS on every page, editor clutter, and forking 5 Dawn sections.
 The curated per-type templates already exist and avoid all three.
 
-- [-] **STRAT-1** Un-fork Dawn sections (gate only `custom-*`) + editor blank-state indicator.
-  *Blank-state indicator is DONE (P1-11). Un-forking the 5 Dawn sections is the remaining piece —
-  large, and it trades against the "one dropdown" UX. Needs a decision (keep union vs move to
-  curated-by-default).*
+- [x] **STRAT-1 — DECIDED: keep the fork (won't un-fork).** The editor blank-state indicator is
+  done (P1-11). The gate stays in the 5 Dawn sections (collection-list, featured-collection,
+  multicolumn, newsletter, related-products). Rationale: the fork has **zero feature/runtime
+  impact** — it only costs a manual merge *if* Dawn is upgraded, and this theme does **not** track
+  new Dawn releases (each store freezes on its Dawn version). Un-forking would mean rebuilding
+  those 5 sections as custom wrappers (risking Best Sellers / Shop-by / related-products) for a
+  benefit we don't need. Revisit only if a decision is made to pull future Dawn updates.
 
 ## P0 — Correctness bugs  ✅ done
 - [x] **P0-1** Gate no longer fails open on blank `store_type` (defaults to `v1`).
