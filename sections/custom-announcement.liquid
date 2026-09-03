@@ -56,9 +56,19 @@
     background: rgba(var(--color-foreground), 0.3);
   }
 
+  .custom-ann__icon {
+    color: rgb(var(--color-foreground));
+    display: inline-flex;
+  }
+
   .custom-ann__icon .svg-wrapper {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  /* Dawn icons default to black fill; force them to follow the bar's text color */
+  .custom-ann__icon svg {
+    fill: currentColor;
   }
 
   /* Mobile: keep only the first item to avoid crowding */

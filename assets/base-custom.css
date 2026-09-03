@@ -188,12 +188,28 @@
   }
 }
 
-/* Header tagline under the logo/name (matches reference branding) */
+/* Keep the header identical on the home page (logo in <h1>) and other pages.
+   The <h1> wrapper on the home page otherwise adds a line-box gap under the
+   inline-flex logo link; making it a flex container removes that. */
+.header__heading {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: 1;
+}
+
+/* Header tagline under the logo/name (matches reference branding).
+   Force identical padding so the header is the same height on every page
+   (Dawn otherwise pads the logo link differently on the home page). */
 .header__heading-link {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   line-height: 1.1;
+  padding-block: 0.4rem;
+  padding-inline: 0;
 }
 
 .header__tagline {
