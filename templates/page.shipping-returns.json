@@ -1,0 +1,59 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Shipping & Returns", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Fast, free shipping and a hassle-free 30-day return policy — because your peace of mind matters.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 20 }
+    },
+    "highlights": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "truck", "title": "Free Shipping", "subtitle": "On all orders over $40" } },
+        "b2": { "type": "badge", "settings": { "icon": "heart", "title": "Fast Delivery", "subtitle": "6–11 business days" } },
+        "b3": { "type": "badge", "settings": { "icon": "return", "title": "30-Day Returns", "subtitle": "Love it or full refund" } },
+        "b4": { "type": "badge", "settings": { "icon": "padlock", "title": "Secure Checkout", "subtitle": "100% safe & encrypted" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": { "color_scheme": "scheme-1" }
+    },
+    "shipping": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "How long does delivery take?", "answer": "<p>Orders arrive within 6–11 business days, including 1–2 days of processing.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "Do you offer free shipping?", "answer": "<p>Yes — free standard shipping on all orders over $40. Orders under $40 have a flat rate calculated at checkout.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "Can I track my order?", "answer": "<p>Absolutely. You'll receive a tracking link by email as soon as your order ships.</p>" } },
+        "q4": { "type": "item", "settings": { "question": "Do you ship internationally?", "answer": "<p>Yes, we ship to most countries. International shipping times and any duties are shown at checkout.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Shipping", "heading_alignment": "left", "columns": "1", "narrow": true }
+    },
+    "returns": {
+      "type": "custom-faq",
+      "blocks": {
+        "q1": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>You have 30 days from delivery to request a return for a full refund on unused items with tags.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "How do I start a return?", "answer": "<p>Email info@gleamgarage.com with your order number. We'll send a prepaid label and instructions — you then have 14 days to post it back.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "When will I get my refund?", "answer": "<p>Refunds are processed within 3–5 business days of us receiving your return, back to your original payment method.</p>" } },
+        "q4": { "type": "item", "settings": { "question": "Can I exchange for a different size?", "answer": "<p>The fastest way is to return the original and place a new order for the size you'd like.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "color_scheme": "scheme-1", "heading": "Returns & Refunds", "heading_alignment": "left", "columns": "1", "narrow": true }
+    },
+    "cta": {
+      "type": "custom-cta-banner",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "heading": "Need help with an order?",
+        "text": "<p>Our team is here for you — email info@gleamgarage.com and we'll reply within 24 hours.</p>",
+        "button_label": "Contact Us",
+        "button_link": "/pages/contact",
+        "content_alignment": "center",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": ["intro", "highlights", "shipping", "returns", "cta"]
+}

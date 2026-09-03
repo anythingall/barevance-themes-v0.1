@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Size Guide", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Find the perfect fit for your pet. Our totes come in two sizes to suit small and medium pets.</p>" } }
+      },
+      "block_order": ["heading", "text"],
+      "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 20 }
+    },
+    "guide": {
+      "type": "custom-size-guide",
+      "blocks": {
+        "r1": { "type": "row", "settings": { "attribute": "Bag Dimensions (L×W×H)", "size1_value": "28 × 14 × 30 cm (11 × 5.5 × 11.8 in)", "size2_value": "33 × 18 × 36 cm (13 × 7 × 14.2 in)" } },
+        "r2": { "type": "row", "settings": { "attribute": "Max Pet Weight", "size1_value": "5 kg (11 lbs)", "size2_value": "8 kg (17 lbs)" } },
+        "r3": { "type": "row", "settings": { "attribute": "Recommended Pet Size", "size1_value": "Small pets", "size2_value": "Small – Medium pets" } },
+        "r4": { "type": "row", "settings": { "attribute": "Best For", "size1_value": "Kittens & small cats", "size2_value": "Most adult cats" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Find the Perfect Fit",
+        "subheading": "Not sure? If your pet is between sizes, we recommend sizing up for extra comfort.",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
+        "attr_label": "Size",
+        "size1_label": "S",
+        "size2_label": "M",
+        "perfect_heading": "Perfect for:",
+        "perfect_for": "<ul><li>Pets up to 8 kg (17 lbs)</li><li>Up to 46 cm (18 in) length</li><li>Most small & medium breeds</li></ul>"
+      }
+    },
+    "tips": {
+      "type": "custom-icon-benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "ruler", "title": "Measure Your Pet", "text": "From base of neck to base of tail, and their weight." } },
+        "b2": { "type": "benefit", "settings": { "icon": "check_mark", "title": "Compare to the Table", "text": "Match your pet's size and weight to S or M." } },
+        "b3": { "type": "benefit", "settings": { "icon": "heart", "title": "When in Doubt, Size Up", "text": "A little extra room means extra comfort." } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": { "color_scheme": "scheme-2", "heading": "How to Measure", "columns": 3, "card_container": true }
+    },
+    "cta": {
+      "type": "custom-cta-banner",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "heading": "Ready to find your fit?",
+        "text": "<p>Browse our collection and pick the perfect tote for your pet.</p>",
+        "button_label": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "content_alignment": "center",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": ["intro", "guide", "tips", "cta"]
+}
