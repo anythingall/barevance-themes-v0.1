@@ -94,6 +94,7 @@
 
   assign body_font_bold = font_body | font_modify: 'weight', 'bold'
   assign body_font_italic = font_body | font_modify: 'style', 'italic'
+  assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
 
   assign row1 = c_bg | append: ';' | append: c_text | append: ';' | append: c_primary | append: ';' | append: c_primary_text | append: ';' | append: c_primary
   assign row2 = c_surface | append: ';' | append: c_text | append: ';' | append: c_primary | append: ';' | append: c_primary_text | append: ';' | append: c_primary
@@ -103,12 +104,25 @@
   assign scheme_rows = row1 | append: '||' | append: row2 | append: '||' | append: row3 | append: '||' | append: row4 | append: '||' | append: row5 | split: '||'
 -%}
 
+{%- comment -%} Preload the fonts that actually paint (preset-aware): LCP heading + body. {%- endcomment -%}
+{%- unless font_heading.system? -%}
+  {% comment %}theme-check-disable AssetPreload{% endcomment %}
+  <link rel="preload" as="font" href="{{ font_heading | font_url }}" type="font/woff2" crossorigin>
+  {% comment %}theme-check-enable AssetPreload{% endcomment %}
+{%- endunless -%}
+{%- unless font_body.system? -%}
+  {% comment %}theme-check-disable AssetPreload{% endcomment %}
+  <link rel="preload" as="font" href="{{ font_body | font_url }}" type="font/woff2" crossorigin>
+  {% comment %}theme-check-enable AssetPreload{% endcomment %}
+{%- endunless -%}
+
 {% style %}
   {%- unless font_heading.system? -%}{{ font_heading | font_face: font_display: 'swap' }}{%- endunless -%}
   {%- unless font_body.system? -%}
     {{ font_body | font_face: font_display: 'swap' }}
     {{ body_font_bold | font_face: font_display: 'swap' }}
     {{ body_font_italic | font_face: font_display: 'swap' }}
+    {{ body_font_bold_italic | font_face: font_display: 'swap' }}
   {%- endunless -%}
   {%- unless font_accent.system? -%}{{ font_accent | font_face: font_display: 'swap' }}{%- endunless -%}
 

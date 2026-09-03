@@ -5,23 +5,9 @@
   Include once in <head> of layout/theme.liquid, after Dawn's :root block.
 {%- endcomment -%}
 
-{%- liquid
-  assign accent_font = settings.type_accent_font
-  assign accent_font_bold = accent_font | font_modify: 'weight', 'bold'
--%}
-
 {% style %}
-  {%- unless accent_font.system? -%}
-    {{ accent_font | font_face: font_display: 'swap' }}
-    {{ accent_font_bold | font_face: font_display: 'swap' }}
-  {%- endunless -%}
-
+  {%- comment -%} Accent font + all --font-* are emitted by snippets/brand-style.liquid (single source). {%- endcomment -%}
   :root {
-    /* Accent font (eyebrow / handwritten labels) */
-    --font-accent-family: {{ accent_font.family }}, {{ accent_font.fallback_families }};
-    --font-accent-style: {{ accent_font.style }};
-    --font-accent-weight: {{ accent_font.weight }};
-
     /* Mobile-first heading scale: shrink headings on small screens */
     --heading-mobile-scale: {{ settings.heading_mobile_scale | divided_by: 100.0 }};
 

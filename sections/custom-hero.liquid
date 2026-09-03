@@ -4,6 +4,18 @@
   Colors/fonts come from the color scheme + global design tokens (never hard-coded).
 {%- endcomment -%}
 
+{%- comment -%} Preload the hero image (LCP element) responsively so it isn't discovered only when the section HTML is parsed. {%- endcomment -%}
+{%- if section.settings.image != blank -%}
+  {% comment %}theme-check-disable AssetPreload{% endcomment %}
+  {%- if section.settings.mobile_image != blank -%}
+    <link rel="preload" as="image" media="(max-width: 749px)" imagesrcset="{{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1100 }} 1100w" imagesizes="100vw">
+    <link rel="preload" as="image" media="(min-width: 750px)" imagesrcset="{{ section.settings.image | image_url: width: 660 }} 660w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1600 }} 1600w" imagesizes="(min-width: 990px) 50vw, 100vw">
+  {%- else -%}
+    <link rel="preload" as="image" imagesrcset="{{ section.settings.image | image_url: width: 660 }} 660w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1600 }} 1600w" imagesizes="(min-width: 990px) 50vw, 100vw">
+  {%- endif -%}
+  {% comment %}theme-check-enable AssetPreload{% endcomment %}
+{%- endif -%}
+
 {%- liquid
   assign media_placement = section.settings.desktop_media_placement
   assign mobile_pos = section.settings.mobile_media_position
