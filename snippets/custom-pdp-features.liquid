@@ -1,0 +1,53 @@
+{% doc %}
+  Row of 4 feature icons for the product buy area (matches the reference PDP).
+  Reads product.metafields.custom.benefits (metaobjects) if present, else defaults.
+  @example {% render 'custom-pdp-features' %}
+{% enddoc %}
+
+{%- liquid
+  assign feats = product.metafields.custom.benefits.value
+-%}
+<ul class="custom-pdp-features list-unstyled" role="list">
+  {%- if feats != blank -%}
+    {%- for f in feats limit: 4 -%}
+      <li class="custom-pdp-features__item">
+        <span class="custom-pdp-features__icon">{%- render 'custom-icon', icon: f.icon -%}</span>
+        <span class="custom-pdp-features__label">{{ f.title }}</span>
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign titles = 'Cozy & Comfortable,Breathable Mesh,Secure Zipper,Lightweight' | split: ',' -%}
+    {%- assign icons = 'heart,leaf,padlock,star' | split: ',' -%}
+    {%- for t in titles -%}
+      <li class="custom-pdp-features__item">
+        <span class="custom-pdp-features__icon">{%- render 'custom-icon', icon: icons[forloop.index0] -%}</span>
+        <span class="custom-pdp-features__label">{{ t }}</span>
+      </li>
+    {%- endfor -%}
+  {%- endif -%}
+</ul>
+{% stylesheet %}
+  .custom-pdp-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem 1rem;
+    margin: 1.6rem 0;
+    padding: 1.6rem 0;
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  }
+  .custom-pdp-features__item {
+    flex: 1 1 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .custom-pdp-features__icon .svg-wrapper {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: rgb(var(--color-button));
+  }
+{% endstylesheet %}

@@ -1,0 +1,122 @@
+{%- comment -%}
+  custom-social-proof — Trust strip: avatars + "N happy customers" + rating on the
+  left, "As seen on" + press logos (text or image) on the right. Matches the PDP ref.
+{%- endcomment -%}
+
+<div class="custom-sp color-{{ section.settings.color_scheme }} gradient custom-section custom-sp--tight">
+  <div class="custom-container custom-sp__inner">
+    <div class="custom-sp__proof">
+      {%- if section.settings.avatars != blank -%}
+        {{ section.settings.avatars | image_url: width: 220 | image_tag: loading: 'lazy', class: 'custom-sp__avatars', alt: '' }}
+      {%- endif -%}
+      <div class="custom-sp__proof-text">
+        {%- if section.settings.count_text != blank -%}
+          <span class="custom-sp__count">{{ section.settings.count_text }}</span>
+        {%- endif -%}
+        <span class="custom-sp__rating">
+          {%- render 'custom-stars', rating: section.settings.rating -%}
+          <span>{{ section.settings.rating_text }}</span>
+        </span>
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="custom-sp__logos">
+        {%- if section.settings.as_seen_label != blank -%}
+          <span class="custom-sp__as-seen">{{ section.settings.as_seen_label }}</span>
+        {%- endif -%}
+        <ul class="list-unstyled custom-sp__logo-list" role="list">
+          {%- for block in section.blocks -%}
+            <li class="custom-sp__logo" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'custom-sp__logo-img', alt: block.settings.text }}
+              {%- else -%}
+                <span class="custom-sp__logo-text">{{ block.settings.text }}</span>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-sp--tight { padding-block: 2.4rem; }
+
+  .custom-sp__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    align-items: center;
+  }
+
+  .custom-sp__proof {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .custom-sp__avatars { height: 3.4rem; width: auto; border-radius: 999px; }
+  .custom-sp__proof-text { display: flex; flex-direction: column; }
+  .custom-sp__count { font-weight: 700; font-size: 1.4rem; }
+  .custom-sp__rating { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; }
+
+  .custom-sp__logos {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .custom-sp__as-seen { font-size: 1.2rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; }
+  .custom-sp__logo-list { display: flex; align-items: center; gap: 2.4rem; flex-wrap: wrap; margin: 0; }
+  .custom-sp__logo-text {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 1.5rem;
+    opacity: 0.55;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .custom-sp__logo-img { height: 2.6rem; width: auto; opacity: 0.6; }
+
+  @media screen and (min-width: 990px) {
+    .custom-sp__inner { flex-direction: row; justify-content: space-between; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Social proof",
+  "tag": "section",
+  "class": "custom-sp-section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "image_picker", "id": "avatars", "label": "Avatars (ảnh nhóm khách)" },
+    { "type": "text", "id": "count_text", "label": "Text số khách", "default": "10,000+ Happy Customers" },
+    { "type": "range", "id": "rating", "label": "Số sao", "min": 0, "max": 5, "step": 0.5, "default": 5 },
+    { "type": "text", "id": "rating_text", "label": "Text rating", "default": "4.9/5" },
+    { "type": "text", "id": "as_seen_label", "label": "Nhãn 'As seen on'", "default": "As seen on" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo / Press",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo (tuỳ chọn)" },
+        { "type": "text", "id": "text", "label": "Text (nếu không có logo)", "default": "PRESS NAME" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social proof",
+      "blocks": [
+        { "type": "logo", "settings": { "text": "PET LOVERS CLUB" } },
+        { "type": "logo", "settings": { "text": "MEOW MAGAZINE" } },
+        { "type": "logo", "settings": { "text": "PAWSOME" } },
+        { "type": "logo", "settings": { "text": "THE PET CHRONICLES" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

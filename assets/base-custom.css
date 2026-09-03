@@ -167,6 +167,21 @@
   }
 }
 
+/* Header CTA button (SHOP NOW) */
+.header__cta {
+  margin-left: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  .header__cta {
+    display: none;
+  }
+}
+
 /* Header tagline under the logo/name (matches reference branding) */
 .header__heading-link {
   display: inline-flex;

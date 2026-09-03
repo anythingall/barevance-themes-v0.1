@@ -168,6 +168,18 @@
         "default": "Cute. Cozy. Adventure."
       },
       {
+        "type": "text",
+        "id": "header_cta_label",
+        "label": "Nút CTA header (vd SHOP NOW)",
+        "info": "Bỏ trống để ẩn nút.",
+        "default": "SHOP NOW"
+      },
+      {
+        "type": "url",
+        "id": "header_cta_link",
+        "label": "Link nút CTA header"
+      },
+      {
         "type": "header",
         "content": "Mobile-first"
       },
