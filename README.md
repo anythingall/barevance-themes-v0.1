@@ -1,99 +1,125 @@
-# Dawn
+# Base Theme — Reusable Shopify Theme
 
-[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
+A production-ready Shopify base theme, built on **Dawn 16**, that you can reuse to launch
+many stores fast. One codebase powers **three store types**, and every store is set up by
+picking a template, importing products, and changing settings — **no code changes required**.
 
-[Getting started](#getting-started) |
-[Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
-[Developer tools](#developer-tools) |
-[Contributing](#contributing) |
-[Code of conduct](#code-of-conduct) |
-[Theme Store submission](#theme-store-submission) |
-[License](#license)
+- **One codebase → 3 store types**: One Product, Multi Style, Multi Product.
+- **Global design system**: change colors, fonts and branding in one place and the whole
+  store follows. Ships with 3 ready-made style presets.
+- **Mobile-first**: every section is designed for mobile first, then enhanced for desktop.
+- **Shopify-native**: real products, collections, metafields, metaobjects and menus — no
+  hard-coded content.
+- **Fast setup**: push the theme, run one bootstrap command, pick a store type, choose a
+  preset. ~15 minutes to a working store.
 
-Dawn represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
+---
 
-* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
-* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+## The 3 store types
 
-You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
+| Type | Best for | Homepage template | Product template |
+|------|----------|-------------------|------------------|
+| **V1 — One Product** | A single hero/trending product | `index.one-product` | `product.landing` |
+| **V2 — Multi Style** | One concept, many styles/variants | `index.multi-style` | `product.multi-style` |
+| **V3 — Multi Product** | Many products in one niche | `index.multi-product` | `product.multi-product` |
 
-## Getting started
-We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
+They share ~80% of their sections and all of the global chrome (announcement bar, header,
+footer). They differ mainly in the commerce structure (single product vs. style grid vs.
+category browsing). See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
+---
 
-Please note that the main branch may include code for features not yet released. The "stable" version of Dawn is available in the theme store.
+## Quick start
 
-## Staying up to date with Dawn changes
-
-Say you're building a new theme off Dawn but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Dawn repository.
-
-1. Navigate to your local theme folder.
-2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
-```sh
-git remote -v
-```
-3. If you don't see an `upstream`, you can add one that points to Shopify's Dawn repository:
-```sh
-git remote add upstream https://github.com/Shopify/dawn.git
-```
-4. Pull in the latest Dawn changes into your repository:
-```sh
-git fetch upstream
-git pull upstream main
-```
-
-## Developer tools
-
-There are a number of really useful tools that the Shopify Themes team uses during development. Dawn is already set up to work with these tools.
-
-### Shopify CLI
-
-[Shopify CLI](https://github.com/Shopify/shopify-cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
-
-You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
-
-### Theme Check
-
-We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
-
-We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
-
-You can also run it from a terminal with the following Shopify CLI command:
+Requirements: [Shopify CLI](https://shopify.dev/docs/api/shopify-cli), Node 18+.
 
 ```bash
-shopify theme check
+# Preview locally against a store
+shopify theme dev --store your-store.myshopify.com
+
+# Push to the store as an unpublished theme (safe to test, doesn't touch the live theme)
+shopify theme push --store your-store.myshopify.com --unpublished --theme "Base Theme"
 ```
 
-### Continuous Integration
+### Set up a brand-new store (~15 min)
 
-Dawn uses [GitHub Actions](https://github.com/features/actions) to maintain the quality of the theme. [This is a starting point](https://github.com/Shopify/dawn/blob/main/.github/workflows/ci.yml) and what we suggest to use in order to ensure you're building better themes. Feel free to build off of it!
+```bash
+# 1. Create the store's data structure (metafields, metaobjects, footer menus) — one command
+SHOPIFY_STORE=your-store.myshopify.com SHOPIFY_TOKEN=shpat_xxx \
+  node scripts/bootstrap-store.mjs
 
-#### Shopify/lighthouse-ci-action
+# 2. Choose the store type (sets the homepage layout)
+scripts/use-store-type.sh v1        # v1 = One Product · v2 = Multi Style · v3 = Multi Product
+```
 
-We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](https://github.com/Shopify/lighthouse-ci-action). This runs a series of [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) audits for the home, product and collections pages on a store to ensure code that gets added doesn't degrade storefront performance over time.
+Then, in the Shopify admin (all clicks, no code):
 
-#### Shopify/theme-check-action
+1. **Branding** — Theme settings → pick a color **preset** (Warm / Minimal / Playful), set the logo.
+2. **Products** — import your catalog, then set each product's **Theme template**.
+3. **Sections** — connect products/collections to sections in the theme editor.
+4. **Media** — upload your hero and lifestyle images.
+5. **Discounts** — if you use the pricing tiers, add matching Automatic discounts.
 
-Dawn runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
+Full walkthrough: **[docs/SETUP-NEW-STORE.md](docs/SETUP-NEW-STORE.md)**.
 
-## Contributing
+---
 
-Want to make commerce better for everyone by contributing to Dawn? We'd love your help! Please read our [contributing guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bug fixes and improvements, and how to build for Dawn.
+## Documentation
 
-## Code of conduct
+| Doc | What's inside |
+|-----|---------------|
+| **[SETUP-NEW-STORE.md](docs/SETUP-NEW-STORE.md)** | Step-by-step guide to launch a new store (fast path + details). |
+| **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** | How the theme is structured: global vs. template-specific, the design system, folder layout. |
+| **[SECTIONS.md](docs/SECTIONS.md)** | Reference for every `custom-*` section and snippet — settings, blocks, and where each is used. |
+| **[METAFIELDS.md](docs/METAFIELDS.md)** | The metafield/metaobject data model and how sections read it. |
+| **[design/](docs/design/)** | The reference designs (One Product / Multi Style / Multi Product). |
 
-All developers who wish to contribute through code or issues, please first read our [Code of Conduct](https://github.com/Shopify/dawn/blob/main/.github/CODE_OF_CONDUCT.md).
+---
 
-## Theme Store submission
+## Repository layout
 
-The [Shopify Theme Store](https://themes.shopify.com/) is the place where Shopify merchants find the themes that they'll use to showcase and support their business. As a theme partner, you can create themes for the Shopify Theme Store and reach an international audience of an ever-growing number of entrepreneurs.
+```
+├── assets/
+│   └── base-custom.css        # Shared mobile-first utilities for custom-* sections
+├── config/
+│   ├── settings_schema.json   # Global design system + branding settings
+│   └── settings_data.json     # Values + color presets (Warm / Minimal / Playful)
+├── sections/
+│   ├── custom-*.liquid        # 17 reusable sections (hero, benefits, pricing tiers, …)
+│   ├── header-group.json      # Global announcement bar + header
+│   └── footer-group.json      # Global footer
+├── snippets/
+│   ├── design-tokens.liquid   # Emits global CSS variables from settings
+│   └── custom-*.liquid        # Shared snippets (icons, stars, cart promo, …)
+├── templates/
+│   ├── index.one-product.json / index.multi-style.json / index.multi-product.json
+│   ├── product.landing.json / product.multi-style.json / product.multi-product.json
+│   └── page.faq.json / page.about-us.json / page.contact.json / …
+├── scripts/
+│   ├── use-store-type.sh      # Switch the homepage between V1/V2/V3 (one command)
+│   └── bootstrap-store.mjs    # Create metafields/metaobjects/menus for a new store
+└── docs/                      # Documentation + reference designs
+```
 
-Ensure that you follow the list of [theme store requirements](https://shopify.dev/themes/store/requirements) if you're interested in becoming a [Shopify Theme Partner](https://themes.shopify.com/services/themes/guidelines) and building themes for the Shopify platform.
+Everything the base theme adds is prefixed **`custom-`** so it never collides with Dawn and
+stays easy to merge when Dawn updates. Dawn's own files are left unmodified wherever possible.
 
-## License
+---
 
-Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+## Design system in one line
+
+Colors and fonts are defined **once** (Theme settings → Colors / Typography) and consumed by
+every section through Dawn's color schemes and CSS design tokens. Change a preset — or a
+single color/font — and the whole store (headings, buttons, badges, icons, footer,
+announcement bar) updates together. Never edit colors or fonts inside a section.
+
+---
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/use-store-type.sh <v1\|v2\|v3>` | Set the homepage layout for a store type. Add `--push` to push it. |
+| `scripts/bootstrap-store.mjs` | Create the metaobject/metafield definitions and footer menus a new store needs (idempotent). |
+
+Built on [Shopify Dawn](https://github.com/Shopify/dawn).

@@ -1,207 +1,195 @@
-# Tạo store mới từ Base Theme
+# Setting up a new store
 
-Quy trình tạo một store mới **không cần sửa source code**. Ước tính 30–60 phút.
+How to launch a new store with this base theme — **without editing code**. There's a fast
+path (~15 minutes) and a detailed reference below it.
 
-> Xem kiến trúc tổng thể ở [ARCHITECTURE.md](ARCHITECTURE.md). Base theme là Dawn 16 +
-> các section `custom-*`, mobile-first.
+> See [ARCHITECTURE.md](ARCHITECTURE.md) for how the theme is structured, and
+> [SECTIONS.md](SECTIONS.md) for what each section does.
 
 ---
 
-## ⚡ Fast setup (~15 phút)
+## ⚡ Fast path (~15 minutes)
 
 ```bash
-# 1. Đẩy theme lên store (tạo theme unpublished để test)
+# 1. Push the theme to the store as an unpublished theme (safe — doesn't touch the live theme)
 shopify theme push --store YOUR-STORE.myshopify.com --unpublished --theme "Base Theme"
 
-# 2. Tạo structure (metafield defs + metaobjects + footer menus) — 1 lệnh
-SHOPIFY_STORE=YOUR-STORE.myshopify.com SHOPIFY_TOKEN=shpat_xxx node scripts/bootstrap-store.mjs
+# 2. Create the store's data structure (metafields, metaobjects, footer menus) — one command
+SHOPIFY_STORE=YOUR-STORE.myshopify.com SHOPIFY_TOKEN=shpat_xxx \
+  node scripts/bootstrap-store.mjs
 
-# 3. Chọn loại store (homepage)
-scripts/use-store-type.sh v1        # v1=One Product · v2=Multi Style · v3=Multi Product
+# 3. Choose the store type (sets the homepage layout)
+scripts/use-store-type.sh v1        # v1 = One Product · v2 = Multi Style · v3 = Multi Product
 shopify theme push --store YOUR-STORE.myshopify.com --theme <theme-id> --only templates/index.json
 ```
 
-**4. Trong Theme Editor / Admin (click, không code):**
-- **Branding**: Theme settings → chọn **preset màu** (Warm / Minimal / Playful) + Logo.
-- **Products**: import CSV → gán **Theme template** (landing / multi-style / multi-product).
-- **Sections**: gắn product/collection vào pricing tiers, best sellers, FBT…
-- **Media**: upload ảnh hero / lifestyle.
-- **Discounts** (nếu dùng pricing tiers): tạo Automatic discount khớp tier (mục "Quantity discounts" bên dưới).
+Then, in the admin (all clicks, no code):
 
-> `SHOPIFY_TOKEN`: Admin → Settings → Apps → Develop apps → tạo app → scopes
-> `write_products, write_content, write_online_store_navigation,
-> write_metaobject_definitions, write_metaobjects` → Install → copy Admin API token.
-> Script an toàn chạy lại (bỏ qua thứ đã tồn tại).
+4. **Branding** — Theme settings → pick a color **preset** (Warm / Minimal / Playful) + logo.
+5. **Products** — import your catalog, then set each product's **Theme template**
+   (`landing` / `multi-style` / `multi-product`).
+6. **Sections** — connect products/collections to the pricing tiers, best-sellers, and other
+   sections in the theme editor.
+7. **Media** — upload your hero and lifestyle images.
+8. **Discounts** — if you use the pricing tiers, create matching Automatic discounts (below).
+
+> **`SHOPIFY_TOKEN`:** Admin → Settings → Apps and sales channels → Develop apps → create an
+> app → Admin API scopes `write_products, write_content, write_online_store_navigation,
+> write_metaobject_definitions, write_metaobjects` → Install → reveal the Admin API access
+> token. `bootstrap-store.mjs` is safe to re-run — it skips anything that already exists.
 
 ---
 
-## Bước 1 — Chọn loại store (V1 / V2 / V3)
+## Detailed reference
 
-Có 3 loại, khác nhau bởi **file JSON template**:
+### Step 1 — Choose the store type (V1 / V2 / V3)
 
-| Loại | Homepage | Product page | Dùng khi |
-|---|---|---|---|
-| **V1 One Product** | `index.one-product` | `product.landing` | 1 sản phẩm chính / trending product |
-| **V2 Multi Style** | `index.multi-style` | `product.multi-style` | 1 concept, nhiều màu/style/variant |
-| **V3 Multi Product** | `index.multi-product` | `product.multi-product` | Nhiều sản phẩm cùng niche |
+| Type | Homepage | Product page | Use when |
+|------|----------|--------------|----------|
+| **V1 One Product** | `index.one-product` | `product.landing` | One hero / trending product |
+| **V2 Multi Style** | `index.multi-style` | `product.multi-style` | One concept, many styles/variants |
+| **V3 Multi Product** | `index.multi-product` | `product.multi-product` | Many products in one niche |
 
-> ⚠️ **Quan trọng — Shopify dùng 2 cơ chế KHÁC nhau:**
-> Trang chủ (index) và cart **không hỗ trợ** "alternate template" chọn qua UI — trang chủ luôn
-> render `templates/index.json`. Còn **product / collection / page** thì chọn template qua
-> dropdown **Theme template** trong Admin (native, không cần code).
+**Product / collection / page templates — native dropdown (no code):**
+Admin → Products → open a product → right panel → **Theme template** → choose `landing` /
+`multi-style` / `multi-product` → Save. Each product can use a different layout.
 
-### A. Product page — chọn qua dropdown (native, no-code) ✅
-Admin → **Products** → mở product → panel bên phải mục **Theme template** → chọn `landing` /
-`multi-style` / `multi-product` → **Save**. Mỗi product có thể dùng layout khác nhau.
-(Tương tự cho Collection và Page: mỗi resource có dropdown Theme template riêng.)
-
-### B. Homepage — set 1 lần lúc setup (KHÔNG dán JSON)
-Trang chủ không có dropdown template. Nhưng **không cần dán JSON** — dùng script 1 lệnh:
+**Homepage — set once at setup:** Shopify has no template picker for the homepage (it always
+renders `templates/index.json`). Pick the layout with the helper script:
 
 ```bash
-scripts/use-store-type.sh v2          # v1=One Product · v2=Multi Style · v3=Multi Product
-scripts/use-store-type.sh v2 --push   # kèm push lên theme luôn
+scripts/use-store-type.sh v2          # v1 / v2 / v3, or one-product / multi-style / multi-product
+scripts/use-store-type.sh v2 --push   # also push templates/index.json
 ```
-Script tự set `templates/index.json` = layout đúng loại + nhắc bước còn lại. Chạy không tham số
-để xem loại hiện tại. Đây là **quyết định 1 lần khi tạo store**; user cuối không đụng tới.
 
-Các cách thay thế (nếu không dùng terminal):
-- **Theme Editor (thuần click):** Customize → Home → thêm/xoá/kéo section (mọi section có preset).
-- **Admin Edit code:** Online Store → Themes → ⋯ → Edit code → `templates/index.json` → dán nội
-  dung `templates/index.<loại>.json`.
+No-terminal alternatives: build the page in the theme editor by adding sections (each has a
+preset), or paste `templates/index.<type>.json` into `templates/index.json` via Admin → Edit
+code.
 
-→ Sau khi chọn xong (1 lần), **mọi thứ còn lại là settings/menu/media** (Bước 3–8) — 100% click.
+### Step 2 — Import products & collections
 
----
+- Import your catalog (CSV / Matrixify / an app). Never hard-code products in the theme.
+- V2/V3: create collections for styles or categories.
+- Fill in images, prices, variants, and compare-at price (to show a strikethrough / % off).
 
-## Bước 2 — Import / tạo Product & Collection
+### Step 3 — Connect products & collections to sections
 
-- Tạo hoặc import product (CSV / Matrixify / app). **Không hard-code trong theme.**
-- V2/V3: tạo Collections theo style/category (vd Lion / Kitty / Bunny hoặc Toys / Beds…).
-- Điền ảnh, giá, variant, compare-at price (để hiện % giảm giá).
+In the theme editor, open each section and pick its source:
 
----
+| Section | Connect to |
+|---------|------------|
+| Best Sellers (`featured-collection`) | a collection |
+| Shop by Style / Category (`collection-list`) | a collection per tile |
+| Pricing tiers (V1) | a product per tier + quantity |
+| Bought together (V3) | the products in the bundle |
+| Sticky Add to Cart | automatic, from the current product |
 
-## Bước 3 — Gắn Product / Collection vào section
+### Step 4 — Upload images & media
 
-Trong Theme Editor, mở từng section và chọn nguồn dữ liệu:
+All in the theme editor — no code:
 
-| Section | Cần chọn |
-|---|---|
-| Best Sellers (`featured-collection`) | 1 collection |
-| Shop by Style / Category (`collection-list`) | các collection cho từng ô |
-| Pricing tiers (V1) | product cho mỗi tier + số lượng |
-| Bought together (V3) | các product mua kèm |
-| Sticky Add to Cart | tự động theo product hiện tại |
+- **Logo / favicon** — Theme settings → Logo.
+- **Hero image** (+ a separate mobile image) — the Hero section.
+- **Lifestyle / story image** — the Image-with-text section.
+- **Product images** — on the product (admin).
+- **CTA background** — the CTA banner section.
 
----
+### Step 5 — Colors
 
-## Bước 4 — Upload Image & Media
+Theme settings → **Colors**. Either pick a **preset** (Warm / Minimal / Playful) or edit the
+five schemes by role:
 
-Đổi trong Theme Editor (không cần code):
-- **Logo / Favicon**: Theme settings → Logo.
-- **Hero image** (+ ảnh mobile riêng): section Hero.
-- **Lifestyle / story image**: section Image with text.
-- **Product images**: trong product (Admin).
-- **CTA background**: section CTA banner.
+| Scheme | Role |
+|--------|------|
+| scheme-1 | Base background |
+| scheme-2 | Surface (cards / bands) |
+| scheme-3 | Brand / dark (footer, CTA, announcement bar) |
+| scheme-4 | Accent (badges, sale) |
+| scheme-5 | Inverse / darkest |
 
-> Mẹo mobile: Hero có ô "Image (mobile)" riêng — dùng ảnh khung dọc/nhẹ hơn cho mobile.
+Changing a scheme updates the whole store — highlights, buttons, stars, badges, icons, footer.
+You never edit colors inside a section.
 
----
+### Step 6 — Fonts
 
-## Bước 5 — Color Scheme
+Theme settings → **Typography**: heading font, body font, **accent font** (eyebrow labels),
+size scales, and "Mobile heading size" (Base theme group).
 
-Theme settings → **Colors**. Chỉnh 5 scheme theo vai trò:
-
-| Scheme | Vai trò | Gợi ý |
-|---|---|---|
-| scheme-1 | Nền chính | Sáng (cream/white) |
-| scheme-2 | Surface | Nhạt hơn nền một chút |
-| scheme-3 | Primary/Brand | Màu đậm (nút, footer, CTA) |
-| scheme-4 | Accent | Màu nhấn (badge, sale) |
-| scheme-5 | Inverse/Dark | Text sáng trên nền tối |
-
-Đổi màu ở đây → **toàn bộ store đổi theo** (highlight heading, icon, sao, badge, nút…).
-Không cần vào từng section.
-
----
-
-## Bước 6 — Font
-
-Theme settings → **Typography**:
-- **Heading font** (tiêu đề)
-- **Body font** (nội dung)
-- **Accent font** (eyebrow kiểu viết tay, vd "Made for Cats")
-- Heading/Body scale, và **"Heading size trên mobile"** (Base theme) để chỉnh độ to heading mobile.
-
----
-
-## Bước 7 — Branding (Base theme settings)
+### Step 7 — Branding (Base theme settings)
 
 Theme settings → **Base theme**:
-- `Heading size trên mobile` — thu nhỏ heading trên mobile.
-- `Sticky Add to Cart trên mobile` — bật/tắt thanh mua cố định ở PDP.
-- `Bề rộng nội dung text` / `Bo góc card` — tinh chỉnh hình khối chung.
 
-Ngoài ra Dawn cho chỉnh: button radius, card/media radius, shadow, spacing, page width.
+- Header tagline + "SHOP NOW" CTA button.
+- Mobile heading scale, sticky Add-to-Cart toggle.
+- Card radius, content width. (Dawn also controls button radius, shadows, spacing, page width.)
 
----
+### Step 8 — Global chrome (header & footer)
 
-## Bước 8 — Kiểm tra & Publish
+Header and footer are **section groups** rendered on every page — so they're identical
+everywhere and you configure them once.
 
-- **Bắt buộc test mobile** (375px/390px): hero, PDP (sticky ATC + gallery swipe), pricing,
-  bảng so sánh (scroll ngang), reviews (carousel).
-- Kiểm tra menu (Header), Announcement bar, Footer trong section groups.
+**Footer** (`custom-footer`, in `footer-group`):
+
+- Brand column: logo + tagline + description + social icons (Theme settings → Social media).
+- Three menu columns (`Shop`, `Customer Care`, `About`) point at navigation menus
+  `footer-shop`, `footer-help`, `footer-company`. Edit links in **Online Store → Navigation** —
+  never in code. `bootstrap-store.mjs` creates these menus for you.
+- "Join the Family" newsletter, payment icons, policy links — toggled in the section settings.
+
+**Header**: the main menu is the `main-menu` navigation menu; edit its items in Navigation.
+
+### Step 9 — Test & publish
+
+- **Test on mobile** (375–768px): hero, product page (sticky ATC + swipe gallery), pricing,
+  comparison table (horizontal scroll), reviews (carousel).
+- Check the header, announcement bar and footer.
 - Preview → **Publish**.
 
 ---
 
-## Global chrome — Header & Footer (giống nhau trên MỌI page)
+## Quantity discounts (pricing tiers)
 
-Header và Footer là **section groups** (`header-group.json`, `footer-group.json`) được Dawn
-render tự động trên **mọi trang** qua `{% sections 'header-group' %}` / `{% sections 'footer-group' %}`
-trong `theme.liquid`. → Không cần cấu hình lại từng page; sửa 1 lần áp toàn site.
+The **pricing tiers** section shows "buy more, save more" (2× / 3× / 4×). For the discount to
+actually apply at checkout and show in the cart drawer:
 
-**Footer** — section tuỳ biến `custom-footer` (đẹp, brand-first), đặt trong `footer-group`:
-- Cột **Brand**: logo (settings `logo`, fallback tên store) + tagline + description + social
-  icons (từ Theme settings → Social media links).
-- 3 cột menu (block `menu`) trỏ tới **navigation menu**: `footer-shop`, `footer-help`,
-  `footer-company`. Đổi link = sửa menu trong **Online Store → Navigation** (KHÔNG sửa code).
-  Thêm/bớt cột = thêm/xoá block `menu` trong Theme Editor.
-- Newsletter "Join the Family" + Payment icons + Policy links: bật/tắt trong settings.
-  (Payment icons hiện theo cổng thanh toán bật trong Admin; Policy links theo Store policies.)
-- Màu: `scheme-5` (nâu đậm nhất) để tách khỏi CTA phía trên.
+1. **Admin → Discounts → Create automatic discount** for each tier, e.g.:
+   - "Buy 2+ Save 10%" — Amount off products, 10%, minimum quantity of items = 2
+   - "Buy 3+ Save 15%" — 15%, minimum quantity = 3
+   - "Buy 4+ Save 20%" — 20%, minimum quantity = 4
+   - Set them **not combinable** — Shopify applies the highest qualifying tier automatically.
+2. In the Pricing tiers section, set each tier's **discount %** to match the admin discount
+   (2 → 10, 3 → 15, 4 → 20). This is a display value; the admin discount does the real work.
+3. The cart drawer shows total savings automatically via `cart.total_discount` — no config.
+   The optional "Cart discount promo" progress bar (Theme settings) nudges shoppers toward the
+   next tier; its tier quantities must match the admin discounts.
 
-**Header:** menu chính = navigation menu `main-menu`. Sửa items trong Navigation.
+> Compare-at price and quantity discounts are two different mechanisms. If you use quantity
+> discounts, remove compare-at prices from the products so you don't show two "Save %" badges.
 
-**→ Tạo store mới, phần footer/header chỉ cần:**
-1. Sửa 3–4 menu trong **Navigation** (main-menu, footer-shop, footer-help, footer-company).
-2. Set **Logo** + **Social media links** trong Theme settings.
-3. Xong — footer/header giống nhau trên mọi page, đúng brand, không đụng code.
+---
 
-> Các menu trên là **store data** (như product/collection), nằm ở Admin → Navigation — đúng
-> nguyên tắc Shopify-native, tách khỏi theme code.
+## Standalone pages
 
-## Quantity discounts (Pricing tiers "buy more save more")
+The theme ships styled page templates. Each store page just needs its **Theme template**
+(page dropdown in the admin) set to the matching suffix:
 
-Section **Pricing tiers** hiển thị giảm giá theo số lượng (2×/3×/4× giảm lần lượt). Để giảm
-giá **thực sự áp dụng** ở checkout + hiện trong cart drawer:
+| Page | Template suffix |
+|------|-----------------|
+| FAQ | `faq` |
+| About Us | `about-us` |
+| Contact | `contact` |
+| Shipping & Returns | `shipping-returns` |
+| Size Guide | `size-guide` |
 
-1. **Admin → Discounts → Create automatic discount** cho từng mốc, ví dụ:
-   - "Buy 2+ Save 10%" — Amount off products, 10%, minimum quantity = 2
-   - "Buy 3+ Save 15%" — 15%, min quantity = 3
-   - "Buy 4+ Save 20%" — 20%, min quantity = 4
-   - Đặt **không combine** (không stack) → Shopify tự áp mốc cao nhất đủ điều kiện.
-2. Trong section Pricing tiers, đặt **"Giảm giá tier này (%)"** mỗi tier **khớp** số trên
-   (2→10, 3→15, 4→20). Đây là số hiển thị; discount thật do Admin áp.
-3. Cart drawer tự hiện tổng tiết kiệm (badge "X% OFF") qua `cart.total_discount` — không cần cấu hình.
+The content lives in the template's sections (edit in the theme editor). Policy pages
+(Privacy / Refund / Terms) are best left on Shopify's default, generated from Store policies.
 
-> Compare-at price và quantity discount là 2 cơ chế khác nhau. Nếu dùng quantity discount thì
-> nên **bỏ compare-at** trên product để tránh hiện 2 loại "Save %" chồng nhau.
+---
 
-## Ghi chú
+## Notes
 
-- **Reviews**: hiện dùng block nhập tay. Có thể thay bằng app (Judge.me/Loox) sau.
-- **Metafields** (Phase 0 — làm sau): khi bật, nội dung như benefits/FAQ/size chart có thể
-  gắn theo product data thay vì nhập trong section. Xem `docs/METAFIELDS.md` (sẽ bổ sung).
-- **Không sửa file Dawn gốc**; mọi thành phần base theme có prefix `custom-`.
+- **Reviews** can come from section blocks (manual) or product metafields (metaobjects), or a
+  reviews app — the sections support a `source` setting. See [METAFIELDS.md](METAFIELDS.md).
+- **Frequently Bought Together / bundles** render the UI; the bundle logic relies on an app or
+  Shopify Bundles.
+- The base theme never modifies Dawn's core files; everything it adds is prefixed `custom-`.
