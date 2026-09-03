@@ -3,16 +3,76 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": { "type": "text", "settings": { "text": "{{ product.vendor }}", "text_style": "uppercase" } },
-        "title": { "type": "title" },
-        "price": { "type": "price" },
-        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
-        "quantity_selector": { "type": "quantity_selector" },
-        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
-        "description": { "type": "description" },
-        "share": { "type": "share", "settings": { "share_label": "Share" } }
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "description": {
+          "type": "description"
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "pdp_rating": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-rating' %}"
+          }
+        },
+        "pdp_feats": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-features' %}"
+          }
+        },
+        "pdp_trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-trust' %}"
+          }
+        }
       },
-      "block_order": ["vendor", "title", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "share"],
+      "block_order": [
+        "vendor",
+        "pdp_rating",
+        "title",
+        "price",
+        "pdp_feats",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "pdp_trust",
+        "description",
+        "share"
+      ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
@@ -28,45 +88,174 @@
     "benefits": {
       "type": "custom-icon-benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "heart", "title": "A Safe Choice", "text": "Designed to feel secure and relaxed." } },
-        "b2": { "type": "benefit", "settings": { "icon": "leaf", "title": "Better Everyday", "text": "Made for comfort and daily use." } },
-        "b3": { "type": "benefit", "settings": { "icon": "star", "title": "Stylish Design", "text": "Looks great anywhere." } },
-        "b4": { "type": "benefit", "settings": { "icon": "check_mark", "title": "Quality Materials", "text": "Built to last." } },
-        "b5": { "type": "benefit", "settings": { "icon": "return", "title": "Easy Returns", "text": "30-day money back." } }
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "A Safe Choice",
+            "text": "Designed to feel secure and relaxed."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Better Everyday",
+            "text": "Made for comfort and daily use."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "title": "Stylish Design",
+            "text": "Looks great anywhere."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check_mark",
+            "title": "Quality Materials",
+            "text": "Built to last."
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "return",
+            "title": "Easy Returns",
+            "text": "30-day money back."
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4", "b5"],
-      "settings": { "color_scheme": "scheme-2", "heading": "Why Customers Love It", "columns": 5 }
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Why Customers Love It",
+        "columns": 5,
+        "card_container": true
+      }
     },
     "how": {
       "type": "custom-how-it-works",
       "blocks": {
-        "s1": { "type": "step", "settings": { "text": "Unbox and set up in seconds." } },
-        "s2": { "type": "step", "settings": { "text": "Use it every day with ease." } },
-        "s3": { "type": "step", "settings": { "text": "Enjoy long-lasting quality!" } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "text": "Unbox and set up in seconds."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "text": "Use it every day with ease."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "text": "Enjoy long-lasting quality!"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": { "color_scheme": "scheme-1", "heading": "How It Works" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "How It Works",
+        "image": "shopify://shop_images/hf_20260903_023027_3fb58f28-c3ab-4e3f-8ddf-47b7b71bc61e.png"
+      }
     },
     "fbt": {
       "type": "custom-frequently-bought",
       "blocks": {
-        "p1": { "type": "product", "settings": { "product": "lion-mane-cat-tote" } },
-        "p2": { "type": "product", "settings": { "product": "kitty-peekaboo-tote" } },
-        "p3": { "type": "product", "settings": { "product": "black-cat-everyday-tote" } }
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "lion-mane-cat-tote"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "kitty-peekaboo-tote"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "product": "black-cat-everyday-tote"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Frequently Bought Together", "button_label": "Add All to Cart" }
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Frequently Bought Together",
+        "button_label": "Add All to Cart"
+      }
     },
     "reviews": {
       "type": "custom-reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "name": "Jessica M.", "stars": 4.5, "text": "Loves it! Immediately became a favorite." } },
-        "r2": { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "text": "Great quality and super soft." } },
-        "r3": { "type": "review", "settings": { "name": "Sophie L.", "stars": 4.5, "text": "Looks beautiful in our home." } },
-        "r4": { "type": "review", "settings": { "name": "Ethan B.", "stars": 4.5, "text": "Perfect fit and great value." } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "name": "Jessica M.",
+            "stars": 4.5,
+            "text": "Loves it! Immediately became a favorite."
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel K.",
+            "stars": 5,
+            "text": "Great quality and super soft."
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "name": "Sophie L.",
+            "stars": 4.5,
+            "text": "Looks beautiful in our home."
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "name": "Ethan B.",
+            "stars": 4.5,
+            "text": "Perfect fit and great value."
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Real Reviews", "columns": 4 }
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Real Reviews",
+        "columns": 4
+      }
     },
     "related": {
       "type": "related-products",
@@ -86,8 +275,110 @@
     },
     "sticky_atc": {
       "type": "custom-sticky-atc",
-      "settings": { "color_scheme": "scheme-1", "button_label": "Add to Cart" }
+      "settings": {
+        "color_scheme": "scheme-1",
+        "button_label": "Add to Cart"
+      }
+    },
+    "size_guide": {
+      "type": "custom-size-guide",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "attribute": "Bag Dimensions (L×W×H)",
+            "size1_value": "28 × 14 × 30 cm",
+            "size2_value": "33 × 18 × 36 cm"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "attribute": "Max Pet Weight",
+            "size1_value": "5 kg (11 lbs)",
+            "size2_value": "8 kg (17 lbs)"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "attribute": "Recommended Size",
+            "size1_value": "Small pets",
+            "size2_value": "Small – Medium"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Will It Fit?",
+        "subheading": "Designed for small to medium pets.",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
+        "attr_label": "Size",
+        "size1_label": "S",
+        "size2_label": "M"
+      }
+    },
+    "trust": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "t1": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $40"
+          }
+        },
+        "t2": {
+          "type": "badge",
+          "settings": {
+            "icon": "return",
+            "title": "30-Day Guarantee",
+            "subtitle": "Love it or full refund"
+          }
+        },
+        "t3": {
+          "type": "badge",
+          "settings": {
+            "icon": "padlock",
+            "title": "Secure Checkout",
+            "subtitle": "100% safe & encrypted"
+          }
+        },
+        "t4": {
+          "type": "badge",
+          "settings": {
+            "icon": "chat_bubble",
+            "title": "24/7 Support",
+            "subtitle": "We're here anytime"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
     }
   },
-  "order": ["main", "benefits", "how", "fbt", "reviews", "related", "sticky_atc"]
+  "order": [
+    "main",
+    "benefits",
+    "how",
+    "size_guide",
+    "fbt",
+    "reviews",
+    "related",
+    "trust",
+    "sticky_atc"
+  ]
 }

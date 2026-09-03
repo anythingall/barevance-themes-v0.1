@@ -3,15 +3,68 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "title": { "type": "title" },
-        "price": { "type": "price" },
-        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
-        "quantity_selector": { "type": "quantity_selector" },
-        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
-        "description": { "type": "description" },
-        "share": { "type": "share", "settings": { "share_label": "Share" } }
+        "title": {
+          "type": "title"
+        },
+        "price": {
+          "type": "price"
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector"
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "description": {
+          "type": "description"
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "pdp_rating": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-rating' %}"
+          }
+        },
+        "pdp_feats": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-features' %}"
+          }
+        },
+        "pdp_trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-trust' %}"
+          }
+        }
       },
-      "block_order": ["title", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "share"],
+      "block_order": [
+        "pdp_rating",
+        "title",
+        "price",
+        "pdp_feats",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "pdp_trust",
+        "description",
+        "share"
+      ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
@@ -27,34 +80,132 @@
     "benefits": {
       "type": "custom-icon-benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "eye", "title": "Peekaboo Window", "text": "Let your pet see the world." } },
-        "b2": { "type": "benefit", "settings": { "icon": "leaf", "title": "Breathable & Airy", "text": "Mesh panels keep air flowing." } },
-        "b3": { "type": "benefit", "settings": { "icon": "padlock", "title": "Secure & Safe", "text": "Smooth zipper keeps your pet secure." } },
-        "b4": { "type": "benefit", "settings": { "icon": "heart", "title": "Lightweight Design", "text": "Easy to carry all day." } }
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "eye",
+            "title": "Peekaboo Window",
+            "text": "Let your pet see the world."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Breathable & Airy",
+            "text": "Mesh panels keep air flowing."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "padlock",
+            "title": "Secure & Safe",
+            "text": "Smooth zipper keeps your pet secure."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Lightweight Design",
+            "text": "Easy to carry all day."
+          }
+        }
       },
-      "block_order": ["b1", "b2", "b3", "b4"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Why Customers Love It", "columns": 4 }
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Why Customers Love It",
+        "columns": 4,
+        "card_container": true
+      }
     },
     "how": {
       "type": "custom-how-it-works",
       "blocks": {
-        "s1": { "type": "step", "settings": { "text": "Place your pet inside the cozy tote." } },
-        "s2": { "type": "step", "settings": { "text": "Secure the zipper and safety leash." } },
-        "s3": { "type": "step", "settings": { "text": "Head out and enjoy the adventure together!" } }
+        "s1": {
+          "type": "step",
+          "settings": {
+            "text": "Place your pet inside the cozy tote."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "text": "Secure the zipper and safety leash."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "text": "Head out and enjoy the adventure together!"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
-      "settings": { "color_scheme": "scheme-2", "heading": "See It In Action" }
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "See It In Action",
+        "image": "shopify://shop_images/hf_20260903_023027_3fb58f28-c3ab-4e3f-8ddf-47b7b71bc61e.png"
+      }
     },
     "reviews": {
       "type": "custom-reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "name": "Jessica M.", "stars": 5, "text": "My pet loves this tote! Feels safe and looks so cute." } },
-        "r2": { "type": "review", "settings": { "name": "Daniel K.", "stars": 5, "text": "Perfect for weekend trips. Lightweight and adorable." } },
-        "r3": { "type": "review", "settings": { "name": "Sophie L.", "stars": 4.5, "text": "Amazing quality and my pet's favorite!" } },
-        "r4": { "type": "review", "settings": { "name": "Ethan B.", "stars": 5, "text": "So stylish! I get compliments everywhere. 10/10." } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "name": "Jessica M.",
+            "stars": 5,
+            "text": "My pet loves this tote! Feels safe and looks so cute."
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel K.",
+            "stars": 5,
+            "text": "Perfect for weekend trips. Lightweight and adorable."
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "name": "Sophie L.",
+            "stars": 4.5,
+            "text": "Amazing quality and my pet's favorite!"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "name": "Ethan B.",
+            "stars": 5,
+            "text": "So stylish! I get compliments everywhere. 10/10."
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3", "r4"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Real Reviews", "columns": 4 }
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Real Reviews",
+        "columns": 4
+      }
     },
     "related": {
       "type": "related-products",
@@ -74,8 +225,105 @@
     },
     "sticky_atc": {
       "type": "custom-sticky-atc",
-      "settings": { "color_scheme": "scheme-1", "button_label": "Add to Cart" }
+      "settings": {
+        "color_scheme": "scheme-1",
+        "button_label": "Add to Cart"
+      }
+    },
+    "social_proof": {
+      "type": "custom-social-proof",
+      "blocks": {
+        "l1": {
+          "type": "logo",
+          "settings": {
+            "text": "PET LOVERS CLUB"
+          }
+        },
+        "l2": {
+          "type": "logo",
+          "settings": {
+            "text": "MEOW MAGAZINE"
+          }
+        },
+        "l3": {
+          "type": "logo",
+          "settings": {
+            "text": "PAWSOME"
+          }
+        },
+        "l4": {
+          "type": "logo",
+          "settings": {
+            "text": "THE PET CHRONICLES"
+          }
+        }
+      },
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "count_text": "10,000+ Happy Customers",
+        "rating": 5,
+        "rating_text": "4.9/5",
+        "as_seen_label": "As seen on"
+      }
+    },
+    "size_guide": {
+      "type": "custom-size-guide",
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "attribute": "Bag Dimensions (L×W×H)",
+            "size1_value": "28 × 14 × 30 cm",
+            "size2_value": "33 × 18 × 36 cm"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "attribute": "Max Pet Weight",
+            "size1_value": "5 kg (11 lbs)",
+            "size2_value": "8 kg (17 lbs)"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "attribute": "Recommended Size",
+            "size1_value": "Small pets",
+            "size2_value": "Small – Medium"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Will It Fit?",
+        "subheading": "Designed for small to medium pets.",
+        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
+        "attr_label": "Size",
+        "size1_label": "S",
+        "size2_label": "M"
+      }
     }
   },
-  "order": ["main", "benefits", "how", "reviews", "related", "sticky_atc"]
+  "order": [
+    "main",
+    "social_proof",
+    "benefits",
+    "how",
+    "size_guide",
+    "reviews",
+    "related",
+    "sticky_atc"
+  ]
 }
