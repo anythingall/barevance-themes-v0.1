@@ -1,25 +1,29 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "eyebrow": { "type": "caption", "settings": { "caption": "Contact", "text_style": "caption-with-letter-spacing" } },
+        "heading": { "type": "heading", "settings": { "heading": "We'd love to hear from you.", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>Questions about an order, sizing or anything else? Email <strong>info@gleamgarage.com</strong> — we reply within 24 hours, Monday–Friday, 9am–5pm.</p>" } }
+      },
+      "block_order": ["eyebrow", "heading", "text"],
+      "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 24 }
+    },
+    "info": {
+      "type": "custom-trust-badges",
+      "blocks": {
+        "i1": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "Email Us", "subtitle": "info@gleamgarage.com" } },
+        "i2": { "type": "badge", "settings": { "icon": "heart", "title": "Support Hours", "subtitle": "Mon–Fri, 9am–5pm" } },
+        "i3": { "type": "badge", "settings": { "icon": "return", "title": "Easy Returns", "subtitle": "30-day money back" } }
+      },
+      "block_order": ["i1", "i2", "i3"],
+      "settings": { "color_scheme": "scheme-1", "padding": "none" }
     },
     "form": {
       "type": "contact-form",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "settings": { "heading": "Send us a message", "heading_size": "h2", "color_scheme": "scheme-1", "padding_top": 28, "padding_bottom": 52 }
     }
   },
-  "order": [
-    "main",
-    "form"
-  ]
+  "order": ["intro", "info", "form"]
 }
