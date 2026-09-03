@@ -167,6 +167,24 @@
   }
 }
 
+/* Header tagline under the logo/name (matches reference branding) */
+.header__heading-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.header__tagline {
+  display: block;
+  font-family: var(--font-accent-family);
+  font-style: var(--font-accent-style);
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+
 /* Wide tables (comparison / size chart): scroll horizontally on mobile
    instead of overflowing the viewport. */
 .custom-table-scroll {

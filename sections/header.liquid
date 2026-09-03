@@ -207,6 +207,9 @@
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
         {%- endif -%}
+        {%- if settings.header_tagline != blank -%}
+          <span class="header__tagline">{{ settings.header_tagline }}</span>
+        {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
         </h1>
@@ -249,6 +252,9 @@
           </div>
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
+        {%- endif -%}
+        {%- if settings.header_tagline != blank -%}
+          <span class="header__tagline">{{ settings.header_tagline }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

@@ -161,6 +161,13 @@
     "name": "Base theme",
     "settings": [
       {
+        "type": "text",
+        "id": "header_tagline",
+        "label": "Tagline dưới logo (header)",
+        "info": "Hiện dưới tên/logo trong header. Vd: Cute. Cozy. Adventure.",
+        "default": "Cute. Cozy. Adventure."
+      },
+      {
         "type": "header",
         "content": "Mobile-first"
       },

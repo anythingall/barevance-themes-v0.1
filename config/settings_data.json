@@ -192,7 +192,8 @@
         }
       },
       "type_accent_font": "playfair_display_i4",
-      "cart_promo_enabled": true
+      "cart_promo_enabled": true,
+      "header_tagline": "Cute. Cozy. Adventure."
     }
   }
 }
