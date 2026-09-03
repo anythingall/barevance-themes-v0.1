@@ -7,6 +7,34 @@ Quy trình tạo một store mới **không cần sửa source code**. Ước t�
 
 ---
 
+## ⚡ Fast setup (~15 phút)
+
+```bash
+# 1. Đẩy theme lên store (tạo theme unpublished để test)
+shopify theme push --store YOUR-STORE.myshopify.com --unpublished --theme "Base Theme"
+
+# 2. Tạo structure (metafield defs + metaobjects + footer menus) — 1 lệnh
+SHOPIFY_STORE=YOUR-STORE.myshopify.com SHOPIFY_TOKEN=shpat_xxx node scripts/bootstrap-store.mjs
+
+# 3. Chọn loại store (homepage)
+scripts/use-store-type.sh v1        # v1=One Product · v2=Multi Style · v3=Multi Product
+shopify theme push --store YOUR-STORE.myshopify.com --theme <theme-id> --only templates/index.json
+```
+
+**4. Trong Theme Editor / Admin (click, không code):**
+- **Branding**: Theme settings → chọn **preset màu** (Warm / Minimal / Playful) + Logo.
+- **Products**: import CSV → gán **Theme template** (landing / multi-style / multi-product).
+- **Sections**: gắn product/collection vào pricing tiers, best sellers, FBT…
+- **Media**: upload ảnh hero / lifestyle.
+- **Discounts** (nếu dùng pricing tiers): tạo Automatic discount khớp tier (mục "Quantity discounts" bên dưới).
+
+> `SHOPIFY_TOKEN`: Admin → Settings → Apps → Develop apps → tạo app → scopes
+> `write_products, write_content, write_online_store_navigation,
+> write_metaobject_definitions, write_metaobjects` → Install → copy Admin API token.
+> Script an toàn chạy lại (bỏ qua thứ đã tồn tại).
+
+---
+
 ## Bước 1 — Chọn loại store (V1 / V2 / V3)
 
 Có 3 loại, khác nhau bởi **file JSON template**:
