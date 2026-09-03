@@ -39,7 +39,8 @@
         "subheading": "<p>Playful, practical and adorable finds for you and the people you love.</p>",
         "footnote": "",
         "content_alignment": "left",
-        "desktop_media_placement": "right"
+        "desktop_media_placement": "right",
+        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png"
       }
     },
     "shop_the_life": {
@@ -51,7 +52,8 @@
             "title": "For You",
             "text": "<p>Everyday essentials for a happy, healthy life.</p>",
             "link_label": "Shop Now",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png"
           }
         },
         "col2": {
@@ -60,7 +62,8 @@
             "title": "For Gifts",
             "text": "<p>Accessories and more to show off your love.</p>",
             "link_label": "Shop Now",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
           }
         },
         "col3": {
@@ -69,7 +72,8 @@
             "title": "For Every Occasion",
             "text": "<p>Perfect gifts for every occasion.</p>",
             "link_label": "Shop Gifts",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "image": "shopify://shop_images/hf_20260903_023027_3fb58f28-c3ab-4e3f-8ddf-47b7b71bc61e.png"
           }
         }
       },

@@ -71,7 +71,8 @@
         "subheading": "<p>Playful, practical designs for every style and every adventure.</p>",
         "footnote": "",
         "content_alignment": "left",
-        "desktop_media_placement": "right"
+        "desktop_media_placement": "right",
+        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png"
       }
     },
     "shop_by_style": {
@@ -182,7 +183,8 @@
       "settings": {
         "color_scheme": "scheme-2",
         "heading": "Why Customers Love Us",
-        "columns": 5
+        "columns": 5,
+        "card_container": true
       }
     },
     "trust": {
@@ -264,7 +266,8 @@
         "heading": "Built with love for you.",
         "text": "<p>Every product is designed with care, tested for real life, and made for unforgettable moments.</p>",
         "button_label": "Learn More About Us",
-        "desktop_media_placement": "left"
+        "desktop_media_placement": "left",
+        "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png"
       }
     }
   },
