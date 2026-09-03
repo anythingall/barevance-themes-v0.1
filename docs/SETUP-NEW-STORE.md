@@ -154,6 +154,23 @@ trong `theme.liquid`. → Không cần cấu hình lại từng page; sửa 1 l�
 > Các menu trên là **store data** (như product/collection), nằm ở Admin → Navigation — đúng
 > nguyên tắc Shopify-native, tách khỏi theme code.
 
+## Quantity discounts (Pricing tiers "buy more save more")
+
+Section **Pricing tiers** hiển thị giảm giá theo số lượng (2×/3×/4× giảm lần lượt). Để giảm
+giá **thực sự áp dụng** ở checkout + hiện trong cart drawer:
+
+1. **Admin → Discounts → Create automatic discount** cho từng mốc, ví dụ:
+   - "Buy 2+ Save 10%" — Amount off products, 10%, minimum quantity = 2
+   - "Buy 3+ Save 15%" — 15%, min quantity = 3
+   - "Buy 4+ Save 20%" — 20%, min quantity = 4
+   - Đặt **không combine** (không stack) → Shopify tự áp mốc cao nhất đủ điều kiện.
+2. Trong section Pricing tiers, đặt **"Giảm giá tier này (%)"** mỗi tier **khớp** số trên
+   (2→10, 3→15, 4→20). Đây là số hiển thị; discount thật do Admin áp.
+3. Cart drawer tự hiện tổng tiết kiệm (badge "X% OFF") qua `cart.total_discount` — không cần cấu hình.
+
+> Compare-at price và quantity discount là 2 cơ chế khác nhau. Nếu dùng quantity discount thì
+> nên **bỏ compare-at** trên product để tránh hiện 2 loại "Save %" chồng nhau.
+
 ## Ghi chú
 
 - **Reviews**: hiện dùng block nhập tay. Có thể thay bằng app (Judge.me/Loox) sau.

@@ -79,11 +79,12 @@
     "pricing": {
       "type": "custom-pricing-tiers",
       "blocks": {
-        "t1": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 1, "label": "1 × Lion Mane Tote" } },
-        "t2": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 2, "label": "2 × Lion Mane Tote", "badge": "MOST POPULAR", "highlight": true } },
-        "t3": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 3, "label": "3 × Lion Mane Tote" } }
+        "t1": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 1, "label": "1 × Lion Mane Tote", "discount_percent": 0 } },
+        "t2": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 2, "label": "2 × Lion Mane Tote", "badge": "MOST POPULAR", "highlight": true, "discount_percent": 10 } },
+        "t3": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 3, "label": "3 × Lion Mane Tote", "discount_percent": 15 } },
+        "t4": { "type": "tier", "settings": { "product": "lion-mane-cat-tote", "quantity": 4, "label": "4 × Lion Mane Tote", "discount_percent": 20 } }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": ["t1", "t2", "t3", "t4"],
       "settings": { "color_scheme": "scheme-1", "heading": "Choose Your Set" }
     },
     "trust": {

@@ -1,7 +1,12 @@
 {%- comment -%}
-  custom-pricing-tiers — Bundle / quantity offers (1× / 2× / 3×) for One Product stores.
-  Each tier is a real product (or variant) added to cart with a chosen quantity — no
-  hard-coded prices. Mobile: tiers stack; the highlighted tier is emphasised.
+  custom-pricing-tiers — Quantity / "buy more save more" offers for One Product stores.
+  Each tier adds a real product with a chosen quantity + an optional per-tier discount %.
+
+  IMPORTANT: the per-tier "discount %" is a DISPLAY value. The real discount must be set
+  up as an Automatic discount in Shopify Admin (e.g. "buy 2 → 10% off", "buy 3 → 15%",
+  "buy 4 → 20%") so it actually applies at checkout and shows in the cart drawer. Keep the
+  tier % here in sync with the Admin discount. When discount % is 0, the tier falls back to
+  the product's compare-at price. No hard-coded prices.
 {%- endcomment -%}
 
 <div class="custom-tiers color-{{ section.settings.color_scheme }} gradient custom-section">
@@ -12,16 +17,32 @@
       </h2>
     {%- endif -%}
 
-    <div class="custom-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 3 }};">
+    <div class="custom-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 4 }};">
       {%- for block in section.blocks -%}
         {%- liquid
           assign product = block.settings.product
           assign qty = block.settings.quantity | at_least: 1
           assign variant = product.selected_or_first_available_variant
           assign unit_price = variant.price | default: product.price
-          assign total_price = unit_price | times: qty
-          assign compare = variant.compare_at_price | default: product.compare_at_price
-          assign total_compare = compare | times: qty
+          assign base_total = unit_price | times: qty
+          assign discount = block.settings.discount_percent | default: 0
+
+          if discount > 0
+            assign keep = 100 | minus: discount
+            assign pay_total = base_total | times: keep | divided_by: 100
+            assign orig_total = base_total
+            assign save_pct = discount
+          else
+            assign compare = variant.compare_at_price | default: product.compare_at_price
+            assign pay_total = base_total
+            assign orig_total = compare | times: qty
+            assign save_pct = 0
+            if orig_total > pay_total
+              assign save_pct = orig_total | minus: pay_total | times: 100 | divided_by: orig_total
+            endif
+          endif
+
+          assign per_unit = pay_total | divided_by: qty
         -%}
         <div class="custom-tiers__card custom-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.badge != blank -%}
@@ -41,15 +62,18 @@
           <h3 class="custom-tiers__label">{{ block.settings.label | default: product.title }}</h3>
 
           <div class="custom-tiers__price">
-            <span class="custom-tiers__price-now">{{ total_price | money }}</span>
-            {%- if total_compare > total_price -%}
-              <s class="custom-tiers__price-was">{{ total_compare | money }}</s>
+            <span class="custom-tiers__price-now">{{ pay_total | money }}</span>
+            {%- if orig_total > pay_total -%}
+              <s class="custom-tiers__price-was">{{ orig_total | money }}</s>
             {%- endif -%}
           </div>
 
-          {%- if total_compare > total_price -%}
-            {%- assign saved = total_compare | minus: total_price | times: 100 | divided_by: total_compare -%}
-            <span class="custom-tiers__save">Save {{ saved }}%</span>
+          {%- if qty > 1 -%}
+            <span class="custom-tiers__unit">{{ per_unit | money }} each</span>
+          {%- endif -%}
+
+          {%- if save_pct > 0 -%}
+            <span class="custom-tiers__save">Save {{ save_pct }}%</span>
           {%- endif -%}
 
           {%- if product != blank and variant != blank -%}
@@ -155,10 +179,19 @@
     opacity: 0.55;
   }
 
+  .custom-tiers__unit {
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+
   .custom-tiers__save {
-    color: rgb(var(--color-button));
-    font-weight: 600;
-    font-size: 1.3rem;
+    color: rgb(var(--color-button-text));
+    background: rgb(var(--color-button));
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.3rem 1rem;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
   }
 
   .custom-tiers__form {
@@ -209,6 +242,17 @@
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "range", "id": "quantity", "label": "Số lượng thêm vào giỏ", "min": 1, "max": 10, "step": 1, "default": 1 },
+        {
+          "type": "range",
+          "id": "discount_percent",
+          "label": "Giảm giá tier này (%)",
+          "info": "Phải khớp Automatic discount trong Admin (vd buy 2 → 10%). 0 = dùng compare-at price.",
+          "min": 0,
+          "max": 90,
+          "step": 5,
+          "unit": "%",
+          "default": 0
+        },
         { "type": "text", "id": "label", "label": "Nhãn tier", "default": "1 × Product" },
         { "type": "text", "id": "badge", "label": "Badge (vd MOST POPULAR)" },
         { "type": "checkbox", "id": "highlight", "label": "Nổi bật tier này", "default": false },
@@ -220,9 +264,10 @@
     {
       "name": "Pricing tiers",
       "blocks": [
-        { "type": "tier", "settings": { "quantity": 1, "label": "1 × Product" } },
-        { "type": "tier", "settings": { "quantity": 2, "label": "2 × Product", "badge": "MOST POPULAR", "highlight": true } },
-        { "type": "tier", "settings": { "quantity": 3, "label": "3 × Product" } }
+        { "type": "tier", "settings": { "quantity": 1, "label": "1 × Product", "discount_percent": 0 } },
+        { "type": "tier", "settings": { "quantity": 2, "label": "2 × Product", "badge": "MOST POPULAR", "highlight": true, "discount_percent": 10 } },
+        { "type": "tier", "settings": { "quantity": 3, "label": "3 × Product", "discount_percent": 15 } },
+        { "type": "tier", "settings": { "quantity": 4, "label": "4 × Product", "discount_percent": 20 } }
       ]
     }
   ]

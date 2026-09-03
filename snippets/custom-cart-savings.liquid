@@ -1,0 +1,66 @@
+{% doc %}
+  Renders total cart savings across ALL applied discounts (automatic discounts,
+  codes, quantity/volume breaks) using the real cart.total_discount. Shows a
+  "X% OFF" badge + the saved amount. Nothing renders when there is no discount.
+  @param {string} [layout] - 'row' (cart drawer/totals) or 'inline' (cart page)
+  @example
+  {% render 'custom-cart-savings', layout: 'row' %}
+{% enddoc %}
+
+{%- if cart.total_discount > 0 -%}
+  {%- liquid
+    assign layout = layout | default: 'row'
+    assign saved = cart.total_discount | money
+    assign original = cart.total_price | plus: cart.total_discount
+    assign pct = 0
+    if original > 0
+      assign pct = cart.total_discount | times: 100.0 | divided_by: original | round
+    endif
+  -%}
+  <div class="custom-cart-savings custom-cart-savings--{{ layout }}" role="status">
+    <span class="custom-cart-savings__label">{{ 'customer.order.discount' | t | default: 'You save' }}</span>
+    {%- if pct > 0 -%}
+      <span class="custom-cart-savings__badge">{{ pct }}% OFF</span>
+    {%- endif -%}
+    <span class="custom-cart-savings__amount">-{{ saved }}</span>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .custom-cart-savings {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    margin: 0.8rem 0;
+    color: rgb(var(--color-foreground));
+  }
+
+  .custom-cart-savings--row {
+    justify-content: space-between;
+  }
+
+  .custom-cart-savings__label {
+    font-weight: 600;
+  }
+
+  .custom-cart-savings__badge {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-right: auto;
+  }
+
+  .custom-cart-savings--inline .custom-cart-savings__badge {
+    margin-right: 0;
+  }
+
+  .custom-cart-savings__amount {
+    font-weight: 700;
+    color: rgb(var(--color-button));
+  }
+{% endstylesheet %}
