@@ -67,11 +67,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.6rem;
+    gap: 0.8rem 1.6rem;
     max-width: var(--page-width);
     margin-inline: auto;
-    flex-wrap: nowrap;
-    overflow: hidden;
+    flex-wrap: wrap; /* wrap to a 2nd line on narrow desktop/tablet instead of clipping the 3rd message */
   }
 
   .custom-ann__item {

@@ -48,7 +48,7 @@
           <div class="custom-cta-banner__text rte">{{ section.settings.text }}</div>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <div class="custom-cta-banner__actions">
+          <div class="custom-cta-banner__actions" style="justify-content: {% if section.settings.content_alignment == 'left' %}flex-start{% else %}center{% endif %};">
             <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary custom-cta">
               {{- section.settings.button_label -}}
             </a>

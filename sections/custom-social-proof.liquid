@@ -23,7 +23,7 @@
 {%- endcomment -%}
 
 <div class="custom-sp color-{{ section.settings.color_scheme }} gradient custom-section custom-sp--tight">
-  <div class="custom-container custom-sp__inner">
+  <div class="custom-container custom-sp__inner{% if section.blocks.size > 0 %} has-logos{% endif %}">
     <div class="custom-sp__proof">
       {%- if section.settings.avatars != blank -%}
         {{ section.settings.avatars | image_url: width: 220 | image_tag: loading: 'lazy', class: 'custom-sp__avatars', alt: '' }}
@@ -101,7 +101,8 @@
   .custom-sp__logo-img { height: 2.6rem; width: auto; opacity: 0.6; }
 
   @media screen and (min-width: 990px) {
-    .custom-sp__inner { flex-direction: row; justify-content: space-between; }
+    .custom-sp__inner { flex-direction: row; justify-content: center; gap: 4rem; }
+    .custom-sp__inner.has-logos { justify-content: space-between; }
   }
 {% endstylesheet %}
 {% schema %}

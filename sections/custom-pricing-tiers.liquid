@@ -150,6 +150,8 @@
     padding: 2.4rem 1.8rem 1.8rem;
     border: 0.1rem solid rgba(var(--color-foreground), 0.12);
     background: rgb(var(--color-background));
+    border-radius: var(--custom-card-radius, 0);
+    overflow: visible; /* let the "MOST POPULAR" badge sit above the card */
   }
 
   .custom-tiers__card.is-highlight {
@@ -191,6 +193,8 @@
     width: 8.5rem;
     flex: 0 0 8.5rem;
     aspect-ratio: 1 / 1;
+    overflow: hidden; /* card is overflow:visible now — clip the image here instead */
+    border-radius: 0.8rem;
   }
 
   .custom-tiers__label-link {
@@ -248,7 +252,8 @@
 
   .custom-tiers__form {
     width: 100%;
-    margin-top: 0.8rem;
+    margin-top: auto; /* push CTA to the bottom so every tier's button lines up */
+    padding-top: 0.8rem;
   }
 
   .custom-tiers__form .custom-cta {
@@ -258,7 +263,7 @@
   @media screen and (min-width: 750px) {
     .custom-tiers__grid {
       grid-template-columns: repeat(var(--tier-cols, 3), 1fr);
-      align-items: center;
+      align-items: stretch; /* equal-height cards so CTAs align */
     }
 
     .custom-tiers__card.is-highlight {

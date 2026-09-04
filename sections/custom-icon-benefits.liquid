@@ -24,6 +24,18 @@
 
 <div class="custom-benefits color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
+    {%- liquid
+      assign mf_benefits = product.metafields.custom.benefits.value
+      assign use_mf = false
+      if section.settings.source == 'product_metafield' and mf_benefits != blank
+        assign use_mf = true
+      endif
+      assign benefit_count = section.blocks.size
+      if use_mf
+        assign benefit_count = mf_benefits | size
+      endif
+      assign benefit_cols = section.settings.columns | at_most: benefit_count | at_least: 1
+    -%}
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
       <div class="custom-benefits__head" style="text-align: {{ section.settings.heading_alignment }};">
         {%- if section.settings.eyebrow != blank -%}
@@ -39,15 +51,8 @@
       class="custom-benefits__grid {% if section.settings.card_container %}is-carded{% endif %} {% if section.settings.mobile_layout == 'carousel' %}custom-scroller custom-scroller--grid-on-desktop{% else %}custom-grid{% endif %} list-unstyled"
       role="list"
       {%- if section.settings.mobile_layout == 'carousel' %} tabindex="0" aria-label="Benefits (scroll to see more)"{% endif %}
-      style="--custom-grid-cols-desktop: {{ section.settings.columns }}; --custom-grid-cols-tablet: {{ section.settings.columns | at_most: 3 }}; --custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 60%;"
+      style="--custom-grid-cols-desktop: {{ benefit_cols }}; --custom-grid-cols-tablet: {{ benefit_cols | at_most: 3 }}; --custom-scroller-cols-desktop: {{ benefit_cols }}; --custom-scroller-item: 60%;"
     >
-      {%- liquid
-        assign mf_benefits = product.metafields.custom.benefits.value
-        assign use_mf = false
-        if section.settings.source == 'product_metafield' and mf_benefits != blank
-          assign use_mf = true
-        endif
-      -%}
       {%- if use_mf -%}
         {%- for feature in mf_benefits -%}
           <li class="custom-benefits__item" style="text-align: {{ section.settings.item_alignment }};">

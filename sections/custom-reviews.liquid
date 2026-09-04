@@ -25,6 +25,18 @@
 
 <div class="custom-reviews color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
+    {%- liquid
+      assign mf_reviews = product.metafields.custom.reviews.value
+      assign use_mf = false
+      if section.settings.source == 'product_metafield' and mf_reviews != blank
+        assign use_mf = true
+      endif
+      assign review_count = section.blocks.size
+      if use_mf
+        assign review_count = mf_reviews | size
+      endif
+      assign review_cols = section.settings.columns | at_most: review_count | at_least: 1
+    -%}
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
       <div class="custom-reviews__head" style="text-align: {{ section.settings.heading_alignment }};">
         {%- if section.settings.eyebrow != blank -%}
@@ -38,18 +50,11 @@
 
     <div
       class="custom-reviews__grid custom-scroller custom-scroller--grid-on-desktop list-unstyled"
-      style="--custom-scroller-cols-desktop: {{ section.settings.columns }}; --custom-scroller-item: 82%;"
+      style="--custom-scroller-cols-desktop: {{ review_cols }}; --custom-scroller-item: 82%;"
       tabindex="0"
       role="group"
       aria-label="Customer reviews (scroll to see more)"
     >
-      {%- liquid
-        assign mf_reviews = product.metafields.custom.reviews.value
-        assign use_mf = false
-        if section.settings.source == 'product_metafield' and mf_reviews != blank
-          assign use_mf = true
-        endif
-      -%}
       {%- if use_mf -%}
         {%- for review in mf_reviews -%}
           <div class="custom-reviews__card custom-card">

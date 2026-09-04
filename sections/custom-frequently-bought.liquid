@@ -26,10 +26,12 @@
 {%- liquid
   assign total = 0
   assign total_compare = 0
+  assign has_products = false
   for block in section.blocks
     assign p = block.settings.product
     assign v = p.selected_or_first_available_variant
     if v != blank
+      assign has_products = true
       assign total = total | plus: v.price
       assign c = v.compare_at_price | default: v.price
       assign total_compare = total_compare | plus: c
@@ -37,6 +39,7 @@
   endfor
 -%}
 
+{%- if has_products -%}
 {%- render 'custom-cart-ajax' -%}
 <div class="custom-fbt color-{{ section.settings.color_scheme }} gradient custom-section">
   <div class="custom-container">
@@ -97,6 +100,7 @@
     </div>
   </div>
 </div>
+{%- elsif request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Frequently bought together — add a product to each block to show this bundle.</div>{%- endif -%}
 {%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}

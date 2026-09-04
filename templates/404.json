@@ -2,9 +2,68 @@
   "sections": {
     "main": {
       "type": "main-404"
+    },
+    "trust": {
+      "type": "custom-trust-badges",
+      "settings": {
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On orders over $40"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "icon": "return",
+            "title": "30-Day Guarantee",
+            "subtitle": "Love it or get a full refund"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "icon": "padlock",
+            "title": "Secure Checkout",
+            "subtitle": "100% safe & encrypted"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "icon": "chat_bubble",
+            "title": "24/7 Support",
+            "subtitle": "We're here anytime"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "popular": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular right now",
+        "collection": "best-sellers",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "show_view_all": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "trust",
+    "popular"
   ]
 }
