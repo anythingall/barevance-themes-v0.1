@@ -71,3 +71,37 @@ The curated per-type templates already exist and avoid all three.
   unused features (Dawn ships per-section/component CSS separately). A PurgeCSS trim would risk
   breaking JS-added classes (cart drawer, predictive search, form errors) that don't appear in
   static HTML. High risk, low safe reward → keep as-is.
+
+---
+
+## UI/UX polish audit (2026-09) — visual + code review
+
+Found by rendering home/product/collection/cart/search/404/about in Chrome + a code sweep.
+The store is on-brand and consistent everywhere (the global design system carries even bare
+Dawn templates), but these polish bugs — same class as the How It Works stretch bug — remain.
+
+### Section layout bugs (highest visual impact first)
+- [ ] **U1** Pricing tiers: "MOST POPULAR" badge is clipped by `.custom-card { overflow:hidden }`
+  (`custom-pricing-tiers.liquid:67`, badge `top:-1.1rem`). Make the card `overflow:visible`, clip the image separately.
+- [ ] **U2** Pricing tiers: `align-items:center` on the desktop grid → unequal card heights, CTAs
+  don't line up. Use `align-items:stretch` + `margin-top:auto` on the form.
+- [ ] **U3** Reviews & icon-benefits: desktop column count is hard-set from a setting, not block
+  count → empty cells / "cụt" row when blocks < columns. Cap col var at `section.blocks.size` (like tiers/trust already do).
+- [ ] **U4** Announcement bar: 3rd message clipped between ~750–1100px (`flex-wrap:nowrap;overflow:hidden`). Allow wrap / shrink / rotate on tablet.
+- [ ] **U5** CTA banner: button hard-coded `justify-content:center` even when text is left-aligned. Drive from `content_alignment`.
+- [ ] **U6** Social proof: `justify-content:space-between` jams the cluster left when there are no press logos. Center when single child.
+- [ ] **U7** Size guide: product image has no `aspect-ratio` → layout shift as it loads. Reserve one.
+- [ ] **U8** Frequently-bought: shows "Select a product" cards + "Total $0.00" until configured; "+" separators can strand on wrap. Hide summary when unconfigured; render "+" via CSS.
+- [ ] **U9** Trust badges: odd count leaves a lone off-center badge on mobile (`repeat(2,1fr)`). Center trailing item / auto-fit.
+- [ ] **U10** FAQ 2-column: row-major order (1,2 / 3,4) + gap when one item expands. Use CSS `columns` or single column.
+- [ ] **U11** Heading treatment inconsistent (alignment control + head margins differ across sections). Standardize.
+
+### Pages — missing / still bare Dawn (not styled to brand beyond the global system)
+- [ ] **PG1** 404: dead-end (just "Page not found" + button). Add popular products + search + trust.
+- [ ] **PG2** Empty cart: plain, big empty area. Add recommendations / trust / free-ship progress.
+- [ ] **PG3** Collection: on-brand grid but no brand sections. Optional: collection banner + trust/benefits/reviews below the grid.
+- [ ] **PG4** Search: on-brand but bare; empty-state could suggest popular products.
+- [ ] **PG5** Account pages (login/register/account/order): Dawn default, not brand-tuned.
+- [ ] **PG6** Password page: Dawn default — this is the first impression while the store is locked. Worth branding.
+- [ ] **PG7** Blog / Article: Dawn default (only if the store does content marketing).
+- Note: policy pages (Privacy/Refund/Terms) are fine on Shopify's generated defaults.
