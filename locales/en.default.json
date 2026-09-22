@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -326,7 +325,7 @@
       "onboarding_content": "Give your customers a summary of your blog post"
     },
     "featured_collection": {
-      "view_all": "View all",
+      "view_all": "View All Products",
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
     "collection_list": {

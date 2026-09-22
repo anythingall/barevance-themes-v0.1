@@ -293,10 +293,35 @@
   display: block;
 }
 
-/* Rating stars — brand gold (spec #D99124) */
+/* Rating stars — brand gold (spec #D99124). Dawn fills the stars via
+   --color-rating-star (background-clip:text), not `color`. */
 .rating-star {
-  --color-icon: 217, 145, 36;
-  color: rgb(217, 145, 36);
+  --color-rating-star: rgb(217, 145, 36) !important;
+}
+
+/* Featured-collection: heading + description centered (design).
+   These .collection__* classes are specific to the featured-collection section. */
+.collection__title {
+  text-align: center;
+}
+
+.collection__title .collection__description {
+  text-align: center;
+  margin-inline: auto;
+}
+
+/* "View All Products" pinned top-right, level with the centered heading */
+@media screen and (min-width: 990px) {
+  .shopify-section > .collection {
+    position: relative;
+  }
+  .collection__view-all {
+    position: absolute;
+    top: 1.2rem;
+    right: 5rem;
+    margin: 0;
+    width: auto;
+  }
 }
 
 /* Sale price — brand terracotta (spec #B85C3A) */
