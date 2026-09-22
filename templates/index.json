@@ -4,15 +4,18 @@
       "type": "custom-hero",
       "settings": {
         "color_scheme": "scheme-1",
-        "desktop_media_placement": "right",
+        "desktop_media_placement": "left",
         "mobile_media_position": "below",
         "section_height": "large",
         "content_alignment": "left",
         "eyebrow": "NATURAL MOVEMENT. A HAPPIER YOU.",
         "heading": "Give Your Feet Room to Move.",
-        "heading_highlight": "Room to Move",
+        "heading_highlight": "",
         "subheading": "<p>Comfortable, stylish barefoot shoes designed for everyday life. More freedom for your feet. A healthier you.</p>",
-        "footnote": ""
+        "footnote": "",
+        "media_style": "overlay",
+        "media_caption": "Move Naturally. Live Fully.",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1696964904681-7ae16f82ceef.jpg?v=1790085849"
       },
       "blocks": {
         "b1": {
@@ -34,36 +37,29 @@
         "f1": {
           "type": "feature",
           "settings": {
-            "icon": "leaf",
+            "icon": "hf-foot",
             "text": "Wide Toe Box"
           }
         },
         "f2": {
           "type": "feature",
           "settings": {
-            "icon": "fire",
+            "icon": "hf-leaf",
             "text": "Lightweight Design"
           }
         },
         "f3": {
           "type": "feature",
           "settings": {
-            "icon": "check_mark",
+            "icon": "hf-wave",
             "text": "Flexible Sole"
           }
         },
         "f4": {
           "type": "feature",
           "settings": {
-            "icon": "heart",
+            "icon": "hf-heart",
             "text": "All-Day Comfort"
-          }
-        },
-        "rt": {
-          "type": "rating",
-          "settings": {
-            "stars": 5,
-            "text": "4.7/5 from 10,000+ happy customers"
           }
         }
       },
@@ -73,8 +69,7 @@
         "f1",
         "f2",
         "f3",
-        "f4",
-        "rt"
+        "f4"
       ]
     },
     "trust": {

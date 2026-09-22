@@ -36,9 +36,17 @@
   class="vy-hero color-{{ section.settings.color_scheme }} gradient vy-section vy-hero--h-{{ section.settings.section_height }}"
   style="--hero-align: {{ align }}; --hero-align-items: {{ align_items }};"
 >
-  <div class="vy-container vy-hero__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
-    <div class="vy-hero__media vy-card">
-      {%- if section.settings.image != blank -%}
+  <div class="vy-container vy-hero__inner media-{{ media_placement }} mobile-{{ mobile_pos }}{% if section.settings.media_style == 'fullbleed' %} vy-hero--fullbleed{% endif %}{% if section.settings.media_style == 'overlay' %} vy-hero--overlay{% endif %}">
+    <div class="vy-hero__media{% if section.settings.media_style == 'boxed' %} vy-card{% endif %}">
+      {%- if section.settings.media_style == 'overlay' -%}
+        <span class="vy-hero__scrim"></span>
+      {%- endif -%}
+      {%- if section.settings.media_caption != blank -%}
+        <span class="vy-hero__media-caption">{{ section.settings.media_caption }}</span>
+      {%- endif -%}
+      {%- if section.settings.image_url != blank -%}
+        <img class="vy-hero__image" src="{{ section.settings.image_url }}" width="1600" height="1200" loading="eager" fetchpriority="high" alt="{{ section.settings.heading | escape }}">
+      {%- elsif section.settings.image != blank -%}
         <picture>
           {%- if section.settings.mobile_image != blank -%}
             <source
@@ -100,7 +108,7 @@
           {%- for block in feature_blocks -%}
             <li class="vy-hero__feature" {{ block.shopify_attributes }}>
               <span class="vy-hero__feature-icon">
-                {%- render 'icon-accordion', icon: block.settings.icon -%}
+                {%- render 'custom-icon', icon: block.settings.icon -%}
               </span>
               {%- if block.settings.text != blank -%}
                 <span class="vy-hero__feature-text">{{ block.settings.text }}</span>
@@ -140,6 +148,7 @@
                 {{ block.shopify_attributes }}
               >
                 {{- block.settings.label -}}
+                {%- if block.settings.style != 'secondary' and section.settings.media_style == 'overlay' -%}<span class="vy-hero__btn-arrow" aria-hidden="true">→</span>{%- endif -%}
               </a>
             {%- endif -%}
           {%- endfor -%}
@@ -346,6 +355,178 @@
     }
 
   }
+
+  /* ---- Full-bleed split hero (edge-to-edge media) ---- */
+  .vy-hero__media-caption {
+    position: absolute;
+    z-index: 2;
+    right: 1.6rem;
+    top: 2rem;
+    max-width: 15rem;
+    text-align: right;
+    color: #fff;
+    font-family: var(--font-accent-family, inherit);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 2.2rem;
+    line-height: 1.15;
+    text-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.35);
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-hero__inner.vy-hero--fullbleed {
+      max-width: none;
+      padding-inline: 0;
+      gap: 0;
+      align-items: stretch;
+      min-height: 60rem;
+    }
+
+    .vy-hero--fullbleed .vy-hero__content {
+      flex: 0 1 46%;
+      justify-content: center;
+      padding-block: 5rem;
+      padding-left: max(2rem, calc((100vw - var(--page-width, 130rem)) / 2 + 1.5rem));
+      padding-right: 4rem;
+    }
+
+    .vy-hero--fullbleed .vy-hero__media {
+      flex: 1 1 54%;
+      aspect-ratio: auto;
+      align-self: stretch;
+      border-radius: 0;
+    }
+
+    .vy-hero--fullbleed .vy-hero__media-caption {
+      right: 3rem;
+      top: 4rem;
+      font-size: 3.2rem;
+      max-width: 22rem;
+    }
+
+    /* Match design content order: eyebrow, H1, sub, buttons, features */
+    .vy-hero--fullbleed .vy-hero__buttons { order: 4; }
+    .vy-hero--fullbleed .vy-hero__features { order: 5; margin-top: 1.2rem; }
+    .vy-hero--fullbleed .vy-hero__rating { order: 6; }
+  }
+
+  /* ---- Overlay hero: full-width background photo + text overlaid ---- */
+  /* Butt the overlay hero against the header (no section gap) */
+  .vy-hero:has(.vy-hero--overlay) {
+    padding-block: 0;
+  }
+
+  .vy-hero__inner.vy-hero--overlay {
+    position: relative;
+    display: block;
+    max-width: none;
+    padding-inline: 0;
+    min-height: 46rem;
+  }
+
+  .vy-hero--overlay .vy-hero__media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    border-radius: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .vy-hero--overlay .vy-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .vy-hero--overlay .vy-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(248, 246, 240, 0.1) 0%, rgba(248, 246, 240, 0.72) 52%, rgba(248, 246, 240, 0.95) 100%);
+  }
+
+  .vy-hero--overlay .vy-hero__content {
+    position: relative;
+    z-index: 2;
+    justify-content: flex-end;
+    min-height: 46rem;
+    padding: 2.4rem 1.5rem 3rem;
+  }
+
+  /* Match design: dark eyebrow, dark bold icons + 2-line labels, darker sub, CTA arrow */
+  .vy-hero--overlay .vy-hero__eyebrow {
+    color: rgb(var(--color-foreground));
+    font-weight: 700;
+  }
+
+  .vy-hero--overlay .vy-hero__subheading {
+    opacity: 1;
+    color: rgba(var(--color-foreground), 0.88);
+  }
+
+  .vy-hero--overlay .vy-hero__feature {
+    max-width: 8.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .vy-hero--overlay .vy-hero__feature-icon,
+  .vy-hero--overlay .vy-hero__feature-icon .svg-wrapper,
+  .vy-hero--overlay .vy-hero__feature-icon svg {
+    color: rgb(var(--color-foreground));
+  }
+
+  .vy-hero--overlay .vy-hero__feature-text {
+    color: rgb(var(--color-foreground));
+    font-weight: 600;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .vy-hero__btn-arrow {
+    margin-left: 0.7rem;
+    font-weight: 400;
+    display: inline-block;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-hero__inner.vy-hero--overlay {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 62rem;
+    }
+
+    .vy-hero--overlay .vy-hero__scrim {
+      background: linear-gradient(90deg, rgba(248, 246, 240, 0.94) 0%, rgba(248, 246, 240, 0.82) 30%, rgba(248, 246, 240, 0.32) 52%, rgba(248, 246, 240, 0) 70%);
+    }
+
+    .vy-hero--overlay .vy-hero__content {
+      flex: 0 1 56rem;
+      max-width: 56rem;
+      min-height: 0;
+      justify-content: center;
+      padding-block: 6rem;
+      padding-right: 4rem;
+      padding-left: max(2rem, calc((100vw - var(--page-width, 130rem)) / 2 + 1.5rem));
+    }
+
+    .vy-hero--overlay .vy-hero__buttons { order: 4; }
+    .vy-hero--overlay .vy-hero__features { order: 5; margin-top: 1.2rem; flex-wrap: nowrap; gap: 1rem 1.6rem; }
+    .vy-hero--overlay .vy-hero__feature { min-width: 0; font-size: 1.2rem; }
+    .vy-hero--overlay .vy-hero__rating { order: 6; }
+
+    .vy-hero--overlay .vy-hero__media-caption {
+      color: #1c2a1f;
+      text-shadow: none;
+      right: 4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      max-width: 20rem;
+    }
+  }
 {% endstylesheet %}
 {% schema %}
 {
@@ -368,6 +549,19 @@
       "id": "image",
       "label": "Image (desktop)"
     },
+    { "type": "text", "id": "image_url", "label": "Hoặc URL ảnh (CDN)", "info": "Ưu tiên hơn image picker. Dùng khi ảnh đã upload lên Files." },
+    {
+      "type": "select",
+      "id": "media_style",
+      "label": "Kiểu ảnh",
+      "options": [
+        { "value": "boxed", "label": "Bọc khung (bo góc)" },
+        { "value": "fullbleed", "label": "Full-bleed (ảnh 1 bên, tràn mép)" },
+        { "value": "overlay", "label": "Overlay (ảnh nền full, chữ đè lên)" }
+      ],
+      "default": "boxed"
+    },
+    { "type": "text", "id": "media_caption", "label": "Chữ viết tay trên ảnh (fullbleed)", "info": "VD: Move Naturally. Live Fully." },
     {
       "type": "image_picker",
       "id": "mobile_image",

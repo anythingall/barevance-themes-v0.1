@@ -10,8 +10,9 @@
         "content_alignment": "left",
         "eyebrow": "WALKING BAREFOOT SHOES",
         "heading": "Walk Further. Feel Lighter.",
-        "heading_highlight": "Feel Lighter",
-        "subheading": "<p>Lightweight, flexible barefoot shoes designed for everyday walks, long days and life on the move.</p>"
+        "heading_highlight": "",
+        "subheading": "<p>Lightweight, flexible barefoot shoes designed for everyday walks, long days and life on the move.</p>",
+        "footnote": ""
       },
       "blocks": {
         "b1": {
