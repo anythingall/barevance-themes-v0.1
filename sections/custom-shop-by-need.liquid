@@ -68,7 +68,9 @@
         <li class="vy-sbn__item" {{ block.shopify_attributes }}>
           <a class="vy-sbn__card" href="{{ sbn_href }}">
             <span class="vy-sbn__media">
-              {%- if block.settings.image != blank -%}
+              {%- if block.settings.image_url != blank -%}
+                <img class="vy-sbn__img" src="{{ block.settings.image_url }}" width="600" height="800" loading="lazy" alt="{{ block.settings.label | escape }}">
+              {%- elsif block.settings.image != blank -%}
                 {{
                   block.settings.image
                   | image_url: width: 800
@@ -325,6 +327,7 @@
       "name": "Use case",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Ảnh" },
+        { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN)" },
         { "type": "text", "id": "label", "label": "Nhãn", "default": "Everyday Comfort" },
         { "type": "text", "id": "sublabel", "label": "Nhãn phụ" },
         { "type": "url", "id": "link_url", "label": "Link" }

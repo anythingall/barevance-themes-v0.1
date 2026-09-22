@@ -233,42 +233,48 @@
           "type": "need",
           "settings": {
             "label": "Everyday Comfort",
-            "link_url": "/collections/everyday"
+            "link_url": "/collections/everyday",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
           }
         },
         "n2": {
           "type": "need",
           "settings": {
             "label": "Walking & Travel",
-            "link_url": "/collections/walking"
+            "link_url": "/collections/walking",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
           }
         },
         "n3": {
           "type": "need",
           "settings": {
             "label": "Active & Training",
-            "link_url": "/collections/active"
+            "link_url": "/collections/active",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
           }
         },
         "n4": {
           "type": "need",
           "settings": {
             "label": "Outdoor & Trail",
-            "link_url": "/collections/outdoor"
+            "link_url": "/collections/outdoor",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124"
           }
         },
         "n5": {
           "type": "need",
           "settings": {
             "label": "Travel Ready",
-            "link_url": "/collections/travel"
+            "link_url": "/collections/travel",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124"
           }
         },
         "n6": {
           "type": "need",
           "settings": {
             "label": "Casual Style",
-            "link_url": "/collections/casual"
+            "link_url": "/collections/casual",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1772867692023-e66c1997f0e8.jpg?v=1790090125"
           }
         }
       },
