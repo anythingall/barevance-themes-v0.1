@@ -191,8 +191,8 @@
     },
     "type_accent_font": "manrope_n6",
     "cart_promo_enabled": true,
-    "header_tagline": "Move Naturally. Live Fully.",
-    "header_cta_label": "SHOP NOW",
+    "header_tagline": "",
+    "header_cta_label": "",
     "header_cta_link": "shopify://collections/all",
     "style_preset": "voya",
     "store_type": "v3"
