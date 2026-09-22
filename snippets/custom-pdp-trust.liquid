@@ -3,19 +3,19 @@
   Secure) matching the reference PDP.
   @example {% render 'custom-pdp-trust' %}
 {% enddoc %}
-<ul class="custom-pdp-trust list-unstyled" role="list">
-  <li><span class="custom-pdp-trust__icon">{%- render 'custom-icon', icon: 'truck' -%}</span>Free Shipping<br><small>on orders over $40</small></li>
-  <li><span class="custom-pdp-trust__icon">{%- render 'custom-icon', icon: 'return' -%}</span>30-Day<br><small>Guarantee</small></li>
-  <li><span class="custom-pdp-trust__icon">{%- render 'custom-icon', icon: 'padlock' -%}</span>Secure<br><small>Checkout</small></li>
+<ul class="vy-pdp-trust list-unstyled" role="list">
+  <li><span class="vy-pdp-trust__icon">{%- render 'custom-icon', icon: 'truck' -%}</span>Free Shipping<br><small>on orders over $40</small></li>
+  <li><span class="vy-pdp-trust__icon">{%- render 'custom-icon', icon: 'return' -%}</span>30-Day<br><small>Guarantee</small></li>
+  <li><span class="vy-pdp-trust__icon">{%- render 'custom-icon', icon: 'padlock' -%}</span>Secure<br><small>Checkout</small></li>
 </ul>
 {% stylesheet %}
-  .custom-pdp-trust {
+  .vy-pdp-trust {
     display: flex;
     gap: 1.4rem;
     margin: 1.4rem 0 0;
     justify-content: space-between;
   }
-  .custom-pdp-trust li {
+  .vy-pdp-trust li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,11 +24,11 @@
     font-weight: 600;
     gap: 0.3rem;
   }
-  .custom-pdp-trust small {
+  .vy-pdp-trust small {
     font-weight: 400;
     opacity: 0.7;
   }
-  .custom-pdp-trust__icon .svg-wrapper {
+  .vy-pdp-trust__icon .svg-wrapper {
     width: 2rem;
     height: 2rem;
     color: rgb(var(--color-button));

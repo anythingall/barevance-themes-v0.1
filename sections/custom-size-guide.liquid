@@ -1,26 +1,26 @@
 {%- comment -%}
-  custom-size-guide — "Will it fit?" section: product image + size table (2 sizes)
+  vy-size-guide — "Will it fit?" section: product image + size table (2 sizes)
   + a "Perfect for" box. Rows via blocks. Mobile: image top, table scrolls.
 {%- endcomment -%}
 
-<div class="custom-sizeguide color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-sizeguide color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="custom-h2 custom-sizeguide__heading">{{ section.settings.heading }}</h2>
+      <h2 class="vy-h2 vy-sizeguide__heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
     {%- if section.settings.subheading != blank -%}
-      <p class="custom-sizeguide__sub">{{ section.settings.subheading }}</p>
+      <p class="vy-sizeguide__sub">{{ section.settings.subheading }}</p>
     {%- endif -%}
 
-    <div class="custom-sizeguide__layout">
+    <div class="vy-sizeguide__layout">
       {%- if section.settings.image != blank -%}
-        <div class="custom-sizeguide__media custom-card">
-          {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-sizeguide__img', alt: section.settings.heading }}
+        <div class="vy-sizeguide__media vy-card">
+          {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-sizeguide__img', alt: section.settings.heading }}
         </div>
       {%- endif -%}
 
-      <div class="custom-table-scroll custom-sizeguide__tablewrap" tabindex="0" role="region" aria-label="Size chart (scroll horizontally)">
-        <table class="custom-sizeguide__table">
+      <div class="vy-table-scroll vy-sizeguide__tablewrap" tabindex="0" role="region" aria-label="Size chart (scroll horizontally)">
+        <table class="vy-sizeguide__table">
           <thead>
             <tr>
               <th scope="col">{{ section.settings.attr_label }}</th>
@@ -31,7 +31,7 @@
           <tbody>
             {%- for block in section.blocks -%}
               <tr {{ block.shopify_attributes }}>
-                <th scope="row" class="custom-sizeguide__attr">{{ block.settings.attribute }}</th>
+                <th scope="row" class="vy-sizeguide__attr">{{ block.settings.attribute }}</th>
                 <td>{{ block.settings.size1_value }}</td>
                 <td>{{ block.settings.size2_value }}</td>
               </tr>
@@ -41,9 +41,9 @@
       </div>
 
       {%- if section.settings.perfect_for != blank -%}
-        <div class="custom-sizeguide__perfect custom-card">
+        <div class="vy-sizeguide__perfect vy-card">
           {%- if section.settings.perfect_heading != blank -%}
-            <h3 class="custom-sizeguide__perfect-heading">{{ section.settings.perfect_heading }}</h3>
+            <h3 class="vy-sizeguide__perfect-heading">{{ section.settings.perfect_heading }}</h3>
           {%- endif -%}
           <div class="rte">{{ section.settings.perfect_for }}</div>
         </div>
@@ -53,62 +53,62 @@
 </div>
 
 {% stylesheet %}
-  .custom-sizeguide__heading { margin: 0 0 0.4rem; }
-  .custom-sizeguide__sub { margin: 0 0 2.4rem; opacity: 0.8; }
+  .vy-sizeguide__heading { margin: 0 0 0.4rem; }
+  .vy-sizeguide__sub { margin: 0 0 2.4rem; opacity: 0.8; }
 
-  .custom-sizeguide__layout {
+  .vy-sizeguide__layout {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
-  .custom-sizeguide__media { flex: 0 0 auto; aspect-ratio: 4 / 3; overflow: hidden; }
-  .custom-sizeguide__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vy-sizeguide__media { flex: 0 0 auto; aspect-ratio: 4 / 3; overflow: hidden; }
+  .vy-sizeguide__img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  .custom-sizeguide__table {
+  .vy-sizeguide__table {
     width: 100%;
     min-width: 42rem;
     border-collapse: collapse;
   }
-  .custom-sizeguide__table th,
-  .custom-sizeguide__table td {
+  .vy-sizeguide__table th,
+  .vy-sizeguide__table td {
     padding: 1.1rem 1.4rem;
     text-align: left;
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
     font-size: 1.4rem;
   }
-  .custom-sizeguide__table th { font-weight: 700; }
-  .custom-sizeguide__attr { font-weight: 600; }
+  .vy-sizeguide__table th { font-weight: 700; }
+  .vy-sizeguide__attr { font-weight: 600; }
   /* Keep the attribute (first) column in view while the size columns scroll. */
-  .custom-sizeguide__table th:first-child,
-  .custom-sizeguide__table td:first-child {
+  .vy-sizeguide__table th:first-child,
+  .vy-sizeguide__table td:first-child {
     position: sticky;
     left: 0;
     background: rgb(var(--color-background));
     text-align: left;
   }
 
-  .custom-sizeguide__perfect {
+  .vy-sizeguide__perfect {
     padding: 2rem;
     background: rgba(var(--color-button), 0.08);
   }
-  .custom-sizeguide__perfect-heading { margin: 0 0 1rem; font-size: 1.6rem; }
+  .vy-sizeguide__perfect-heading { margin: 0 0 1rem; font-size: 1.6rem; }
 
   @media screen and (min-width: 990px) {
-    .custom-sizeguide__layout {
+    .vy-sizeguide__layout {
       flex-direction: row;
       align-items: flex-start;
     }
-    .custom-sizeguide__media { flex: 0 0 22%; }
-    .custom-sizeguide__tablewrap { flex: 1; }
-    .custom-sizeguide__perfect { flex: 0 0 24%; }
+    .vy-sizeguide__media { flex: 0 0 22%; }
+    .vy-sizeguide__tablewrap { flex: 1; }
+    .vy-sizeguide__perfect { flex: 0 0 24%; }
   }
 {% endstylesheet %}
 {% schema %}
 {
   "name": "Size guide",
   "tag": "section",
-  "class": "custom-sizeguide-section",
+  "class": "vy-sizeguide-section",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Will It Fit?" },

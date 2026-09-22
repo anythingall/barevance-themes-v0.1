@@ -18,12 +18,12 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-icon-benefits — "Why customers love it" icon grid (mobile-first).
+  vy-icon-benefits — "Why customers love it" icon grid (mobile-first).
   Grid of icon + title + text blocks. Mobile: 1–2 cols or horizontal scroller.
 {%- endcomment -%}
 
-<div class="custom-benefits color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-benefits color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- liquid
       assign mf_benefits = product.metafields.custom.benefits.value
       assign use_mf = false
@@ -37,47 +37,47 @@
       assign benefit_cols = section.settings.columns | at_most: benefit_count | at_least: 1
     -%}
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
-      <div class="custom-benefits__head" style="text-align: {{ section.settings.heading_alignment }};">
+      <div class="vy-benefits__head" style="text-align: {{ section.settings.heading_alignment }};">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="custom-h2">{{ section.settings.heading }}</h2>
+          <h2 class="vy-h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
       </div>
     {%- endif -%}
 
     <ul
-      class="custom-benefits__grid {% if section.settings.card_container %}is-carded{% endif %} {% if section.settings.mobile_layout == 'carousel' %}custom-scroller custom-scroller--grid-on-desktop{% else %}custom-grid{% endif %} list-unstyled"
+      class="vy-benefits__grid {% if section.settings.card_container %}is-carded{% endif %} {% if section.settings.mobile_layout == 'carousel' %}vy-scroller vy-scroller--grid-on-desktop{% else %}vy-grid{% endif %} list-unstyled"
       role="list"
       {%- if section.settings.mobile_layout == 'carousel' %} tabindex="0" aria-label="Benefits (scroll to see more)"{% endif %}
-      style="--custom-grid-cols-desktop: {{ benefit_cols }}; --custom-grid-cols-tablet: {{ benefit_cols | at_most: 3 }}; --custom-scroller-cols-desktop: {{ benefit_cols }}; --custom-scroller-item: 60%;"
+      style="--vy-grid-cols-desktop: {{ benefit_cols }}; --vy-grid-cols-tablet: {{ benefit_cols | at_most: 3 }}; --vy-scroller-cols-desktop: {{ benefit_cols }}; --vy-scroller-item: 60%;"
     >
       {%- if use_mf -%}
         {%- for feature in mf_benefits -%}
-          <li class="custom-benefits__item" style="text-align: {{ section.settings.item_alignment }};">
+          <li class="vy-benefits__item" style="text-align: {{ section.settings.item_alignment }};">
             {%- if feature.icon != blank -%}
-              <span class="custom-benefits__icon">{%- render 'custom-icon', icon: feature.icon -%}</span>
+              <span class="vy-benefits__icon">{%- render 'custom-icon', icon: feature.icon -%}</span>
             {%- endif -%}
             {%- if feature.title != blank -%}
-              <h3 class="custom-benefits__title">{{ feature.title }}</h3>
+              <h3 class="vy-benefits__title">{{ feature.title }}</h3>
             {%- endif -%}
             {%- if feature.text != blank -%}
-              <p class="custom-benefits__text">{{ feature.text }}</p>
+              <p class="vy-benefits__text">{{ feature.text }}</p>
             {%- endif -%}
           </li>
         {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
-          <li class="custom-benefits__item" style="text-align: {{ section.settings.item_alignment }};" {{ block.shopify_attributes }}>
+          <li class="vy-benefits__item" style="text-align: {{ section.settings.item_alignment }};" {{ block.shopify_attributes }}>
             {%- if block.settings.icon != 'none' -%}
-              <span class="custom-benefits__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
+              <span class="vy-benefits__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
             {%- endif -%}
             {%- if block.settings.title != blank -%}
-              <h3 class="custom-benefits__title">{{ block.settings.title }}</h3>
+              <h3 class="vy-benefits__title">{{ block.settings.title }}</h3>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <p class="custom-benefits__text">{{ block.settings.text }}</p>
+              <p class="vy-benefits__text">{{ block.settings.text }}</p>
             {%- endif -%}
           </li>
         {%- endfor -%}
@@ -86,48 +86,48 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-benefits__head {
+  .vy-benefits__head {
     margin-bottom: 3rem;
   }
 
-  .custom-benefits__head .custom-eyebrow {
+  .vy-benefits__head .vy-eyebrow {
     margin: 0 0 0.6rem;
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-benefits__head .custom-h2 {
+  .vy-benefits__head .vy-h2 {
     margin: 0;
   }
 
-  .custom-benefits__grid {
+  .vy-benefits__grid {
     margin: 0;
     padding: 0;
   }
 
   /* Optional card container wrapping the whole grid (matches reference) */
-  .custom-benefits__grid.is-carded {
+  .vy-benefits__grid.is-carded {
     background: rgba(var(--color-foreground), 0.04);
     border: 0.1rem solid rgba(var(--color-foreground), 0.08);
-    border-radius: var(--custom-card-radius, 1.6rem);
+    border-radius: var(--vy-card-radius, 1.6rem);
     padding: 2.8rem 2rem;
   }
 
-  .custom-benefits__item {
+  .vy-benefits__item {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     align-items: center;
   }
 
-  .custom-benefits__item[style*='left'] {
+  .vy-benefits__item[style*='left'] {
     align-items: flex-start;
   }
 
   /* Icon in a soft circle (matches reference) */
-  .custom-benefits__icon {
+  .vy-benefits__icon {
     width: 5.6rem;
     height: 5.6rem;
     border-radius: 999px;
@@ -138,18 +138,18 @@
     margin-bottom: 0.4rem;
   }
 
-  .custom-benefits__icon .svg-wrapper {
+  .vy-benefits__icon .svg-wrapper {
     width: 2.8rem;
     height: 2.8rem;
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-benefits__title {
+  .vy-benefits__title {
     margin: 0;
     font-size: 1.7rem;
   }
 
-  .custom-benefits__text {
+  .vy-benefits__text {
     margin: 0;
     font-size: 1.4rem;
     opacity: 0.82;
@@ -160,7 +160,7 @@
 {
   "name": "Icon benefits",
   "tag": "section",
-  "class": "custom-benefits-section",
+  "class": "vy-benefits-section",
   "settings": [
     {
       "type": "select",

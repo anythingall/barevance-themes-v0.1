@@ -94,18 +94,18 @@
       endif
     -%}
 
-    <div class="custom-promo{% if has_next == false %} custom-promo--complete{% endif %}">
-      <p class="custom-promo__head">{{ headline }}</p>
-      <div class="custom-promo__rail" style="--tiers: {{ n }};">
-        <div class="custom-promo__row custom-promo__row--above">
+    <div class="vy-promo{% if has_next == false %} vy-promo--complete{% endif %}">
+      <p class="vy-promo__head">{{ headline }}</p>
+      <div class="vy-promo__rail" style="--tiers: {{ n }};">
+        <div class="vy-promo__row vy-promo__row--above">
           {%- for tier in tiers -%}
             {%- assign parts = tier | split: '~' -%}
             {%- assign tq = parts[0] | plus: 0 -%}
-            <span class="custom-promo__count{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ tq }} {% if tq == 1 %}item{% else %}items{% endif %}</span>
+            <span class="vy-promo__count{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ tq }} {% if tq == 1 %}item{% else %}items{% endif %}</span>
           {%- endfor -%}
         </div>
-        <div class="custom-promo__row custom-promo__row--nodes">
-          <span class="custom-promo__fill" style="--fill: {{ fillpct }}%;"></span>
+        <div class="vy-promo__row vy-promo__row--nodes">
+          <span class="vy-promo__fill" style="--fill: {{ fillpct }}%;"></span>
           {%- for tier in tiers -%}
             {%- assign parts = tier | split: '~' -%}
             {%- assign tq = parts[0] | plus: 0 -%}
@@ -113,20 +113,20 @@
             {%- if qty >= tq -%}{%- assign done = true -%}{%- endif -%}
             {%- assign is_next = false -%}
             {%- if forloop.index == nextindex and has_next -%}{%- assign is_next = true -%}{%- endif -%}
-            <span class="custom-promo__node{% if done %} is-done{% elsif is_next %} is-next{% endif %}" aria-hidden="true">
+            <span class="vy-promo__node{% if done %} is-done{% elsif is_next %} is-next{% endif %}" aria-hidden="true">
               {%- if done -%}
-                <svg viewBox="0 0 24 24" fill="none" class="custom-promo__mark"><path d="M6 12.5l3.6 3.6L18 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" class="vy-promo__mark"><path d="M6 12.5l3.6 3.6L18 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               {%- else -%}
-                <svg viewBox="0 0 34 34" class="custom-promo__seal"><path class="custom-promo__seal-bg" d="M17 3l2.5 2.1 3.2-.5 1.2 3 3 1.2-.5 3.2L31 17l-2.1 2.5.5 3.2-3 1.2-1.2 3-3.2-.5L17 31l-2.5-2.1-3.2.5-1.2-3-3-1.2.5-3.2L3 17l2.1-2.5-.5-3.2 3-1.2 1.2-3 3.2.5z"/><text x="17" y="21" text-anchor="middle" class="custom-promo__seal-mark">%</text></svg>
+                <svg viewBox="0 0 34 34" class="vy-promo__seal"><path class="vy-promo__seal-bg" d="M17 3l2.5 2.1 3.2-.5 1.2 3 3 1.2-.5 3.2L31 17l-2.1 2.5.5 3.2-3 1.2-1.2 3-3.2-.5L17 31l-2.5-2.1-3.2.5-1.2-3-3-1.2.5-3.2L3 17l2.1-2.5-.5-3.2 3-1.2 1.2-3 3.2.5z"/><text x="17" y="21" text-anchor="middle" class="vy-promo__seal-mark">%</text></svg>
               {%- endif -%}
             </span>
           {%- endfor -%}
         </div>
-        <div class="custom-promo__row custom-promo__row--below">
+        <div class="vy-promo__row vy-promo__row--below">
           {%- for tier in tiers -%}
             {%- assign parts = tier | split: '~' -%}
             {%- assign tq = parts[0] | plus: 0 -%}
-            <span class="custom-promo__label{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ parts[1] }}</span>
+            <span class="vy-promo__label{% if qty >= tq %} is-done{% elsif forloop.index == nextindex and has_next %} is-next{% endif %}">{{ parts[1] }}</span>
           {%- endfor -%}
         </div>
       </div>
@@ -135,76 +135,76 @@
 {%- endif -%}
 
 {% stylesheet %}
-  .custom-promo {
+  .vy-promo {
     margin: 0 0 1.8rem;
     padding: 1.3rem 1.8rem 1.4rem;
-    border-radius: var(--custom-card-radius, 0.6rem);
+    border-radius: var(--vy-card-radius, 0.6rem);
     background: rgba(var(--color-foreground), 0.05);
   }
 
-  .custom-promo__head {
+  .vy-promo__head {
     margin: 0 0 1rem;
     font-size: 1.35rem;
     line-height: 1.3;
   }
 
-  .custom-promo__rail {
+  .vy-promo__rail {
     --tiers: 1;
   }
 
-  .custom-promo__row {
+  .vy-promo__row {
     display: grid;
     grid-template-columns: repeat(var(--tiers), 1fr);
     align-items: center;
   }
 
-  .custom-promo__row > * {
+  .vy-promo__row > * {
     justify-self: center;
     text-align: center;
   }
 
-  .custom-promo__row--above {
+  .vy-promo__row--above {
     margin-bottom: 0.7rem;
     font-size: 1.2rem;
     font-weight: 600;
   }
 
-  .custom-promo__row--below {
+  .vy-promo__row--below {
     margin-top: 0.7rem;
     font-size: 1.05rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 
-  .custom-promo__count,
-  .custom-promo__label {
+  .vy-promo__count,
+  .vy-promo__label {
     color: rgba(var(--color-foreground), 0.4);
     transition: color 0.3s ease;
   }
 
-  .custom-promo__count.is-next {
+  .vy-promo__count.is-next {
     color: rgb(var(--color-foreground));
   }
 
-  .custom-promo__count.is-done {
+  .vy-promo__count.is-done {
     color: rgba(var(--color-foreground), 0.55);
   }
 
-  .custom-promo__label.is-done {
+  .vy-promo__label.is-done {
     color: rgb(var(--color-button));
     font-weight: 700;
   }
 
-  .custom-promo__label.is-next {
+  .vy-promo__label.is-next {
     color: rgba(var(--color-foreground), 0.8);
     font-weight: 700;
   }
 
-  .custom-promo__row--nodes {
+  .vy-promo__row--nodes {
     position: relative;
   }
 
-  .custom-promo__row--nodes::before {
+  .vy-promo__row--nodes::before {
     content: '';
     position: absolute;
     left: calc(50% / var(--tiers));
@@ -217,7 +217,7 @@
     z-index: 0;
   }
 
-  .custom-promo__fill {
+  .vy-promo__fill {
     position: absolute;
     left: calc(50% / var(--tiers));
     width: clamp(0px, calc(var(--fill, 0%) - 50% / var(--tiers)), calc(100% - 100% / var(--tiers)));
@@ -230,7 +230,7 @@
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .custom-promo__node {
+  .vy-promo__node {
     position: relative;
     z-index: 1;
     width: 3.6rem;
@@ -243,42 +243,42 @@
     transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
-  .custom-promo__seal {
+  .vy-promo__seal {
     width: 2rem;
     height: 2rem;
   }
 
-  .custom-promo__seal-bg {
+  .vy-promo__seal-bg {
     fill: none;
     stroke: rgba(var(--color-foreground), 0.35);
     stroke-width: 1;
   }
 
-  .custom-promo__seal-mark {
+  .vy-promo__seal-mark {
     fill: rgba(var(--color-foreground), 0.5);
     font-size: 1.1rem;
     font-weight: 600;
   }
 
-  .custom-promo__node.is-next {
+  .vy-promo__node.is-next {
     border-color: rgb(var(--color-button));
     box-shadow: 0 0 0 0.4rem rgba(var(--color-button), 0.1);
   }
 
-  .custom-promo__node.is-next .custom-promo__seal-bg {
+  .vy-promo__node.is-next .vy-promo__seal-bg {
     stroke: rgba(var(--color-button), 0.8);
   }
 
-  .custom-promo__node.is-next .custom-promo__seal-mark {
+  .vy-promo__node.is-next .vy-promo__seal-mark {
     fill: rgb(var(--color-button));
   }
 
-  .custom-promo__node.is-done {
+  .vy-promo__node.is-done {
     background: rgb(var(--color-button));
     border-color: rgb(var(--color-button));
   }
 
-  .custom-promo__mark {
+  .vy-promo__mark {
     width: 1.8rem;
     height: 1.8rem;
     color: rgb(var(--color-button-text));

@@ -1,0 +1,39 @@
+{% comment %}
+  vy-card-swatches — Color swatch row for a product card (mobile-first).
+  Shows up to `limit` swatches from the product's first swatch-configured option
+  (e.g. "Color"), with a "+N" overflow chip. Decorative — the card already links to
+  the product — so swatches are aria-hidden and a visually-hidden label announces the
+  count. Renders nothing when the product has no swatch-configured option.
+
+  Accepts:
+  - card_product: {Object} product
+  - limit: {Number} max swatches to show before "+N" (optional, default 4)
+{% endcomment %}
+{%- liquid
+  assign swatch_option = null
+  for option in card_product.options_with_values
+    assign sc = option.values | map: 'swatch' | compact | size
+    if sc > 0
+      assign swatch_option = option
+      break
+    endif
+  endfor
+-%}
+{%- if swatch_option -%}
+  {%- liquid
+    assign lim = limit | default: 4
+    assign total = swatch_option.values | size
+    assign overflow = total | minus: lim
+  -%}
+  <div class="vy-card-swatches">
+    <span class="visually-hidden">{{ total }} {{ swatch_option.name | downcase }} options</span>
+    <span class="vy-card-swatches__row" aria-hidden="true">
+      {%- for value in swatch_option.values limit: lim -%}
+        {% render 'swatch', swatch: value.swatch %}
+      {%- endfor -%}
+      {%- if overflow > 0 -%}
+        <span class="vy-card-swatches__more">+{{ overflow }}</span>
+      {%- endif -%}
+    </span>
+  </div>
+{%- endif -%}

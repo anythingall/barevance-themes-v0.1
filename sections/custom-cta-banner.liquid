@@ -18,13 +18,13 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-cta-banner — Full-width CTA with background image + overlay (mobile-first).
+  vy-cta-banner — Full-width CTA with background image + overlay (mobile-first).
   Text stacks and centers on mobile; button is full-width on mobile.
 {%- endcomment -%}
 
-<div class="custom-cta-banner color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
-    <div class="custom-cta-banner__box custom-card" style="--overlay: {{ section.settings.overlay_opacity | at_least: 35 | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
+<div class="vy-cta-banner color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
+    <div class="vy-cta-banner__box vy-card" style="--overlay: {{ section.settings.overlay_opacity | at_least: 35 | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
       {%- if section.settings.image != blank -%}
         {{
           section.settings.image
@@ -33,23 +33,23 @@
             loading: 'lazy',
             sizes: '100vw',
             widths: '750, 1100, 1500',
-            class: 'custom-cta-banner__bg',
+            class: 'vy-cta-banner__bg',
             alt: ''
         }}
       {%- endif -%}
-      <div class="custom-cta-banner__content">
+      <div class="vy-cta-banner__content">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="custom-h2 custom-cta-banner__heading">{{ section.settings.heading }}</h2>
+          <h2 class="vy-h2 vy-cta-banner__heading">{{ section.settings.heading }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
-          <div class="custom-cta-banner__text rte">{{ section.settings.text }}</div>
+          <div class="vy-cta-banner__text rte">{{ section.settings.text }}</div>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <div class="custom-cta-banner__actions" style="justify-content: {% if section.settings.content_alignment == 'left' %}flex-start{% else %}center{% endif %};">
-            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary custom-cta">
+          <div class="vy-cta-banner__actions" style="justify-content: {% if section.settings.content_alignment == 'left' %}flex-start{% else %}center{% endif %};">
+            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta">
               {{- section.settings.button_label -}}
             </a>
           </div>
@@ -58,10 +58,10 @@
     </div>
   </div>
 </div>
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-cta-banner__box {
+  .vy-cta-banner__box {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -70,7 +70,7 @@
     padding: 4rem 2rem;
   }
 
-  .custom-cta-banner__bg {
+  .vy-cta-banner__bg {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -79,7 +79,7 @@
     z-index: 0;
   }
 
-  .custom-cta-banner__box::after {
+  .vy-cta-banner__box::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -88,11 +88,11 @@
     z-index: 1;
   }
 
-  .custom-cta-banner__box:not(:has(.custom-cta-banner__bg))::after {
+  .vy-cta-banner__box:not(:has(.vy-cta-banner__bg))::after {
     display: none;
   }
 
-  .custom-cta-banner__content {
+  .vy-cta-banner__content {
     position: relative;
     z-index: 2;
     width: 100%;
@@ -104,21 +104,21 @@
     color: rgb(var(--color-background));
   }
 
-  .custom-cta-banner__box:not(:has(.custom-cta-banner__bg)) .custom-cta-banner__content {
+  .vy-cta-banner__box:not(:has(.vy-cta-banner__bg)) .vy-cta-banner__content {
     color: rgb(var(--color-foreground));
   }
 
-  .custom-cta-banner__heading {
+  .vy-cta-banner__heading {
     margin: 0;
   }
 
-  .custom-cta-banner__actions {
+  .vy-cta-banner__actions {
     display: flex;
     justify-content: center;
   }
 
   @media screen and (min-width: 750px) {
-    .custom-cta-banner__box {
+    .vy-cta-banner__box {
       min-height: 40rem;
       padding: 6rem;
     }
@@ -128,7 +128,7 @@
 {
   "name": "CTA banner",
   "tag": "section",
-  "class": "custom-cta-banner-section",
+  "class": "vy-cta-banner-section",
   "settings": [
     {
       "type": "select",

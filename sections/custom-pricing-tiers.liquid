@@ -18,7 +18,7 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-pricing-tiers — Quantity / "buy more save more" offers for One Product stores.
+  vy-pricing-tiers — Quantity / "buy more save more" offers for One Product stores.
   Each tier adds a real product with a chosen quantity + an optional per-tier discount %.
 
   IMPORTANT: the per-tier "discount %" is a DISPLAY value. The real discount must be set
@@ -29,15 +29,15 @@
 {%- endcomment -%}
 
 {%- render 'custom-cart-ajax' -%}
-<div class="custom-tiers color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-tiers color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="custom-h2 custom-tiers__heading" style="text-align: {{ section.settings.heading_alignment }};">
+      <h2 class="vy-h2 vy-tiers__heading" style="text-align: {{ section.settings.heading_alignment }};">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
 
-    <div class="custom-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 4 }};">
+    <div class="vy-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 4 }};">
       {%- for block in section.blocks -%}
         {%- liquid
           assign product = block.settings.product
@@ -64,52 +64,52 @@
 
           assign per_unit = pay_total | divided_by: qty
         -%}
-        <div class="custom-tiers__card custom-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
+        <div class="vy-tiers__card vy-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.badge != blank -%}
-            <span class="custom-tiers__badge">{{ block.settings.badge }}</span>
+            <span class="vy-tiers__badge">{{ block.settings.badge }}</span>
           {%- endif -%}
 
-          <div class="custom-tiers__card-top">
-            <a href="{{ product.url | default: '#' }}" class="custom-tiers__media" aria-label="{{ product.title | default: block.settings.label }}">
+          <div class="vy-tiers__card-top">
+            <a href="{{ product.url | default: '#' }}" class="vy-tiers__media" aria-label="{{ product.title | default: block.settings.label }}">
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-tiers__img', alt: block.settings.label }}
+                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-tiers__img', alt: block.settings.label }}
               {%- elsif product.featured_image != blank -%}
-                {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'custom-tiers__img', alt: product.title }}
+                {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-tiers__img', alt: product.title }}
               {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag: 'custom-tiers__img placeholder-svg' }}
+                {{ 'product-1' | placeholder_svg_tag: 'vy-tiers__img placeholder-svg' }}
               {%- endif -%}
             </a>
 
-            <div class="custom-tiers__info">
-              <h3 class="custom-tiers__label">
-                <a href="{{ product.url | default: '#' }}" class="custom-tiers__label-link">{{ block.settings.label | default: product.title }}</a>
+            <div class="vy-tiers__info">
+              <h3 class="vy-tiers__label">
+                <a href="{{ product.url | default: '#' }}" class="vy-tiers__label-link">{{ block.settings.label | default: product.title }}</a>
               </h3>
 
-              <div class="custom-tiers__price">
-                <span class="custom-tiers__price-now">{{ pay_total | money }}</span>
+              <div class="vy-tiers__price">
+                <span class="vy-tiers__price-now">{{ pay_total | money }}</span>
                 {%- if orig_total > pay_total -%}
-                  <s class="custom-tiers__price-was">{{ orig_total | money }}</s>
+                  <s class="vy-tiers__price-was">{{ orig_total | money }}</s>
                 {%- endif -%}
               </div>
 
               {%- if qty > 1 -%}
-                <span class="custom-tiers__unit">{{ per_unit | money }} each</span>
+                <span class="vy-tiers__unit">{{ per_unit | money }} each</span>
               {%- endif -%}
 
               {%- if save_pct > 0 -%}
-                <span class="custom-tiers__save">Save {{ save_pct }}%</span>
+                <span class="vy-tiers__save">Save {{ save_pct }}%</span>
               {%- endif -%}
             </div>
           </div>
 
           {%- if product != blank and variant != blank -%}
-            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="custom-tiers__form" data-ajax-cart>
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="vy-tiers__form" data-ajax-cart>
               <input type="hidden" name="id" value="{{ variant.id }}">
               <input type="hidden" name="quantity" value="{{ qty }}">
               <button
                 type="submit"
                 name="add"
-                class="button custom-cta {% if block.settings.highlight %}button--primary{% else %}button--secondary{% endif %}"
+                class="button vy-cta {% if block.settings.highlight %}button--primary{% else %}button--secondary{% endif %}"
                 {% unless variant.available %}disabled{% endunless %}
               >
                 {%- if variant.available -%}
@@ -120,7 +120,7 @@
               </button>
             </form>
           {%- else -%}
-            <p class="custom-tiers__empty">Chọn product cho tier này.</p>
+            <p class="vy-tiers__empty">Chọn product cho tier này.</p>
           {%- endif -%}
         </div>
       {%- endfor -%}
@@ -128,20 +128,20 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-tiers__heading {
+  .vy-tiers__heading {
     margin: 0 0 2.8rem;
   }
 
-  .custom-tiers__grid {
+  .vy-tiers__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.6rem;
   }
 
-  .custom-tiers__card {
+  .vy-tiers__card {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -150,29 +150,29 @@
     padding: 2.4rem 1.8rem 1.8rem;
     border: 0.1rem solid rgba(var(--color-foreground), 0.12);
     background: rgb(var(--color-background));
-    border-radius: var(--custom-card-radius, 0);
+    border-radius: var(--vy-card-radius, 0);
     overflow: visible; /* let the "MOST POPULAR" badge sit above the card */
   }
 
-  .custom-tiers__card.is-highlight {
+  .vy-tiers__card.is-highlight {
     border-color: rgb(var(--color-accent-strong, var(--color-button)));
     border-width: 0.2rem;
   }
 
-  .custom-tiers__card-top {
+  .vy-tiers__card-top {
     display: flex;
     align-items: center;
     gap: 1.4rem;
   }
 
-  .custom-tiers__info {
+  .vy-tiers__info {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     min-width: 0;
   }
 
-  .custom-tiers__badge {
+  .vy-tiers__badge {
     position: absolute;
     top: -1.1rem;
     left: 50%;
@@ -188,7 +188,7 @@
     white-space: nowrap;
   }
 
-  .custom-tiers__media {
+  .vy-tiers__media {
     display: block;
     width: 8.5rem;
     flex: 0 0 8.5rem;
@@ -197,17 +197,17 @@
     border-radius: 0.8rem;
   }
 
-  .custom-tiers__label-link {
+  .vy-tiers__label-link {
     color: inherit;
     text-decoration: none;
   }
 
-  .custom-tiers__label-link:hover {
+  .vy-tiers__label-link:hover {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }
 
-  .custom-tiers__img {
+  .vy-tiers__img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -215,32 +215,32 @@
     border-radius: 0.8rem;
   }
 
-  .custom-tiers__label {
+  .vy-tiers__label {
     margin: 0;
     font-size: 1.7rem;
   }
 
-  .custom-tiers__price {
+  .vy-tiers__price {
     display: flex;
     align-items: baseline;
     gap: 0.8rem;
   }
 
-  .custom-tiers__price-now {
+  .vy-tiers__price-now {
     font-size: 2.4rem;
     font-weight: 700;
   }
 
-  .custom-tiers__price-was {
+  .vy-tiers__price-was {
     opacity: 0.55;
   }
 
-  .custom-tiers__unit {
+  .vy-tiers__unit {
     font-size: 1.2rem;
     opacity: 0.7;
   }
 
-  .custom-tiers__save {
+  .vy-tiers__save {
     color: rgb(var(--color-button-text));
     background: rgb(var(--color-button));
     font-weight: 700;
@@ -250,23 +250,23 @@
     letter-spacing: 0.02em;
   }
 
-  .custom-tiers__form {
+  .vy-tiers__form {
     width: 100%;
     margin-top: auto; /* push CTA to the bottom so every tier's button lines up */
     padding-top: 0.8rem;
   }
 
-  .custom-tiers__form .custom-cta {
+  .vy-tiers__form .vy-cta {
     width: 100%;
   }
 
   @media screen and (min-width: 750px) {
-    .custom-tiers__grid {
+    .vy-tiers__grid {
       grid-template-columns: repeat(var(--tier-cols, 3), 1fr);
       align-items: stretch; /* equal-height cards so CTAs align */
     }
 
-    .custom-tiers__card.is-highlight {
+    .vy-tiers__card.is-highlight {
       box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.14);
     }
   }
@@ -275,7 +275,7 @@
 {
   "name": "Pricing tiers",
   "tag": "section",
-  "class": "custom-tiers-section",
+  "class": "vy-tiers-section",
   "settings": [
     {
       "type": "select",

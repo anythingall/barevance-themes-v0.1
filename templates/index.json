@@ -2,272 +2,209 @@
   "sections": {
     "hero": {
       "type": "custom-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_media_placement": "right",
+        "mobile_media_position": "below",
+        "section_height": "large",
+        "content_alignment": "left",
+        "eyebrow": "NATURAL MOVEMENT. A HAPPIER YOU.",
+        "heading": "Give Your Feet Room to Move.",
+        "heading_highlight": "Room to Move",
+        "subheading": "<p>Comfortable, stylish barefoot shoes designed for everyday life. More freedom for your feet. A healthier you.</p>",
+        "footnote": ""
+      },
       "blocks": {
+        "b1": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Best Sellers",
+            "link": "/collections/best-sellers",
+            "style": "primary"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Why Barefoot?",
+            "link": "/pages/why-barefoot",
+            "style": "secondary"
+          }
+        },
         "f1": {
           "type": "feature",
           "settings": {
             "icon": "leaf",
-            "text": "Lightweight & Easy to Carry"
+            "text": "Wide Toe Box"
           }
         },
         "f2": {
           "type": "feature",
           "settings": {
-            "icon": "eye",
-            "text": "Breathable Mesh"
+            "icon": "fire",
+            "text": "Lightweight Design"
           }
         },
         "f3": {
           "type": "feature",
           "settings": {
-            "icon": "padlock",
-            "text": "Secure & Escape-Resistant"
+            "icon": "check_mark",
+            "text": "Flexible Sole"
           }
         },
         "f4": {
           "type": "feature",
           "settings": {
             "icon": "heart",
-            "text": "Adorable Design"
+            "text": "All-Day Comfort"
           }
         },
-        "rating": {
+        "rt": {
           "type": "rating",
           "settings": {
             "stars": 5,
-            "text": "4.9/5 from 10,000+ happy customers"
-          }
-        },
-        "btn": {
-          "type": "button",
-          "settings": {
-            "label": "Shop Now",
-            "style": "primary"
-          }
-        },
-        "badge": {
-          "type": "badge",
-          "settings": {
-            "title": "PEEKABOO WINDOW",
-            "text": "So your kitty can see the world"
+            "text": "4.7/5 from 10,000+ happy customers"
           }
         }
       },
       "block_order": [
+        "b1",
+        "b2",
         "f1",
         "f2",
         "f3",
         "f4",
-        "rating",
-        "btn",
-        "badge"
-      ],
+        "rt"
+      ]
+    },
+    "trust": {
+      "type": "custom-trust-badges",
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "The Peekaboo Cat Tote ♡",
-        "heading": "The Cutest Way To Take Your Cat",
-        "heading_highlight": "Everywhere.",
-        "subheading": "<p>A cozy and breathable design that keeps your pet safe, comfy, and part of every adventure.</p>",
-        "footnote": "🚚 Free shipping today!",
-        "content_alignment": "left",
-        "desktop_media_placement": "right",
-        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png"
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+        "padding": "compact"
+      },
       "blocks": {
-        "col1": {
-          "type": "column",
+        "t1": {
+          "type": "badge",
           "settings": {
-            "title": "For You",
-            "text": "<p>Everyday essentials for a happy, healthy life.</p>",
-            "link_label": "Shop Now",
-            "link": "shopify://collections/all",
-            "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png"
+            "icon": "truck",
+            "title": "Free Shipping",
+            "subtitle": "On All Orders"
           }
         },
-        "col2": {
-          "type": "column",
+        "t2": {
+          "type": "badge",
           "settings": {
-            "title": "For Gifts",
-            "text": "<p>Accessories and more to show off your love.</p>",
-            "link_label": "Shop Now",
-            "link": "shopify://collections/all",
-            "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png"
+            "icon": "return",
+            "title": "30-Day Returns",
+            "subtitle": "Shop With Confidence"
           }
         },
-        "col3": {
-          "type": "column",
+        "t3": {
+          "type": "badge",
           "settings": {
-            "title": "For Every Occasion",
-            "text": "<p>Perfect gifts for every occasion.</p>",
-            "link_label": "Shop Gifts",
-            "link": "shopify://collections/all",
-            "image": "shopify://shop_images/hf_20260903_023027_3fb58f28-c3ab-4e3f-8ddf-47b7b71bc61e.png"
+            "icon": "lock",
+            "title": "Secure Checkout",
+            "subtitle": "Your Data Is Protected"
+          }
+        },
+        "t4": {
+          "type": "badge",
+          "settings": {
+            "icon": "star",
+            "title": "10,000+ Happy Customers",
+            "subtitle": "4.7/5 Average Rating"
           }
         }
       },
       "block_order": [
-        "col1",
-        "col2",
-        "col3"
-      ],
-      "settings": {
-        "title": "Shop the Collection",
-        "heading_size": "h2",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "primary",
-        "button_label": "",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "type_visibility": "v3"
-      }
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ]
     },
-    "shop_by_style": {
-      "type": "collection-list",
+    "problem": {
+      "type": "custom-problem",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "THE PROBLEM",
+        "heading": "Your Feet Weren't Made to Be Squeezed.",
+        "text": "<p>Traditional shoes can be narrow, stiff and heavy — leaving your feet tired and uncomfortable.</p>",
+        "button_label": "There's a Better Way",
+        "button_link": "/pages/why-barefoot"
+      },
       "blocks": {
-        "c1": {
-          "type": "featured_collection",
+        "l1": {
+          "type": "list_item",
           "settings": {
-            "collection": "best-sellers"
+            "icon_style": "cross",
+            "text": "Cramped toes from narrow shoes"
           }
         },
-        "c2": {
-          "type": "featured_collection"
+        "l2": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "cross",
+            "text": "Stiff movement that fights your stride"
+          }
         },
-        "c3": {
-          "type": "featured_collection"
+        "l3": {
+          "type": "list_item",
+          "settings": {
+            "icon_style": "cross",
+            "text": "Heavy feel — more shoe than you need"
+          }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3"
-      ],
-      "settings": {
-        "title": "Shop by Style",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "type_visibility": "v2"
-      }
+        "l1",
+        "l2",
+        "l3"
+      ]
     },
-    "shop_by_category": {
-      "type": "collection-list",
-      "blocks": {
-        "c1": {
-          "type": "featured_collection"
-        },
-        "c2": {
-          "type": "featured_collection"
-        },
-        "c3": {
-          "type": "featured_collection"
-        },
-        "c4": {
-          "type": "featured_collection"
-        },
-        "c5": {
-          "type": "featured_collection"
-        },
-        "c6": {
-          "type": "featured_collection"
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
-      "settings": {
-        "title": "Shop by Category",
-        "image_ratio": "square",
-        "columns_desktop": 6,
-        "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "type_visibility": "v3"
-      }
-    },
-    "best_sellers": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Best Sellers",
-        "heading_size": "h2",
-        "collection": "best-sellers",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "view_all_style": "link",
-        "image_ratio": "portrait",
-        "show_secondary_image": true,
-        "show_rating": true,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "type_visibility": "v2v3"
-      }
-    },
-    "benefits": {
+    "barefoot": {
       "type": "custom-icon-benefits",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "source": "blocks",
+        "eyebrow": "",
+        "heading": "What Makes a Barefoot Shoe Different?",
+        "heading_alignment": "center",
+        "columns": 4,
+        "mobile_layout": "carousel"
+      },
       "blocks": {
         "b1": {
           "type": "benefit",
           "settings": {
-            "icon": "heart",
-            "title": "Cozy & Comfy",
-            "text": "Soft interior keeps them calm and relaxed."
+            "icon": "leaf",
+            "title": "Wide Toe Box",
+            "text": "Give your toes room to spread and move."
           }
         },
         "b2": {
           "type": "benefit",
           "settings": {
-            "icon": "eye",
-            "title": "Breathe Easy",
-            "text": "Mesh panels for maximum airflow."
+            "icon": "check_mark",
+            "title": "Flexible Sole",
+            "text": "Lets your feet flex naturally with every step."
           }
         },
         "b3": {
           "type": "benefit",
           "settings": {
-            "icon": "padlock",
-            "title": "Built for Safety",
-            "text": "Secure closure for peace of mind."
+            "icon": "star",
+            "title": "Zero Drop",
+            "text": "A flat platform for a more natural stance."
           }
         },
         "b4": {
           "type": "benefit",
           "settings": {
-            "icon": "leaf",
+            "icon": "fire",
             "title": "Lightweight",
-            "text": "Carry with comfort, wherever life takes you."
-          }
-        },
-        "b5": {
-          "type": "benefit",
-          "settings": {
-            "icon": "star",
-            "title": "Super Adorable",
-            "text": "A design that turns heads everywhere."
+            "text": "Less bulk between you and the ground."
           }
         }
       },
@@ -275,96 +212,277 @@
         "b1",
         "b2",
         "b3",
-        "b4",
-        "b5"
-      ],
+        "b4"
+      ]
+    },
+    "shop_by_need": {
+      "type": "custom-shop-by-need",
       "settings": {
         "color_scheme": "scheme-1",
-        "heading": "Why Customers Love It ♡",
-        "columns": 5,
-        "card_container": true,
-        "type_visibility": "v1v2"
-      }
-    },
-    "story": {
-      "type": "custom-image-with-text",
+        "heading": "Shop by What You Need",
+        "subheading": "Find the perfect pair for your lifestyle.",
+        "heading_alignment": "center",
+        "columns": 6,
+        "image_ratio": "3 / 4",
+        "mobile_layout": "carousel"
+      },
       "blocks": {
-        "l1": {
-          "type": "list_item",
+        "n1": {
+          "type": "need",
           "settings": {
-            "icon_style": "check",
-            "text": "Perfect for everyday adventures"
+            "label": "Everyday Comfort",
+            "link_url": "/collections/everyday"
           }
         },
-        "l2": {
-          "type": "list_item",
+        "n2": {
+          "type": "need",
           "settings": {
-            "icon_style": "check",
-            "text": "Great for travel & daily use"
+            "label": "Walking & Travel",
+            "link_url": "/collections/walking"
           }
         },
-        "l3": {
-          "type": "list_item",
+        "n3": {
+          "type": "need",
           "settings": {
-            "icon_style": "check",
-            "text": "Fits comfortably on your shoulder"
+            "label": "Active & Training",
+            "link_url": "/collections/active"
           }
         },
-        "l4": {
-          "type": "list_item",
+        "n4": {
+          "type": "need",
           "settings": {
-            "icon_style": "check",
-            "text": "Easy to clean & quick to fold"
+            "label": "Outdoor & Trail",
+            "link_url": "/collections/outdoor"
+          }
+        },
+        "n5": {
+          "type": "need",
+          "settings": {
+            "label": "Travel Ready",
+            "link_url": "/collections/travel"
+          }
+        },
+        "n6": {
+          "type": "need",
+          "settings": {
+            "label": "Casual Style",
+            "link_url": "/collections/casual"
           }
         }
       },
       "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
-      ],
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6"
+      ]
+    },
+    "best_sellers": {
+      "type": "featured-collection",
       "settings": {
-        "color_scheme": "scheme-2",
-        "eyebrow": "Made for every adventure",
-        "heading": "From coffee runs to weekend getaways.",
-        "text": "<p>Whether it's a trip to the vet, a stroll in the park, or a visit to a friend — every outing stays cozy, safe and memorable.</p>",
-        "button_label": "See It In Action",
-        "desktop_media_placement": "left",
-        "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png",
-        "type_visibility": "v1v2"
+        "title": "Best Sellers",
+        "description": "<p>Customer favorites for a reason.</p>",
+        "show_description": true,
+        "products_to_show": 5,
+        "columns_desktop": 5,
+        "color_scheme": "scheme-1",
+        "show_rating": true,
+        "quick_add": "standard",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "square",
+        "collection": "best-sellers"
       }
     },
-    "pricing": {
+    "love": {
+      "type": "custom-reviews",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "eyebrow": "REAL COMFORT",
+        "heading": "What Customers Love About Voya",
+        "heading_alignment": "center",
+        "columns": 3
+      },
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "I feel like I'm walking barefoot.",
+            "name": "Sarah K.",
+            "badge": "Verified Customer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "So much room for my toes.",
+            "name": "Michael T.",
+            "badge": "Verified Customer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "I can wear them all day without discomfort.",
+            "name": "Emily R.",
+            "badge": "Verified Customer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ]
+    },
+    "shoe_finder": {
+      "type": "custom-shoe-finder",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "SHOE FINDER",
+        "heading": "Not Sure Which Voya Is Right for You?",
+        "subheading": "Take our 30-second shoe finder and get a personalized recommendation.",
+        "default_result_url": "/collections/best-sellers",
+        "cta_final": "Find My Voya"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What's your main activity?",
+            "option_1_label": "Everyday walking",
+            "option_1_url": "/collections/everyday",
+            "option_2_label": "Travel & long days",
+            "option_2_url": "/collections/walking",
+            "option_3_label": "Active & training",
+            "option_3_url": "/collections/active",
+            "option_4_label": "Outdoor & trail",
+            "option_4_url": "/collections/outdoor"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How do you like your fit?",
+            "option_1_label": "Roomy & relaxed",
+            "option_2_label": "Snug & secure",
+            "option_3_label": "Somewhere in between"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Pick your style",
+            "option_1_label": "Minimal & modern",
+            "option_2_label": "Sporty",
+            "option_3_label": "Casual everyday"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ]
+    },
+    "why_voya": {
+      "type": "custom-icon-benefits",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "eyebrow": "",
+        "heading": "Why Voya?",
+        "heading_alignment": "center",
+        "columns": 4,
+        "mobile_layout": "carousel"
+      },
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Foot-Shaped Design",
+            "text": "More room where you need it."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check_mark",
+            "title": "Natural Movement",
+            "text": "Flexible construction designed for you."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Everyday Comfort",
+            "text": "Made for long days and real life."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "title": "Modern Style",
+            "text": "Barefoot function without sacrificing style."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "bundle": {
       "type": "custom-pricing-tiers",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "One Pair Is Good. Two Makes Life Easier.",
+        "heading_alignment": "left",
+        "button_label": "Shop Bundle Deals"
+      },
       "blocks": {
         "t1": {
           "type": "tier",
           "settings": {
-            "product": "lion-mane-cat-tote",
             "quantity": 1,
-            "label": "1 × Lion Mane Tote",
-            "discount_percent": 0
+            "discount_percent": 0,
+            "label": "1 Pair",
+            "badge": "",
+            "highlight": false,
+            "product": "mirox"
           }
         },
         "t2": {
           "type": "tier",
           "settings": {
-            "product": "lion-mane-cat-tote",
             "quantity": 2,
-            "label": "2 × Lion Mane Tote",
-            "badge": "MOST POPULAR",
-            "highlight": true,
-            "discount_percent": 10
+            "discount_percent": 10,
+            "label": "2 Pairs",
+            "badge": "Save 10%",
+            "highlight": false,
+            "product": "mirox"
           }
         },
         "t3": {
           "type": "tier",
           "settings": {
-            "product": "lion-mane-cat-tote",
             "quantity": 3,
-            "label": "3 × Lion Mane Tote",
-            "discount_percent": 15
+            "discount_percent": 20,
+            "label": "3 Pairs",
+            "badge": "Best Value",
+            "highlight": true,
+            "product": "mirox"
           }
         }
       },
@@ -372,213 +490,58 @@
         "t1",
         "t2",
         "t3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Choose Your Set",
-        "type_visibility": "v1"
-      }
-    },
-    "comparison": {
-      "type": "custom-comparison-table",
-      "blocks": {
-        "c1": {
-          "type": "row",
-          "settings": {
-            "feature": "Peekaboo Window",
-            "us": "check",
-            "others": "cross"
-          }
-        },
-        "c2": {
-          "type": "row",
-          "settings": {
-            "feature": "Breathable & Airy",
-            "us": "check",
-            "others": "partial"
-          }
-        },
-        "c3": {
-          "type": "row",
-          "settings": {
-            "feature": "Lightweight & Portable",
-            "us": "check",
-            "others": "partial"
-          }
-        },
-        "c4": {
-          "type": "row",
-          "settings": {
-            "feature": "Durable & Long-Lasting",
-            "us": "check",
-            "others": "cross"
-          }
-        },
-        "c5": {
-          "type": "row",
-          "settings": {
-            "feature": "Stylish & Unique Design",
-            "us": "check",
-            "others": "cross"
-          }
-        },
-        "c6": {
-          "type": "row",
-          "settings": {
-            "feature": "Easy to Clean",
-            "us": "check",
-            "others": "partial"
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5",
-        "c6"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Why Choose Us Over Others?",
-        "us_label": "Our Brand",
-        "others_label": "Others",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
-        "type_visibility": "v1"
-      }
-    },
-    "reviews": {
-      "type": "custom-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "name": "Jessica M.",
-            "stars": 5,
-            "text": "My cat actually loves being in this tote! She feels safe and looks so cute."
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "name": "Daniel K.",
-            "stars": 5,
-            "text": "Perfect for our weekend trips. Lightweight and adorable."
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "name": "Sophie L.",
-            "stars": 5,
-            "text": "Great quality and super breathable. My kitten doesn't want to get out!"
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "name": "Ethan B.",
-            "stars": 5,
-            "text": "Everyone stops to ask where I got it. Best purchase this year!"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Loved by Thousands of Customers",
-        "columns": 4,
-        "type_visibility": "v1v3"
-      }
-    },
-    "trust": {
-      "type": "custom-trust-badges",
-      "blocks": {
-        "tb1": {
-          "type": "badge",
-          "settings": {
-            "icon": "truck",
-            "title": "Free Shipping",
-            "subtitle": "On orders over $40"
-          }
-        },
-        "tb2": {
-          "type": "badge",
-          "settings": {
-            "icon": "return",
-            "title": "30-Day Guarantee",
-            "subtitle": "Love it or get a full refund"
-          }
-        },
-        "tb3": {
-          "type": "badge",
-          "settings": {
-            "icon": "padlock",
-            "title": "Secure Checkout",
-            "subtitle": "100% safe & encrypted"
-          }
-        },
-        "tb4": {
-          "type": "badge",
-          "settings": {
-            "icon": "chat_bubble",
-            "title": "24/7 Support",
-            "subtitle": "We're here anytime"
-          }
-        }
-      },
-      "block_order": [
-        "tb1",
-        "tb2",
-        "tb3",
-        "tb4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2"
-      }
+      ]
     },
     "faq": {
       "type": "custom-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "heading": "Frequently Asked Questions",
+        "heading_alignment": "left",
+        "columns": "2"
+      },
       "blocks": {
         "q1": {
           "type": "item",
           "settings": {
-            "question": "What size fits my pet?",
-            "answer": "<p>Designed for small to medium pets. See the size guide for details.</p>"
+            "question": "How should barefoot shoes fit?",
+            "answer": "<p>Your toes should have room to spread, with a snug (not tight) midfoot and heel.</p>"
           }
         },
         "q2": {
           "type": "item",
           "settings": {
-            "question": "How does the peekaboo window work?",
-            "answer": "<p>A breathable mesh window lets your pet see out while staying safe inside.</p>"
+            "question": "What size should I choose?",
+            "answer": "<p>Most customers stay true to size. If between sizes or wide-footed, size up.</p>"
           }
         },
         "q3": {
           "type": "item",
           "settings": {
-            "question": "Is it safe for my pet?",
-            "answer": "<p>Yes — secure closure and reinforced stitching keep your pet safe.</p>"
+            "question": "Can I return them if they don't fit?",
+            "answer": "<p>Yes — 30-day returns so you can find the right fit with confidence.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
-            "question": "How do I clean it?",
-            "answer": "<p>Wipe clean or hand wash. Air dry for best results.</p>"
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 1–2 business days with tracking.</p>"
           }
         },
         "q5": {
           "type": "item",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "<p>30-day money-back guarantee, no questions asked.</p>"
+            "question": "Are Voya shoes suitable for everyday walking?",
+            "answer": "<p>Yes — Voya is designed for everyday walking, travel and light activity.</p>"
+          }
+        },
+        "q6": {
+          "type": "item",
+          "settings": {
+            "question": "How do barefoot shoes differ from regular shoes?",
+            "answer": "<p>Wider toe box, flexible sole and a zero-drop platform for natural movement.</p>"
           }
         }
       },
@@ -587,67 +550,36 @@
         "q2",
         "q3",
         "q4",
-        "q5"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Frequently Asked Questions",
-        "columns": "1",
-        "heading_alignment": "left",
-        "show_guarantee": true,
-        "guarantee_scheme": "scheme-2",
-        "guarantee_badge": "30 DAYS",
-        "guarantee_heading": "Love It or Get Your Money Back",
-        "guarantee_text": "We're confident you and your pet will love it. If not, return it within 30 days for a full refund.",
-        "type_visibility": "v1"
-      }
+        "q5",
+        "q6"
+      ]
     },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Join the Family"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Get 10% off your first order and exclusive offers.</p>"
-          }
-        },
-        "email_form": {
-          "type": "email_form"
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email_form"
-      ],
+    "cta": {
+      "type": "custom-cta-banner",
       "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "type_visibility": "v3"
+        "color_scheme": "scheme-3",
+        "eyebrow": "HEALTHIER FEET. HAPPIER LIVES.",
+        "heading": "Ready to Give Your Feet More Room?",
+        "text": "<p>Discover a more natural way to move.</p>",
+        "button_label": "Shop Best Sellers",
+        "button_link": "/collections/best-sellers",
+        "content_alignment": "left",
+        "overlay_opacity": 45
       }
     }
   },
   "order": [
     "hero",
-    "multicolumn",
-    "shop_by_style",
-    "shop_by_category",
-    "best_sellers",
-    "benefits",
-    "story",
-    "pricing",
-    "comparison",
-    "reviews",
     "trust",
+    "problem",
+    "barefoot",
+    "shop_by_need",
+    "best_sellers",
+    "love",
+    "shoe_finder",
+    "why_voya",
+    "bundle",
     "faq",
-    "newsletter"
+    "cta"
   ]
 }

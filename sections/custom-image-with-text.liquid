@@ -18,7 +18,7 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-image-with-text — Story / problem-solution block (mobile-first).
+  vy-image-with-text — Story / problem-solution block (mobile-first).
   Media + content (eyebrow, heading, richtext, checklist blocks, button).
   Mobile: stacked (media position selectable). Desktop: two columns.
 {%- endcomment -%}
@@ -28,9 +28,9 @@
   assign mobile_pos = section.settings.mobile_media_position
 -%}
 
-<div class="custom-iwt color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container custom-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
-    <div class="custom-iwt__media custom-card">
+<div class="vy-iwt color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container vy-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
+    <div class="vy-iwt__media vy-card">
       {%- if section.settings.image != blank -%}
         {{
           section.settings.image
@@ -39,45 +39,45 @@
             loading: 'lazy',
             sizes: '(min-width: 990px) 50vw, 100vw',
             widths: '450, 660, 900, 1100, 1400',
-            class: 'custom-iwt__image',
+            class: 'vy-iwt__image',
             alt: section.settings.image.alt | default: section.settings.heading
         }}
       {%- else -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'custom-iwt__image placeholder-svg' }}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'vy-iwt__image placeholder-svg' }}
       {%- endif -%}
     </div>
 
-    <div class="custom-iwt__content">
+    <div class="vy-iwt__content">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="custom-eyebrow custom-iwt__eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="vy-eyebrow vy-iwt__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="custom-h2 custom-iwt__heading">{{ section.settings.heading }}</h2>
+        <h2 class="vy-h2 vy-iwt__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
       {%- if section.settings.text != blank -%}
-        <div class="custom-iwt__text rte">{{ section.settings.text }}</div>
+        <div class="vy-iwt__text rte">{{ section.settings.text }}</div>
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="custom-iwt__list list-unstyled" role="list">
+        <ul class="vy-iwt__list list-unstyled" role="list">
           {%- for block in section.blocks -%}
-            <li class="custom-iwt__list-item" {{ block.shopify_attributes }}>
-              <span class="custom-iwt__list-icon custom-iwt__list-icon--{{ block.settings.icon_style }}">
+            <li class="vy-iwt__list-item" {{ block.shopify_attributes }}>
+              <span class="vy-iwt__list-icon vy-iwt__list-icon--{{ block.settings.icon_style }}">
                 {%- if block.settings.icon_style == 'cross' -%}
                   {%- render 'custom-icon', icon: 'close' -%}
                 {%- else -%}
                   {%- render 'custom-icon', icon: 'check_mark' -%}
                 {%- endif -%}
               </span>
-              <span class="custom-iwt__list-text">{{ block.settings.text }}</span>
+              <span class="vy-iwt__list-text">{{ block.settings.text }}</span>
             </li>
           {%- endfor -%}
         </ul>
       {%- endif -%}
 
       {%- if section.settings.button_label != blank -%}
-        <div class="custom-iwt__actions">
-          <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary custom-cta">
+        <div class="vy-iwt__actions">
+          <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta">
             {{- section.settings.button_label -}}
           </a>
         </div>
@@ -86,51 +86,51 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-iwt__inner {
+  .vy-iwt__inner {
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
   }
 
-  .custom-iwt__inner.mobile-bottom {
+  .vy-iwt__inner.mobile-bottom {
     flex-direction: column-reverse;
   }
 
-  .custom-iwt__media {
+  .vy-iwt__media {
     aspect-ratio: 4 / 3;
   }
 
-  .custom-iwt__image,
-  .custom-iwt__media .placeholder-svg {
+  .vy-iwt__image,
+  .vy-iwt__media .placeholder-svg {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .custom-iwt__content {
+  .vy-iwt__content {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
   }
 
-  .custom-iwt__eyebrow {
+  .vy-iwt__eyebrow {
     margin: 0;
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-iwt__heading {
+  .vy-iwt__heading {
     margin: 0;
   }
 
-  .custom-iwt__text {
+  .vy-iwt__text {
     opacity: 0.85;
   }
 
-  .custom-iwt__list {
+  .vy-iwt__list {
     margin: 0;
     padding: 0;
     display: flex;
@@ -138,47 +138,47 @@
     gap: 1rem;
   }
 
-  .custom-iwt__list-item {
+  .vy-iwt__list-item {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
   }
 
-  .custom-iwt__list-icon .svg-wrapper {
+  .vy-iwt__list-icon .svg-wrapper {
     width: 2rem;
     height: 2rem;
   }
 
-  .custom-iwt__list-icon--check .svg-wrapper {
+  .vy-iwt__list-icon--check .svg-wrapper {
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-iwt__list-icon--cross .svg-wrapper {
+  .vy-iwt__list-icon--cross .svg-wrapper {
     opacity: 0.55;
   }
 
-  .custom-iwt__list-text {
+  .vy-iwt__list-text {
     font-size: 1.5rem;
   }
 
   @media screen and (min-width: 990px) {
-    .custom-iwt__inner {
+    .vy-iwt__inner {
       flex-direction: row;
       align-items: center;
       gap: 4.5rem;
     }
 
-    .custom-iwt__inner.media-left {
+    .vy-iwt__inner.media-left {
       flex-direction: row-reverse;
     }
 
-    .custom-iwt__media,
-    .custom-iwt__content {
+    .vy-iwt__media,
+    .vy-iwt__content {
       flex: 1 1 50%;
       min-width: 0;
     }
 
-    .custom-iwt__media {
+    .vy-iwt__media {
       aspect-ratio: 1 / 1;
     }
   }
@@ -187,7 +187,7 @@
 {
   "name": "Image with text",
   "tag": "section",
-  "class": "custom-iwt-section",
+  "class": "vy-iwt-section",
   "settings": [
     {
       "type": "select",

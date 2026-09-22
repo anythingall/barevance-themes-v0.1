@@ -17,17 +17,17 @@
       assign pct = cart.total_discount | times: 100.0 | divided_by: original | round
     endif
   -%}
-  <div class="custom-cart-savings custom-cart-savings--{{ layout }}" role="status">
-    <span class="custom-cart-savings__label">{{ 'customer.order.discount' | t | default: 'You save' }}</span>
+  <div class="vy-cart-savings vy-cart-savings--{{ layout }}" role="status">
+    <span class="vy-cart-savings__label">{{ 'customer.order.discount' | t | default: 'You save' }}</span>
     {%- if pct > 0 -%}
-      <span class="custom-cart-savings__badge">{{ pct }}% OFF</span>
+      <span class="vy-cart-savings__badge">{{ pct }}% OFF</span>
     {%- endif -%}
-    <span class="custom-cart-savings__amount">-{{ saved }}</span>
+    <span class="vy-cart-savings__amount">-{{ saved }}</span>
   </div>
 {%- endif -%}
 
 {% stylesheet %}
-  .custom-cart-savings {
+  .vy-cart-savings {
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -36,15 +36,15 @@
     color: rgb(var(--color-foreground));
   }
 
-  .custom-cart-savings--row {
+  .vy-cart-savings--row {
     justify-content: space-between;
   }
 
-  .custom-cart-savings__label {
+  .vy-cart-savings__label {
     font-weight: 600;
   }
 
-  .custom-cart-savings__badge {
+  .vy-cart-savings__badge {
     background: rgb(var(--color-button));
     color: rgb(var(--color-button-text));
     font-weight: 700;
@@ -55,11 +55,11 @@
     margin-right: auto;
   }
 
-  .custom-cart-savings--inline .custom-cart-savings__badge {
+  .vy-cart-savings--inline .vy-cart-savings__badge {
     margin-right: 0;
   }
 
-  .custom-cart-savings__amount {
+  .vy-cart-savings__amount {
     font-weight: 700;
     color: rgb(var(--color-button));
   }

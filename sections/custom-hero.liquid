@@ -1,5 +1,5 @@
 {%- comment -%}
-  custom-hero — Shared hero section (mobile-first) used by One Product / Multi Style /
+  vy-hero — Shared hero section (mobile-first) used by One Product / Multi Style /
   Multi Product templates and PDP. Media + content two-column on desktop, stacked on mobile.
   Colors/fonts come from the color scheme + global design tokens (never hard-coded).
 {%- endcomment -%}
@@ -33,11 +33,11 @@
 -%}
 
 <div
-  class="custom-hero color-{{ section.settings.color_scheme }} gradient custom-section custom-hero--h-{{ section.settings.section_height }}"
+  class="vy-hero color-{{ section.settings.color_scheme }} gradient vy-section vy-hero--h-{{ section.settings.section_height }}"
   style="--hero-align: {{ align }}; --hero-align-items: {{ align_items }};"
 >
-  <div class="custom-container custom-hero__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
-    <div class="custom-hero__media custom-card">
+  <div class="vy-container vy-hero__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
+    <div class="vy-hero__media vy-card">
       {%- if section.settings.image != blank -%}
         <picture>
           {%- if section.settings.mobile_image != blank -%}
@@ -54,56 +54,56 @@
               fetchpriority: 'high',
               sizes: '(min-width: 990px) 50vw, 100vw',
               widths: '450, 660, 900, 1100, 1400, 1600',
-              class: 'custom-hero__image',
+              class: 'vy-hero__image',
               alt: section.settings.image.alt | default: section.settings.heading
           }}
         </picture>
       {%- else -%}
-        {{ 'hero-apparel-1' | placeholder_svg_tag: 'custom-hero__image placeholder-svg' }}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'vy-hero__image placeholder-svg' }}
       {%- endif -%}
 
       {%- for block in section.blocks -%}
         {%- if block.type == 'badge' -%}
-          <div class="custom-hero__badge" {{ block.shopify_attributes }}>
+          <div class="vy-hero__badge" {{ block.shopify_attributes }}>
             {%- if block.settings.title != blank -%}
-              <span class="custom-hero__badge-title">{{ block.settings.title }}</span>
+              <span class="vy-hero__badge-title">{{ block.settings.title }}</span>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <span class="custom-hero__badge-text">{{ block.settings.text }}</span>
+              <span class="vy-hero__badge-text">{{ block.settings.text }}</span>
             {%- endif -%}
           </div>
         {%- endif -%}
       {%- endfor -%}
     </div>
 
-    <div class="custom-hero__content">
+    <div class="vy-hero__content">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="custom-eyebrow custom-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="vy-eyebrow vy-hero__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <{{ hero_tag }} class="custom-h1 custom-hero__heading">
+        <{{ hero_tag }} class="vy-h1 vy-hero__heading">
           {{ section.settings.heading }}
           {%- if section.settings.heading_highlight != blank -%}
-            <span class="custom-hero__heading-accent">{{ section.settings.heading_highlight }}</span>
+            <span class="vy-hero__heading-accent">{{ section.settings.heading_highlight }}</span>
           {%- endif -%}
         </{{ hero_tag }}>
       {%- endif -%}
 
       {%- if section.settings.subheading != blank -%}
-        <div class="custom-hero__subheading rte">{{ section.settings.subheading }}</div>
+        <div class="vy-hero__subheading rte">{{ section.settings.subheading }}</div>
       {%- endif -%}
 
       {%- assign feature_blocks = section.blocks | where: 'type', 'feature' -%}
       {%- if feature_blocks.size > 0 -%}
-        <ul class="custom-hero__features" role="list">
+        <ul class="vy-hero__features" role="list">
           {%- for block in feature_blocks -%}
-            <li class="custom-hero__feature" {{ block.shopify_attributes }}>
-              <span class="custom-hero__feature-icon">
+            <li class="vy-hero__feature" {{ block.shopify_attributes }}>
+              <span class="vy-hero__feature-icon">
                 {%- render 'icon-accordion', icon: block.settings.icon -%}
               </span>
               {%- if block.settings.text != blank -%}
-                <span class="custom-hero__feature-text">{{ block.settings.text }}</span>
+                <span class="vy-hero__feature-text">{{ block.settings.text }}</span>
               {%- endif -%}
             </li>
           {%- endfor -%}
@@ -112,18 +112,18 @@
 
       {%- assign rating_blocks = section.blocks | where: 'type', 'rating' -%}
       {%- for block in rating_blocks -%}
-        <div class="custom-hero__rating" {{ block.shopify_attributes }}>
+        <div class="vy-hero__rating" {{ block.shopify_attributes }}>
           {%- if block.settings.avatars != blank -%}
             {{
               block.settings.avatars
               | image_url: width: 240
-              | image_tag: loading: 'lazy', class: 'custom-hero__avatars', alt: ''
+              | image_tag: loading: 'lazy', class: 'vy-hero__avatars', alt: ''
             }}
           {%- endif -%}
-          <span class="custom-hero__rating-body">
+          <span class="vy-hero__rating-body">
             {%- render 'custom-stars', rating: block.settings.stars -%}
             {%- if block.settings.text != blank -%}
-              <span class="custom-hero__rating-text">{{ block.settings.text }}</span>
+              <span class="vy-hero__rating-text">{{ block.settings.text }}</span>
             {%- endif -%}
           </span>
         </div>
@@ -131,12 +131,12 @@
 
       {%- assign button_blocks = section.blocks | where: 'type', 'button' -%}
       {%- if button_blocks.size > 0 -%}
-        <div class="custom-hero__buttons">
+        <div class="vy-hero__buttons">
           {%- for block in button_blocks -%}
             {%- if block.settings.label != blank -%}
               <a
                 href="{{ block.settings.link | default: '#' }}"
-                class="button custom-cta {% if block.settings.style == 'secondary' %}button--secondary{% else %}button--primary{% endif %}"
+                class="button vy-cta {% if block.settings.style == 'secondary' %}button--secondary{% else %}button--primary{% endif %}"
                 {{ block.shopify_attributes }}
               >
                 {{- block.settings.label -}}
@@ -147,14 +147,14 @@
       {%- endif -%}
 
       {%- if section.settings.footnote != blank -%}
-        <p class="custom-hero__footnote">{{ section.settings.footnote }}</p>
+        <p class="vy-hero__footnote">{{ section.settings.footnote }}</p>
       {%- endif -%}
     </div>
   </div>
 </div>
 
 {% stylesheet %}
-  .custom-hero__inner {
+  .vy-hero__inner {
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
@@ -162,24 +162,24 @@
   }
 
   /* Mobile media order */
-  .custom-hero__inner.mobile-bottom {
+  .vy-hero__inner.mobile-bottom {
     flex-direction: column-reverse;
   }
 
-  .custom-hero__media {
+  .vy-hero__media {
     position: relative;
     aspect-ratio: 4 / 3;
   }
 
-  .custom-hero__image,
-  .custom-hero__media .placeholder-svg {
+  .vy-hero__image,
+  .vy-hero__media .placeholder-svg {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .custom-hero__content {
+  .vy-hero__content {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
@@ -187,26 +187,26 @@
     align-items: var(--hero-align-items, flex-start);
   }
 
-  .custom-hero__eyebrow {
+  .vy-hero__eyebrow {
     color: rgb(var(--color-accent-strong, var(--color-button)));
     margin: 0;
   }
 
-  .custom-hero__heading {
+  .vy-hero__heading {
     margin: 0;
   }
 
-  .custom-hero__heading-accent {
+  .vy-hero__heading-accent {
     color: rgb(var(--color-accent-strong, var(--color-button)));
     display: inline;
   }
 
-  .custom-hero__subheading {
+  .vy-hero__subheading {
     max-width: 52rem;
     opacity: 0.85;
   }
 
-  .custom-hero__features {
+  .vy-hero__features {
     list-style: none;
     margin: 0.4rem 0 0;
     padding: 0;
@@ -215,7 +215,7 @@
     gap: 1.6rem 2rem;
   }
 
-  .custom-hero__feature {
+  .vy-hero__feature {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,37 +226,37 @@
     font-size: 1.3rem;
   }
 
-  .custom-hero__feature .svg-wrapper {
+  .vy-hero__feature .svg-wrapper {
     width: 2.6rem;
     height: 2.6rem;
   }
 
-  .custom-hero__rating {
+  .vy-hero__rating {
     display: flex;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
   }
 
-  .custom-hero__avatars {
+  .vy-hero__avatars {
     height: 3.2rem;
     width: auto;
     border-radius: 999px;
   }
 
-  .custom-hero__rating-body {
+  .vy-hero__rating-body {
     display: inline-flex;
     align-items: center;
     gap: 0.8rem;
     flex-wrap: wrap;
   }
 
-  .custom-hero__rating-text {
+  .vy-hero__rating-text {
     font-size: 1.3rem;
     opacity: 0.85;
   }
 
-  .custom-hero__buttons {
+  .vy-hero__buttons {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -264,14 +264,14 @@
     margin-top: 0.4rem;
   }
 
-  .custom-hero__footnote {
+  .vy-hero__footnote {
     font-size: 1.3rem;
     opacity: 0.8;
     margin: 0;
   }
 
   /* Circular callout badge over media */
-  .custom-hero__badge {
+  .vy-hero__badge {
     position: absolute;
     top: 1.2rem;
     right: 1.2rem;
@@ -289,21 +289,21 @@
     gap: 0.3rem;
   }
 
-  .custom-hero__badge-title {
+  .vy-hero__badge-title {
     font-weight: 700;
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
   }
 
-  .custom-hero__badge-text {
+  .vy-hero__badge-text {
     font-size: 1rem;
     line-height: 1.2;
   }
 
   /* Section height modifiers (min-heights on desktop) */
   @media screen and (min-width: 750px) {
-    .custom-hero__badge {
+    .vy-hero__badge {
       width: 12rem;
       height: 12rem;
       top: 2rem;
@@ -312,35 +312,35 @@
   }
 
   @media screen and (min-width: 990px) {
-    .custom-hero__inner {
+    .vy-hero__inner {
       flex-direction: row;
       align-items: center;
       gap: 4rem;
     }
 
-    .custom-hero__inner.media-left {
+    .vy-hero__inner.media-left {
       flex-direction: row-reverse;
     }
 
-    .custom-hero__media,
-    .custom-hero__content {
+    .vy-hero__media,
+    .vy-hero__content {
       flex: 1 1 50%;
       min-width: 0;
     }
 
-    .custom-hero__media {
+    .vy-hero__media {
       aspect-ratio: 1 / 1;
     }
 
-    .custom-hero--h-large .custom-hero__media {
+    .vy-hero--h-large .vy-hero__media {
       aspect-ratio: 4 / 5;
     }
 
-    .custom-hero--h-small .custom-hero__media {
+    .vy-hero--h-small .vy-hero__media {
       aspect-ratio: 3 / 2;
     }
 
-    .custom-hero__buttons {
+    .vy-hero__buttons {
       flex-direction: row;
       flex-wrap: wrap;
     }
@@ -351,7 +351,7 @@
 {
   "name": "Hero",
   "tag": "section",
-  "class": "custom-hero-section",
+  "class": "vy-hero-section",
   "settings": [
     {
       "type": "color_scheme",

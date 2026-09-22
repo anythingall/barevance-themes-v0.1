@@ -18,42 +18,42 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-comparison-table — "Us vs others" comparison (mobile-first).
+  vy-comparison-table — "Us vs others" comparison (mobile-first).
   Rows of feature + our value + competitor value. Mobile: table scrolls horizontally
   and the first column stays readable.
 {%- endcomment -%}
 
-<div class="custom-compare color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-compare color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="custom-h2 custom-compare__heading" style="text-align: {{ section.settings.heading_alignment }};">
+      <h2 class="vy-h2 vy-compare__heading" style="text-align: {{ section.settings.heading_alignment }};">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
 
-    <div class="custom-compare__layout {% if section.settings.image != blank %}has-image{% endif %}">
+    <div class="vy-compare__layout {% if section.settings.image != blank %}has-image{% endif %}">
       {%- if section.settings.image != blank -%}
-        <div class="custom-compare__media custom-card">
-          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'custom-compare__img', alt: section.settings.heading }}
+        <div class="vy-compare__media vy-card">
+          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'vy-compare__img', alt: section.settings.heading }}
         </div>
       {%- endif -%}
-      <div class="custom-table-scroll" tabindex="0" role="region" aria-label="Comparison table (scroll horizontally)">
-      <table class="custom-compare__table">
+      <div class="vy-table-scroll" tabindex="0" role="region" aria-label="Comparison table (scroll horizontally)">
+      <table class="vy-compare__table">
         <thead>
           <tr>
-            <th class="custom-compare__feature-col">{{ section.settings.feature_label }}</th>
-            <th class="custom-compare__us-col">{{ section.settings.us_label }}</th>
+            <th class="vy-compare__feature-col">{{ section.settings.feature_label }}</th>
+            <th class="vy-compare__us-col">{{ section.settings.us_label }}</th>
             <th>{{ section.settings.others_label }}</th>
           </tr>
         </thead>
         <tbody>
           {%- for block in section.blocks -%}
             <tr {{ block.shopify_attributes }}>
-              <td class="custom-compare__feature">{{ block.settings.feature }}</td>
-              <td class="custom-compare__us">
+              <td class="vy-compare__feature">{{ block.settings.feature }}</td>
+              <td class="vy-compare__us">
                 {%- render 'custom-compare-mark', state: block.settings.us -%}
               </td>
-              <td class="custom-compare__other">
+              <td class="vy-compare__other">
                 {%- render 'custom-compare-mark', state: block.settings.others -%}
               </td>
             </tr>
@@ -65,24 +65,24 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-compare__heading {
+  .vy-compare__heading {
     margin: 0 0 2.4rem;
   }
 
-  .custom-compare__layout {
+  .vy-compare__layout {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
-  .custom-compare__media {
+  .vy-compare__media {
     aspect-ratio: 4 / 3;
   }
 
-  .custom-compare__img {
+  .vy-compare__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -90,58 +90,58 @@
   }
 
   @media screen and (min-width: 990px) {
-    .custom-compare__layout.has-image {
+    .vy-compare__layout.has-image {
       flex-direction: row;
       align-items: center;
       gap: 4rem;
     }
 
-    .custom-compare__layout.has-image .custom-compare__media {
+    .vy-compare__layout.has-image .vy-compare__media {
       flex: 0 0 38%;
       aspect-ratio: 3 / 4;
     }
 
-    .custom-compare__layout.has-image .custom-table-scroll {
+    .vy-compare__layout.has-image .vy-table-scroll {
       flex: 1;
     }
   }
 
-  .custom-compare__table {
+  .vy-compare__table {
     width: 100%;
     min-width: 42rem;
     border-collapse: collapse;
   }
 
-  .custom-compare__table th,
-  .custom-compare__table td {
+  .vy-compare__table th,
+  .vy-compare__table td {
     padding: 1.2rem 1.4rem;
     text-align: center;
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
   }
 
-  .custom-compare__table th {
+  .vy-compare__table th {
     font-weight: 700;
     font-size: 1.5rem;
   }
 
-  .custom-compare__feature-col,
-  .custom-compare__feature {
+  .vy-compare__feature-col,
+  .vy-compare__feature {
     text-align: left;
     position: sticky;
     left: 0;
     background: rgb(var(--color-background));
   }
 
-  .custom-compare__us-col,
-  .custom-compare__us {
+  .vy-compare__us-col,
+  .vy-compare__us {
     background: rgba(var(--color-button), 0.08);
   }
 
-  .custom-compare__us-col {
+  .vy-compare__us-col {
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-compare__table .svg-wrapper {
+  .vy-compare__table .svg-wrapper {
     width: 2rem;
     height: 2rem;
   }
@@ -150,7 +150,7 @@
 {
   "name": "Comparison table",
   "tag": "section",
-  "class": "custom-compare-section",
+  "class": "vy-compare-section",
   "settings": [
     {
       "type": "select",

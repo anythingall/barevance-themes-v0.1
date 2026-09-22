@@ -18,13 +18,13 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-reviews — Testimonial / review cards (mobile-first).
+  vy-reviews — Testimonial / review cards (mobile-first).
   Mobile: horizontal scroll-snap carousel. Desktop: grid of N columns.
   Manual blocks now; a metafield/app source can be added later without markup changes.
 {%- endcomment -%}
 
-<div class="custom-reviews color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-reviews color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- liquid
       assign mf_reviews = product.metafields.custom.reviews.value
       assign use_mf = false
@@ -38,40 +38,40 @@
       assign review_cols = section.settings.columns | at_most: review_count | at_least: 1
     -%}
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
-      <div class="custom-reviews__head" style="text-align: {{ section.settings.heading_alignment }};">
+      <div class="vy-reviews__head" style="text-align: {{ section.settings.heading_alignment }};">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="custom-h2">{{ section.settings.heading }}</h2>
+          <h2 class="vy-h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
       </div>
     {%- endif -%}
 
     <div
-      class="custom-reviews__grid custom-scroller custom-scroller--grid-on-desktop list-unstyled"
-      style="--custom-scroller-cols-desktop: {{ review_cols }}; --custom-scroller-item: 82%;"
+      class="vy-reviews__grid vy-scroller vy-scroller--grid-on-desktop list-unstyled"
+      style="--vy-scroller-cols-desktop: {{ review_cols }}; --vy-scroller-item: 82%;"
       tabindex="0"
       role="group"
       aria-label="Customer reviews (scroll to see more)"
     >
       {%- if use_mf -%}
         {%- for review in mf_reviews -%}
-          <div class="custom-reviews__card custom-card">
-            <div class="custom-reviews__stars">{%- render 'custom-stars', rating: review.rating -%}</div>
+          <div class="vy-reviews__card vy-card">
+            <div class="vy-reviews__stars">{%- render 'custom-stars', rating: review.rating -%}</div>
             {%- if review.text != blank -%}
-              <p class="custom-reviews__text">{{ review.text }}</p>
+              <p class="vy-reviews__text">{{ review.text }}</p>
             {%- endif -%}
-            <div class="custom-reviews__author">
+            <div class="vy-reviews__author">
               {%- if review.avatar != blank -%}
-                {{ review.avatar | image_url: width: 120 | image_tag: loading: 'lazy', class: 'custom-reviews__avatar', alt: review.author }}
+                {{ review.avatar | image_url: width: 120 | image_tag: loading: 'lazy', class: 'vy-reviews__avatar', alt: review.author }}
               {%- endif -%}
-              <span class="custom-reviews__author-body">
+              <span class="vy-reviews__author-body">
                 {%- if review.author != blank -%}
-                  <span class="custom-reviews__name">{{ review.author }}</span>
+                  <span class="vy-reviews__name">{{ review.author }}</span>
                 {%- endif -%}
                 {%- if review.badge != blank -%}
-                  <span class="custom-reviews__verified">{{ review.badge }}</span>
+                  <span class="vy-reviews__verified">{{ review.badge }}</span>
                 {%- endif -%}
               </span>
             </div>
@@ -79,25 +79,25 @@
         {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
-          <div class="custom-reviews__card custom-card" {{ block.shopify_attributes }}>
-            <div class="custom-reviews__stars">{%- render 'custom-stars', rating: block.settings.stars -%}</div>
+          <div class="vy-reviews__card vy-card" {{ block.shopify_attributes }}>
+            <div class="vy-reviews__stars">{%- render 'custom-stars', rating: block.settings.stars -%}</div>
             {%- if block.settings.text != blank -%}
-              <p class="custom-reviews__text">{{ block.settings.text }}</p>
+              <p class="vy-reviews__text">{{ block.settings.text }}</p>
             {%- endif -%}
-            <div class="custom-reviews__author">
+            <div class="vy-reviews__author">
               {%- if block.settings.image != blank -%}
                 {{
                   block.settings.image
                   | image_url: width: 120
-                  | image_tag: loading: 'lazy', class: 'custom-reviews__avatar', alt: block.settings.name
+                  | image_tag: loading: 'lazy', class: 'vy-reviews__avatar', alt: block.settings.name
                 }}
               {%- endif -%}
-              <span class="custom-reviews__author-body">
+              <span class="vy-reviews__author-body">
                 {%- if block.settings.name != blank -%}
-                  <span class="custom-reviews__name">{{ block.settings.name }}</span>
+                  <span class="vy-reviews__name">{{ block.settings.name }}</span>
                 {%- endif -%}
                 {%- if block.settings.badge != blank -%}
-                  <span class="custom-reviews__verified">{{ block.settings.badge }}</span>
+                  <span class="vy-reviews__verified">{{ block.settings.badge }}</span>
                 {%- endif -%}
               </span>
             </div>
@@ -131,23 +131,23 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-reviews__head {
+  .vy-reviews__head {
     margin-bottom: 2.8rem;
   }
 
-  .custom-reviews__head .custom-eyebrow {
+  .vy-reviews__head .vy-eyebrow {
     margin: 0 0 0.6rem;
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-reviews__head .custom-h2 {
+  .vy-reviews__head .vy-h2 {
     margin: 0;
   }
 
-  .custom-reviews__card {
+  .vy-reviews__card {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
@@ -157,38 +157,38 @@
     height: 100%;
   }
 
-  .custom-reviews__text {
+  .vy-reviews__text {
     margin: 0;
     font-size: 1.4rem;
     line-height: 1.55;
   }
 
-  .custom-reviews__author {
+  .vy-reviews__author {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-top: auto;
   }
 
-  .custom-reviews__avatar {
+  .vy-reviews__avatar {
     width: 4rem;
     height: 4rem;
     border-radius: 999px;
     object-fit: cover;
   }
 
-  .custom-reviews__author-body {
+  .vy-reviews__author-body {
     display: flex;
     flex-direction: column;
     line-height: 1.3;
   }
 
-  .custom-reviews__name {
+  .vy-reviews__name {
     font-weight: 600;
     font-size: 1.4rem;
   }
 
-  .custom-reviews__verified {
+  .vy-reviews__verified {
     font-size: 1.2rem;
     opacity: 0.7;
   }
@@ -197,7 +197,7 @@
 {
   "name": "Reviews",
   "tag": "section",
-  "class": "custom-reviews-section",
+  "class": "vy-reviews-section",
   "settings": [
     {
       "type": "select",

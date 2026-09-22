@@ -1,17 +1,17 @@
 {%- comment -%}
-  custom-announcement — Top bar with 2–3 static messages separated by dividers,
+  vy-announcement — Top bar with 2–3 static messages separated by dividers,
   matching the reference design (FREE SHIPPING | 30-DAY GUARANTEE | LOVED BY ...).
   Used in the header group. Mobile: shows the first message only (or scrolls).
 {%- endcomment -%}
 
-<announcement-bar class="custom-ann color-{{ section.settings.color_scheme }} gradient">
-  <div class="custom-ann__inner">
+<announcement-bar class="vy-ann color-{{ section.settings.color_scheme }} gradient">
+  <div class="vy-ann__inner">
     {%- for block in section.blocks -%}
-      <span class="custom-ann__item" {{ block.shopify_attributes }}>
+      <span class="vy-ann__item" {{ block.shopify_attributes }}>
         {%- if block.settings.icon != 'none' -%}
-          <span class="custom-ann__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
+          <span class="vy-ann__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
         {%- endif -%}
-        <span class="custom-ann__text">{{ block.settings.text }}</span>
+        <span class="vy-ann__text">{{ block.settings.text }}</span>
       </span>
     {%- endfor -%}
   </div>
@@ -19,7 +19,7 @@
     (function () {
       class AnnouncementBar extends HTMLElement {
         connectedCallback() {
-          this.items = Array.prototype.slice.call(this.querySelectorAll('.custom-ann__item'));
+          this.items = Array.prototype.slice.call(this.querySelectorAll('.vy-ann__item'));
           if (this.items.length < 2) return;
           this.i = 0;
           this.mq = window.matchMedia('(max-width: 749px)');
@@ -59,11 +59,11 @@
 </announcement-bar>
 
 {% stylesheet %}
-  .custom-ann {
+  .vy-ann {
     padding: 0.9rem 1.5rem;
   }
 
-  .custom-ann__inner {
+  .vy-ann__inner {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,7 @@
     flex-wrap: wrap; /* wrap to a 2nd line on narrow desktop/tablet instead of clipping the 3rd message */
   }
 
-  .custom-ann__item {
+  .vy-ann__item {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
@@ -85,7 +85,7 @@
   }
 
   /* divider between items */
-  .custom-ann__item + .custom-ann__item::before {
+  .vy-ann__item + .vy-ann__item::before {
     content: '';
     position: absolute;
     left: -0.9rem;
@@ -96,40 +96,40 @@
     background: rgba(var(--color-foreground), 0.3);
   }
 
-  .custom-ann__icon {
+  .vy-ann__icon {
     color: rgb(var(--color-foreground));
     display: inline-flex;
   }
 
-  .custom-ann__icon .svg-wrapper {
+  .vy-ann__icon .svg-wrapper {
     width: 1.5rem;
     height: 1.5rem;
   }
 
   /* Dawn icons default to black fill; force them to follow the bar's text color */
-  .custom-ann__icon svg {
+  .vy-ann__icon svg {
     fill: currentColor;
   }
 
-  .custom-ann { display: block; }
+  .vy-ann { display: block; }
 
   /* Mobile: no-JS / reduced-motion fallback shows every message, wrapped (nothing hidden). */
   @media screen and (max-width: 749px) {
-    .custom-ann__inner {
+    .vy-ann__inner {
       gap: 0.6rem 1.4rem;
       flex-wrap: wrap;
     }
-    .custom-ann__item + .custom-ann__item::before {
+    .vy-ann__item + .vy-ann__item::before {
       display: none;
     }
 
     /* With JS + motion allowed, rotate one message at a time (all still reachable). */
-    .custom-ann.is-rotating .custom-ann__inner {
+    .vy-ann.is-rotating .vy-ann__inner {
       flex-wrap: nowrap;
       position: relative;
       min-height: 1.8rem;
     }
-    .custom-ann.is-rotating .custom-ann__item {
+    .vy-ann.is-rotating .vy-ann__item {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -137,7 +137,7 @@
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .custom-ann.is-rotating .custom-ann__item[data-ann-active] {
+    .vy-ann.is-rotating .vy-ann__item[data-ann-active] {
       position: relative;
       left: auto;
       transform: none;
@@ -149,7 +149,7 @@
 {% schema %}
 {
   "name": "Announcement bar",
-  "class": "custom-ann-section",
+  "class": "vy-ann-section",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" }
   ],

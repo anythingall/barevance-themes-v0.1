@@ -1,23 +1,23 @@
 {%- comment -%}
-  custom-sticky-atc — Mobile sticky Add-to-Cart bar for product pages.
+  vy-sticky-atc — Mobile sticky Add-to-Cart bar for product pages.
   Shows product title + price and an Add-to-cart button that triggers the real
   product form (preserving the selected variant). Hidden on desktop and while the
   main buy button is on screen. Respects the global `enable_sticky_atc` setting.
 {%- endcomment -%}
 
 {%- if settings.enable_sticky_atc and product != blank -%}
-  <sticky-atc class="custom-sticky-atc color-{{ section.settings.color_scheme }} gradient" hidden>
-    <div class="custom-sticky-atc__inner">
-      <div class="custom-sticky-atc__info">
+  <sticky-atc class="vy-sticky-atc color-{{ section.settings.color_scheme }} gradient" hidden>
+    <div class="vy-sticky-atc__inner">
+      <div class="vy-sticky-atc__info">
         {%- if product.featured_image != blank -%}
-          {{ product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy', class: 'custom-sticky-atc__img', alt: '' }}
+          {{ product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy', class: 'vy-sticky-atc__img', alt: '' }}
         {%- endif -%}
-        <span class="custom-sticky-atc__text">
-          <span class="custom-sticky-atc__title">{{ product.title }}</span>
-          <span class="custom-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+        <span class="vy-sticky-atc__text">
+          <span class="vy-sticky-atc__title">{{ product.title }}</span>
+          <span class="vy-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
         </span>
       </div>
-      <button type="button" class="button button--primary custom-sticky-atc__btn" data-sticky-atc-trigger>
+      <button type="button" class="button button--primary vy-sticky-atc__btn" data-sticky-atc-trigger>
         {{ section.settings.button_label }}
       </button>
     </div>
@@ -28,7 +28,7 @@
       class StickyAtc extends HTMLElement {
         connectedCallback() {
           this.trigger = this.querySelector('[data-sticky-atc-trigger]');
-          this.priceEl = this.querySelector('.custom-sticky-atc__price');
+          this.priceEl = this.querySelector('.vy-sticky-atc__price');
           this.mainForm = document.querySelector('product-form .product-form__submit, .product-form__submit');
           this.mainButtons = document.querySelector('.product-form__buttons, product-form');
           this.mainPrice = document.querySelector('.product__info-container .price, .product .price, [id^="price-"]');
@@ -87,7 +87,7 @@
 {%- endif -%}
 
 {% stylesheet %}
-  .custom-sticky-atc {
+  .vy-sticky-atc {
     position: fixed;
     left: 0;
     right: 0;
@@ -98,17 +98,17 @@
     padding: 1rem 1.4rem calc(1rem + env(safe-area-inset-bottom));
   }
 
-  .custom-sticky-atc[hidden] {
+  .vy-sticky-atc[hidden] {
     display: none;
   }
 
-  .custom-sticky-atc__inner {
+  .vy-sticky-atc__inner {
     display: flex;
     align-items: center;
     gap: 1.2rem;
   }
 
-  .custom-sticky-atc__info {
+  .vy-sticky-atc__info {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -116,7 +116,7 @@
     flex: 1;
   }
 
-  .custom-sticky-atc__img {
+  .vy-sticky-atc__img {
     width: 4rem;
     height: 4rem;
     border-radius: 0.6rem;
@@ -124,14 +124,14 @@
     flex: 0 0 auto;
   }
 
-  .custom-sticky-atc__text {
+  .vy-sticky-atc__text {
     display: flex;
     flex-direction: column;
     min-width: 0;
     line-height: 1.25;
   }
 
-  .custom-sticky-atc__title {
+  .vy-sticky-atc__title {
     font-size: 1.3rem;
     font-weight: 600;
     white-space: nowrap;
@@ -139,18 +139,18 @@
     text-overflow: ellipsis;
   }
 
-  .custom-sticky-atc__price {
+  .vy-sticky-atc__price {
     font-size: 1.4rem;
   }
 
-  .custom-sticky-atc__btn {
+  .vy-sticky-atc__btn {
     flex: 0 0 auto;
     min-height: var(--tap-target);
   }
 
   /* Mobile-only surface */
   @media screen and (min-width: 750px) {
-    .custom-sticky-atc {
+    .vy-sticky-atc {
       display: none;
     }
   }
@@ -159,7 +159,7 @@
 {
   "name": "Sticky add to cart",
   "tag": "section",
-  "class": "custom-sticky-atc-section",
+  "class": "vy-sticky-atc-section",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "text", "id": "button_label", "label": "Nút", "default": "Add to Cart" },

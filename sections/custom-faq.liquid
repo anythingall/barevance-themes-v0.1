@@ -18,16 +18,16 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-faq — Accordion FAQ using native <details>/<summary> (mobile-first, accessible).
+  vy-faq — Accordion FAQ using native <details>/<summary> (mobile-first, accessible).
   Mobile: single column. Desktop: optional two columns.
 {%- endcomment -%}
 
-<div class="custom-faq color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container {% if section.settings.narrow and section.settings.show_guarantee == false %}custom-container--narrow{% endif %}">
-    <div class="custom-faq__wrap {% if section.settings.show_guarantee %}has-guarantee{% endif %}">
-    <div class="custom-faq__main">
+<div class="vy-faq color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container {% if section.settings.narrow and section.settings.show_guarantee == false %}vy-container--narrow{% endif %}">
+    <div class="vy-faq__wrap {% if section.settings.show_guarantee %}has-guarantee{% endif %}">
+    <div class="vy-faq__main">
     {%- if section.settings.heading != blank -%}
-      <h2 class="custom-h2 custom-faq__heading" style="text-align: {{ section.settings.heading_alignment }};">
+      <h2 class="vy-h2 vy-faq__heading" style="text-align: {{ section.settings.heading_alignment }};">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
@@ -39,25 +39,25 @@
         assign use_mf = true
       endif
     -%}
-    <div class="custom-faq__list" style="--faq-cols: {{ section.settings.columns }};">
+    <div class="vy-faq__list" style="--faq-cols: {{ section.settings.columns }};">
       {%- if use_mf -%}
         {%- for item in mf_faq -%}
-          <details class="custom-faq__item">
-            <summary class="custom-faq__q custom-tap">
+          <details class="vy-faq__item">
+            <summary class="vy-faq__q vy-tap">
               <span>{{ item.question }}</span>
-              <span class="custom-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
+              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
             </summary>
-            <div class="custom-faq__a rte">{{ item.answer }}</div>
+            <div class="vy-faq__a rte">{{ item.answer }}</div>
           </details>
         {%- endfor -%}
       {%- else -%}
         {%- for block in section.blocks -%}
-          <details class="custom-faq__item" {{ block.shopify_attributes }}>
-            <summary class="custom-faq__q custom-tap">
+          <details class="vy-faq__item" {{ block.shopify_attributes }}>
+            <summary class="vy-faq__q vy-tap">
               <span>{{ block.settings.question }}</span>
-              <span class="custom-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
+              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
             </summary>
-            <div class="custom-faq__a rte">{{ block.settings.answer }}</div>
+            <div class="vy-faq__a rte">{{ block.settings.answer }}</div>
           </details>
         {%- endfor -%}
       {%- endif -%}
@@ -87,20 +87,20 @@
     </div>
 
     {%- if section.settings.show_guarantee -%}
-      <aside class="custom-faq__guarantee custom-card color-{{ section.settings.guarantee_scheme }} gradient">
-        <div class="custom-faq__guarantee-body">
+      <aside class="vy-faq__guarantee vy-card color-{{ section.settings.guarantee_scheme }} gradient">
+        <div class="vy-faq__guarantee-body">
           {%- if section.settings.guarantee_badge != blank -%}
-            <span class="custom-faq__seal">{{ section.settings.guarantee_badge }}</span>
+            <span class="vy-faq__seal">{{ section.settings.guarantee_badge }}</span>
           {%- endif -%}
           {%- if section.settings.guarantee_heading != blank -%}
-            <h3 class="custom-faq__guarantee-heading">{{ section.settings.guarantee_heading }}</h3>
+            <h3 class="vy-faq__guarantee-heading">{{ section.settings.guarantee_heading }}</h3>
           {%- endif -%}
           {%- if section.settings.guarantee_text != blank -%}
-            <p class="custom-faq__guarantee-text">{{ section.settings.guarantee_text }}</p>
+            <p class="vy-faq__guarantee-text">{{ section.settings.guarantee_text }}</p>
           {%- endif -%}
         </div>
         {%- if section.settings.guarantee_image != blank -%}
-          {{ section.settings.guarantee_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'custom-faq__guarantee-img', alt: '' }}
+          {{ section.settings.guarantee_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'vy-faq__guarantee-img', alt: '' }}
         {%- endif -%}
       </aside>
     {%- endif -%}
@@ -108,25 +108,25 @@
   </div>
 </div>
 
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-faq__heading {
+  .vy-faq__heading {
     margin: 0 0 2.4rem;
   }
 
-  .custom-faq__wrap {
+  .vy-faq__wrap {
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
   }
 
-  .custom-faq__main {
+  .vy-faq__main {
     flex: 1;
     min-width: 0;
   }
 
-  .custom-faq__guarantee {
+  .vy-faq__guarantee {
     display: flex;
     align-items: center;
     gap: 1.6rem;
@@ -134,7 +134,7 @@
     background: rgba(var(--color-foreground), 0.04);
   }
 
-  .custom-faq__seal {
+  .vy-faq__seal {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -151,52 +151,52 @@
     margin-bottom: 1.2rem;
   }
 
-  .custom-faq__guarantee-heading {
+  .vy-faq__guarantee-heading {
     margin: 0 0 0.8rem;
     font-size: 2rem;
   }
 
-  .custom-faq__guarantee-text {
+  .vy-faq__guarantee-text {
     margin: 0;
     font-size: 1.4rem;
     opacity: 0.85;
     line-height: 1.5;
   }
 
-  .custom-faq__guarantee-img {
+  .vy-faq__guarantee-img {
     width: 10rem;
     height: auto;
     flex: 0 0 auto;
   }
 
   @media screen and (min-width: 990px) {
-    .custom-faq__wrap.has-guarantee {
+    .vy-faq__wrap.has-guarantee {
       flex-direction: row;
       align-items: flex-start;
       gap: 4rem;
     }
 
-    .custom-faq__wrap.has-guarantee .custom-faq__main {
+    .vy-faq__wrap.has-guarantee .vy-faq__main {
       flex: 1 1 60%;
     }
 
-    .custom-faq__wrap.has-guarantee .custom-faq__guarantee {
+    .vy-faq__wrap.has-guarantee .vy-faq__guarantee {
       flex: 0 0 34%;
     }
   }
 
-  .custom-faq__list {
+  .vy-faq__list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
     align-content: start;
   }
 
-  .custom-faq__item {
+  .vy-faq__item {
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
   }
 
-  .custom-faq__q {
+  .vy-faq__q {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -208,27 +208,27 @@
     list-style: none;
   }
 
-  .custom-faq__q::-webkit-details-marker {
+  .vy-faq__q::-webkit-details-marker {
     display: none;
   }
 
-  .custom-faq__icon .svg-wrapper {
+  .vy-faq__icon .svg-wrapper {
     width: 1.6rem;
     height: 1.6rem;
     transition: transform 0.2s ease;
   }
 
-  .custom-faq__item[open] .custom-faq__icon .svg-wrapper {
+  .vy-faq__item[open] .vy-faq__icon .svg-wrapper {
     transform: rotate(45deg);
   }
 
-  .custom-faq__a {
+  .vy-faq__a {
     padding: 0 0 1.6rem;
     opacity: 0.85;
   }
 
   @media screen and (min-width: 990px) {
-    .custom-faq__list {
+    .vy-faq__list {
       grid-template-columns: repeat(var(--faq-cols, 1), 1fr);
       column-gap: 4rem;
     }
@@ -238,7 +238,7 @@
 {
   "name": "FAQ",
   "tag": "section",
-  "class": "custom-faq-section",
+  "class": "vy-faq-section",
   "settings": [
     {
       "type": "select",

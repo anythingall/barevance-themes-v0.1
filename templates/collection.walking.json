@@ -1,0 +1,359 @@
+{
+  "sections": {
+    "hero": {
+      "type": "custom-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_media_placement": "right",
+        "mobile_media_position": "below",
+        "section_height": "medium",
+        "content_alignment": "left",
+        "eyebrow": "WALKING BAREFOOT SHOES",
+        "heading": "Walk Further. Feel Lighter.",
+        "heading_highlight": "Feel Lighter",
+        "subheading": "<p>Lightweight, flexible barefoot shoes designed for everyday walks, long days and life on the move.</p>"
+      },
+      "blocks": {
+        "b1": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Walking Shoes",
+            "link": "/collections/walking",
+            "style": "primary"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Find Your Voya",
+            "link": "#shoe-finder",
+            "style": "secondary"
+          }
+        },
+        "rt": {
+          "type": "rating",
+          "settings": {
+            "stars": 5,
+            "text": "4.7/5 from 10,000+ customers"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "rt"
+      ]
+    },
+    "trust": {
+      "type": "custom-trust-badges",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding": "compact"
+      },
+      "blocks": {
+        "t1": {
+          "type": "badge",
+          "settings": {
+            "icon": "leaf",
+            "title": "Roomy Toe Box",
+            "subtitle": "More space for natural movement"
+          }
+        },
+        "t2": {
+          "type": "badge",
+          "settings": {
+            "icon": "check_mark",
+            "title": "Flexible Sole",
+            "subtitle": "Moves with every step"
+          }
+        },
+        "t3": {
+          "type": "badge",
+          "settings": {
+            "icon": "fire",
+            "title": "Lightweight",
+            "subtitle": "Less bulk for longer walks"
+          }
+        },
+        "t4": {
+          "type": "badge",
+          "settings": {
+            "icon": "heart",
+            "title": "All-Day Comfort",
+            "subtitle": "Designed for wherever the day takes you"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ]
+    },
+    "best": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Walking Shoes",
+        "description": "<p>Our most-loved options for walking and everyday movement.</p>",
+        "show_description": true,
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_rating": true,
+        "quick_add": "standard",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "square",
+        "collection": "best-sellers"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "compare": {
+      "type": "custom-comparison-table",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Which Walking Shoe Is Right for You?",
+        "heading_alignment": "left",
+        "feature_label": "",
+        "us_label": "Mirox",
+        "others_label": "Others"
+      },
+      "blocks": {
+        "c1": {
+          "type": "row",
+          "settings": {
+            "feature": "Everyday",
+            "us": "true",
+            "others": "true"
+          }
+        },
+        "c2": {
+          "type": "row",
+          "settings": {
+            "feature": "Lightweight",
+            "us": "true",
+            "others": "false"
+          }
+        },
+        "c3": {
+          "type": "row",
+          "settings": {
+            "feature": "Wide Toe Box",
+            "us": "true",
+            "others": "false"
+          }
+        },
+        "c4": {
+          "type": "row",
+          "settings": {
+            "feature": "Outdoor Ready",
+            "us": "true",
+            "others": "true"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "ugc": {
+      "type": "custom-reviews",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "eyebrow": "REAL STORIES. REAL STEPS.",
+        "heading": "Made for Miles. Loved by Walkers.",
+        "heading_alignment": "left",
+        "columns": 4
+      },
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "I can wear them all day. So comfortable!",
+            "name": "Emily R.",
+            "badge": "Verified Customer"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "So light I forget I'm wearing them.",
+            "name": "Jason T.",
+            "badge": "Verified Customer"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Plenty of room for my toes.",
+            "name": "Mark S.",
+            "badge": "Verified Customer"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "My go-to shoes for walking and travel.",
+            "name": "Sarah L.",
+            "badge": "Verified Customer"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ]
+    },
+    "benefits": {
+      "type": "custom-icon-benefits",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "source": "blocks",
+        "heading": "Why Barefoot Shoes Feel Different When You Walk",
+        "heading_alignment": "left",
+        "columns": 4,
+        "mobile_layout": "carousel"
+      },
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "More Toe Room",
+            "text": "Your toes have space to spread."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check_mark",
+            "title": "Flexible Movement",
+            "text": "The sole bends with your foot."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "fire",
+            "title": "Lightweight Feel",
+            "text": "Less shoe between you and the ground."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Natural Movement",
+            "text": "Designed for the way your feet naturally move."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "faq": {
+      "type": "custom-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "heading": "Frequently Asked Questions",
+        "heading_alignment": "left",
+        "columns": "2"
+      },
+      "blocks": {
+        "q1": {
+          "type": "item",
+          "settings": {
+            "question": "Are these good for long walks?",
+            "answer": "<p>Yes — lightweight, flexible and roomy for all-day walking comfort.</p>"
+          }
+        },
+        "q2": {
+          "type": "item",
+          "settings": {
+            "question": "How should barefoot walking shoes fit?",
+            "answer": "<p>Toes with room to spread, snug midfoot and heel.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Do I need to transition into barefoot shoes?",
+            "answer": "<p>Ease in over a couple of weeks if you're new to zero-drop footwear.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "What size should I choose?",
+            "answer": "<p>True to size for most; size up for wide feet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ]
+    },
+    "cta": {
+      "type": "custom-cta-banner",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "eyebrow": "",
+        "heading": "Ready to Walk More Naturally?",
+        "text": "<p>Find your perfect pair of walking barefoot shoes.</p>",
+        "button_label": "Shop Walking Shoes",
+        "button_link": "/collections/walking",
+        "content_alignment": "left",
+        "overlay_opacity": 45
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "best",
+    "product-grid",
+    "compare",
+    "ugc",
+    "benefits",
+    "faq",
+    "cta"
+  ]
+}

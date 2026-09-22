@@ -1,6 +1,6 @@
 {%- comment -%}
   Base theme design tokens.
-  Render global CSS variables that custom (`custom-*`) sections consume so branding is
+  Render global CSS variables that custom (`vy-*`) sections consume so branding is
   controlled in one place (Theme settings > Base theme). Mobile-first by design.
   Include once in <head> of layout/theme.liquid, after Dawn's :root block.
 {%- endcomment -%}
@@ -12,8 +12,8 @@
     --heading-mobile-scale: {{ settings.heading_mobile_scale | divided_by: 100.0 }};
 
     /* Custom section layout tokens */
-    --custom-content-width: {{ settings.custom_section_content_width }}rem;
-    --custom-card-radius: {{ settings.custom_card_radius }}px;
+    --vy-content-width: {{ settings.custom_section_content_width }}rem;
+    --vy-card-radius: {{ settings.custom_card_radius }}px;
 
     /* Touch-target minimum (accessibility on mobile) */
     --tap-target: 4.4rem;
@@ -21,12 +21,12 @@
     /* Section vertical rhythm. Driven by the theme "spacing between sections"
        setting (Theme settings > Layout) so the merchant can tune all sections at
        once, with a small floor so sections never touch/overlap when set to 0. */
-    --custom-section-padding-block: max(2.4rem, var(--spacing-sections-mobile));
+    --vy-section-padding-block: max(2.4rem, var(--spacing-sections-mobile));
   }
 
   @media screen and (min-width: 750px) {
     :root {
-      --custom-section-padding-block: max(3.2rem, var(--spacing-sections-desktop));
+      --vy-section-padding-block: max(3.2rem, var(--spacing-sections-desktop));
     }
   }
 {% endstyle %}

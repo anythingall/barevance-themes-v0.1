@@ -1,0 +1,4 @@
+{
+  "prefix": "vy",
+  "customAsset": { "from": "base-custom.css", "to": "vy-custom.css" }
+}

@@ -9,21 +9,21 @@
           "type": "message",
           "settings": {
             "icon": "truck",
-            "text": "FREE SHIPPING on all orders over $40"
+            "text": "Free Shipping on All Orders"
           }
         },
         "m2": {
           "type": "message",
           "settings": {
             "icon": "return",
-            "text": "30-DAY MONEY BACK GUARANTEE"
+            "text": "30-Day Returns"
           }
         },
         "m3": {
           "type": "message",
           "settings": {
             "icon": "heart",
-            "text": "LOVED BY 10,000+ CUSTOMERS"
+            "text": "Designed for Healthier, Happier Feet"
           }
         }
       },
@@ -42,7 +42,7 @@
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
         "logo_position": "middle-left",
-        "menu": "main-menu",
+        "menu": "voya-main",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
         "show_line_separator": true,

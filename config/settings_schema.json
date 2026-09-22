@@ -32,6 +32,10 @@
             "label": "Playful — bold rounded (pink / purple)"
           },
           {
+            "value": "voya",
+            "label": "Voya — barefoot (green / sage / white)"
+          },
+          {
             "value": "custom",
             "label": "Custom — use my own colours & fonts"
           }

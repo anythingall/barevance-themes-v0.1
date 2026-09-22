@@ -3,20 +3,20 @@
   Reads product.metafields.custom.rating_text if set, else a default.
   @example {% render 'custom-pdp-rating' %}
 {% enddoc %}
-<div class="custom-pdp-rating">
+<div class="vy-pdp-rating">
   {%- render 'custom-stars', rating: 5 -%}
-  <span class="custom-pdp-rating__text">
+  <span class="vy-pdp-rating__text">
     {{- product.metafields.custom.rating_text | default: '4.9 (878 reviews)' -}}
   </span>
 </div>
 {% stylesheet %}
-  .custom-pdp-rating {
+  .vy-pdp-rating {
     display: flex;
     align-items: center;
     gap: 0.8rem;
     margin-bottom: 1rem;
   }
-  .custom-pdp-rating__text {
+  .vy-pdp-rating__text {
     font-size: 1.4rem;
     opacity: 0.85;
   }

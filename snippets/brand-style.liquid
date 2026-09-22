@@ -4,7 +4,7 @@
   `settings.style_preset` picks a preset (colors + fonts + corner radius). "custom" reads
   the "Custom style" settings instead. Everything below feeds one small set of brand role
   tokens, which are then mapped onto Dawn's 5 color schemes — so every section (Dawn and
-  custom-*) re-skins from ONE control in Theme settings, with no code and no push.
+  vy-*) re-skins from ONE control in Theme settings, with no code and no push.
 
   Rendered in <head> AFTER Dawn's color-scheme block and after design-tokens, so these
   rules win the cascade (same selector, later in source order).
@@ -56,6 +56,25 @@
     assign font_accent = poppins_bold
     assign btn_radius = 40
     assign card_radius = 24
+
+  when 'voya'
+    # Voya Barefoot — Natural / Premium / Modern. Green = action, sage = wellness,
+    # white = shopping, dark green = footer/close. Fonts: Manrope headings + Inter body
+    # (read from the font_picker settings so the merchant can still swap them).
+    assign c_bg = '#FFFFFF'
+    assign c_surface = '#ECF1E9'
+    assign c_text = '#171B18'
+    assign c_primary = '#23452D'
+    assign c_primary_text = '#FFFFFF'
+    assign c_dark = '#193722'
+    assign c_dark_text = '#F4F6F1'
+    assign c_accent = '#2F5A3B'
+    assign c_accent_text = '#FFFFFF'
+    assign font_heading = settings.type_header_font
+    assign font_body = settings.type_body_font
+    assign font_accent = settings.type_accent_font
+    assign btn_radius = 40
+    assign card_radius = 14
 
   when 'custom'
     # Guard each swatch: a merchant can clear a color setting, which would emit an empty
@@ -179,7 +198,7 @@
 
     --buttons-radius: {{ btn_radius }}px;
     --buttons-radius-outset: {{ btn_radius }}px;
-    --custom-card-radius: {{ card_radius }}px;
+    --vy-card-radius: {{ card_radius }}px;
 
     --brand-bg: {{ c_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --brand-text: {{ c_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};

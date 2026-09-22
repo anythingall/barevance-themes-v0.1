@@ -70,82 +70,43 @@
         "padding_bottom": 12
       }
     },
-    "social_proof": {
-      "type": "custom-social-proof",
-      "blocks": {
-        "l1": {
-          "type": "logo",
-          "settings": {
-            "text": "PET LOVERS CLUB"
-          }
-        },
-        "l2": {
-          "type": "logo",
-          "settings": {
-            "text": "MEOW MAGAZINE"
-          }
-        },
-        "l3": {
-          "type": "logo",
-          "settings": {
-            "text": "PAWSOME"
-          }
-        },
-        "l4": {
-          "type": "logo",
-          "settings": {
-            "text": "THE PET CHRONICLES"
-          }
-        }
-      },
-      "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
-      ],
+    "trust_bar": {
+      "type": "custom-trust-badges",
       "settings": {
-        "color_scheme": "scheme-2",
-        "count_text": "10,000+ Happy Customers",
-        "rating": 5,
-        "rating_text": "4.9/5",
-        "as_seen_label": "As seen on",
-        "type_visibility": "v1v2"
-      }
-    },
-    "benefits": {
-      "type": "custom-icon-benefits",
+        "color_scheme": "scheme-1",
+        "padding": "compact"
+      },
       "blocks": {
         "b1": {
-          "type": "benefit",
+          "type": "badge",
           "settings": {
-            "icon": "eye",
-            "title": "Peekaboo Window",
-            "text": "Let your pet see the world."
+            "icon": "leaf",
+            "title": "Wide Toe Box",
+            "subtitle": "More space for your toes"
           }
         },
         "b2": {
-          "type": "benefit",
+          "type": "badge",
           "settings": {
-            "icon": "leaf",
-            "title": "Breathable & Airy",
-            "text": "Mesh panels keep fresh air flowing."
+            "icon": "check_mark",
+            "title": "Flexible Sole",
+            "subtitle": "Moves with every step"
           }
         },
         "b3": {
-          "type": "benefit",
+          "type": "badge",
           "settings": {
-            "icon": "padlock",
-            "title": "Secure & Safe",
-            "text": "Zipper closure keeps your pet secure."
+            "icon": "star",
+            "title": "Zero Drop",
+            "subtitle": "A natural, balanced posture"
           }
         },
         "b4": {
-          "type": "benefit",
+          "type": "badge",
           "settings": {
-            "icon": "heart",
-            "title": "Lightweight Design",
-            "text": "Easy to carry all day."
+            "icon": "fire",
+            "title": "Lightweight",
+            "subtitle": "Less bulk, more freedom"
           }
         }
       },
@@ -154,38 +115,38 @@
         "b2",
         "b3",
         "b4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Why Customers Love It",
-        "columns": 4,
-        "source": "product_metafield",
-        "card_container": true,
-        "type_visibility": "all"
-      }
+      ]
     },
     "problem": {
       "type": "custom-problem",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "eyebrow": "THE PROBLEM",
+        "heading": "Your Feet Weren't Made to Be Squeezed.",
+        "text": "<p>Traditional shoes can be narrow, stiff and heavy — leaving your feet tired and uncomfortable.</p>",
+        "button_label": "Why Barefoot?",
+        "button_link": "/pages/why-barefoot"
+      },
       "blocks": {
         "l1": {
           "type": "list_item",
           "settings": {
             "icon_style": "cross",
-            "text": "Hard and uncomfortable materials"
+            "text": "Narrow toe box cramps your toes"
           }
         },
         "l2": {
           "type": "list_item",
           "settings": {
             "icon_style": "cross",
-            "text": "Limited visibility for your pet"
+            "text": "Stiff soles fight your natural stride"
           }
         },
         "l3": {
           "type": "list_item",
           "settings": {
             "icon_style": "cross",
-            "text": "Not stylish for everyday use"
+            "text": "Heavy and restrictive all day"
           }
         }
       },
@@ -193,125 +154,95 @@
         "l1",
         "l2",
         "l3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "eyebrow": "The Problem",
-        "heading": "Your Pet Deserves Better.",
-        "text": "<p>Tired of bulky, uncomfortable carriers that stress your pet? It's time for a better way.</p>",
-        "desktop_media_placement": "left",
-        "image": "shopify://shop_images/hf_20260903_023027_d9ad149b-cec3-46eb-ae68-6bd678384459.png",
-        "type_visibility": "v1"
-      }
+      ]
     },
-    "solution": {
-      "type": "custom-solution",
-      "blocks": {
-        "l1": {
-          "type": "list_item",
-          "settings": {
-            "icon_style": "check",
-            "text": "Peekaboo window your pet will love"
-          }
-        },
-        "l2": {
-          "type": "list_item",
-          "settings": {
-            "icon_style": "check",
-            "text": "Soft & breathable interior"
-          }
-        },
-        "l3": {
-          "type": "list_item",
-          "settings": {
-            "icon_style": "check",
-            "text": "Secure and sturdy construction"
-          }
-        },
-        "l4": {
-          "type": "list_item",
-          "settings": {
-            "icon_style": "check",
-            "text": "Perfect for daily outings and travel"
-          }
-        }
-      },
-      "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
-      ],
+    "benefits": {
+      "type": "custom-icon-benefits",
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "The Solution",
-        "heading": "Meet the Product",
-        "text": "<p>A playful and practical design made for comfort, safety and style.</p>",
-        "desktop_media_placement": "right",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
-        "type_visibility": "v1"
-      }
-    },
-    "how": {
-      "type": "custom-how-it-works",
+        "source": "blocks",
+        "heading": "Why Mirox Feels Different",
+        "heading_alignment": "center",
+        "columns": 4,
+        "mobile_layout": "carousel"
+      },
       "blocks": {
-        "s1": {
-          "type": "step",
+        "b1": {
+          "type": "benefit",
           "settings": {
-            "text": "Place your pet inside the tote."
+            "icon": "leaf",
+            "title": "Roomy Toe Box",
+            "text": "Give your toes space to spread and move naturally."
           }
         },
-        "s2": {
-          "type": "step",
+        "b2": {
+          "type": "benefit",
           "settings": {
-            "text": "Secure the zipper and adjust the strap."
+            "icon": "check_mark",
+            "title": "Flexible Sole",
+            "text": "Designed to flex with your feet as you walk."
           }
         },
-        "s3": {
-          "type": "step",
+        "b3": {
+          "type": "benefit",
           "settings": {
-            "text": "Head out and enjoy the journey together!"
+            "icon": "fire",
+            "title": "Lightweight Construction",
+            "text": "Less bulk between you and the ground."
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Everyday Comfort",
+            "text": "Made for walking, errands, travel and daily wear."
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "heading": "How It Works",
-        "subheading": "Simple steps for stress-free adventures.",
-        "image": "shopify://shop_images/hf_20260903_023027_3fb58f28-c3ab-4e3f-8ddf-47b7b71bc61e.png",
-        "type_visibility": "all"
-      }
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
     },
-    "size": {
-      "type": "custom-size-guide",
+    "ugc": {
+      "type": "custom-reviews",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "eyebrow": "REAL STORIES",
+        "heading": "Real People. Real Comfort.",
+        "heading_alignment": "left",
+        "columns": 3
+      },
       "blocks": {
         "r1": {
-          "type": "row",
+          "type": "review",
           "settings": {
-            "attribute": "Bag Dimensions (L×W×H)",
-            "size1_value": "28 × 14 × 30 cm",
-            "size2_value": "33 × 18 × 36 cm"
+            "stars": 5,
+            "text": "I literally forget I'm wearing shoes.",
+            "name": "Sarah M.",
+            "badge": "Verified Customer"
           }
         },
         "r2": {
-          "type": "row",
+          "type": "review",
           "settings": {
-            "attribute": "Max Pet Weight",
-            "size1_value": "5 kg (11 lbs)",
-            "size2_value": "8 kg (17 lbs)"
+            "stars": 5,
+            "text": "Finally, enough room for my toes.",
+            "name": "Jason T.",
+            "badge": "Verified Customer"
           }
         },
         "r3": {
-          "type": "row",
+          "type": "review",
           "settings": {
-            "attribute": "Recommended Size",
-            "size1_value": "Small pets",
-            "size2_value": "Small – Medium"
+            "stars": 5,
+            "text": "I've worn these all day and my feet still feel good.",
+            "name": "Emily R.",
+            "badge": "Verified Customer"
           }
         }
       },
@@ -319,145 +250,51 @@
         "r1",
         "r2",
         "r3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Will It Fit?",
-        "subheading": "Designed for small to medium pets.",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
-        "attr_label": "Size",
-        "size1_label": "S",
-        "size2_label": "M",
-        "type_visibility": "all"
-      }
+      ]
     },
-    "comparison": {
-      "type": "custom-comparison-table",
-      "blocks": {
-        "c1": {
-          "type": "row",
-          "settings": {
-            "feature": "Peekaboo window",
-            "us": "check",
-            "others": "cross"
-          }
-        },
-        "c2": {
-          "type": "row",
-          "settings": {
-            "feature": "Soft material",
-            "us": "check",
-            "others": "partial"
-          }
-        },
-        "c3": {
-          "type": "row",
-          "settings": {
-            "feature": "Breathable panels",
-            "us": "check",
-            "others": "cross"
-          }
-        },
-        "c4": {
-          "type": "row",
-          "settings": {
-            "feature": "Lightweight & portable",
-            "us": "check",
-            "others": "partial"
-          }
-        },
-        "c5": {
-          "type": "row",
-          "settings": {
-            "feature": "Secure closure",
-            "us": "check",
-            "others": "check"
-          }
-        }
+    "fit": {
+      "type": "custom-size-guide",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "How Should Mirox Fit?",
+        "subheading": "Your toes should have room to spread.",
+        "attr_label": "Measurement",
+        "size1_label": "Standard",
+        "size2_label": "Wide",
+        "perfect_heading": "Best for",
+        "perfect_for": "<p>Best for normal to wide feet.</p>"
       },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Why Choose Us?",
-        "us_label": "Our Brand",
-        "others_label": "Standard",
-        "image": "shopify://shop_images/hf_20260901_162053_78840a78-52ad-4483-8706-cf6fc5f70986.png",
-        "type_visibility": "v1"
-      }
-    },
-    "bundle": {
-      "type": "custom-frequently-bought",
-      "blocks": {
-        "p1": {
-          "type": "product",
-          "settings": {
-            "product": "lion-mane-cat-tote"
-          }
-        },
-        "p2": {
-          "type": "product",
-          "settings": {
-            "product": "kitty-peekaboo-tote"
-          }
-        },
-        "p3": {
-          "type": "product",
-          "settings": {
-            "product": "black-cat-everyday-tote"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Frequently Bought Together",
-        "button_label": "Add All to Cart",
-        "type_visibility": "v3"
-      }
-    },
-    "reviews": {
-      "type": "custom-reviews",
       "blocks": {
         "r1": {
-          "type": "review",
+          "type": "row",
           "settings": {
-            "name": "Jessica M.",
-            "stars": 5,
-            "text": "My pet absolutely loves it and looks so cute. Perfect for daily walks!"
+            "attribute": "Toe room",
+            "size1_value": "Roomy",
+            "size2_value": "Extra roomy"
           }
         },
         "r2": {
-          "type": "review",
+          "type": "row",
           "settings": {
-            "name": "Daniel K.",
-            "stars": 5,
-            "text": "The quality is amazing and it's so well designed."
+            "attribute": "Flexibility",
+            "size1_value": "High",
+            "size2_value": "High"
           }
         },
         "r3": {
-          "type": "review",
+          "type": "row",
           "settings": {
-            "name": "Sophie L.",
-            "stars": 5,
-            "text": "Perfect for our weekend trips and loves the design!"
+            "attribute": "Weight (US 9)",
+            "size1_value": "≈210g",
+            "size2_value": "≈215g"
           }
         },
         "r4": {
-          "type": "review",
+          "type": "row",
           "settings": {
-            "name": "Ethan B.",
-            "stars": 5,
-            "text": "Stylish, comfortable and practical. Highly recommend!"
+            "attribute": "Drop",
+            "size1_value": "Zero drop",
+            "size2_value": "Zero drop"
           }
         }
       },
@@ -466,61 +303,212 @@
         "r2",
         "r3",
         "r4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Real Reviews",
-        "columns": 4,
-        "source": "product_metafield",
-        "type_visibility": "all"
-      }
+      ]
     },
-    "related": {
-      "type": "related-products",
+    "comparison": {
+      "type": "custom-comparison-table",
       "settings": {
-        "heading": "You May Also Like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "show_secondary_image": true,
-        "show_rating": true,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "type_visibility": "v2v3"
-      }
+        "heading": "Compare with Other Voya Shoes",
+        "heading_alignment": "left",
+        "feature_label": "",
+        "us_label": "Mirox",
+        "others_label": "Others"
+      },
+      "blocks": {
+        "c1": {
+          "type": "row",
+          "settings": {
+            "feature": "Everyday",
+            "us": "true",
+            "others": "true"
+          }
+        },
+        "c2": {
+          "type": "row",
+          "settings": {
+            "feature": "Walking",
+            "us": "true",
+            "others": "true"
+          }
+        },
+        "c3": {
+          "type": "row",
+          "settings": {
+            "feature": "Wide Toe Box",
+            "us": "true",
+            "others": "false"
+          }
+        },
+        "c4": {
+          "type": "row",
+          "settings": {
+            "feature": "Lightweight",
+            "us": "true",
+            "others": "false"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "bundle": {
+      "type": "custom-pricing-tiers",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Love Mirox? Get More Than One.",
+        "heading_alignment": "center",
+        "button_label": "Add to Cart"
+      },
+      "blocks": {
+        "t1": {
+          "type": "tier",
+          "settings": {
+            "quantity": 1,
+            "discount_percent": 0,
+            "label": "1 Pair",
+            "badge": "",
+            "highlight": false,
+            "product": "mirox"
+          }
+        },
+        "t2": {
+          "type": "tier",
+          "settings": {
+            "quantity": 2,
+            "discount_percent": 10,
+            "label": "2 Pairs",
+            "badge": "Save 10%",
+            "highlight": false,
+            "product": "mirox"
+          }
+        },
+        "t3": {
+          "type": "tier",
+          "settings": {
+            "quantity": 3,
+            "discount_percent": 20,
+            "label": "3 Pairs",
+            "badge": "Best Value",
+            "highlight": true,
+            "product": "mirox"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "reviews": {
+      "type": "custom-reviews",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "heading": "What Customers Are Saying",
+        "heading_alignment": "left",
+        "columns": 4
+      },
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Plenty of room for my toes. Super comfortable.",
+            "name": "Jessica L.",
+            "badge": "Verified"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Lightweight and perfect for travel.",
+            "name": "Daniel K.",
+            "badge": "Verified"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Best everyday shoes I've ever owned.",
+            "name": "Rachel M.",
+            "badge": "Verified"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Great quality and stylish too.",
+            "name": "Tom S.",
+            "badge": "Verified"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ]
     },
     "faq": {
       "type": "custom-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "heading": "Frequently Asked Questions",
+        "heading_alignment": "left",
+        "columns": "2"
+      },
       "blocks": {
         "q1": {
           "type": "item",
           "settings": {
-            "question": "Is this suitable for my pet?",
-            "answer": "<p>Designed for small to medium pets.</p>"
+            "question": "Is Mirox a barefoot shoe?",
+            "answer": "<p>Yes — Mirox uses a wide toe box, flexible sole and zero-drop platform for a natural-feeling stride.</p>"
           }
         },
         "q2": {
           "type": "item",
           "settings": {
-            "question": "What are the dimensions?",
-            "answer": "<p>See the size guide for full dimensions and weight capacity.</p>"
+            "question": "How much room should I have around my toes?",
+            "answer": "<p>Your toes should be able to spread with a little room at the front — not cramped, not sliding around.</p>"
           }
         },
         "q3": {
           "type": "item",
           "settings": {
-            "question": "How breathable is it?",
-            "answer": "<p>Mesh panels keep air flowing for comfort.</p>"
+            "question": "Does Mirox run true to size?",
+            "answer": "<p>Most customers find Mirox true to size. If you are between sizes or have wide feet, size up.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
-            "question": "How do I clean it?",
-            "answer": "<p>Wipe clean or hand wash.</p>"
+            "question": "Can I wear Mirox without socks?",
+            "answer": "<p>Yes. The breathable interior is comfortable with thin socks or barefoot.</p>"
+          }
+        },
+        "q5": {
+          "type": "item",
+          "settings": {
+            "question": "Is Mirox good for walking?",
+            "answer": "<p>Mirox is built for everyday walking, errands, travel and light activity.</p>"
+          }
+        },
+        "q6": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return it if the size isn't right?",
+            "answer": "<p>Yes — we offer 30-day returns so you can find the right fit with confidence.</p>"
           }
         }
       },
@@ -528,106 +516,41 @@
         "q1",
         "q2",
         "q3",
-        "q4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Frequently Asked Questions",
-        "columns": "1",
-        "source": "product_metafield",
-        "show_guarantee": true,
-        "guarantee_scheme": "scheme-2",
-        "guarantee_badge": "30 DAYS",
-        "guarantee_heading": "Love It or Get Your Money Back",
-        "guarantee_text": "We're confident you and your pet will love it. If not, return it within 30 days for a full refund.",
-        "heading_alignment": "left",
-        "type_visibility": "v1"
-      }
+        "q4",
+        "q5",
+        "q6"
+      ]
     },
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
         "color_scheme": "scheme-3",
-        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png",
-        "overlay_opacity": 50,
-        "heading": "Ready for Your Next Adventure?",
-        "text": "<p>Join thousands of happy customers today.</p>",
-        "button_label": "Shop Now",
-        "content_alignment": "center",
-        "type_visibility": "v1"
-      }
-    },
-    "trust": {
-      "type": "custom-trust-badges",
-      "blocks": {
-        "t1": {
-          "type": "badge",
-          "settings": {
-            "icon": "truck",
-            "title": "Free Shipping",
-            "subtitle": "On orders over $40"
-          }
-        },
-        "t2": {
-          "type": "badge",
-          "settings": {
-            "icon": "return",
-            "title": "30-Day Guarantee",
-            "subtitle": "Love it or full refund"
-          }
-        },
-        "t3": {
-          "type": "badge",
-          "settings": {
-            "icon": "padlock",
-            "title": "Secure Checkout",
-            "subtitle": "100% safe & encrypted"
-          }
-        },
-        "t4": {
-          "type": "badge",
-          "settings": {
-            "icon": "chat_bubble",
-            "title": "24/7 Support",
-            "subtitle": "We're here anytime"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "type_visibility": "v3"
+        "eyebrow": "MORE NATURAL STEPS. A HAPPIER YOU.",
+        "heading": "Give Your Feet Room to Move.",
+        "text": "<p>Discover the barefoot feeling without giving up everyday style.</p>",
+        "button_label": "Add to Cart",
+        "button_link": "",
+        "content_alignment": "left",
+        "overlay_opacity": 45
       }
     },
     "sticky": {
       "type": "custom-sticky-atc",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "button_label": "Add to Cart",
-        "type_visibility": "all"
-      }
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "social_proof",
-    "benefits",
+    "trust_bar",
     "problem",
-    "solution",
-    "how",
-    "size",
+    "benefits",
+    "ugc",
+    "fit",
     "comparison",
     "bundle",
     "reviews",
-    "related",
     "faq",
     "cta",
-    "trust",
     "sticky"
   ]
 }

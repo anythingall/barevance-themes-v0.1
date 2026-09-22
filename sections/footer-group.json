@@ -15,7 +15,7 @@
         "care": {
           "type": "menu",
           "settings": {
-            "heading": "Customer Care",
+            "heading": "Help",
             "menu": "footer-help"
           }
         },
@@ -33,13 +33,13 @@
         "about"
       ],
       "settings": {
-        "color_scheme": "scheme-5",
-        "tagline": "Cute. Cozy. Adventure.",
-        "description": "Designed for pets who love to explore and the humans who love them.",
+        "color_scheme": "scheme-3",
+        "tagline": "Move Naturally. Live Fully.",
+        "description": "Comfortable, stylish barefoot shoes designed for everyday life. More freedom for your feet.",
         "show_social": true,
         "newsletter_enable": true,
-        "newsletter_heading": "Join the Family",
-        "newsletter_text": "Get 10% off your first order and exclusive offers.",
+        "newsletter_heading": "Join Our Journey",
+        "newsletter_text": "Get the latest updates, new releases and exclusive offers.",
         "payment_enable": true,
         "show_policy": true
       }

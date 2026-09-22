@@ -1,35 +1,35 @@
 {%- comment -%}
-  custom-how-it-works — Numbered steps (auto-numbered) + optional media (mobile-first).
+  vy-how-it-works — Numbered steps (auto-numbered) + optional media (mobile-first).
   Mobile: steps stack vertically. Desktop: steps in a row, optional media beside.
 {%- endcomment -%}
 
-<div class="custom-hiw color-{{ section.settings.color_scheme }} gradient custom-section">
-  <div class="custom-container">
+<div class="vy-hiw color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
-      <div class="custom-hiw__head">
+      <div class="vy-hiw__head">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="custom-eyebrow">{{ section.settings.eyebrow }}</p>
+          <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="custom-h2">{{ section.settings.heading }}</h2>
+          <h2 class="vy-h2">{{ section.settings.heading }}</h2>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
-          <p class="custom-hiw__sub">{{ section.settings.subheading }}</p>
+          <p class="vy-hiw__sub">{{ section.settings.subheading }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
 
-    <div class="custom-hiw__layout {% if section.settings.image != blank %}has-media{% endif %}">
-      <ol class="custom-hiw__steps list-unstyled">
+    <div class="vy-hiw__layout {% if section.settings.image != blank %}has-media{% endif %}">
+      <ol class="vy-hiw__steps list-unstyled">
         {%- for block in section.blocks -%}
-          <li class="custom-hiw__step" {{ block.shopify_attributes }}>
-            <span class="custom-hiw__num">{{ forloop.index }}</span>
-            <span class="custom-hiw__step-body">
+          <li class="vy-hiw__step" {{ block.shopify_attributes }}>
+            <span class="vy-hiw__num">{{ forloop.index }}</span>
+            <span class="vy-hiw__step-body">
               {%- if block.settings.title != blank -%}
-                <span class="custom-hiw__step-title">{{ block.settings.title }}</span>
+                <span class="vy-hiw__step-title">{{ block.settings.title }}</span>
               {%- endif -%}
               {%- if block.settings.text != blank -%}
-                <span class="custom-hiw__step-text">{{ block.settings.text }}</span>
+                <span class="vy-hiw__step-text">{{ block.settings.text }}</span>
               {%- endif -%}
             </span>
           </li>
@@ -37,7 +37,7 @@
       </ol>
 
       {%- if section.settings.image != blank -%}
-        <div class="custom-hiw__media custom-card">
+        <div class="vy-hiw__media vy-card">
           {{
             section.settings.image
             | image_url: width: 1200
@@ -45,11 +45,11 @@
               loading: 'lazy',
               sizes: '(min-width: 990px) 40vw, 100vw',
               widths: '450, 660, 900, 1200',
-              class: 'custom-hiw__image',
+              class: 'vy-hiw__image',
               alt: section.settings.image.alt
           }}
           {%- if section.settings.video_url != blank -%}
-            <a href="{{ section.settings.video_url }}" class="custom-hiw__play" target="_blank" rel="noopener" aria-label="Play video">
+            <a href="{{ section.settings.video_url }}" class="vy-hiw__play" target="_blank" rel="noopener" aria-label="Play video">
               {%- render 'custom-icon', icon: 'play' -%}
             </a>
           {%- endif -%}
@@ -60,40 +60,40 @@
 </div>
 
 {% stylesheet %}
-  .custom-hiw__head {
+  .vy-hiw__head {
     margin-bottom: 2.8rem;
     text-align: center;
   }
 
-  .custom-hiw__head .custom-eyebrow {
+  .vy-hiw__head .vy-eyebrow {
     margin: 0 0 0.6rem;
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-hiw__head .custom-h2 {
+  .vy-hiw__head .vy-h2 {
     margin: 0;
   }
 
-  .custom-hiw__sub {
+  .vy-hiw__sub {
     margin: 0.8rem 0 0;
     opacity: 0.8;
   }
 
-  .custom-hiw__layout {
+  .vy-hiw__layout {
     display: flex;
     flex-direction: column;
     gap: 3rem;
   }
 
   /* Steps = a vertical timeline (numbers connected by a line). */
-  .custom-hiw__steps {
+  .vy-hiw__steps {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
   }
 
-  .custom-hiw__step {
+  .vy-hiw__step {
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -101,12 +101,12 @@
     padding-bottom: 2.6rem;
   }
 
-  .custom-hiw__step:last-child {
+  .vy-hiw__step:last-child {
     padding-bottom: 0;
   }
 
   /* Connector line running from each number down to the next. */
-  .custom-hiw__step:not(:last-child)::before {
+  .vy-hiw__step:not(:last-child)::before {
     content: '';
     position: absolute;
     top: 3.8rem;
@@ -117,7 +117,7 @@
     background: rgba(var(--color-foreground), 0.15);
   }
 
-  .custom-hiw__num {
+  .vy-hiw__num {
     position: relative;
     z-index: 1;
     flex: 0 0 auto;
@@ -133,38 +133,38 @@
     font-size: 1.5rem;
   }
 
-  .custom-hiw__step-body {
+  .vy-hiw__step-body {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
     padding-top: 0.5rem;
   }
 
-  .custom-hiw__step-title {
+  .vy-hiw__step-title {
     font-weight: 600;
     font-size: 1.7rem;
   }
 
-  .custom-hiw__step-text {
+  .vy-hiw__step-text {
     font-size: 1.45rem;
     opacity: 0.82;
     line-height: 1.55;
   }
 
-  .custom-hiw__media {
+  .vy-hiw__media {
     position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
   }
 
-  .custom-hiw__image {
+  .vy-hiw__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .custom-hiw__play {
+  .vy-hiw__play {
     position: absolute;
     inset: 0;
     margin: auto;
@@ -177,7 +177,7 @@
     justify-content: center;
   }
 
-  .custom-hiw__play .svg-wrapper {
+  .vy-hiw__play .svg-wrapper {
     width: 2.4rem;
     height: 2.4rem;
     color: rgb(var(--color-accent-strong, var(--color-button)));
@@ -185,14 +185,14 @@
 
   /* No media: show the steps as an evenly-spaced row of cards on larger screens. */
   @media screen and (min-width: 750px) {
-    .custom-hiw__layout:not(.has-media) .custom-hiw__steps {
+    .vy-hiw__layout:not(.has-media) .vy-hiw__steps {
       flex-direction: row;
       gap: 2.4rem;
       max-width: 96rem;
       margin-inline: auto;
     }
 
-    .custom-hiw__layout:not(.has-media) .custom-hiw__step {
+    .vy-hiw__layout:not(.has-media) .vy-hiw__step {
       flex: 1;
       flex-direction: column;
       align-items: center;
@@ -201,11 +201,11 @@
       padding-bottom: 0;
     }
 
-    .custom-hiw__layout:not(.has-media) .custom-hiw__step::before {
+    .vy-hiw__layout:not(.has-media) .vy-hiw__step::before {
       display: none;
     }
 
-    .custom-hiw__layout:not(.has-media) .custom-hiw__step-body {
+    .vy-hiw__layout:not(.has-media) .vy-hiw__step-body {
       align-items: center;
       padding-top: 0;
     }
@@ -213,18 +213,18 @@
 
   /* With media: two balanced columns (timeline beside the image). */
   @media screen and (min-width: 990px) {
-    .custom-hiw__layout.has-media {
+    .vy-hiw__layout.has-media {
       flex-direction: row;
       align-items: center;
       gap: 5rem;
     }
 
-    .custom-hiw__layout.has-media .custom-hiw__steps {
+    .vy-hiw__layout.has-media .vy-hiw__steps {
       flex: 1 1 48%;
       min-width: 0;
     }
 
-    .custom-hiw__layout.has-media .custom-hiw__media {
+    .vy-hiw__layout.has-media .vy-hiw__media {
       flex: 1 1 52%;
       align-self: stretch;
       aspect-ratio: auto;
@@ -236,7 +236,7 @@
 {
   "name": "How it works",
   "tag": "section",
-  "class": "custom-hiw-section",
+  "class": "vy-hiw-section",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },

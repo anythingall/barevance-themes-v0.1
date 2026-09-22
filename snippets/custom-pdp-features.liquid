@@ -7,27 +7,27 @@
 {%- liquid
   assign feats = product.metafields.custom.benefits.value
 -%}
-<ul class="custom-pdp-features list-unstyled" role="list">
+<ul class="vy-pdp-features list-unstyled" role="list">
   {%- if feats != blank -%}
     {%- for f in feats limit: 4 -%}
-      <li class="custom-pdp-features__item">
-        <span class="custom-pdp-features__icon">{%- render 'custom-icon', icon: f.icon -%}</span>
-        <span class="custom-pdp-features__label">{{ f.title }}</span>
+      <li class="vy-pdp-features__item">
+        <span class="vy-pdp-features__icon">{%- render 'custom-icon', icon: f.icon -%}</span>
+        <span class="vy-pdp-features__label">{{ f.title }}</span>
       </li>
     {%- endfor -%}
   {%- else -%}
     {%- assign titles = 'Cozy & Comfortable,Breathable Mesh,Secure Zipper,Lightweight' | split: ',' -%}
     {%- assign icons = 'heart,leaf,padlock,star' | split: ',' -%}
     {%- for t in titles -%}
-      <li class="custom-pdp-features__item">
-        <span class="custom-pdp-features__icon">{%- render 'custom-icon', icon: icons[forloop.index0] -%}</span>
-        <span class="custom-pdp-features__label">{{ t }}</span>
+      <li class="vy-pdp-features__item">
+        <span class="vy-pdp-features__icon">{%- render 'custom-icon', icon: icons[forloop.index0] -%}</span>
+        <span class="vy-pdp-features__label">{{ t }}</span>
       </li>
     {%- endfor -%}
   {%- endif -%}
 </ul>
 {% stylesheet %}
-  .custom-pdp-features {
+  .vy-pdp-features {
     display: flex;
     flex-wrap: wrap;
     gap: 1.4rem 1rem;
@@ -36,7 +36,7 @@
     border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
   }
-  .custom-pdp-features__item {
+  .vy-pdp-features__item {
     flex: 1 1 12rem;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
     text-align: center;
     font-size: 1.2rem;
   }
-  .custom-pdp-features__icon .svg-wrapper {
+  .vy-pdp-features__icon .svg-wrapper {
     width: 2.4rem;
     height: 2.4rem;
     color: rgb(var(--color-button));

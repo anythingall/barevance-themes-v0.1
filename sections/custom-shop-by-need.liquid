@@ -1,0 +1,348 @@
+{%- comment -%} Base theme: store-type gate — on home/product pages, hide this section when settings.store_type is not in this section's type_visibility. Falls back to showing everything if store_type is blank. {%- endcomment -%}
+{%- liquid
+  assign sbn_hide = false
+  assign sbn_vis = section.settings.type_visibility | default: 'all'
+  assign sbn_st = settings.store_type | default: 'v1'
+  assign sbn_on = false
+  if template.name == 'index'
+    assign sbn_on = true
+  endif
+  if template.name == 'product'
+    assign sbn_on = true
+  endif
+  if sbn_on and sbn_vis != 'all'
+    unless sbn_vis contains sbn_st
+      assign sbn_hide = true
+    endunless
+  endif
+-%}
+{%- unless sbn_hide -%}
+{%- comment -%}
+  vy-shop-by-need — "Shop by need / use case" routing grid (mobile-first).
+  Image-led cards (image + label + optional sublabel + arrow) that route intent to
+  collections/URLs. Desktop: grid of N columns. Mobile: horizontal scroller.
+  Colors/fonts come from the color scheme + global tokens (never hard-coded).
+{%- endcomment -%}
+
+{%- liquid
+  assign sbn_count = section.blocks.size
+  assign sbn_cols = section.settings.columns | at_most: sbn_count | at_least: 1
+-%}
+<div class="vy-sbn color-{{ section.settings.color_scheme }} gradient vy-section">
+  <div class="vy-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.link_label != blank -%}
+      <div class="vy-sbn__head">
+        <div class="vy-sbn__headings" style="text-align: {{ section.settings.heading_alignment }};">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="vy-h2">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <p class="vy-sbn__sub">{{ section.settings.subheading }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+          <a class="vy-sbn__viewall" href="{{ section.settings.link_url }}">
+            {{ section.settings.link_label }}
+            <span class="vy-sbn__viewall-arrow">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul
+      class="vy-sbn__grid {% if section.settings.mobile_layout == 'carousel' %}vy-scroller vy-scroller--grid-on-desktop{% else %}vy-grid{% endif %} list-unstyled"
+      role="list"
+      {%- if section.settings.mobile_layout == 'carousel' %} tabindex="0" aria-label="{{ section.settings.heading | default: 'Categories' | escape }} (scroll to see more)"{% endif %}
+      style="--vy-grid-cols-desktop: {{ sbn_cols }}; --vy-grid-cols-tablet: {{ sbn_cols | at_most: 3 }}; --vy-scroller-cols-desktop: {{ sbn_cols }}; --vy-scroller-item: 44%; --vy-sbn-ratio: {{ section.settings.image_ratio }};"
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign sbn_href = block.settings.link_url
+          if sbn_href == blank
+            assign sbn_href = '#'
+          endif
+        -%}
+        <li class="vy-sbn__item" {{ block.shopify_attributes }}>
+          <a class="vy-sbn__card" href="{{ sbn_href }}">
+            <span class="vy-sbn__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 400, 600, 800',
+                    sizes: '(min-width: 750px) 22vw, 44vw',
+                    class: 'vy-sbn__img',
+                    alt: block.settings.label | escape
+                }}
+              {%- else -%}
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'vy-sbn__img vy-sbn__img--placeholder' }}
+              {%- endif -%}
+            </span>
+            <span class="vy-sbn__overlay"></span>
+            <span class="vy-sbn__content">
+              <span class="vy-sbn__labels">
+                {%- if block.settings.label != blank -%}
+                  <span class="vy-sbn__label">{{ block.settings.label }}</span>
+                {%- endif -%}
+                {%- if block.settings.sublabel != blank -%}
+                  <span class="vy-sbn__sublabel">{{ block.settings.sublabel }}</span>
+                {%- endif -%}
+              </span>
+              <span class="vy-sbn__arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+            </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+
+{% stylesheet %}
+  .vy-sbn__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .vy-sbn__headings {
+    flex: 1 1 60%;
+  }
+
+  .vy-sbn__headings .vy-eyebrow {
+    margin: 0 0 0.6rem;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+  }
+
+  .vy-sbn__headings .vy-h2 {
+    margin: 0;
+  }
+
+  .vy-sbn__sub {
+    margin: 0.6rem 0 0;
+    font-size: 1.5rem;
+    opacity: 0.82;
+  }
+
+  .vy-sbn__viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+    white-space: nowrap;
+  }
+
+  .vy-sbn__viewall-arrow .svg-wrapper,
+  .vy-sbn__viewall-arrow svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .vy-sbn__grid {
+    margin: 0;
+    padding: 0;
+  }
+
+  .vy-sbn__card {
+    position: relative;
+    display: block;
+    aspect-ratio: var(--vy-sbn-ratio, 3 / 4);
+    border-radius: var(--vy-card-radius, 1.2rem);
+    overflow: hidden;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  .vy-sbn__media,
+  .vy-sbn__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .vy-sbn__img {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .vy-sbn__img--placeholder {
+    background: rgba(var(--color-foreground), 0.06);
+  }
+
+  .vy-sbn__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.12) 46%, rgba(0, 0, 0, 0) 72%);
+  }
+
+  .vy-sbn__content {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 1.4rem;
+    color: #fff;
+  }
+
+  .vy-sbn__label {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .vy-sbn__sublabel {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 1.3rem;
+    opacity: 0.88;
+  }
+
+  .vy-sbn__arrow {
+    flex: 0 0 auto;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(2px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .vy-sbn__arrow .svg-wrapper,
+  .vy-sbn__arrow svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #fff;
+  }
+
+  @media (hover: hover) {
+    .vy-sbn__card:hover .vy-sbn__img {
+      transform: scale(1.05);
+    }
+
+    .vy-sbn__card:hover .vy-sbn__arrow {
+      background: rgba(255, 255, 255, 0.32);
+      transform: translateX(0.2rem);
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-sbn__label {
+      font-size: 1.8rem;
+    }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Shop by need",
+  "tag": "section",
+  "class": "vy-sbn-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "type_visibility",
+      "label": "Show on store type",
+      "info": "Which store types (V1/V2/V3) show this section. Affects home + product pages via the Store type setting.",
+      "options": [
+        { "value": "all", "label": "All layouts" },
+        { "value": "v1", "label": "V1 only" },
+        { "value": "v2", "label": "V2 only" },
+        { "value": "v3", "label": "V3 only" },
+        { "value": "v1v2", "label": "V1 + V2" },
+        { "value": "v1v3", "label": "V1 + V3" },
+        { "value": "v2v3", "label": "V2 + V3" }
+      ],
+      "default": "all"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by What You Need" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Find the perfect pair for your lifestyle." },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Căn tiêu đề",
+      "options": [
+        { "value": "left", "label": "Trái" },
+        { "value": "center", "label": "Giữa" }
+      ],
+      "default": "left"
+    },
+    { "type": "text", "id": "link_label", "label": "Link phụ (nhãn)", "info": "VD: View All Categories" },
+    { "type": "url", "id": "link_url", "label": "Link phụ (URL)" },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Số cột (desktop)",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Tỷ lệ ảnh",
+      "options": [
+        { "value": "3 / 4", "label": "Dọc (3:4)" },
+        { "value": "1 / 1", "label": "Vuông (1:1)" },
+        { "value": "4 / 5", "label": "Dọc nhẹ (4:5)" }
+      ],
+      "default": "3 / 4"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Layout mobile",
+      "options": [
+        { "value": "stack", "label": "Lưới (2 cột)" },
+        { "value": "carousel", "label": "Cuộn ngang" }
+      ],
+      "default": "carousel"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "need",
+      "name": "Use case",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Ảnh" },
+        { "type": "text", "id": "label", "label": "Nhãn", "default": "Everyday Comfort" },
+        { "type": "text", "id": "sublabel", "label": "Nhãn phụ" },
+        { "type": "url", "id": "link_url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by need",
+      "blocks": [
+        { "type": "need", "settings": { "label": "Everyday Comfort" } },
+        { "type": "need", "settings": { "label": "Walking & Travel" } },
+        { "type": "need", "settings": { "label": "Active & Training" } },
+        { "type": "need", "settings": { "label": "Outdoor & Trail" } },
+        { "type": "need", "settings": { "label": "Casual Style" } },
+        { "type": "need", "settings": { "label": "Boots & Cold Weather" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

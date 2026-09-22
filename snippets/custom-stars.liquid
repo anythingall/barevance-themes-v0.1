@@ -11,40 +11,40 @@
   assign remainder = value | minus: full
   assign half_index = full | plus: 1
 -%}
-<span class="custom-stars" role="img" aria-label="{{ value }} / 5">
+<span class="vy-stars" role="img" aria-label="{{ value }} / 5">
   {%- for i in (1..5) -%}
     {%- if i <= full -%}
-      <span class="custom-stars__star is-full">★</span>
+      <span class="vy-stars__star is-full">★</span>
     {%- elsif i == half_index and remainder >= 0.5 -%}
-      <span class="custom-stars__star is-half">★</span>
+      <span class="vy-stars__star is-half">★</span>
     {%- else -%}
-      <span class="custom-stars__star">★</span>
+      <span class="vy-stars__star">★</span>
     {%- endif -%}
   {%- endfor -%}
 </span>
 
 {% stylesheet %}
-  .custom-stars {
+  .vy-stars {
     display: inline-flex;
     line-height: 1;
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
   }
 
-  .custom-stars__star {
+  .vy-stars__star {
     color: rgba(var(--color-foreground), 0.25);
   }
 
-  .custom-stars__star.is-full {
+  .vy-stars__star.is-full {
     color: rgb(var(--color-accent-strong, var(--color-button)));
   }
 
-  .custom-stars__star.is-half {
+  .vy-stars__star.is-half {
     position: relative;
     color: rgba(var(--color-foreground), 0.25);
   }
 
-  .custom-stars__star.is-half::before {
+  .vy-stars__star.is-half::before {
     content: '★';
     position: absolute;
     inset: 0;

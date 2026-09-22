@@ -18,21 +18,21 @@
 -%}
 {%- unless hl_hide -%}
 {%- comment -%}
-  custom-social-proof — Trust strip: avatars + "N happy customers" + rating on the
+  vy-social-proof — Trust strip: avatars + "N happy customers" + rating on the
   left, "As seen on" + press logos (text or image) on the right. Matches the PDP ref.
 {%- endcomment -%}
 
-<div class="custom-sp color-{{ section.settings.color_scheme }} gradient custom-section custom-sp--tight">
-  <div class="custom-container custom-sp__inner{% if section.blocks.size > 0 %} has-logos{% endif %}">
-    <div class="custom-sp__proof">
+<div class="vy-sp color-{{ section.settings.color_scheme }} gradient vy-section vy-sp--tight">
+  <div class="vy-container vy-sp__inner{% if section.blocks.size > 0 %} has-logos{% endif %}">
+    <div class="vy-sp__proof">
       {%- if section.settings.avatars != blank -%}
-        {{ section.settings.avatars | image_url: width: 220 | image_tag: loading: 'lazy', class: 'custom-sp__avatars', alt: '' }}
+        {{ section.settings.avatars | image_url: width: 220 | image_tag: loading: 'lazy', class: 'vy-sp__avatars', alt: '' }}
       {%- endif -%}
-      <div class="custom-sp__proof-text">
+      <div class="vy-sp__proof-text">
         {%- if section.settings.count_text != blank -%}
-          <span class="custom-sp__count">{{ section.settings.count_text }}</span>
+          <span class="vy-sp__count">{{ section.settings.count_text }}</span>
         {%- endif -%}
-        <span class="custom-sp__rating">
+        <span class="vy-sp__rating">
           {%- render 'custom-stars', rating: section.settings.rating -%}
           <span>{{ section.settings.rating_text }}</span>
         </span>
@@ -40,17 +40,17 @@
     </div>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="custom-sp__logos">
+      <div class="vy-sp__logos">
         {%- if section.settings.as_seen_label != blank -%}
-          <span class="custom-sp__as-seen">{{ section.settings.as_seen_label }}</span>
+          <span class="vy-sp__as-seen">{{ section.settings.as_seen_label }}</span>
         {%- endif -%}
-        <ul class="list-unstyled custom-sp__logo-list" role="list">
+        <ul class="list-unstyled vy-sp__logo-list" role="list">
           {%- for block in section.blocks -%}
-            <li class="custom-sp__logo" {{ block.shopify_attributes }}>
+            <li class="vy-sp__logo" {{ block.shopify_attributes }}>
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'custom-sp__logo-img', alt: block.settings.text }}
+                {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'vy-sp__logo-img', alt: block.settings.text }}
               {%- else -%}
-                <span class="custom-sp__logo-text">{{ block.settings.text }}</span>
+                <span class="vy-sp__logo-text">{{ block.settings.text }}</span>
               {%- endif -%}
             </li>
           {%- endfor -%}
@@ -59,38 +59,38 @@
     {%- endif -%}
   </div>
 </div>
-{%- else -%}{%- if request.design_mode -%}<div class="custom-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
-  .custom-sp--tight { padding-block: 2.4rem; }
+  .vy-sp--tight { padding-block: 2.4rem; }
 
-  .custom-sp__inner {
+  .vy-sp__inner {
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
     align-items: center;
   }
 
-  .custom-sp__proof {
+  .vy-sp__proof {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-  .custom-sp__avatars { height: 3.4rem; width: auto; border-radius: 999px; }
-  .custom-sp__proof-text { display: flex; flex-direction: column; }
-  .custom-sp__count { font-weight: 700; font-size: 1.4rem; }
-  .custom-sp__rating { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; }
+  .vy-sp__avatars { height: 3.4rem; width: auto; border-radius: 999px; }
+  .vy-sp__proof-text { display: flex; flex-direction: column; }
+  .vy-sp__count { font-weight: 700; font-size: 1.4rem; }
+  .vy-sp__rating { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 1.3rem; }
 
-  .custom-sp__logos {
+  .vy-sp__logos {
     display: flex;
     align-items: center;
     gap: 1.6rem;
     flex-wrap: wrap;
     justify-content: center;
   }
-  .custom-sp__as-seen { font-size: 1.2rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; }
-  .custom-sp__logo-list { display: flex; align-items: center; gap: 2.4rem; flex-wrap: wrap; margin: 0; }
-  .custom-sp__logo-text {
+  .vy-sp__as-seen { font-size: 1.2rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; }
+  .vy-sp__logo-list { display: flex; align-items: center; gap: 2.4rem; flex-wrap: wrap; margin: 0; }
+  .vy-sp__logo-text {
     font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 1.5rem;
@@ -98,18 +98,18 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
-  .custom-sp__logo-img { height: 2.6rem; width: auto; opacity: 0.6; }
+  .vy-sp__logo-img { height: 2.6rem; width: auto; opacity: 0.6; }
 
   @media screen and (min-width: 990px) {
-    .custom-sp__inner { flex-direction: row; justify-content: center; gap: 4rem; }
-    .custom-sp__inner.has-logos { justify-content: space-between; }
+    .vy-sp__inner { flex-direction: row; justify-content: center; gap: 4rem; }
+    .vy-sp__inner.has-logos { justify-content: space-between; }
   }
 {% endstylesheet %}
 {% schema %}
 {
   "name": "Social proof",
   "tag": "section",
-  "class": "custom-sp-section",
+  "class": "vy-sp-section",
   "settings": [
     {
       "type": "select",

@@ -7,39 +7,39 @@
 
 {%- case state -%}
   {%- when 'check' -%}
-    <span class="custom-mark custom-mark--check" role="img" aria-label="Yes">
+    <span class="vy-mark vy-mark--check" role="img" aria-label="Yes">
       {{- 'icon-check-mark.svg' | inline_asset_content -}}
     </span>
   {%- when 'partial' -%}
-    <span class="custom-mark custom-mark--partial" role="img" aria-label="Partial">△</span>
+    <span class="vy-mark vy-mark--partial" role="img" aria-label="Partial">△</span>
   {%- else -%}
-    <span class="custom-mark custom-mark--cross" role="img" aria-label="No">
+    <span class="vy-mark vy-mark--cross" role="img" aria-label="No">
       {{- 'icon-close.svg' | inline_asset_content -}}
     </span>
 {%- endcase -%}
 
 {% stylesheet %}
-  .custom-mark {
+  .vy-mark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
-  .custom-mark svg {
+  .vy-mark svg {
     width: 2rem;
     height: 2rem;
   }
 
-  .custom-mark--check {
+  .vy-mark--check {
     color: rgb(var(--color-button));
   }
 
-  .custom-mark--partial {
+  .vy-mark--partial {
     font-size: 1.8rem;
     opacity: 0.6;
   }
 
-  .custom-mark--cross {
+  .vy-mark--cross {
     opacity: 0.45;
   }
 {% endstylesheet %}
