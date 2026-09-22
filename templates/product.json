@@ -320,32 +320,32 @@
           "type": "row",
           "settings": {
             "feature": "Everyday",
-            "us": "true",
-            "others": "true"
+            "us": "check",
+            "others": "check"
           }
         },
         "c2": {
           "type": "row",
           "settings": {
             "feature": "Walking",
-            "us": "true",
-            "others": "true"
+            "us": "check",
+            "others": "check"
           }
         },
         "c3": {
           "type": "row",
           "settings": {
             "feature": "Wide Toe Box",
-            "us": "true",
-            "others": "false"
+            "us": "check",
+            "others": "cross"
           }
         },
         "c4": {
           "type": "row",
           "settings": {
             "feature": "Lightweight",
-            "us": "true",
-            "others": "false"
+            "us": "check",
+            "others": "cross"
           }
         }
       },
@@ -362,7 +362,10 @@
         "color_scheme": "scheme-2",
         "heading": "Love Mirox? Get More Than One.",
         "heading_alignment": "center",
-        "button_label": "Add to Cart"
+        "button_label": "Shop Bundle Deals",
+        "layout": "split",
+        "subheading": "Mix colors and styles for your lifestyle.",
+        "cta_link": "/collections/best-sellers"
       },
       "blocks": {
         "t1": {

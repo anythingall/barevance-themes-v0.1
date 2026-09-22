@@ -16,8 +16,8 @@
       </li>
     {%- endfor -%}
   {%- else -%}
-    {%- assign titles = 'Cozy & Comfortable,Breathable Mesh,Secure Zipper,Lightweight' | split: ',' -%}
-    {%- assign icons = 'heart,leaf,padlock,star' | split: ',' -%}
+    {%- assign titles = 'Roomy Toe Box,Flexible Sole,Lightweight,All-Day Comfort' | split: ',' -%}
+    {%- assign icons = 'leaf,check_mark,fire,heart' | split: ',' -%}
     {%- for t in titles -%}
       <li class="vy-pdp-features__item">
         <span class="vy-pdp-features__icon">{%- render 'custom-icon', icon: icons[forloop.index0] -%}</span>

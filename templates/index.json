@@ -449,7 +449,10 @@
         "color_scheme": "scheme-2",
         "heading": "One Pair Is Good. Two Makes Life Easier.",
         "heading_alignment": "left",
-        "button_label": "Shop Bundle Deals"
+        "button_label": "Shop Bundle Deals",
+        "layout": "split",
+        "subheading": "Mix colors and styles for your lifestyle.",
+        "cta_link": "/collections/best-sellers"
       },
       "blocks": {
         "t1": {

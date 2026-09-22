@@ -143,32 +143,32 @@
           "type": "row",
           "settings": {
             "feature": "Everyday",
-            "us": "true",
-            "others": "true"
+            "us": "check",
+            "others": "check"
           }
         },
         "c2": {
           "type": "row",
           "settings": {
             "feature": "Lightweight",
-            "us": "true",
-            "others": "false"
+            "us": "check",
+            "others": "cross"
           }
         },
         "c3": {
           "type": "row",
           "settings": {
             "feature": "Wide Toe Box",
-            "us": "true",
-            "others": "false"
+            "us": "check",
+            "others": "cross"
           }
         },
         "c4": {
           "type": "row",
           "settings": {
             "feature": "Outdoor Ready",
-            "us": "true",
-            "others": "true"
+            "us": "check",
+            "others": "check"
           }
         }
       },

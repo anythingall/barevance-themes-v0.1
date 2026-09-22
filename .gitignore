@@ -10,3 +10,6 @@ Thumbs.db
 .shopify
 node_modules
 *.zipdocs/index.dawn-default.json.bak
+
+.report-shots/
+.playwright-mcp/
