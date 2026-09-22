@@ -90,7 +90,7 @@
         "t2": {
           "type": "badge",
           "settings": {
-            "icon": "return",
+            "icon": "box",
             "title": "30-Day Returns",
             "subtitle": "Shop With Confidence"
           }
@@ -98,7 +98,7 @@
         "t3": {
           "type": "badge",
           "settings": {
-            "icon": "lock",
+            "icon": "shield",
             "title": "Secure Checkout",
             "subtitle": "Your Data Is Protected"
           }
@@ -106,7 +106,7 @@
         "t4": {
           "type": "badge",
           "settings": {
-            "icon": "star",
+            "icon": "people",
             "title": "10,000+ Happy Customers",
             "subtitle": "4.7/5 Average Rating"
           }
