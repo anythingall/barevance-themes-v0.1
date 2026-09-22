@@ -29,6 +29,32 @@
 -%}
 
 <div class="vy-iwt color-{{ section.settings.color_scheme }} gradient vy-section">
+  {%- if section.settings.layout == 'cards' -%}
+  <div class="vy-container vy-pcards">
+    <div class="vy-pcards__intro">
+      {%- if section.settings.heading != blank -%}<h2 class="vy-h2 vy-pcards__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="vy-pcards__text rte">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta vy-pcards__btn">{{ section.settings.button_label }}<span class="vy-pcards__arrow" aria-hidden="true">→</span></a>{%- endif -%}
+    </div>
+    <ul class="vy-pcards__grid list-unstyled" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          <li class="vy-pcards__card" {{ block.shopify_attributes }}>
+            <span class="vy-pcards__media">
+              {%- if block.settings.image_url != blank -%}
+                <img class="vy-pcards__img" src="{{ block.settings.image_url }}" width="600" height="450" loading="lazy" alt="{{ block.settings.title | escape }}">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'vy-pcards__img placeholder-svg' }}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.title != blank -%}<span class="vy-pcards__title">{{ block.settings.title }}</span>{%- endif -%}
+            {%- if block.settings.text != blank -%}<span class="vy-pcards__desc">{{ block.settings.text }}</span>{%- endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- else -%}
   <div class="vy-container vy-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
     <div class="vy-iwt__media vy-card">
       {%- if section.settings.image != blank -%}
@@ -84,6 +110,7 @@
       {%- endif -%}
     </div>
   </div>
+  {%- endif -%}
 </div>
 
 {%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
@@ -182,6 +209,27 @@
       aspect-ratio: 1 / 1;
     }
   }
+
+  /* ---- Cards layout: left intro + right image cards (matches design Problem) ---- */
+  .vy-pcards__intro { display: flex; flex-direction: column; gap: 1.4rem; margin-bottom: 2.4rem; }
+  .vy-pcards__heading { margin: 0; }
+  .vy-pcards__text { opacity: 0.82; max-width: 34rem; }
+  .vy-pcards__btn { align-self: flex-start; }
+  .vy-pcards__arrow { margin-left: 0.7rem; }
+  .vy-pcards__grid { display: grid; grid-template-columns: 1fr; gap: 1.6rem; margin: 0; }
+  .vy-pcards__card { display: flex; flex-direction: column; background: rgb(var(--color-background)); border: 0.1rem solid rgba(var(--color-foreground), 0.08); border-radius: var(--vy-card-radius, 1.2rem); overflow: hidden; }
+  .vy-pcards__media { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: rgba(var(--color-foreground), 0.05); }
+  .vy-pcards__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vy-pcards__title { font-size: 1.7rem; font-weight: 700; margin: 1.2rem 1.4rem 0.4rem; }
+  .vy-pcards__desc { font-size: 1.35rem; opacity: 0.78; line-height: 1.5; margin: 0 1.4rem 1.6rem; }
+
+  @media screen and (min-width: 750px) {
+    .vy-pcards__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media screen and (min-width: 990px) {
+    .vy-pcards { display: grid; grid-template-columns: 0.85fr 2fr; gap: 3.2rem; align-items: center; }
+    .vy-pcards__intro { margin-bottom: 0; }
+  }
 {% endstylesheet %}
 {% schema %}
 {
@@ -207,6 +255,16 @@
     },
 
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "media", "label": "Media + list (ảnh 1 bên)" },
+        { "value": "cards", "label": "Cards (intro trái + card ảnh phải)" }
+      ],
+      "default": "media"
+    },
     { "type": "header", "content": "Media" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     {
@@ -242,6 +300,15 @@
     { "type": "url", "id": "button_link", "label": "Button link" }
   ],
   "blocks": [
+    {
+      "type": "card",
+      "name": "Card (ảnh)",
+      "settings": [
+        { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN)" },
+        { "type": "text", "id": "title", "label": "Tiêu đề", "default": "Cramped Toes" },
+        { "type": "textarea", "id": "text", "label": "Mô tả", "default": "Traditional shoes can squeeze your toes." }
+      ]
+    },
     {
       "type": "list_item",
       "name": "Checklist item",

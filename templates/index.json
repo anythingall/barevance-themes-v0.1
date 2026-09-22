@@ -123,39 +123,42 @@
       "type": "custom-problem",
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "THE PROBLEM",
+        "layout": "cards",
         "heading": "Your Feet Weren't Made to Be Squeezed.",
         "text": "<p>Traditional shoes can be narrow, stiff and heavy — leaving your feet tired and uncomfortable.</p>",
         "button_label": "There's a Better Way",
         "button_link": "/pages/why-barefoot"
       },
       "blocks": {
-        "l1": {
-          "type": "list_item",
+        "c1": {
+          "type": "card",
           "settings": {
-            "icon_style": "cross",
-            "text": "Cramped toes from narrow shoes"
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1731001202618-452c0354e52f.jpg?v=1790089726",
+            "title": "Cramped Toes",
+            "text": "Traditional shoes can squeeze your toes."
           }
         },
-        "l2": {
-          "type": "list_item",
+        "c2": {
+          "type": "card",
           "settings": {
-            "icon_style": "cross",
-            "text": "Stiff movement that fights your stride"
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1732448393117-a91790b108d3.jpg?v=1790089726",
+            "title": "Stiff Movement",
+            "text": "Your feet naturally flex as you walk."
           }
         },
-        "l3": {
-          "type": "list_item",
+        "c3": {
+          "type": "card",
           "settings": {
-            "icon_style": "cross",
-            "text": "Heavy feel — more shoe than you need"
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1581888748626-2a3f240a6f9f.jpg?v=1790089726",
+            "title": "Heavy Feel",
+            "text": "Why carry more shoe than you need?"
           }
         }
       },
       "block_order": [
-        "l1",
-        "l2",
-        "l3"
+        "c1",
+        "c2",
+        "c3"
       ]
     },
     "barefoot": {
