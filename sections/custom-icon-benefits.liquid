@@ -70,7 +70,9 @@
       {%- else -%}
         {%- for block in section.blocks -%}
           <li class="vy-benefits__item" style="text-align: {{ section.settings.item_alignment }};" {{ block.shopify_attributes }}>
-            {%- if block.settings.icon != 'none' -%}
+            {%- if block.settings.image_url != blank -%}
+              <span class="vy-benefits__photo"><img src="{{ block.settings.image_url }}" width="360" height="360" loading="lazy" alt="{{ block.settings.title | escape }}"></span>
+            {%- elsif block.settings.icon != 'none' -%}
               <span class="vy-benefits__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
             {%- endif -%}
             {%- if block.settings.title != blank -%}
@@ -154,6 +156,25 @@
     font-size: 1.4rem;
     opacity: 0.82;
     line-height: 1.5;
+  }
+
+  /* Photo variant (rounded square image instead of icon circle) */
+  .vy-benefits__photo {
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: rgba(var(--color-foreground), 0.05);
+    margin-bottom: 0.4rem;
+  }
+
+  .vy-benefits__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 {% endstylesheet %}
 {% schema %}
@@ -267,6 +288,7 @@
             { "value": "chat_bubble", "label": "Chat" }
           ]
         },
+        { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN) — thay icon nếu có" },
         { "type": "text", "id": "title", "label": "Title", "default": "Cozy & Comfy" },
         { "type": "text", "id": "text", "label": "Text", "default": "Soft interior keeps them calm and relaxed." }
       ]
