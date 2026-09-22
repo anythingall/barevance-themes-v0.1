@@ -311,3 +311,39 @@
   background: linear-gradient(135deg, #ecf1e9 0%, #dfe8da 100%);
   color: rgba(35, 69, 45, 0.25);
 }
+
+/* Header nav — bolder + darker to match design */
+.header__menu-item {
+  color: rgb(var(--color-foreground));
+  font-weight: 600;
+}
+
+.header__menu-item span {
+  font-weight: 600;
+}
+
+/* Announcement localization (currency) selector, right side */
+.vy-ann__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.vy-ann__loc select {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.vy-ann__loc select option {
+  color: #171b18;
+}
+
+.vy-ann__currency {
+  letter-spacing: 0.03em;
+}

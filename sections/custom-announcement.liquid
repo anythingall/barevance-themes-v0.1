@@ -15,6 +15,26 @@
       </span>
     {%- endfor -%}
   </div>
+  {%- if section.settings.show_localization -%}
+    <div class="vy-ann__loc">
+      {%- if localization.available_countries.size > 1 -%}
+        {%- form 'localization', class: 'vy-ann__loc-form' -%}
+          <select name="country_code" aria-label="Currency" onchange="this.form.submit()">
+            {%- for country in localization.available_countries -%}
+              <option
+                value="{{ country.iso_code }}"
+                {%- if country.iso_code == localization.country.iso_code %} selected{% endif -%}
+              >
+                {{- country.currency.iso_code }} {{ country.currency.symbol -}}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- endform -%}
+      {%- else -%}
+        <span class="vy-ann__currency">{{ localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency }}</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
   <script>
     (function () {
       class AnnouncementBar extends HTMLElement {
@@ -111,7 +131,22 @@
     fill: currentColor;
   }
 
-  .vy-ann { display: block; }
+  .vy-ann { display: block; position: relative; }
+
+  .vy-ann__loc {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .vy-ann__loc { display: none; }
+  }
 
   /* Mobile: no-JS / reduced-motion fallback shows every message, wrapped (nothing hidden). */
   @media screen and (max-width: 749px) {
@@ -151,7 +186,8 @@
   "name": "Announcement bar",
   "class": "vy-ann-section",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" }
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "checkbox", "id": "show_localization", "label": "Hiện chọn tiền tệ (góc phải)", "default": true }
   ],
   "blocks": [
     {
