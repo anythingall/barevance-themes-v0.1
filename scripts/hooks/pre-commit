@@ -1,0 +1,21 @@
+#!/bin/sh
+# voya-parity pre-commit gate — blocks commits that break design parity on "done" sections.
+# Installed via:  git config core.hooksPath scripts/hooks
+# Bypass (emergency only):  PARITY_SKIP=1 git commit ...
+if [ "$PARITY_SKIP" = "1" ]; then
+  echo "parity-gate: PARITY_SKIP=1 — skipping (emergency bypass)."
+  exit 0
+fi
+if ! command -v node >/dev/null 2>&1; then
+  echo "parity-gate: node not found — skipping gate."
+  exit 0
+fi
+node scripts/parity-gate.mjs --staged
+status=$?
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "Commit blocked by parity-gate. A 'done' section no longer matches its design crop."
+  echo "  → regenerate actual-<key>.png and re-run the compare, or set status \"wip\" while iterating."
+  exit 1
+fi
+exit 0

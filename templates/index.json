@@ -125,7 +125,7 @@
         "color_scheme": "scheme-1",
         "layout": "cards",
         "heading": "Your Feet Weren't Made to Be Squeezed.",
-        "text": "<p>Traditional shoes can be narrow, stiff and heavy — leaving your feet tired and uncomfortable.</p>",
+        "text": "<p>Traditional shoes can be narrow, stiff and heavy \u2014 leaving your feet tired and uncomfortable.</p>",
         "button_label": "There's a Better Way",
         "button_link": "/pages/why-barefoot"
       },
@@ -176,37 +176,37 @@
         "b1": {
           "type": "benefit",
           "settings": {
-            "icon": "leaf",
+            "icon": "hf-foot",
             "title": "Wide Toe Box",
             "text": "Give your toes room to spread and move.",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1731001202618-452c0354e52f.jpg?v=1790089726"
+            "image_url": ""
           }
         },
         "b2": {
           "type": "benefit",
           "settings": {
-            "icon": "check_mark",
+            "icon": "hf-wave",
             "title": "Flexible Sole",
             "text": "Lets your feet flex naturally with every step.",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1581888748626-2a3f240a6f9f.jpg?v=1790089726"
+            "image_url": ""
           }
         },
         "b3": {
           "type": "benefit",
           "settings": {
-            "icon": "star",
+            "icon": "hf-drop",
             "title": "Zero Drop",
             "text": "A flat platform for a more natural stance.",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1732448393117-a91790b108d3.jpg?v=1790089726"
+            "image_url": ""
           }
         },
         "b4": {
           "type": "benefit",
           "settings": {
-            "icon": "fire",
+            "icon": "hf-feather",
             "title": "Lightweight",
             "text": "Less bulk between you and the ground.",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1573655695613-004614d4366b.jpg?v=1790089909"
+            "image_url": ""
           }
         }
       },
@@ -536,21 +536,21 @@
           "type": "item",
           "settings": {
             "question": "Can I return them if they don't fit?",
-            "answer": "<p>Yes — 30-day returns so you can find the right fit with confidence.</p>"
+            "answer": "<p>Yes \u2014 30-day returns so you can find the right fit with confidence.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
             "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1–2 business days with tracking.</p>"
+            "answer": "<p>Orders ship within 1\u20132 business days with tracking.</p>"
           }
         },
         "q5": {
           "type": "item",
           "settings": {
             "question": "Are Voya shoes suitable for everyday walking?",
-            "answer": "<p>Yes — Voya is designed for everyday walking, travel and light activity.</p>"
+            "answer": "<p>Yes \u2014 Voya is designed for everyday walking, travel and light activity.</p>"
           }
         },
         "q6": {

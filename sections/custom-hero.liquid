@@ -205,6 +205,15 @@
     margin: 0;
   }
 
+  /* Parity: home hero heading matches the design's large display size (~66px @1440,
+     measured from docs/design/home.png cap-height). Scoped to hero so global .vy-h1
+     on other pages is unchanged. */
+  .vy-hero .vy-hero__heading {
+    font-size: clamp(3.4rem, 3.2vw + 2.4rem, 6.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+  }
+
   .vy-hero__heading-accent {
     color: rgb(var(--color-accent-strong, var(--color-button)));
     display: inline;
@@ -503,12 +512,12 @@
     }
 
     .vy-hero--overlay .vy-hero__content {
-      flex: 0 1 56rem;
-      max-width: 56rem;
+      flex: 0 1 72rem;
+      max-width: 72rem;
       min-height: 0;
       justify-content: center;
       padding-block: 6rem;
-      padding-right: 4rem;
+      padding-right: 3rem;
       padding-left: max(2rem, calc((100vw - var(--page-width, 130rem)) / 2 + 5rem));
     }
 

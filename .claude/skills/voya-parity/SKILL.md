@@ -20,6 +20,19 @@ actual screenshot on the design. Only move to the next section when all AC pass.
   - Sale `#B85C3A` · Rating `#D99124`
   - **Headings = Manrope ExtraBold (manrope_n8)** · Body/UI = Inter · card radius 14px · buttons = pill.
 
+## Enforcement (installed — the gate makes this mandatory, not advisory)
+This loop is now backed by a **commit gate** so a section can't be declared done while wrong.
+See [docs/plan/parity-status.md](../../docs/plan/parity-status.md). Registry of sections +
+`status` (todo/wip/done) + thresholds: [docs/plan/parity-sections.json](../../docs/plan/parity-sections.json).
+- **Objective match score:** `node scripts/parity-gate.mjs --section <key>` runs
+  `scripts/parity-diff.py` (design crop vs live render) and prints **mismatch %** (AI-gen photo
+  regions masked via `docs/plan/mockups/<key>.mask.json`). A section passes only when mismatch ≤
+  threshold (default 8%) — this replaces "so bằng mắt" for the numeric AC.
+- **`done` = enforced:** the `scripts/hooks/pre-commit` hook (installed via
+  `git config core.hooksPath scripts/hooks`) blocks any commit that touches a `status:"done"`
+  section whose gate fails. Promote a section to `done` only in the commit that passes its gate.
+  Emergency bypass: `PARITY_SKIP=1 git commit`.
+
 ## The loop (per section)
 
 ### 0. Mockup Blueprint FIRST — get sign-off before any code  ⟵ prevents rework

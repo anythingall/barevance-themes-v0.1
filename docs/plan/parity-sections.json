@@ -1,0 +1,26 @@
+{
+  "$comment": "Source of truth for the voya-parity gate. status: todo=not started, wip=building (gate WARNS only), done=locked (gate ENFORCES: blueprint signed + compare artifacts + pixel-diff <= threshold). Promote a section to 'done' only in the commit that makes its gate pass. mask = optional JSON of image regions to ignore (AI-gen photos).",
+  "defaultThreshold": 8.0,
+  "shots": ".report-shots/ac",
+  "mockups": "docs/plan/mockups",
+  "pages": {
+    "home": {
+      "design": "docs/design/home.png",
+      "url": "/",
+      "sections": [
+        { "key": "hero",      "name": "Hero",             "file": "sections/custom-hero.liquid",          "blueprint": "hero.md",            "status": "todo" },
+        { "key": "trust",     "name": "Trust bar",        "file": "sections/custom-trust-badges.liquid",  "blueprint": "trust.md",           "status": "todo" },
+        { "key": "problem",   "name": "Problem",          "file": "sections/custom-problem.liquid",       "blueprint": "problem.md",         "status": "todo" },
+        { "key": "benefits",  "name": "Barefoot benefits","file": "sections/custom-icon-benefits.liquid", "blueprint": "benefits.md",        "status": "todo" },
+        { "key": "shopneed",  "name": "Shop by Need",     "file": "sections/custom-shop-by-need.liquid",  "blueprint": "shop-by-need.md",    "status": "todo" },
+        { "key": "best",      "name": "Best Sellers",     "file": "sections/featured-collection.liquid",  "blueprint": "best-sellers.md",    "status": "todo" },
+        { "key": "reviews",   "name": "Real People / Reviews", "file": "sections/custom-reviews.liquid",  "blueprint": "real-people-reviews.md", "status": "todo" },
+        { "key": "finderwhy", "name": "Finder + Why Yoya","file": "sections/custom-finder-why.liquid",    "blueprint": "finder-why.md",      "status": "todo" },
+        { "key": "bundle",    "name": "Bundle",           "file": "sections/custom-pricing-tiers.liquid", "blueprint": "bundle.md",          "status": "todo" },
+        { "key": "faq",       "name": "FAQ",              "file": "sections/custom-faq.liquid",           "blueprint": "faq.md",             "status": "todo" },
+        { "key": "cta",       "name": "Final CTA",        "file": "sections/custom-cta-banner.liquid",    "blueprint": "cta.md",             "status": "todo" },
+        { "key": "footer",    "name": "Footer",           "file": "sections/custom-footer.liquid",        "blueprint": "footer.md",          "status": "todo" }
+      ]
+    }
+  }
+}
