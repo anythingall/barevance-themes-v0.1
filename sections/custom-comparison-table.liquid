@@ -69,11 +69,19 @@
                       {%- assign rating = block.settings[k_r] | default: 0 -%}
                       {%- assign chl = section.settings[k_hl] -%}
                       <td class="vy-compare__rating{% if chl %} is-highlight{% endif %}">
-                        <span class="vy-compare__stars" aria-label="{{ rating }} out of 5">
-                          {%- for s in (1..5) -%}
-                            <span class="vy-compare__star{% if s <= rating %} is-on{% endif %}" aria-hidden="true">★</span>
-                          {%- endfor -%}
-                        </span>
+                        {%- if section.settings.mark_style == 'checks' -%}
+                          {%- if rating >= 3 -%}
+                            {%- render 'custom-compare-mark', state: 'check' -%}
+                          {%- else -%}
+                            <span class="vy-compare__dash" aria-label="not included">—</span>
+                          {%- endif -%}
+                        {%- else -%}
+                          <span class="vy-compare__stars" aria-label="{{ rating }} out of 5">
+                            {%- for s in (1..5) -%}
+                              <span class="vy-compare__star{% if s <= rating %} is-on{% endif %}" aria-hidden="true">★</span>
+                            {%- endfor -%}
+                          </span>
+                        {%- endif -%}
                       </td>
                     {%- endif -%}
                   {%- endfor -%}
@@ -250,6 +258,11 @@
     color: #d99124;
   }
 
+  .vy-compare__dash {
+    color: rgba(var(--color-foreground), 0.3);
+    font-size: 1.6rem;
+  }
+
   /* Highlighted (recommended) model column */
   .vy-compare__model.is-highlight,
   .vy-compare__rating.is-highlight {
@@ -313,9 +326,19 @@
       "label": "Kiểu bảng",
       "options": [
         { "value": "vs", "label": "Us vs Others (2 cột)" },
-        { "value": "models", "label": "So sánh model (4 cột, rating sao)" }
+        { "value": "models", "label": "So sánh model (4 cột)" }
       ],
       "default": "vs"
+    },
+    {
+      "type": "select",
+      "id": "mark_style",
+      "label": "Kiểu đánh dấu (models)",
+      "options": [
+        { "value": "stars", "label": "Sao (0–5)" },
+        { "value": "checks", "label": "Tick ✓ / —" }
+      ],
+      "default": "stars"
     },
     { "type": "header", "content": "Us vs Others (kiểu 'vs')" },
     { "type": "text", "id": "us_label", "label": "Cột của bạn", "default": "Our Brand" },

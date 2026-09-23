@@ -1,13 +1,5 @@
 {
   "sections": {
-    "banner": {
-      "type": "main-collection-banner",
-      "settings": {
-        "show_collection_description": true,
-        "show_collection_image": false,
-        "color_scheme": "scheme-1"
-      }
-    },
     "trust": {
       "type": "custom-trust-badges",
       "settings": {
@@ -73,42 +65,48 @@
           "type": "need",
           "settings": {
             "label": "Everyday Comfort",
-            "link_url": "/collections/everyday"
+            "link_url": "/collections/everyday",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
           }
         },
         "n2": {
           "type": "need",
           "settings": {
             "label": "Walking & Travel",
-            "link_url": "/collections/walking"
+            "link_url": "/collections/walking",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
           }
         },
         "n3": {
           "type": "need",
           "settings": {
             "label": "Active & Training",
-            "link_url": "/collections/active"
+            "link_url": "/collections/active",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
           }
         },
         "n4": {
           "type": "need",
           "settings": {
             "label": "Outdoor & Trail",
-            "link_url": "/collections/outdoor"
+            "link_url": "/collections/outdoor",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124"
           }
         },
         "n5": {
           "type": "need",
           "settings": {
             "label": "Casual Style",
-            "link_url": "/collections/casual"
+            "link_url": "/collections/casual",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124"
           }
         },
         "n6": {
           "type": "need",
           "settings": {
             "label": "Boots & Cold Weather",
-            "link_url": "/collections/boots"
+            "link_url": "/collections/boots",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1772867692023-e66c1997f0e8.jpg?v=1790090125"
           }
         }
       },
@@ -166,47 +164,80 @@
         "heading_alignment": "left",
         "feature_label": "",
         "us_label": "Mirox",
-        "others_label": "Others"
+        "others_label": "Others",
+        "mode": "models",
+        "mark_style": "checks",
+        "col1_name": "Mirox",
+        "col1_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113",
+        "col1_highlight": true,
+        "col2_name": "Solyn",
+        "col2_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
+        "col2_highlight": false,
+        "col3_name": "Neuro",
+        "col3_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1513654233834-19416b6eed13.jpg?v=1790091117",
+        "col3_highlight": false,
+        "col4_name": "FluxTrail",
+        "col4_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
+        "col4_highlight": false
       },
       "blocks": {
-        "c1": {
-          "type": "row",
+        "cc1": {
+          "type": "model_row",
           "settings": {
             "feature": "Everyday",
-            "us": "check",
-            "others": "check"
+            "r1": 5,
+            "r2": 5,
+            "r3": 5,
+            "r4": 5
           }
         },
-        "c2": {
-          "type": "row",
+        "cc2": {
+          "type": "model_row",
           "settings": {
             "feature": "Walking",
-            "us": "check",
-            "others": "check"
+            "r1": 5,
+            "r2": 5,
+            "r3": 5,
+            "r4": 5
           }
         },
-        "c3": {
-          "type": "row",
+        "cc3": {
+          "type": "model_row",
+          "settings": {
+            "feature": "Outdoor",
+            "r1": 5,
+            "r2": 3,
+            "r3": 3,
+            "r4": 5
+          }
+        },
+        "cc4": {
+          "type": "model_row",
           "settings": {
             "feature": "Wide Toe Box",
-            "us": "check",
-            "others": "cross"
+            "r1": 5,
+            "r2": 5,
+            "r3": 5,
+            "r4": 5
           }
         },
-        "c4": {
-          "type": "row",
+        "cc5": {
+          "type": "model_row",
           "settings": {
             "feature": "Lightweight",
-            "us": "check",
-            "others": "cross"
+            "r1": 2,
+            "r2": 5,
+            "r3": 5,
+            "r4": 5
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4"
+        "cc1",
+        "cc2",
+        "cc3",
+        "cc4",
+        "cc5"
       ]
     },
     "shoe_finder": {
@@ -388,14 +419,14 @@
           "type": "item",
           "settings": {
             "question": "Can I return them if they don't fit?",
-            "answer": "<p>Yes — 30-day returns so you can find the right fit with confidence.</p>"
+            "answer": "<p>Yes \u2014 30-day returns so you can find the right fit with confidence.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
             "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1–2 business days with tracking provided.</p>"
+            "answer": "<p>Orders ship within 1\u20132 business days with tracking provided.</p>"
           }
         }
       },
@@ -409,19 +440,62 @@
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
-        "color_scheme": "scheme-3",
-        "eyebrow": "A MORE NATURAL YOU.",
+        "color_scheme": "scheme-1",
+        "eyebrow": "",
         "heading": "Ready to Give Your Feet More Room?",
         "text": "<p>Discover a more natural way to move. Healthier feet. Happier you.</p>",
         "button_label": "Shop Best Sellers",
         "button_link": "/collections/best-sellers",
         "content_alignment": "left",
-        "overlay_opacity": 45
+        "overlay_opacity": 0,
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
+        "scrim": true,
+        "script_text": "A More Natural You."
+      }
+    },
+    "banner_hero": {
+      "type": "custom-hero",
+      "blocks": {
+        "b1": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Best Sellers",
+            "link": "/collections/best-sellers",
+            "style": "primary"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Find Your Voya",
+            "link": "/collections/all",
+            "style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_media_placement": "left",
+        "mobile_media_position": "below",
+        "section_height": "large",
+        "content_alignment": "left",
+        "eyebrow": "BAREFOOT SHOES",
+        "heading": "Made to Move Naturally",
+        "heading_highlight": "",
+        "subheading": "<p>Wide toe boxes, flexible soles and lightweight comfort for everyday movement.</p>",
+        "footnote": "",
+        "media_style": "overlay",
+        "media_caption": "More Freedom Every Step.",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1696964904681-7ae16f82ceef.jpg?v=1790085849"
       }
     }
   },
   "order": [
-    "banner",
+    "banner_hero",
     "trust",
     "shop_by_need",
     "favorites",
