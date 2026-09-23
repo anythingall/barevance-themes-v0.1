@@ -410,7 +410,7 @@
 }
 
 .card .price__sale s.price-item--regular {
-  color: rgba(var(--color-foreground), 0.5);
+  color: rgba(var(--color-foreground), 0.65);
   font-weight: 400;
 }
 
@@ -434,7 +434,7 @@
   order: 1;
 }
 .price--large.price--on-sale .price__sale s.price-item--regular {
-  color: rgba(var(--color-foreground, 23 27 24), 0.5);
+  color: rgba(var(--color-foreground, 23 27 24), 0.65);
 }
 
 /* PDP gallery overlays (Best-Seller badge + script caption), driven by
