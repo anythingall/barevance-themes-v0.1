@@ -89,6 +89,9 @@
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
+                {%- unless product.price_varies -%}
+                  &nbsp;— {{ product.selected_or_first_available_variant.price | money }}
+                {%- endunless -%}
               {%- endif -%}
             </span>
             {%- render 'loading-spinner' -%}
