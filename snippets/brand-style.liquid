@@ -63,6 +63,7 @@
     # (read from the font_picker settings so the merchant can still swap them).
     assign c_bg = '#FFFFFF'
     assign c_surface = '#ECF1E9'
+    assign c_sand = '#F6F1E7'
     assign c_text = '#171B18'
     assign c_primary = '#23452D'
     assign c_primary_text = '#FFFFFF'
@@ -111,6 +112,7 @@
     assign card_radius = 10
   endcase
 
+  assign c_sand = c_sand | default: c_surface
   assign body_font_bold = font_body | font_modify: 'weight', 'bold'
   assign body_font_italic = font_body | font_modify: 'style', 'italic'
   assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
@@ -201,6 +203,8 @@
     --vy-card-radius: {{ card_radius }}px;
 
     --brand-bg: {{ c_bg | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-surface: {{ c_surface | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --brand-sand: {{ c_sand | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --brand-text: {{ c_text | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --brand-primary: {{ c_primary | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --brand-dark: {{ c_dark | color_to_rgb | remove: 'rgb(' | remove: ')' }};

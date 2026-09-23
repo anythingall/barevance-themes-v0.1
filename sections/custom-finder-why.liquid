@@ -1,0 +1,425 @@
+{%- comment -%} Base theme: store-type gate — on home/product pages, hide this section when settings.store_type is not in this section's type_visibility. {%- endcomment -%}
+{%- liquid
+  assign hl_hide = false
+  assign hl_vis = section.settings.type_visibility | default: 'all'
+  assign hl_st = settings.store_type | default: 'v1'
+  assign hl_on = false
+  if template.name == 'index'
+    assign hl_on = true
+  endif
+  if template.name == 'product'
+    assign hl_on = true
+  endif
+  if hl_on and hl_vis != 'all'
+    unless hl_vis contains hl_st
+      assign hl_hide = true
+    endunless
+  endif
+-%}
+{%- unless hl_hide -%}
+{%- comment -%}
+  vy-finder-why — side-by-side band: left = shoe-finder promo (green + phone),
+  right = "Why Voya?" benefits grid. Mobile: stacks.
+{%- endcomment -%}
+
+<div class="vy-finder-why color-{{ section.settings.color_scheme }} vy-section">
+  <div class="vy-finder-why__grid">
+    <div class="vy-finder-why__finder">
+      <div class="vy-finder-why__finder-inner">
+        {%- if section.settings.finder_heading != blank -%}
+          <h2 class="vy-finder-why__heading">{{ section.settings.finder_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.finder_text != blank -%}
+          <p class="vy-finder-why__text">{{ section.settings.finder_text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            class="vy-finder-why__btn"
+            {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}href="#"{% endif %}
+          >
+            {{ section.settings.button_label }}
+            <span class="vy-finder-why__btn-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.phone_image_url != blank -%}
+        <div class="vy-finder-why__phone">
+          <img
+            src="{{ section.settings.phone_image_url }}"
+            width="520"
+            height="640"
+            alt="{{ section.settings.finder_heading | escape }}"
+            loading="lazy"
+          >
+        </div>
+      {%- else -%}
+        <div class="vy-finder-why__phone" aria-hidden="true">
+          <div class="vy-finder-why__device">
+            <span class="vy-finder-why__notch"></span>
+            <div class="vy-finder-why__screen">
+              <span class="vy-finder-why__brand">✦ Voya</span>
+              <span class="vy-finder-why__q-title">Find Your Perfect Pair</span>
+              <span class="vy-finder-why__q-label">What's your main activity?</span>
+              <div class="vy-finder-why__chips">
+                <span>Walking</span><span>Running</span>
+                <span>Hiking</span><span>Training</span>
+                <span>Everyday</span><span>Travel</span>
+              </div>
+              <span class="vy-finder-why__next">Next</span>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="vy-finder-why__why">
+      {%- if section.settings.why_heading != blank -%}
+        <h2 class="vy-finder-why__why-title">{{ section.settings.why_heading }}</h2>
+      {%- endif -%}
+      <ul class="vy-finder-why__benefits list-unstyled" role="list">
+        {%- for block in section.blocks -%}
+          <li class="vy-finder-why__benefit" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}
+              <span class="vy-finder-why__icon">{%- render 'custom-icon', icon: block.settings.icon -%}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="vy-finder-why__benefit-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="vy-finder-why__benefit-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>.</div>{%- endif -%}{%- endunless -%}
+
+{% stylesheet %}
+  .vy-finder-why.vy-section {
+    padding: 0;
+  }
+
+  .vy-finder-why__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__grid {
+      grid-template-columns: 46% 54%;
+    }
+  }
+
+  /* Left: green finder */
+  .vy-finder-why__finder {
+    position: relative;
+    background: rgb(var(--brand-surface, 236, 241, 233));
+    padding: 3.2rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__finder {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      padding: 4.5rem 4rem;
+    }
+  }
+
+  .vy-finder-why__finder-inner {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .vy-finder-why__heading {
+    margin: 0 0 1.2rem;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    line-height: 1.12;
+    color: rgb(var(--brand-text, 23, 27, 24));
+    font-size: calc(2.8rem * var(--font-heading-scale, 1));
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__heading {
+      font-size: calc(3.4rem * var(--font-heading-scale, 1));
+      text-wrap: balance;
+    }
+  }
+
+  .vy-finder-why__text {
+    margin: 0 0 2rem;
+    font-size: 1.5rem;
+    line-height: 1.55;
+    color: rgba(var(--brand-text, 23, 27, 24), 0.72);
+    max-width: 34rem;
+  }
+
+  .vy-finder-why__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgb(var(--brand-primary, 35, 69, 45));
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1.4rem 2.6rem;
+    border-radius: 999px;
+    min-height: 4.8rem;
+  }
+
+  .vy-finder-why__btn-arrow .svg-wrapper,
+  .vy-finder-why__btn-arrow svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .vy-finder-why__phone {
+    flex: 0 0 auto;
+    align-self: center;
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__phone {
+      width: 19rem;
+    }
+  }
+
+  .vy-finder-why__phone img {
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: 0 1.6rem 3.2rem rgba(0, 0, 0, 0.16);
+    display: block;
+  }
+
+  /* CSS phone-quiz mockup (matches the design's flat device) */
+  .vy-finder-why__device {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 200 / 410;
+    background: #1c2620;
+    border-radius: 2.6rem;
+    padding: 0.7rem;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.22);
+  }
+
+  .vy-finder-why__notch {
+    position: absolute;
+    top: 0.7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34%;
+    height: 1.5rem;
+    background: #1c2620;
+    border-radius: 0 0 1rem 1rem;
+    z-index: 2;
+  }
+
+  .vy-finder-why__screen {
+    position: relative;
+    height: 100%;
+    background: #fff;
+    border-radius: 2rem;
+    padding: 2.2rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vy-finder-why__brand {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: rgb(var(--brand-primary, 35, 69, 45));
+    text-align: center;
+    margin-bottom: 1.4rem;
+  }
+
+  .vy-finder-why__q-title {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #171b18;
+    margin-bottom: 0.3rem;
+  }
+
+  .vy-finder-why__q-label {
+    font-size: 1.1rem;
+    color: rgba(23, 27, 24, 0.6);
+    margin-bottom: 1.2rem;
+  }
+
+  .vy-finder-why__chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .vy-finder-why__chips span {
+    background: #f1f2ef;
+    border: 0.1rem solid rgba(23, 27, 24, 0.08);
+    border-radius: 0.8rem;
+    font-size: 1rem;
+    color: #3a3f3b;
+    text-align: center;
+    padding: 0.7rem 0.4rem;
+  }
+
+  .vy-finder-why__next {
+    margin-top: auto;
+    background: rgb(var(--brand-primary, 35, 69, 45));
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.9rem;
+    border-radius: 0.9rem;
+  }
+
+  /* Right: why voya */
+  .vy-finder-why__why {
+    background: rgb(var(--brand-bg, 255, 255, 255));
+    padding: 3.2rem 2.4rem;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__why {
+      padding: 4.5rem 4rem;
+    }
+  }
+
+  .vy-finder-why__why-title {
+    margin: 0 0 2.8rem;
+    text-align: center;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    color: rgb(var(--brand-text, 23, 27, 24));
+    font-size: calc(2.6rem * var(--font-heading-scale, 1));
+  }
+
+  .vy-finder-why__benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem 1.6rem;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-finder-why__benefits {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .vy-finder-why__benefit {
+    text-align: left;
+  }
+
+  .vy-finder-why__icon {
+    display: inline-flex;
+    margin-bottom: 1.2rem;
+    color: rgb(var(--brand-text, 23, 27, 24));
+  }
+
+  .vy-finder-why__icon .svg-wrapper,
+  .vy-finder-why__icon svg {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .vy-finder-why__benefit-title {
+    margin: 0 0 0.6rem;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    color: rgb(var(--brand-text, 23, 27, 24));
+  }
+
+  .vy-finder-why__benefit-text {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: rgba(var(--brand-text, 23, 27, 24), 0.65);
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Finder + Why",
+  "tag": "section",
+  "class": "vy-finder-why-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "type_visibility",
+      "label": "Show on store type",
+      "options": [
+        { "value": "all", "label": "All layouts" },
+        { "value": "v1", "label": "V1 only" },
+        { "value": "v2", "label": "V2 only" },
+        { "value": "v3", "label": "V3 only" },
+        { "value": "v1v2", "label": "V1 + V2" },
+        { "value": "v1v3", "label": "V1 + V3" },
+        { "value": "v2v3", "label": "V2 + V3" }
+      ],
+      "default": "all"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "header", "content": "Left — Shoe finder (green)" },
+    { "type": "text", "id": "finder_heading", "label": "Heading", "default": "Not Sure Which Voya Is Right for You?" },
+    { "type": "textarea", "id": "finder_text", "label": "Text", "default": "Take our 30-second shoe finder and get a personalized recommendation." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Find My Voya" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "phone_image_url", "label": "Phone image (URL CDN)" },
+    { "type": "header", "content": "Right — Why Voya" },
+    { "type": "text", "id": "why_heading", "label": "Heading", "default": "Why Voya?" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "hf_foot",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "hf_foot", "label": "Foot" },
+            { "value": "hf_leaf", "label": "Leaf" },
+            { "value": "hf_heart", "label": "Heart" },
+            { "value": "hf_wave", "label": "Wave" },
+            { "value": "diamond", "label": "Diamond / Gem" },
+            { "value": "leaf", "label": "Leaf (alt)" },
+            { "value": "heart", "label": "Heart (alt)" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Foot-Shaped Design" },
+        { "type": "text", "id": "text", "label": "Text", "default": "More room where you need it." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Finder + Why",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "hf_foot", "title": "Foot-Shaped Design", "text": "More room where you need it." } },
+        { "type": "benefit", "settings": { "icon": "hf_leaf", "title": "Natural Movement", "text": "Flexible construction designed for you." } },
+        { "type": "benefit", "settings": { "icon": "diamond", "title": "Everyday Comfort", "text": "Made for long days and real life." } },
+        { "type": "benefit", "settings": { "icon": "hf_heart", "title": "Modern Style", "text": "Barefoot function without sacrificing style." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

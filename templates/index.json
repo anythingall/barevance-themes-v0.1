@@ -297,7 +297,7 @@
         "columns_desktop": 5,
         "color_scheme": "scheme-1",
         "show_rating": true,
-        "quick_add": "standard",
+        "quick_add": "none",
         "show_view_all": true,
         "swipe_on_mobile": true,
         "image_ratio": "square",
@@ -309,6 +309,12 @@
       "type": "custom-reviews",
       "settings": {
         "color_scheme": "scheme-1",
+        "layout": "split",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1551632811-561732d1e306.jpg?v=1790128083",
+        "left_heading": "Real People. Real Comfort.",
+        "left_subheading": "See how Voya fits into everyday life.",
+        "button_label": "Watch Customer Stories",
+        "show_play": true,
         "source": "blocks",
         "eyebrow": "REAL COMFORT",
         "heading": "What Customers Love About Voya",
@@ -322,7 +328,8 @@
             "stars": 5,
             "text": "I feel like I'm walking barefoot.",
             "name": "Sarah K.",
-            "badge": "Verified Customer"
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_c0169607-ee08-48c1-82dd-ecb8e8d60bd7.jpg?v=1790128083"
           }
         },
         "r2": {
@@ -331,7 +338,8 @@
             "stars": 5,
             "text": "So much room for my toes.",
             "name": "Michael T.",
-            "badge": "Verified Customer"
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_27fddbf2-0705-4e15-9506-1e3d07fea5de.jpg?v=1790128083"
           }
         },
         "r3": {
@@ -340,82 +348,66 @@
             "stars": 5,
             "text": "I can wear them all day without discomfort.",
             "name": "Emily R.",
-            "badge": "Verified Customer"
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300.jpg?v=1790128083"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "My knees stopped aching after switching.",
+            "name": "James P.",
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_41367795-d935-4b0a-a012-35b200bb60ec.jpg?v=1790129005"
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Lightweight and true to size.",
+            "name": "Priya N.",
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_b496c9f4-364c-412d-a6e4-8c6a4cb30f94.jpg?v=1790129005"
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "text": "Best travel shoes I've owned.",
+            "name": "Marcus D.",
+            "badge": "Verified Customer",
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_a5d3b909-cf6e-45cc-b47a-30283350a724.jpg?v=1790129005"
           }
         }
       },
       "block_order": [
         "r1",
         "r2",
-        "r3"
+        "r3",
+        "r4",
+        "r5",
+        "r6"
       ]
     },
-    "shoe_finder": {
-      "type": "custom-shoe-finder",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "eyebrow": "SHOE FINDER",
-        "heading": "Not Sure Which Voya Is Right for You?",
-        "subheading": "Take our 30-second shoe finder and get a personalized recommendation.",
-        "default_result_url": "/collections/best-sellers",
-        "cta_final": "Find My Voya"
-      },
-      "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "What's your main activity?",
-            "option_1_label": "Everyday walking",
-            "option_1_url": "/collections/everyday",
-            "option_2_label": "Travel & long days",
-            "option_2_url": "/collections/walking",
-            "option_3_label": "Active & training",
-            "option_3_url": "/collections/active",
-            "option_4_label": "Outdoor & trail",
-            "option_4_url": "/collections/outdoor"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "How do you like your fit?",
-            "option_1_label": "Roomy & relaxed",
-            "option_2_label": "Snug & secure",
-            "option_3_label": "Somewhere in between"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "Pick your style",
-            "option_1_label": "Minimal & modern",
-            "option_2_label": "Sporty",
-            "option_3_label": "Casual everyday"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3"
-      ]
-    },
-    "why_voya": {
-      "type": "custom-icon-benefits",
+    "finder_why": {
+      "type": "custom-finder-why",
       "settings": {
         "color_scheme": "scheme-1",
-        "source": "blocks",
-        "eyebrow": "",
-        "heading": "Why Voya?",
-        "heading_alignment": "center",
-        "columns": 4,
-        "mobile_layout": "carousel"
+        "finder_heading": "Not Sure Which Voya Is Right for You?",
+        "finder_text": "Take our 30-second shoe finder and get a personalized recommendation.",
+        "button_label": "Find My Voya",
+        "button_link": "shopify://collections/best-sellers",
+        "phone_image_url": "",
+        "why_heading": "Why Voya?"
       },
       "blocks": {
         "b1": {
           "type": "benefit",
           "settings": {
-            "icon": "leaf",
+            "icon": "hf_foot",
             "title": "Foot-Shaped Design",
             "text": "More room where you need it."
           }
@@ -423,7 +415,7 @@
         "b2": {
           "type": "benefit",
           "settings": {
-            "icon": "check_mark",
+            "icon": "hf_leaf",
             "title": "Natural Movement",
             "text": "Flexible construction designed for you."
           }
@@ -431,7 +423,7 @@
         "b3": {
           "type": "benefit",
           "settings": {
-            "icon": "heart",
+            "icon": "diamond",
             "title": "Everyday Comfort",
             "text": "Made for long days and real life."
           }
@@ -439,7 +431,7 @@
         "b4": {
           "type": "benefit",
           "settings": {
-            "icon": "star",
+            "icon": "hf_heart",
             "title": "Modern Style",
             "text": "Barefoot function without sacrificing style."
           }
@@ -456,7 +448,7 @@
       "type": "custom-pricing-tiers",
       "settings": {
         "color_scheme": "scheme-2",
-        "heading": "One Pair Is Good. Two Makes Life Easier.",
+        "heading": "One Pair Is Good.<br>Two Makes Life Easier.",
         "heading_alignment": "left",
         "button_label": "Shop Bundle Deals",
         "layout": "split",
@@ -472,7 +464,10 @@
             "label": "1 Pair",
             "badge": "",
             "highlight": false,
-            "product": "mirox"
+            "product": "mirox",
+            "price_text": "$79.99",
+            "save_text": "Standard",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113"
           }
         },
         "t2": {
@@ -481,9 +476,12 @@
             "quantity": 2,
             "discount_percent": 10,
             "label": "2 Pairs",
-            "badge": "Save 10%",
+            "badge": "",
             "highlight": false,
-            "product": "mirox"
+            "product": "mirox",
+            "price_text": "$139.99",
+            "save_text": "Save $19.99",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115"
           }
         },
         "t3": {
@@ -494,7 +492,10 @@
             "label": "3 Pairs",
             "badge": "Best Value",
             "highlight": true,
-            "product": "mirox"
+            "product": "mirox",
+            "price_text": "$179.99",
+            "save_text": "Save $59.98",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120"
           }
         }
       },
@@ -511,7 +512,10 @@
         "source": "blocks",
         "heading": "Frequently Asked Questions",
         "heading_alignment": "left",
-        "columns": "2"
+        "columns": "2",
+        "view_all_label": "View All FAQs",
+        "view_all_link": "/pages/faq",
+        "narrow": false
       },
       "blocks": {
         "q1": {
@@ -559,24 +563,29 @@
       },
       "block_order": [
         "q1",
-        "q2",
-        "q3",
         "q4",
+        "q2",
         "q5",
+        "q3",
         "q6"
       ]
     },
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
-        "color_scheme": "scheme-3",
-        "eyebrow": "HEALTHIER FEET. HAPPIER LIVES.",
+        "color_scheme": "scheme-1",
+        "eyebrow": "",
         "heading": "Ready to Give Your Feet More Room?",
         "text": "<p>Discover a more natural way to move.</p>",
         "button_label": "Shop Best Sellers",
         "button_link": "/collections/best-sellers",
         "content_alignment": "left",
-        "overlay_opacity": 45
+        "overlay_opacity": 0,
+        "button2_label": "Find Your Voya",
+        "button2_link": "/collections/best-sellers",
+        "script_text": "Healthier Feet. Happier Lives.",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
+        "scrim": true
       }
     }
   },
@@ -588,8 +597,7 @@
     "shop_by_need",
     "best_sellers",
     "love",
-    "shoe_finder",
-    "why_voya",
+    "finder_why",
     "bundle",
     "faq",
     "cta"

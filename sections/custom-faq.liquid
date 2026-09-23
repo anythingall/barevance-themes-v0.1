@@ -26,10 +26,20 @@
   <div class="vy-container {% if section.settings.narrow and section.settings.show_guarantee == false %}vy-container--narrow{% endif %}">
     <div class="vy-faq__wrap {% if section.settings.show_guarantee %}has-guarantee{% endif %}">
     <div class="vy-faq__main">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="vy-h2 vy-faq__heading" style="text-align: {{ section.settings.heading_alignment }};">
-        {{ section.settings.heading }}
-      </h2>
+    {%- if section.settings.heading != blank or section.settings.view_all_label != blank -%}
+      <div class="vy-faq__head" style="justify-content: {% if section.settings.heading_alignment == 'center' %}center{% else %}space-between{% endif %};">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="vy-h2 vy-faq__heading" style="text-align: {{ section.settings.heading_alignment }};">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.view_all_label != blank -%}
+          <a class="vy-faq__view-all" href="{{ section.settings.view_all_link | default: '#' }}">
+            {{ section.settings.view_all_label }}
+            <span class="vy-faq__view-all-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+          </a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
     {%- liquid
@@ -45,7 +55,7 @@
           <details class="vy-faq__item">
             <summary class="vy-faq__q vy-tap">
               <span>{{ item.question }}</span>
-              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
+              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'caret' -%}</span>
             </summary>
             <div class="vy-faq__a rte">{{ item.answer }}</div>
           </details>
@@ -55,7 +65,7 @@
           <details class="vy-faq__item" {{ block.shopify_attributes }}>
             <summary class="vy-faq__q vy-tap">
               <span>{{ block.settings.question }}</span>
-              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'plus' -%}</span>
+              <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'caret' -%}</span>
             </summary>
             <div class="vy-faq__a rte">{{ block.settings.answer }}</div>
           </details>
@@ -192,8 +202,41 @@
     align-content: start;
   }
 
+  /* Header row: heading left, "View All FAQs" right */
+  .vy-faq__head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .vy-faq__head .vy-faq__heading {
+    margin: 0;
+  }
+
+  .vy-faq__view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+  }
+
+  .vy-faq__view-all-arrow .svg-wrapper,
+  .vy-faq__view-all-arrow svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  /* Each question is its own bordered card */
   .vy-faq__item {
-    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    background: rgb(var(--brand-bg, 255, 255, 255));
+    border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    border-radius: 1rem;
   }
 
   .vy-faq__q {
@@ -202,9 +245,9 @@
     justify-content: space-between;
     gap: 1rem;
     cursor: pointer;
-    padding: 1.4rem 0;
+    padding: 1.5rem 1.8rem;
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     list-style: none;
   }
 
@@ -213,17 +256,18 @@
   }
 
   .vy-faq__icon .svg-wrapper {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.4rem;
+    height: 1.4rem;
     transition: transform 0.2s ease;
+    opacity: 0.6;
   }
 
   .vy-faq__item[open] .vy-faq__icon .svg-wrapper {
-    transform: rotate(45deg);
+    transform: rotate(180deg);
   }
 
   .vy-faq__a {
-    padding: 0 0 1.6rem;
+    padding: 0 1.8rem 1.6rem;
     opacity: 0.85;
   }
 
@@ -270,6 +314,8 @@
       "default": "blocks"
     },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "view_all_label", "label": "View-all link label" },
+    { "type": "url", "id": "view_all_link", "label": "View-all link" },
     { "type": "header", "content": "Money-back guarantee (bên phải)" },
     { "type": "checkbox", "id": "show_guarantee", "label": "Hiện box bảo đảm hoàn tiền", "default": false },
     { "type": "color_scheme", "id": "guarantee_scheme", "label": "Color scheme của box", "default": "scheme-2" },

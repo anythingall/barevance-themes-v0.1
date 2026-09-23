@@ -23,6 +23,143 @@
   Manual blocks now; a metafield/app source can be added later without markup changes.
 {%- endcomment -%}
 
+{%- if section.settings.layout == 'split' -%}
+  <div class="vy-reviews vy-reviews--split color-{{ section.settings.color_scheme }} gradient vy-section">
+    <div class="vy-reviews__split">
+      <div class="vy-reviews__media">
+        {%- if section.settings.image_url != blank -%}
+          <img
+            class="vy-reviews__media-img"
+            src="{{ section.settings.image_url }}"
+            width="1200"
+            height="900"
+            alt="{{ section.settings.left_heading | escape }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+        <span class="vy-reviews__media-scrim" aria-hidden="true"></span>
+        <div class="vy-reviews__media-inner">
+          {%- if section.settings.left_heading != blank -%}
+            <h2 class="vy-reviews__media-title">{{ section.settings.left_heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.left_subheading != blank -%}
+            <p class="vy-reviews__media-sub">{{ section.settings.left_subheading }}</p>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank -%}
+            <div class="vy-reviews__cta-row">
+              <a class="vy-reviews__cta" href="{{ section.settings.button_link | default: '#' }}">
+                {{ section.settings.button_label }}
+              </a>
+              {%- if section.settings.show_play -%}
+                <a
+                  class="vy-reviews__play"
+                  href="{{ section.settings.button_link | default: '#' }}"
+                  aria-label="{{ section.settings.button_label | escape }}"
+                >
+                  {%- render 'custom-icon', icon: 'play' -%}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="vy-reviews__panel" data-reviews-slider>
+        {%- if section.settings.heading != blank or section.blocks.size > 1 -%}
+          <div class="vy-reviews__panel-head">
+            {%- if section.settings.heading != blank -%}
+              <h2 class="vy-reviews__panel-title">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+            <div class="vy-reviews__nav">
+              <button
+                type="button"
+                class="vy-reviews__nav-btn vy-reviews__nav-btn--prev"
+                data-reviews-prev
+                aria-label="{{ 'general.slider.previous_slide' | t | default: 'Previous' }}"
+              >
+                {%- render 'custom-icon', icon: 'arrow' -%}
+              </button>
+              <button
+                type="button"
+                class="vy-reviews__nav-btn vy-reviews__nav-btn--next"
+                data-reviews-next
+                aria-label="{{ 'general.slider.next_slide' | t | default: 'Next' }}"
+              >
+                {%- render 'custom-icon', icon: 'arrow' -%}
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="vy-reviews__track" data-reviews-track>
+          {%- for block in section.blocks -%}
+            <div class="vy-reviews__card vy-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.text != blank -%}
+                <p class="vy-reviews__quote">{{ block.settings.text }}</p>
+              {%- endif -%}
+              <div class="vy-reviews__stars">{%- render 'custom-stars', rating: block.settings.stars -%}</div>
+              <div class="vy-reviews__author">
+                {%- if block.settings.avatar_url != blank -%}
+                  <img
+                    class="vy-reviews__avatar"
+                    src="{{ block.settings.avatar_url }}"
+                    width="88"
+                    height="88"
+                    alt="{{ block.settings.name | escape }}"
+                    loading="lazy"
+                  >
+                {%- elsif block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 120
+                    | image_tag: loading: 'lazy', class: 'vy-reviews__avatar', alt: block.settings.name
+                  }}
+                {%- endif -%}
+                <span class="vy-reviews__author-body">
+                  {%- if block.settings.name != blank -%}
+                    <span class="vy-reviews__name">{{ block.settings.name }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.badge != blank -%}
+                    <span class="vy-reviews__verified">{{ block.settings.badge }}</span>
+                  {%- endif -%}
+                </span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll('[data-reviews-slider]').forEach(function (root) {
+        var track = root.querySelector('[data-reviews-track]');
+        if (!track) return;
+        var prev = root.querySelector('[data-reviews-prev]');
+        var next = root.querySelector('[data-reviews-next]');
+        function step() {
+          var card = track.firstElementChild;
+          if (!card) return track.clientWidth;
+          var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+          return card.getBoundingClientRect().width + gap;
+        }
+        function update() {
+          if (!prev || !next) return;
+          var max = track.scrollWidth - track.clientWidth - 1;
+          prev.disabled = track.scrollLeft <= 0;
+          next.disabled = track.scrollLeft >= max;
+        }
+        prev && prev.addEventListener('click', function () {
+          track.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+        next && next.addEventListener('click', function () {
+          track.scrollBy({ left: step(), behavior: 'smooth' });
+        });
+        track.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+      });
+    })();
+  </script>
+{%- else -%}
 <div class="vy-reviews color-{{ section.settings.color_scheme }} gradient vy-section">
   <div class="vy-container">
     {%- liquid
@@ -130,6 +267,7 @@
     {%- endif -%}
   </div>
 </div>
+{%- endif -%}
 
 {%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
@@ -192,6 +330,261 @@
     font-size: 1.2rem;
     opacity: 0.7;
   }
+
+  /* ---------- Split layout (photo CTA + review cards) ---------- */
+  .vy-reviews--split.vy-section {
+    padding: 0;
+  }
+
+  .vy-reviews__split {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-reviews__split {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Left: full-bleed photo with overlaid content */
+  .vy-reviews__media {
+    position: relative;
+    min-height: 34rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-reviews__media {
+      min-height: 46rem;
+    }
+  }
+
+  .vy-reviews__media-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .vy-reviews__media-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.35) 45%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .vy-reviews__media-inner {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    padding: 3.2rem 2.4rem;
+    max-width: 46rem;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-reviews__media-inner {
+      padding: 4rem 4.5rem;
+    }
+  }
+
+  .vy-reviews__media-title {
+    margin: 0 0 1rem;
+    color: #fff;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    line-height: 1.1;
+    font-size: calc(3.2rem * var(--font-heading-scale, 1));
+    text-wrap: balance;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-reviews__media-title {
+      font-size: calc(3.8rem * var(--font-heading-scale, 1));
+    }
+  }
+
+  .vy-reviews__media-sub {
+    margin: 0 0 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  .vy-reviews__cta-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .vy-reviews__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #171b18;
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1.4rem 2.6rem;
+    border-radius: 999px;
+    min-height: 4.8rem;
+  }
+
+  .vy-reviews__play {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 999px;
+    background: #fff;
+    color: #171b18;
+    flex: 0 0 auto;
+  }
+
+  .vy-reviews__play .svg-wrapper,
+  .vy-reviews__play svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  /* Right: light panel with review-card slider */
+  .vy-reviews__panel {
+    background: rgba(var(--color-foreground), 0.045);
+    padding: 3.2rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-reviews__panel {
+      padding: 4rem;
+    }
+  }
+
+  .vy-reviews__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .vy-reviews__panel-title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    font-size: calc(2.2rem * var(--font-heading-scale, 1));
+    line-height: 1.2;
+    color: rgb(var(--color-foreground));
+  }
+
+  .vy-reviews__nav {
+    display: flex;
+    gap: 0.8rem;
+    flex: 0 0 auto;
+  }
+
+  .vy-reviews__nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border: 0;
+    background: transparent;
+    color: rgb(var(--color-foreground));
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+
+  .vy-reviews__nav-btn:hover {
+    background: rgba(var(--color-foreground), 0.08);
+  }
+
+  .vy-reviews__nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    background: transparent;
+  }
+
+  .vy-reviews__nav-btn .svg-wrapper,
+  .vy-reviews__nav-btn svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .vy-reviews__nav-btn--prev svg {
+    transform: rotate(180deg);
+  }
+
+  /* Horizontal slider track (arrows scroll it) */
+  .vy-reviews__track {
+    display: flex;
+    gap: 1.6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.4rem;
+    min-width: 0;
+  }
+
+  .vy-reviews__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vy-reviews__card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 2rem 1.8rem;
+    background: rgb(var(--color-background));
+    border: 0;
+    border-radius: 1.4rem;
+    box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.07);
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
+
+  @media screen and (min-width: 750px) {
+    .vy-reviews__card {
+      flex-basis: calc((100% - 3.2rem) / 3);
+    }
+  }
+
+  .vy-reviews__quote {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 1.7rem;
+    line-height: 1.35;
+    color: rgb(var(--color-foreground));
+    quotes: "\201C" "\201D";
+  }
+
+  .vy-reviews__quote::before {
+    content: open-quote;
+  }
+
+  .vy-reviews__quote::after {
+    content: close-quote;
+  }
+
+  .vy-reviews__card .vy-reviews__author {
+    margin-top: auto;
+  }
 {% endstylesheet %}
 {% schema %}
 {
@@ -217,6 +610,24 @@
     },
 
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "info": "Split = left lifestyle photo + CTA, right review cards (design). Stack = centered heading + card row.",
+      "options": [
+        { "value": "stack", "label": "Stacked (centered heading + cards)" },
+        { "value": "split", "label": "Split (photo CTA + cards)" }
+      ],
+      "default": "stack"
+    },
+    { "type": "header", "content": "Split layout — left photo panel" },
+    { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN)" },
+    { "type": "text", "id": "left_heading", "label": "Tiêu đề (trên ảnh)", "default": "Real People. Real Comfort." },
+    { "type": "text", "id": "left_subheading", "label": "Mô tả (trên ảnh)", "default": "See how Voya fits into everyday life." },
+    { "type": "text", "id": "button_label", "label": "Nút — nhãn", "default": "Watch Customer Stories" },
+    { "type": "url", "id": "button_link", "label": "Nút — liên kết" },
+    { "type": "checkbox", "id": "show_play", "label": "Hiện icon play cạnh nút", "default": true },
     {
       "type": "select",
       "id": "source",
@@ -256,6 +667,7 @@
       "name": "Review",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Avatar" },
+        { "type": "text", "id": "avatar_url", "label": "Avatar (URL CDN) — thay ảnh nếu có" },
         { "type": "range", "id": "stars", "label": "Số sao", "min": 0, "max": 5, "step": 0.5, "default": 5 },
         { "type": "textarea", "id": "text", "label": "Review", "default": "Absolutely love it! Great quality and looks amazing." },
         { "type": "text", "id": "name", "label": "Tên", "default": "Jessica M." },

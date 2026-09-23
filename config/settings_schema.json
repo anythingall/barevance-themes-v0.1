@@ -1549,6 +1549,13 @@
     "name": "t:settings_schema.badges.name",
     "settings": [
       {
+        "type": "checkbox",
+        "id": "show_sale_badge",
+        "label": "Show automatic \"Sale\" badge",
+        "info": "When off, product cards only show a badge if a product has a custom.card_badge metafield.",
+        "default": true
+      },
+      {
         "type": "select",
         "id": "badge_position",
         "options": [

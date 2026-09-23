@@ -5,12 +5,23 @@ Voya is a barefoot-shoe store cloned from the canonical base theme **`shopify-on
 
 ## Standard process — always use it
 Any work that must match the design in `docs/design/` MUST follow the **`voya-parity` skill**
-(`.claude/skills/voya-parity/SKILL.md`): measure the design → write measurable AC → build the
-section generically in **base** → sync with `scripts/namespace-store.mjs` → capture the actual
-section (Playwright **element** screenshot) → **overlay-compare** (`scripts/make-compare.mjs`
-+ Artifact) → user signs off → next section. One section at a time. Do not eyeball-and-hope.
+(`.claude/skills/voya-parity/SKILL.md`):
 
-Design AC (tokens, per-page section order, parity checklist): `docs/plan/voya-build-spec.md`.
+0. **Mockup Blueprint FIRST** — fill `docs/plan/mockups/<sec>.md` (copy `_TEMPLATE.md`): full
+   element inventory (text/font/size/weight/**sampled** color/align/inset/icon/data source) +
+   the "easy-to-miss" checklist (badge/rating/price/button/swatch/card/link-edge) + data needs,
+   and **get user sign-off on the blueprint before writing code**. Reuse the Product-Card spec in
+   `docs/plan/mockups/best-sellers.md` for any card grid.
+1. Build generically in **base** → sync with `scripts/namespace-store.mjs`.
+2. **Self-diff gate**: assert every AC against the live DOM with `browser_evaluate` (measured,
+   not eyeballed) BEFORE showing the user → then **overlay-compare** (`scripts/make-compare.mjs`
+   + Artifact) → user signs off → next section.
+
+One section at a time. Do not eyeball-and-hope; do not skip the blueprint (it exists because
+Best Sellers was reworked ~5× from reactive, incomplete AC).
+
+Design AC (tokens, per-page section order): `docs/plan/voya-build-spec.md`. Per-section
+blueprints: `docs/plan/mockups/`.
 
 ## Hard rules (avoid rework)
 - **Build shared code in base** (`../shopify-one-product`, `custom-` prefix), then `cp` into this

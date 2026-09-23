@@ -42,7 +42,10 @@
           <p class="vy-tiers__sub">{{ section.settings.subheading }}</p>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a class="button button--primary vy-cta vy-tiers__cta" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.button_label }}</a>
+          <a class="button button--primary vy-cta vy-tiers__cta" href="{{ section.settings.cta_link | default: '#' }}">
+            {{ section.settings.button_label }}
+            <span class="vy-tiers__cta-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+          </a>
         {%- endif -%}
       </div>
     {%- elsif section.settings.heading != blank -%}
@@ -79,10 +82,46 @@
           assign per_unit = pay_total | divided_by: qty
         -%}
         <div class="vy-tiers__card vy-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
-          {%- if block.settings.badge != blank -%}
-            <span class="vy-tiers__badge">{{ block.settings.badge }}</span>
-          {%- endif -%}
+          {%- unless tiers_split -%}
+            {%- if block.settings.badge != blank -%}
+              <span class="vy-tiers__badge">{{ block.settings.badge }}</span>
+            {%- endif -%}
+          {%- endunless -%}
 
+          {%- if tiers_split -%}
+            <div class="vy-tiers__head">
+              <span class="vy-tiers__num" aria-hidden="true">{{ forloop.index }}</span>
+              <span class="vy-tiers__head-main">
+                <h3 class="vy-tiers__label">{{ block.settings.label | default: product.title }}</h3>
+                {%- if block.settings.badge != blank -%}
+                  <span class="vy-tiers__badge vy-tiers__badge--inline">{{ block.settings.badge }}</span>
+                {%- endif -%}
+              </span>
+            </div>
+            <div class="vy-tiers__media vy-tiers__media--stack">
+              {%- if block.settings.image_url != blank -%}
+                <img class="vy-tiers__img" src="{{ block.settings.image_url }}" width="300" height="240" loading="lazy" alt="{{ block.settings.label | escape }}">
+                {%- if block.settings.image_url2 != blank -%}
+                  <img class="vy-tiers__img vy-tiers__img--2" src="{{ block.settings.image_url2 }}" width="300" height="240" loading="lazy" alt="">
+                {%- endif -%}
+                {%- if block.settings.image_url3 != blank -%}
+                  <img class="vy-tiers__img vy-tiers__img--3" src="{{ block.settings.image_url3 }}" width="300" height="240" loading="lazy" alt="">
+                {%- endif -%}
+              {%- elsif block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-tiers__img', alt: block.settings.label }}
+              {%- elsif product.featured_image != blank -%}
+                {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-tiers__img', alt: product.title }}
+              {%- endif -%}
+            </div>
+            <div class="vy-tiers__price">
+              <span class="vy-tiers__price-now">
+                {%- if block.settings.price_text != blank -%}{{ block.settings.price_text }}{%- else -%}{{ pay_total | money }}{%- endif -%}
+              </span>
+            </div>
+            {%- if block.settings.save_text != blank -%}
+              <span class="vy-tiers__save {% if block.settings.save_text contains 'Save' or block.settings.save_text contains 'save' %}is-save{% endif %}">{{ block.settings.save_text }}</span>
+            {%- endif -%}
+          {%- else -%}
           <div class="vy-tiers__card-top">
             <a href="{{ product.url | default: '#' }}" class="vy-tiers__media" aria-label="{{ product.title | default: block.settings.label }}">
               {%- if block.settings.image != blank -%}
@@ -115,6 +154,7 @@
               {%- endif -%}
             </div>
           </div>
+          {%- endif -%}
 
           {%- if tiers_split -%}
           {%- elsif product != blank and variant != blank -%}
@@ -276,8 +316,14 @@
   }
 
   /* Split layout: left intro + single CTA, right tier tiles (matches Voya design) */
+  .vy-tiers--split.vy-section {
+    background: rgb(var(--brand-sand, 246, 241, 231));
+  }
   .vy-tiers__intro { margin-bottom: 2.4rem; }
-  .vy-tiers--split .vy-tiers__heading { margin: 0 0 1rem; }
+  .vy-tiers--split .vy-tiers__heading { margin: 0 0 1rem; text-wrap: balance; font-size: calc(3.2rem * var(--font-heading-scale, 1)); line-height: 1.15; }
+  .vy-tiers__cta-arrow { display: inline-flex; margin-left: 0.6rem; }
+  .vy-tiers__cta-arrow .svg-wrapper,
+  .vy-tiers__cta-arrow svg { width: 1.5rem; height: 1.5rem; }
   .vy-tiers__sub { margin: 0 0 1.8rem; font-size: 1.5rem; opacity: 0.82; max-width: 34rem; }
   .vy-tiers__cta { display: inline-flex; }
 
@@ -295,11 +341,115 @@
   @media screen and (min-width: 990px) {
     .vy-tiers--split .vy-container {
       display: grid;
-      grid-template-columns: 0.85fr 1.9fr;
+      grid-template-columns: 1.1fr 1.8fr;
       gap: 3.2rem;
       align-items: center;
     }
     .vy-tiers--split .vy-tiers__intro { margin-bottom: 0; }
+  }
+
+  /* Split promo tiles — design parity (white card, grey image box, green price,
+     plain-text savings, green Best Value badge). */
+  .vy-tiers--split .vy-tiers__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    background: rgb(var(--brand-bg, 255, 255, 255));
+    border: 0.1rem solid rgba(var(--color-foreground), 0.06);
+    border-radius: 1.4rem;
+    padding: 1.8rem 1.6rem;
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.06);
+  }
+
+  .vy-tiers--split .vy-tiers__media {
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
+  .vy-tiers--split .vy-tiers__head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2rem;
+  }
+
+  .vy-tiers--split .vy-tiers__num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgba(var(--color-foreground), 0.4);
+  }
+
+  .vy-tiers--split .vy-tiers__label {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .vy-tiers--split .vy-tiers__media {
+    width: 100%;
+    flex: none;
+    aspect-ratio: 16 / 10;
+    background: rgba(var(--color-foreground), 0.05);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .vy-tiers--split .vy-tiers__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  .vy-tiers--split .vy-tiers__price {
+    justify-content: center;
+  }
+
+  .vy-tiers--split .vy-tiers__price-now {
+    color: rgb(var(--brand-primary, 35, 69, 45));
+    font-size: 2.2rem;
+    font-weight: 800;
+  }
+
+  .vy-tiers--split .vy-tiers__save {
+    background: transparent;
+    color: rgba(var(--color-foreground), 0.55);
+    padding: 0;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: 0;
+  }
+
+  .vy-tiers--split .vy-tiers__save.is-save {
+    color: rgb(var(--brand-primary, 35, 69, 45));
+    font-weight: 600;
+  }
+
+  .vy-tiers--split .vy-tiers__head-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .vy-tiers__badge--inline {
+    position: static;
+    transform: none;
+    background: rgb(var(--brand-primary, 35, 69, 45));
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.3rem 0.9rem;
   }
 {% endstylesheet %}
 {% schema %}
@@ -373,7 +523,13 @@
         { "type": "text", "id": "label", "label": "Nhãn tier", "default": "1 × Product" },
         { "type": "text", "id": "badge", "label": "Badge (vd MOST POPULAR)" },
         { "type": "checkbox", "id": "highlight", "label": "Nổi bật tier này", "default": false },
-        { "type": "image_picker", "id": "image", "label": "Ảnh riêng (tuỳ chọn)" }
+        { "type": "image_picker", "id": "image", "label": "Ảnh riêng (tuỳ chọn)" },
+        { "type": "header", "content": "Split layout (promo tiles)" },
+        { "type": "text", "id": "price_text", "label": "Giá hiển thị (vd $79.99)" },
+        { "type": "text", "id": "save_text", "label": "Dòng phụ (vd Standard / Save $19.99)" },
+        { "type": "text", "id": "image_url", "label": "Ảnh 1 (URL CDN)" },
+        { "type": "text", "id": "image_url2", "label": "Ảnh 2 (URL CDN)" },
+        { "type": "text", "id": "image_url3", "label": "Ảnh 3 (URL CDN)" }
       ]
     }
   ],

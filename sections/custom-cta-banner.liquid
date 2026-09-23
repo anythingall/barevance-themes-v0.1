@@ -24,35 +24,46 @@
 
 <div class="vy-cta-banner color-{{ section.settings.color_scheme }} gradient vy-section">
   <div class="vy-container">
-    <div class="vy-cta-banner__box vy-card" style="--overlay: {{ section.settings.overlay_opacity | at_least: 35 | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
-      {%- if section.settings.image != blank -%}
+    <div class="vy-cta-banner__box {% if section.settings.image_url != blank or section.settings.image != blank %}has-media{% endif %}" style="--overlay: {{ section.settings.overlay_opacity | at_least: 0 | divided_by: 100.0 }}; text-align: {{ section.settings.content_alignment }};">
+      {%- if section.settings.image_url != blank -%}
+        <img class="vy-cta-banner__bg" src="{{ section.settings.image_url }}" width="1600" height="520" loading="lazy" alt="">
+      {%- elsif section.settings.image != blank -%}
         {{
           section.settings.image
           | image_url: width: 1600
-          | image_tag:
-            loading: 'lazy',
-            sizes: '100vw',
-            widths: '750, 1100, 1500',
-            class: 'vy-cta-banner__bg',
-            alt: ''
+          | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1100, 1500', class: 'vy-cta-banner__bg', alt: ''
         }}
       {%- endif -%}
-      <div class="vy-cta-banner__content">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="vy-h2 vy-cta-banner__heading">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-        {%- if section.settings.text != blank -%}
-          <div class="vy-cta-banner__text rte">{{ section.settings.text }}</div>
-        {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
-          <div class="vy-cta-banner__actions" style="justify-content: {% if section.settings.content_alignment == 'left' %}flex-start{% else %}center{% endif %};">
-            <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta">
-              {{- section.settings.button_label -}}
-            </a>
-          </div>
+      {%- if section.settings.scrim -%}<span class="vy-cta-banner__scrim" aria-hidden="true"></span>{%- endif -%}
+      <div class="vy-cta-banner__row">
+        <div class="vy-cta-banner__content">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="vy-eyebrow">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="vy-h2 vy-cta-banner__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="vy-cta-banner__text rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
+            <div class="vy-cta-banner__actions" style="justify-content: {% if section.settings.content_alignment == 'left' %}flex-start{% else %}center{% endif %};">
+              {%- if section.settings.button_label != blank -%}
+                <a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta vy-cta-banner__btn">
+                  {{ section.settings.button_label }}
+                  <span class="vy-cta-banner__btn-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+                </a>
+              {%- endif -%}
+              {%- if section.settings.button2_label != blank -%}
+                <a href="{{ section.settings.button2_link | default: '#' }}" class="button button--secondary vy-cta vy-cta-banner__btn vy-cta-banner__btn--outline">
+                  {{ section.settings.button2_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.script_text != blank -%}
+          <p class="vy-cta-banner__script">{{ section.settings.script_text }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -61,13 +72,20 @@
 {%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
 {% stylesheet %}
+  /* Full-bleed banner (design spans edge to edge) */
+  .vy-cta-banner > .vy-container {
+    max-width: none;
+    padding-inline: 0;
+  }
+
   .vy-cta-banner__box {
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
-    min-height: 32rem;
-    padding: 4rem 2rem;
+    min-height: 24rem;
+    padding: 3.2rem 2rem;
+    border-radius: 0;
   }
 
   .vy-cta-banner__bg {
@@ -79,48 +97,120 @@
     z-index: 0;
   }
 
+  /* Light scrim on the left so dark text stays legible over the photo */
+  .vy-cta-banner__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.55) 34%,
+      rgba(255, 255, 255, 0) 64%
+    );
+  }
+
   .vy-cta-banner__box::after {
     content: '';
     position: absolute;
     inset: 0;
     background: rgb(var(--color-foreground));
-    opacity: var(--overlay, 0.4);
+    opacity: var(--overlay, 0);
     z-index: 1;
   }
 
-  .vy-cta-banner__box:not(:has(.vy-cta-banner__bg))::after {
+  .vy-cta-banner__box:not(.has-media)::after {
     display: none;
   }
 
-  .vy-cta-banner__content {
+  .vy-cta-banner__row {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 60rem;
-    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .vy-cta-banner__content {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
-    color: rgb(var(--color-background));
+    max-width: 44rem;
+    text-align: left;
+    color: rgb(var(--brand-text, 23, 27, 24));
   }
 
-  .vy-cta-banner__box:not(:has(.vy-cta-banner__bg)) .vy-cta-banner__content {
+  .vy-cta-banner__box:not(.has-media) .vy-cta-banner__content {
     color: rgb(var(--color-foreground));
+    margin-inline: auto;
+    align-items: center;
+    text-align: center;
   }
 
   .vy-cta-banner__heading {
     margin: 0;
   }
 
+  .vy-cta-banner__text {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
   .vy-cta-banner__actions {
     display: flex;
-    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .vy-cta-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .vy-cta-banner__btn-arrow .svg-wrapper,
+  .vy-cta-banner__btn-arrow svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .vy-cta-banner__btn--outline {
+    background: transparent;
+    border: 0.15rem solid rgb(var(--brand-text, 23, 27, 24));
+    color: rgb(var(--brand-text, 23, 27, 24));
+  }
+
+  .vy-cta-banner__script {
+    font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', 'Brush Script MT', cursive;
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0;
+    max-width: 20rem;
+    text-align: right;
+    align-self: flex-start;
+    color: rgb(var(--brand-text, 23, 27, 24));
+  }
+
+  @media screen and (max-width: 749px) {
+    .vy-cta-banner__row {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .vy-cta-banner__script {
+      text-align: left;
+    }
   }
 
   @media screen and (min-width: 750px) {
     .vy-cta-banner__box {
-      min-height: 40rem;
-      padding: 6rem;
+      min-height: 30rem;
+      padding: 4.5rem 6rem;
+    }
+    .vy-cta-banner__script {
+      font-size: 4.2rem;
     }
   }
 {% endstylesheet %}
@@ -149,6 +239,8 @@
 
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
     { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "image_url", "label": "Background image (URL CDN)" },
+    { "type": "checkbox", "id": "scrim", "label": "Light scrim over image (for dark text)", "default": true },
     {
       "type": "range",
       "id": "overlay_opacity",
@@ -164,6 +256,9 @@
     { "type": "richtext", "id": "text", "label": "Text" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
     { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "button2_label", "label": "Button 2 label" },
+    { "type": "url", "id": "button2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "script_text", "label": "Script accent (right)" },
     {
       "type": "select",
       "id": "content_alignment",

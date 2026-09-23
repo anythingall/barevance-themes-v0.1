@@ -29,8 +29,8 @@
       },
       "block_order": [
         "shop",
-        "care",
-        "about"
+        "about",
+        "care"
       ],
       "settings": {
         "color_scheme": "scheme-3",
@@ -41,7 +41,9 @@
         "newsletter_heading": "Join Our Journey",
         "newsletter_text": "Get the latest updates, new releases and exclusive offers.",
         "payment_enable": true,
-        "show_policy": true
+        "show_policy": true,
+        "brand_name": "Voya",
+        "brand_subtext": "Barefoot"
       }
     }
   },

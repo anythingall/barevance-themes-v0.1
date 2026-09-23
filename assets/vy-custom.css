@@ -266,16 +266,19 @@
   gap: 0.5rem;
 }
 
-.vy-card-swatches__row .swatch {
-  width: 1.8rem;
-  height: 1.8rem;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+.vy-card-swatches__dot {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  display: inline-block;
+  box-shadow: inset 0 0 0 0.1rem rgba(0, 0, 0, 0.12);
 }
 
 .vy-card-swatches__more {
   font-size: 1.2rem;
   font-weight: 600;
   opacity: 0.68;
+  margin-left: 0.2rem;
 }
 
 /* ------------------------------------------------------------------ *
@@ -299,6 +302,12 @@
   --color-rating-star: rgb(217, 145, 36) !important;
 }
 
+/* custom-stars (review/testimonial cards) — same brand gold as the rating stars */
+.vy-stars__star.is-full,
+.vy-stars__star.is-half::before {
+  color: rgb(217, 145, 36);
+}
+
 /* Featured-collection: heading + description centered (design).
    These .collection__* classes are specific to the featured-collection section. */
 .collection__title {
@@ -310,18 +319,33 @@
   margin-inline: auto;
 }
 
-/* "View All Products" pinned top-right, level with the centered heading */
+/* "View All Products" pinned right, vertically level with the title block
+   (design: sits beside the heading/subheading, not above it). */
 @media screen and (min-width: 990px) {
   .shopify-section > .collection {
     position: relative;
   }
   .collection__view-all {
     position: absolute;
-    top: 1.2rem;
-    right: 5rem;
+    top: 10.2rem;
+    right: 12rem;
     margin: 0;
     width: auto;
+    z-index: 1;
   }
+}
+
+/* Plain link + arrow (no underline) to match the design mockup */
+.collection__view-all .link,
+.collection__view-all a.underlined-link {
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.collection__view-all a::after {
+  content: '→';
+  margin-left: 0.6rem;
+  display: inline-block;
 }
 
 /* Sale price — brand terracotta (spec #B85C3A) */
@@ -371,4 +395,44 @@
 
 .vy-ann__currency {
   letter-spacing: 0.03em;
+}
+
+/* ------------------------------------------------------------------ *
+ * Product-card parity (Best Sellers etc.) — match design mockup
+ * ------------------------------------------------------------------ */
+/* Rating row: ★★★★½ 4.7 (66) inline. Dawn hides .rating-text by default. */
+.card__information .rating,
+.card__information .rating-count {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card__information .rating-text {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.2rem 0 0.6rem;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+/* Price: sale amount FIRST in brand green, compare-at struck grey after
+   (design order is reverse of Dawn's default markup). Selector carries
+   .price--on-sale so it beats component-price.css's later `display:initial`. */
+.card .price--on-sale .price__sale {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.card .price--on-sale .price-item--sale {
+  color: rgb(var(--brand-primary));
+  font-weight: 600;
+}
+
+.card .price__sale s.price-item--regular {
+  color: rgba(var(--color-foreground), 0.5);
+  font-weight: 400;
 }

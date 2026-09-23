@@ -127,14 +127,22 @@
               </h3>
             </div>
             <div class="card__badge {{ settings.badge_position }}">
-              {%- if card_product.available == false -%}
+              {%- assign card_badge_text = card_product.metafields.custom.card_badge | default: '' -%}
+              {%- if card_badge_text != blank -%}
+                <span
+                  id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                  class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                >
+                  {{- card_badge_text -}}
+                </span>
+              {%- elsif card_product.available == false -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                   class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
                 >
                   {{- 'products.product.sold_out' | t -}}
                 </span>
-              {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+              {%- elsif settings.show_sale_badge and card_product.compare_at_price > card_product.price and card_product.available -%}
                 <span
                   id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                   class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
@@ -192,7 +200,8 @@
                   ></span>
                 </div>
                 <p class="rating-text caption">
-                  <span aria-hidden="true">
+                  <span aria-hidden="true">{{ card_product.metafields.reviews.rating.value.rating }}</span>
+                  <span class="visually-hidden">
                     {{- card_product.metafields.reviews.rating.value }} /
                     {{ card_product.metafields.reviews.rating.value.scale_max -}}
                   </span>
@@ -552,14 +561,22 @@
             {% endif %}
           {% endif %}
           <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
+            {%- assign card_badge_text = card_product.metafields.custom.card_badge | default: '' -%}
+            {%- if card_badge_text != blank -%}
+              <span
+                id="Badge-{{ section_id }}-{{ card_product.id }}"
+                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+              >
+                {{- card_badge_text -}}
+              </span>
+            {%- elsif card_product.available == false -%}
               <span
                 id="Badge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
               >
                 {{- 'products.product.sold_out' | t -}}
               </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+            {%- elsif settings.show_sale_badge and card_product.compare_at_price > card_product.price and card_product.available -%}
               <span
                 id="Badge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"

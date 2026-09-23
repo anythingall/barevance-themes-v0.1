@@ -9,7 +9,13 @@ ehthumbs.db
 Thumbs.db
 .shopify
 node_modules
-*.zipdocs/index.dawn-default.json.bak
+*.zip
 
+# Backups / build artifacts
+docs/index.dawn-default.json.bak
+
+# Working screenshots / QA artifacts (root-level scratch)
+/*.png
 .report-shots/
 .playwright-mcp/
+docs/evidence/

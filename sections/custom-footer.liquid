@@ -18,7 +18,12 @@
             }}
           </span>
         {%- else -%}
-          <p class="vy-footer__logo-text">{{ shop.name }}</p>
+          <p class="vy-footer__logo-text">
+            {{ section.settings.brand_name | default: shop.name }}
+            {%- if section.settings.brand_subtext != blank -%}
+              <span class="vy-footer__logo-sub">{{ section.settings.brand_subtext }}</span>
+            {%- endif -%}
+          </p>
         {%- endif -%}
 
         {%- if section.settings.tagline != blank -%}
@@ -71,9 +76,7 @@
                   aria-label="Email"
                   required
                 >
-                <button type="submit" class="vy-footer__submit vy-tap" aria-label="Subscribe">
-                  {{- 'icon-arrow.svg' | inline_asset_content -}}
-                </button>
+                <button type="submit" class="vy-footer__submit vy-tap">Subscribe</button>
               </div>
               {%- if form.errors -%}
                 <p class="vy-footer__news-error">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
@@ -86,8 +89,11 @@
 
     <div class="vy-footer__bottom">
       <p class="vy-footer__copy">
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | default: shop.name }}
       </p>
+      {%- if section.settings.tagline != blank -%}
+        <p class="vy-footer__copy-tagline">{{ section.settings.tagline }}</p>
+      {%- endif -%}
 
       {%- if section.settings.show_policy and shop.policies.size > 0 -%}
         <ul class="vy-footer__policies list-unstyled" role="list">
@@ -138,8 +144,20 @@
     font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
     font-size: 2.6rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    line-height: 1;
     margin: 0 0 1.2rem;
+  }
+
+  .vy-footer__logo-sub {
+    display: block;
+    font-family: var(--font-body-family);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-top: 0.4rem;
   }
 
   .vy-footer__tagline {
@@ -232,10 +250,11 @@
   .vy-footer__field {
     display: flex;
     align-items: center;
-    border: 0.1rem solid rgba(var(--color-foreground), 0.35);
-    border-radius: var(--vy-card-radius, 0.6rem);
+    background: #fff;
+    border: 0;
+    border-radius: 0.8rem;
     overflow: hidden;
-    max-width: 34rem;
+    max-width: 36rem;
   }
 
   .vy-footer__field input {
@@ -244,12 +263,12 @@
     background: transparent;
     border: 0;
     padding: 1.3rem 1.4rem;
-    color: rgb(var(--color-foreground));
+    color: #171b18;
     font-size: 1.4rem;
   }
 
   .vy-footer__field input::placeholder {
-    color: rgba(var(--color-foreground), 0.6);
+    color: rgba(23, 27, 24, 0.5);
   }
 
   .vy-footer__field input:focus {
@@ -262,13 +281,16 @@
   }
 
   .vy-footer__submit {
-    background: transparent;
+    background: rgb(var(--brand-primary, 35, 69, 45));
     border: 0;
     cursor: pointer;
-    padding: 0 1.4rem;
-    color: rgb(var(--color-foreground));
-    display: flex;
-    align-items: center;
+    padding: 0.9rem 1.6rem;
+    margin: 0.4rem;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 0.6rem;
+    white-space: nowrap;
   }
 
   .vy-footer__submit svg {
@@ -305,6 +327,25 @@
     opacity: 0.7;
     margin: 0;
     order: 3;
+  }
+
+  .vy-footer__copy-tagline {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    margin: 0;
+    order: 4;
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-footer__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    .vy-footer__copy-tagline {
+      order: 5;
+    }
   }
 
   .vy-footer__policies {
@@ -381,7 +422,9 @@
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" },
     { "type": "header", "content": "Brand" },
-    { "type": "image_picker", "id": "logo", "label": "Logo (footer)", "info": "Bỏ trống sẽ dùng tên store." },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "info": "Bỏ trống sẽ dùng tên store." },
+    { "type": "text", "id": "brand_subtext", "label": "Brand sub-label (vd BAREFOOT)" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (footer)", "info": "Bỏ trống sẽ dùng brand name." },
     { "type": "range", "id": "logo_width", "label": "Logo width", "min": 80, "max": 260, "step": 10, "unit": "px", "default": 150 },
     { "type": "text", "id": "tagline", "label": "Tagline", "default": "Cute. Cozy. Adventure." },
     { "type": "textarea", "id": "description", "label": "Description", "default": "Designed for pets who love to explore and the humans who love them." },

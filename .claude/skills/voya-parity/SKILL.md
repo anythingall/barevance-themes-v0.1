@@ -22,9 +22,22 @@ actual screenshot on the design. Only move to the next section when all AC pass.
 
 ## The loop (per section)
 
-### 1. Measure the design → write AC
+### 0. Mockup Blueprint FIRST — get sign-off before any code  ⟵ prevents rework
+> Best Sellers was reworked ~5× because the AC wasn't exhaustive and I verified by eyeball
+> *after* showing the user. Fix: enumerate everything up front, user approves the blueprint,
+> then build. **Do not skip to code.**
+
+- Copy `docs/plan/mockups/_TEMPLATE.md` → `docs/plan/mockups/<sec>.md` and fill it:
+  - **High-zoom crops** of the whole section AND one repeating unit at 3–4× (read weight+color).
+  - **Element inventory table** — every element × {text, font, size, weight, case, **sampled** color hex, align, position/inset, icon, state, data source}. Sample colors with PIL, never guess.
+  - The **"easy-to-miss" checklist** (badges/rating/price/button/swatches/card/link/edge-alignment) — answer every item. These are exactly the things that caused rework.
+  - **Data requirements**: metafields, products, images, theme settings, template-JSON toggles.
+- For any card grid, reuse the **Product-Card spec** in [best-sellers.md](../../docs/plan/mockups/best-sellers.md) §3 instead of re-measuring.
+- **Present the blueprint to the user and get explicit sign-off** before building.
+
+### 1. Crop + confirm AC are measurable
 - Crop the section from the design: `sips -c <H> <W> --cropOffset <offY> <offX> docs/design/home.png --out .report-shots/ac/design-<sec>.png` (design PNGs are 723 wide; find offY by eye).
-- Read the crop. Write **measurable AC**: layout (full-bleed vs split vs grid), element order, spacing (gap header→section = 0 unless design shows one), font (family/size/weight/case/tracking), exact colors (from tokens above), **icon glyphs** (name each one), button style + arrow, image proportion.
+- Every AC row must be **DOM-verifiable** (a `getBoundingClientRect`, `getComputedStyle`, or text assertion) — if you can't verify it objectively, rewrite it. Spacing gap header→section = 0 unless the design shows one.
 
 ### 2. Build to AC — in BASE, keep it generic
 - Edit `shopify-one-product/sections/custom-<sec>.liquid`. Add **layout options** (a `select`) rather than hard-coding Voya's look, so the base stays reusable (e.g. hero got `media_style: boxed|fullbleed|overlay`). Voya picks the option in its template JSON.
@@ -47,7 +60,39 @@ shopify theme push --store hieu1-1.myshopify.com --theme 145358455018
   - `browser_resize 1440x900` → `browser_navigate http://127.0.0.1:9292/<path>` → `browser_take_screenshot target=".vy-<sec>" filename=".report-shots/ac/actual-<sec>.png"`.
 - Read the PNG and eyeball vs the design crop.
 
-### 5. Overlay compare (objective check)
+### 4a. RESTART `theme dev` before verifying (it serves stale renders)
+- `shopify theme dev` does NOT reliably hot-reload changes to a section's `{% schema %}` **or**
+  its `{% stylesheet %}` — you will verify against OLD css/settings and "pass" a broken section
+  (this is what made testing look green while the page was wrong). After editing a section's
+  schema or stylesheet: `pkill -f "shopify theme dev"` → restart → wait for `127.0.0.1:9292` →
+  hard-reload. Symptoms of a stale render: a section's grid/bg/spacing missing (its whole
+  `{% stylesheet %}` absent), or new block settings rendering blank. When in doubt, restart.
+
+### 4b. Self-diff gate — DOM checks (necessary, NOT sufficient)
+- Run `browser_evaluate` over the rendered section and assert each AC objectively:
+  positions via `getBoundingClientRect`, colors via `getComputedStyle`, text via `textContent`,
+  and **absence** checks. This catches wiring bugs but it only verifies the AC *you wrote* — if
+  your reading of the design was incomplete, DOM checks pass while the visual still differs.
+  **DOM checks alone are never enough to claim a section done.**
+
+### 5. VISUAL side-by-side vs the design — the REAL gate (mandatory, do EVERY time)
+> This step is non-negotiable. Skipping it is why sections shipped "passing" but wrong
+> (finder phone, bundle images/bg/heading/arrow were all missed by DOM-only checks).
+- Element-screenshot the actual section, then stack the **design crop (top) over the actual
+  (bottom) at the same width** and OPEN the image and LOOK:
+  ```
+  # design crop full-width from home.png at the section's y-range, actual from Playwright element shot
+  python3 -c "from PIL import Image; d=Image.open('design-crop.png'); a=Image.open('act.png'); W=1200; \
+    d=d.resize((W,int(d.height*W/d.width))); a=a.resize((W,int(a.height*W/a.width))); \
+    c=Image.new('RGB',(W,d.height+a.height+14),(200,200,200)); c.paste(d,(0,0)); c.paste(a,(0,d.height+14)); c.save('cmp.png')"
+  ```
+  (or `scripts/make-compare.mjs` for the slider version). Read `cmp.png` and enumerate EVERY
+  difference: background color, image subject/style, heading line-wrap, button arrow, icon
+  size/shape, spacing. Fix, re-render, re-compare. Only when the two halves look the same do
+  you present — and publish `cmp.png` with the Artifact tool for the user to see.
+- Images are "similar" by agreement, but a stock photo that reads as a *different kind of thing*
+  than the mockup (e.g. a dashboard photo where the design shows a quiz mockup) is a MISS, not an
+  acceptable image gap — flag it and fix (CSS mockup, better asset, or ask).
 ```
 node scripts/make-compare.mjs --dir .report-shots/ac --design design-<sec>.png --actual actual-<sec>.png --title "<Sec>" --out <sec>-compare.html
 ```
@@ -72,8 +117,8 @@ Work top-to-bottom per page; one section per compare cycle.
 Per-page section order and content AC are in [docs/plan/voya-build-spec.md](../../docs/plan/voya-build-spec.md) §4.
 
 ## Non-negotiables (avoid rework)
-1. Measure design → written AC **before** touching code.
+1. **Blueprint FIRST** (`docs/plan/mockups/<sec>.md`) with the full element inventory + easy-to-miss checklist + **user sign-off**, before touching code. Reuse the Product-Card spec for card grids.
 2. Build generic in **base**, sync via `namespace-store.mjs`, never hand-edit `vy-`.
-3. Colors/fonts from tokens; custom icons as line-art SVG when the glyph is missing.
-4. Verify with the **element-screenshot + overlay-compare** loop; one section at a time; user signs off before moving on.
+3. Colors/fonts from tokens (sample the mockup, never guess); custom icons as line-art SVG when the glyph is missing.
+4. **Two gates, in order:** (a) DOM self-diff (`browser_evaluate`) for wiring, then (b) the **mandatory VISUAL side-by-side** (design crop stacked over the live render) — LOOK at it and fix every visible difference. DOM-passing is NOT done; the stacked image is the source of truth. One section at a time; user signs off before moving on.
 5. theme-check stays at **0 errors** every push.
