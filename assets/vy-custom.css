@@ -436,3 +436,26 @@
   color: rgba(var(--color-foreground), 0.5);
   font-weight: 400;
 }
+
+/* ------------------------------------------------------------------ *
+ * PDP price: sale price first (large), compare-at struck after — matches
+ * the design's "$79.99  $129.99" order (only the large PDP price; cards
+ * already render sale-first).
+ * ------------------------------------------------------------------ */
+.price--large.price--on-sale .price__sale {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+.price--large.price--on-sale .price__sale .price-item--sale {
+  order: 0;
+  font-weight: 800;
+  color: rgb(var(--color-foreground, 23 27 24));
+}
+.price--large.price--on-sale .price__sale > span:has(> s.price-item--regular) {
+  order: 1;
+}
+.price--large.price--on-sale .price__sale s.price-item--regular {
+  color: rgba(var(--color-foreground, 23 27 24), 0.5);
+}
