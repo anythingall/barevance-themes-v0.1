@@ -213,9 +213,14 @@
         "color_scheme": "scheme-1",
         "source": "blocks",
         "eyebrow": "REAL STORIES. REAL STEPS.",
-        "heading": "Made for Miles. Loved by Walkers.",
+        "heading": "",
         "heading_alignment": "left",
-        "columns": 4
+        "columns": 4,
+        "layout": "split",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1551632811-561732d1e306.jpg?v=1790128083",
+        "left_heading": "Made for Miles. Loved by Walkers.",
+        "left_subheading": "Real people. Real experiences.",
+        "button_label": "Watch More Stories"
       },
       "blocks": {
         "r1": {
