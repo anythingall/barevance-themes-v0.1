@@ -222,7 +222,9 @@
               <p class="vy-reviews__text">{{ block.settings.text }}</p>
             {%- endif -%}
             <div class="vy-reviews__author">
-              {%- if block.settings.image != blank -%}
+              {%- if block.settings.avatar_url != blank -%}
+                <img class="vy-reviews__avatar" src="{{ block.settings.avatar_url }}" width="120" height="120" loading="lazy" alt="{{ block.settings.name | escape }}">
+              {%- elsif block.settings.image != blank -%}
                 {{
                   block.settings.image
                   | image_url: width: 120
