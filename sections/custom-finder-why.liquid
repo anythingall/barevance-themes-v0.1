@@ -53,21 +53,52 @@
           >
         </div>
       {%- else -%}
-        <div class="vy-finder-why__phone" aria-hidden="true">
-          <div class="vy-finder-why__device">
+        <div class="vy-finder-why__phone">
+          <div class="vy-finder-why__device vy-finder-quiz" data-finder-quiz>
             <span class="vy-finder-why__notch"></span>
             <div class="vy-finder-why__screen">
               <span class="vy-finder-why__brand">✦ Voya</span>
               <span class="vy-finder-why__q-title">Find Your Perfect Pair</span>
-              <span class="vy-finder-why__q-label">What's your main activity?</span>
-              <div class="vy-finder-why__chips">
-                <span>Walking</span><span>Running</span>
-                <span>Hiking</span><span>Training</span>
-                <span>Everyday</span><span>Travel</span>
+              <div class="vy-finder-why__progress" data-quiz-progress aria-hidden="true"></div>
+              <div class="vy-finder-why__stage" data-quiz-stage aria-live="polite">
+                <span class="vy-finder-why__q-label">What's your main activity?</span>
+                <div class="vy-finder-why__chips">
+                  <button type="button" class="vy-finder-why__chip">Walking</button>
+                  <button type="button" class="vy-finder-why__chip">Running</button>
+                  <button type="button" class="vy-finder-why__chip">Hiking</button>
+                  <button type="button" class="vy-finder-why__chip">Training</button>
+                  <button type="button" class="vy-finder-why__chip">Everyday</button>
+                  <button type="button" class="vy-finder-why__chip">Travel</button>
+                </div>
               </div>
-              <span class="vy-finder-why__next">Next</span>
+              <div class="vy-finder-why__actions">
+                <button type="button" class="vy-finder-why__back" data-quiz-back hidden>Back</button>
+                <button type="button" class="vy-finder-why__next" data-quiz-next disabled>Next</button>
+              </div>
             </div>
           </div>
+          {%- capture finder_quiz_config -%}
+            {
+              "questions": [
+                { "label": "What's your main activity?", "options": ["Walking","Running","Hiking","Training","Everyday","Travel"] },
+                { "label": "What matters most to you?", "options": ["Comfort","Lightweight","Support","Style"] },
+                { "label": "Where will you wear them?", "options": ["Indoors","City streets","Trails","Everywhere"] }
+              ],
+              "shopLabel": "Shop This Pair",
+              "restartLabel": "Start over",
+              "eyebrow": "Your perfect match",
+              "results": {
+                "Walking":  { "name": "Solyn",      "tag": "Cushioned for all-day walking comfort.", "url": "/products/solyn" },
+                "Running":  { "name": "Neuro",      "tag": "Responsive and light for faster miles.",  "url": "/products/neuro" },
+                "Hiking":   { "name": "FluxTrail",  "tag": "Rugged grip built for the trail.",         "url": "/products/fluxtrail" },
+                "Training": { "name": "Mirox",      "tag": "Stable and grounded for training days.",   "url": "/products/mirox" },
+                "Everyday": { "name": "Voya Slip",  "tag": "Easy slip-on for everyday life.",           "url": "/products/voya-slip" },
+                "Travel":   { "name": "TerraStride","tag": "Versatile and packable for travel.",        "url": "/products/terrastride" }
+              },
+              "fallback": { "name": "Mirox", "tag": "An all-round barefoot favorite.", "url": "/products/mirox" }
+            }
+          {%- endcapture -%}
+          <script type="application/json" data-quiz-config>{{ finder_quiz_config }}</script>
         </div>
       {%- endif -%}
     </div>
@@ -259,13 +290,45 @@
     margin-bottom: 1.2rem;
   }
 
+  .vy-finder-why__q-title { margin-bottom: 0.9rem; }
+
+  /* progress dots */
+  .vy-finder-why__progress {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .vy-finder-why__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: rgba(23, 27, 24, 0.16);
+    transition: background 0.2s ease;
+  }
+
+  .vy-finder-why__dot.is-done { background: rgba(35, 69, 45, 0.45); }
+  .vy-finder-why__dot.is-active { background: rgb(var(--brand-primary, 35, 69, 45)); }
+
+  /* stage fills the screen so the action bar sits at the bottom */
+  .vy-finder-why__stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
   .vy-finder-why__chips {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
   }
 
-  .vy-finder-why__chips span {
+  .vy-finder-why__chip {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    cursor: pointer;
     background: #f1f2ef;
     border: 0.1rem solid rgba(23, 27, 24, 0.08);
     border-radius: 0.8rem;
@@ -273,17 +336,119 @@
     color: #3a3f3b;
     text-align: center;
     padding: 0.7rem 0.4rem;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
 
+  .vy-finder-why__chip:hover { border-color: rgba(35, 69, 45, 0.45); }
+
+  .vy-finder-why__chip.is-selected {
+    background: rgb(var(--brand-primary, 35, 69, 45));
+    border-color: rgb(var(--brand-primary, 35, 69, 45));
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* action bar */
+  .vy-finder-why__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  /* [hidden] must win over the flex/inline display set above */
+  .vy-finder-why__device [hidden] {
+    display: none !important;
+  }
+
+  .vy-finder-why__back {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: rgba(23, 27, 24, 0.6);
+    font: inherit;
+    font-size: 1.1rem;
+    padding: 0.9rem 0.4rem;
+  }
+
+  .vy-finder-why__back:hover { color: rgb(var(--brand-primary, 35, 69, 45)); }
+
   .vy-finder-why__next {
-    margin-top: auto;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    cursor: pointer;
+    flex: 1 1 auto;
     background: rgb(var(--brand-primary, 35, 69, 45));
     color: #fff;
+    font: inherit;
     font-size: 1.2rem;
     font-weight: 600;
     text-align: center;
     padding: 0.9rem;
     border-radius: 0.9rem;
+    transition: opacity 0.15s ease;
+  }
+
+  .vy-finder-why__next:disabled { opacity: 0.4; cursor: default; }
+
+  /* result screen */
+  .vy-finder-why__result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding-top: 0.6rem;
+  }
+
+  .vy-finder-why__result-eyebrow {
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(23, 27, 24, 0.5);
+  }
+
+  .vy-finder-why__result-name {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgb(var(--brand-primary, 35, 69, 45));
+  }
+
+  .vy-finder-why__result-tag {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: rgba(23, 27, 24, 0.65);
+    margin-bottom: 0.6rem;
+  }
+
+  .vy-finder-why__result-shop {
+    display: block;
+    width: 100%;
+    background: rgb(var(--brand-primary, 35, 69, 45));
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.9rem;
+    border-radius: 0.9rem;
+  }
+
+  .vy-finder-why__restart {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: rgba(23, 27, 24, 0.55);
+    font: inherit;
+    font-size: 1rem;
+    padding: 0.4rem;
+    text-decoration: underline;
   }
 
   /* Right: why voya */
@@ -354,6 +519,124 @@
     color: rgba(var(--brand-text, 23, 27, 24), 0.65);
   }
 {% endstylesheet %}
+{% javascript %}
+  (function () {
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function initQuiz(root) {
+      if (!root || root.__quizInit) return;
+      root.__quizInit = true;
+
+      var wrap = root.closest('.vy-finder-why__phone') || root;
+      var cfgEl = wrap.querySelector('[data-quiz-config]');
+      var cfg;
+      try { cfg = JSON.parse(cfgEl.textContent); } catch (e) { return; }
+      if (!cfg || !cfg.questions || !cfg.questions.length) return;
+
+      var stage = root.querySelector('[data-quiz-stage]');
+      var progress = root.querySelector('[data-quiz-progress]');
+      var actions = root.querySelector('.vy-finder-why__actions');
+      var backBtn = root.querySelector('[data-quiz-back]');
+      var nextBtn = root.querySelector('[data-quiz-next]');
+      var qs = cfg.questions;
+
+      var answers = [];
+      var step = 0;
+      var done = false;
+
+      function pickResult() {
+        var a = answers[0];
+        return (cfg.results && cfg.results[a]) || cfg.fallback || { name: '', tag: '', url: '#' };
+      }
+
+      function renderProgress() {
+        var html = '';
+        for (var i = 0; i < qs.length; i++) {
+          var cls = 'vy-finder-why__dot';
+          if (done || i < step) cls += ' is-done';
+          if (i === step && !done) cls += ' is-active';
+          html += '<span class="' + cls + '"></span>';
+        }
+        progress.innerHTML = html;
+      }
+
+      function renderQuestion() {
+        var q = qs[step];
+        var html = '<span class="vy-finder-why__q-label">' + escapeHtml(q.label) + '</span>';
+        html += '<div class="vy-finder-why__chips">';
+        q.options.forEach(function (opt) {
+          var sel = answers[step] === opt ? ' is-selected' : '';
+          html += '<button type="button" class="vy-finder-why__chip' + sel + '" data-opt="' + escapeHtml(opt) + '"'
+            + (sel ? ' aria-pressed="true"' : '') + '>' + escapeHtml(opt) + '</button>';
+        });
+        html += '</div>';
+        stage.innerHTML = html;
+        stage.querySelectorAll('[data-opt]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            answers[step] = b.getAttribute('data-opt');
+            renderQuestion();
+            syncControls();
+          });
+        });
+      }
+
+      function renderResult() {
+        var r = pickResult();
+        var html = '<div class="vy-finder-why__result">'
+          + '<span class="vy-finder-why__result-eyebrow">' + escapeHtml(cfg.eyebrow || 'Your perfect match') + '</span>'
+          + '<span class="vy-finder-why__result-name">' + escapeHtml(r.name) + '</span>'
+          + '<span class="vy-finder-why__result-tag">' + escapeHtml(r.tag) + '</span>'
+          + '<a class="vy-finder-why__result-shop" href="' + encodeURI(r.url || '#') + '">' + escapeHtml(cfg.shopLabel || 'Shop now') + '</a>'
+          + '<button type="button" class="vy-finder-why__restart" data-quiz-restart>' + escapeHtml(cfg.restartLabel || 'Start over') + '</button>'
+          + '</div>';
+        stage.innerHTML = html;
+        stage.querySelector('[data-quiz-restart]').addEventListener('click', function () {
+          done = false; step = 0; answers = []; update();
+        });
+      }
+
+      function syncControls() {
+        if (done) { actions.hidden = true; return; }
+        actions.hidden = false;
+        nextBtn.disabled = !answers[step];
+        nextBtn.textContent = step === qs.length - 1 ? 'See My Match' : 'Next';
+        backBtn.hidden = step === 0;
+      }
+
+      function update() {
+        if (done) renderResult(); else renderQuestion();
+        renderProgress();
+        syncControls();
+      }
+
+      nextBtn.addEventListener('click', function () {
+        if (done || !answers[step]) return;
+        if (step === qs.length - 1) { done = true; } else { step++; }
+        update();
+      });
+      backBtn.addEventListener('click', function () {
+        if (step > 0) { step--; update(); }
+      });
+
+      update();
+    }
+
+    function initAll(ctx) {
+      (ctx || document).querySelectorAll('[data-finder-quiz]').forEach(initQuiz);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { initAll(); });
+    } else {
+      initAll();
+    }
+    document.addEventListener('shopify:section:load', function (e) { initAll(e.target); });
+  })();
+{% endjavascript %}
 {% schema %}
 {
   "name": "Finder + Why",
