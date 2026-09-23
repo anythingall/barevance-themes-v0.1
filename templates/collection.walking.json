@@ -6,13 +6,17 @@
         "color_scheme": "scheme-1",
         "desktop_media_placement": "right",
         "mobile_media_position": "below",
-        "section_height": "medium",
+        "section_height": "large",
         "content_alignment": "left",
         "eyebrow": "WALKING BAREFOOT SHOES",
         "heading": "Walk Further. Feel Lighter.",
         "heading_highlight": "",
         "subheading": "<p>Lightweight, flexible barefoot shoes designed for everyday walks, long days and life on the move.</p>",
-        "footnote": ""
+        "footnote": "",
+        "media_style": "overlay",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1696964904681-7ae16f82ceef.jpg?v=1790085849",
+        "media_caption": "Good Shoes Take You Further.",
+        "image": ""
       },
       "blocks": {
         "b1": {
@@ -102,7 +106,7 @@
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
         "show_rating": true,
-        "quick_add": "standard",
+        "quick_add": "none",
         "show_view_all": true,
         "swipe_on_mobile": true,
         "image_ratio": "square",
@@ -122,7 +126,7 @@
         "show_rating": false,
         "quick_add": "none",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "2",
         "padding_top": 36,
@@ -137,47 +141,69 @@
         "heading_alignment": "left",
         "feature_label": "",
         "us_label": "Mirox",
-        "others_label": "Others"
+        "others_label": "Others",
+        "mode": "models",
+        "mark_style": "checks",
+        "col1_name": "Mirox",
+        "col1_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113",
+        "col1_highlight": true,
+        "col2_name": "Solyn",
+        "col2_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
+        "col2_highlight": false,
+        "col3_name": "Neuro",
+        "col3_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1513654233834-19416b6eed13.jpg?v=1790091117",
+        "col3_highlight": false,
+        "col4_name": "FluxTrail",
+        "col4_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
+        "col4_highlight": false
       },
       "blocks": {
-        "c1": {
-          "type": "row",
+        "wc1": {
+          "type": "model_row",
           "settings": {
             "feature": "Everyday",
-            "us": "check",
-            "others": "check"
+            "r1": 5,
+            "r2": 3,
+            "r3": 5,
+            "r4": 3
           }
         },
-        "c2": {
-          "type": "row",
+        "wc2": {
+          "type": "model_row",
           "settings": {
             "feature": "Lightweight",
-            "us": "check",
-            "others": "cross"
+            "r1": 5,
+            "r2": 4,
+            "r3": 5,
+            "r4": 4
           }
         },
-        "c3": {
-          "type": "row",
+        "wc3": {
+          "type": "model_row",
           "settings": {
             "feature": "Wide Toe Box",
-            "us": "check",
-            "others": "cross"
+            "r1": 5,
+            "r2": 5,
+            "r3": 5,
+            "r4": 5
           }
         },
-        "c4": {
-          "type": "row",
+        "wc4": {
+          "type": "model_row",
           "settings": {
             "feature": "Outdoor Ready",
-            "us": "check",
-            "others": "check"
+            "r1": 3,
+            "r2": 2,
+            "r3": 5,
+            "r4": 5
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4"
+        "wc1",
+        "wc2",
+        "wc3",
+        "wc4"
       ]
     },
     "ugc": {
@@ -300,7 +326,7 @@
           "type": "item",
           "settings": {
             "question": "Are these good for long walks?",
-            "answer": "<p>Yes — lightweight, flexible and roomy for all-day walking comfort.</p>"
+            "answer": "<p>Yes \u2014 lightweight, flexible and roomy for all-day walking comfort.</p>"
           }
         },
         "q2": {
@@ -335,14 +361,17 @@
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
         "eyebrow": "",
         "heading": "Ready to Walk More Naturally?",
         "text": "<p>Find your perfect pair of walking barefoot shoes.</p>",
         "button_label": "Shop Walking Shoes",
         "button_link": "/collections/walking",
         "content_alignment": "left",
-        "overlay_opacity": 45
+        "overlay_opacity": 0,
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
+        "scrim": true,
+        "script_text": "Good Shoes Take You Further."
       }
     }
   },
