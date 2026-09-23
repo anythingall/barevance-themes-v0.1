@@ -67,7 +67,11 @@
         -%}
         <li class="vy-edu__item" {{ block.shopify_attributes }}>
           <{{ edu_tag }} class="vy-edu__card"{% if edu_href != blank %} href="{{ edu_href }}"{% endif %}>
-            {%- if block.settings.image != blank -%}
+            {%- if block.settings.image_url != blank -%}
+              <span class="vy-edu__media">
+                <img class="vy-edu__img" src="{{ block.settings.image_url }}" width="600" height="450" loading="lazy" alt="{{ block.settings.title | escape }}">
+              </span>
+            {%- elsif block.settings.image != blank -%}
               <span class="vy-edu__media">
                 {{
                   block.settings.image
@@ -289,6 +293,7 @@
       "name": "Guide card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Ảnh" },
+        { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN, ưu tiên)" },
         { "type": "text", "id": "title", "label": "Tiêu đề", "default": "What Are Barefoot Shoes?" },
         { "type": "textarea", "id": "text", "label": "Mô tả", "default": "Learn the benefits and how they work." },
         { "type": "text", "id": "link_label", "label": "CTA (nhãn)", "default": "Learn More" },

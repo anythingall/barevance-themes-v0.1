@@ -129,7 +129,7 @@
         "columns_desktop": 5,
         "color_scheme": "scheme-1",
         "show_rating": true,
-        "quick_add": "standard",
+        "quick_add": "none",
         "show_view_all": true,
         "swipe_on_mobile": true,
         "image_ratio": "square",
@@ -149,7 +149,7 @@
         "show_rating": false,
         "quick_add": "none",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "2",
         "padding_top": 36,
@@ -363,7 +363,8 @@
             "title": "What Are Barefoot Shoes?",
             "text": "Learn the benefits and how they work.",
             "link_label": "Learn More",
-            "link_url": "/pages/why-barefoot"
+            "link_url": "/pages/why-barefoot",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
           }
         },
         "e2": {
@@ -372,7 +373,8 @@
             "title": "How Should Barefoot Shoes Fit?",
             "text": "Get the right size and fit for maximum comfort.",
             "link_label": "Size Guide",
-            "link_url": "/pages/size-guide"
+            "link_url": "/pages/size-guide",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
           }
         },
         "e3": {
@@ -381,7 +383,8 @@
             "title": "How to Transition",
             "text": "Tips for making the switch comfortably.",
             "link_label": "Learn More",
-            "link_url": "/pages/transition"
+            "link_url": "/pages/transition",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
           }
         }
       },
