@@ -459,3 +459,21 @@
 .price--large.price--on-sale .price__sale s.price-item--regular {
   color: rgba(var(--color-foreground, 23 27 24), 0.5);
 }
+
+/* PDP gallery overlays (Best-Seller badge + script caption), driven by
+   product metafields custom.gallery_badge / custom.gallery_caption. */
+.vy-media-wrapper { position: relative; }
+.vy-gallery-badge {
+  position: absolute; z-index: 3; top: 1.4rem; left: 1.4rem;
+  background: rgb(var(--color-button, 35 69 45));
+  color: rgb(var(--color-button-text, 255 255 255));
+  font-size: 1.2rem; font-weight: 700; letter-spacing: 0.02em;
+  padding: 0.6rem 1.2rem; border-radius: 999px;
+}
+.vy-gallery-caption {
+  position: absolute; z-index: 3; top: 1.8rem; right: 1.8rem; max-width: 18rem;
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', 'Brush Script MT', cursive; font-style: normal; font-weight: 600;
+  font-size: 2.2rem; line-height: 1.25; text-align: right;
+  color: rgb(var(--color-foreground, 23 27 24));
+  text-shadow: 0 0.1rem 0.6rem rgba(255, 255, 255, 0.6);
+}
