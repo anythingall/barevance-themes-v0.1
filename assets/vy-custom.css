@@ -516,5 +516,5 @@
 /* On desktop the thumbnail rail occupies the wrapper's left edge, so shift the
    Best-Seller badge right to sit on the MAIN image (like the design). */
 @media screen and (min-width: 990px) {
-  .vy-gallery-badge { left: calc(8.4rem + 1.2rem + 1.4rem); }
+  .vy-media-wrapper:has(.thumbnail-slider) .vy-gallery-badge { left: calc(8.4rem + 1.2rem + 1.4rem); }
 }

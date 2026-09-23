@@ -590,58 +590,61 @@
         "source": "blocks",
         "heading": "Frequently Asked Questions",
         "heading_alignment": "left",
-        "columns": "2"
+        "columns": "2",
+        "view_all_label": "View All FAQs",
+        "view_all_link": "/pages/faq",
+        "narrow": false
       },
       "blocks": {
         "q1": {
           "type": "item",
           "settings": {
-            "question": "Is Mirox a barefoot shoe?",
-            "answer": "<p>Yes \u2014 Mirox uses a wide toe box, flexible sole and zero-drop platform for a natural-feeling stride.</p>"
+            "question": "How should barefoot shoes fit?",
+            "answer": "<p>Your toes should have room to spread, with a snug (not tight) midfoot and heel.</p>"
           }
         },
         "q2": {
           "type": "item",
           "settings": {
-            "question": "How much room should I have around my toes?",
-            "answer": "<p>Your toes should be able to spread with a little room at the front \u2014 not cramped, not sliding around.</p>"
+            "question": "What size should I choose?",
+            "answer": "<p>Most customers stay true to size. If between sizes or wide-footed, size up.</p>"
           }
         },
         "q3": {
           "type": "item",
           "settings": {
-            "question": "Does Mirox run true to size?",
-            "answer": "<p>Most customers find Mirox true to size. If you are between sizes or have wide feet, size up.</p>"
+            "question": "Can I return them if they don't fit?",
+            "answer": "<p>Yes \u2014 30-day returns so you can find the right fit with confidence.</p>"
           }
         },
         "q4": {
           "type": "item",
           "settings": {
-            "question": "Can I wear Mirox without socks?",
-            "answer": "<p>Yes. The breathable interior is comfortable with thin socks or barefoot.</p>"
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 1\u20132 business days with tracking.</p>"
           }
         },
         "q5": {
           "type": "item",
           "settings": {
-            "question": "Is Mirox good for walking?",
-            "answer": "<p>Mirox is built for everyday walking, errands, travel and light activity.</p>"
+            "question": "Are Voya shoes suitable for everyday walking?",
+            "answer": "<p>Yes \u2014 Voya is designed for everyday walking, travel and light activity.</p>"
           }
         },
         "q6": {
           "type": "item",
           "settings": {
-            "question": "Can I return it if the size isn't right?",
-            "answer": "<p>Yes \u2014 we offer 30-day returns so you can find the right fit with confidence.</p>"
+            "question": "How do barefoot shoes differ from regular shoes?",
+            "answer": "<p>Wider toe box, flexible sole and a zero-drop platform for natural movement.</p>"
           }
         }
       },
       "block_order": [
         "q1",
-        "q2",
-        "q3",
         "q4",
+        "q2",
         "q5",
+        "q3",
         "q6"
       ]
     },

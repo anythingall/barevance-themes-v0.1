@@ -78,12 +78,8 @@
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper vy-media-wrapper">
           {%- assign vy_gallery_badge = product.metafields.custom.gallery_badge.value -%}
-          {%- assign vy_gallery_caption = product.metafields.custom.gallery_caption.value -%}
           {%- if vy_gallery_badge != blank -%}
             <span class="vy-gallery-badge">{{ vy_gallery_badge }}</span>
-          {%- endif -%}
-          {%- if vy_gallery_caption != blank -%}
-            <span class="vy-gallery-caption">{{ vy_gallery_caption }}</span>
           {%- endif -%}
           {% render 'product-media-gallery', variant_images: variant_images %}
         </div>
