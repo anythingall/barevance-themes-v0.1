@@ -518,3 +518,30 @@
 @media screen and (min-width: 990px) {
   .vy-media-wrapper:has(.thumbnail-slider) .vy-gallery-badge { left: calc(8.4rem + 1.2rem + 1.4rem); }
 }
+
+/* PDP gallery refinements to match the design: rounded thumbnails (~76px), tighter
+   rail, rounded main image, badge offset updated to the new rail width. */
+@media screen and (min-width: 990px) {
+  .vy-media-wrapper media-gallery > .thumbnail-slider { flex-basis: 7.6rem; }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list { gap: 1.2rem; }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item {
+    width: 7.6rem;
+    border-radius: 1.2rem;
+    overflow: hidden;
+  }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item .thumbnail,
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item img {
+    border-radius: 1.2rem;
+  }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item[aria-current="true"] .thumbnail,
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item.is-active .thumbnail {
+    box-shadow: 0 0 0 0.2rem rgb(var(--color-button));
+  }
+  .vy-media-wrapper media-gallery > .slider-mobile-gutter .product__media,
+  .vy-media-wrapper media-gallery > .slider-mobile-gutter img {
+    border-radius: 1.6rem;
+  }
+  .vy-media-wrapper:has(.thumbnail-slider) .vy-gallery-badge {
+    left: calc(7.6rem + 1.2rem + 1.4rem);
+  }
+}
