@@ -54,6 +54,50 @@
       {%- endfor -%}
     </ul>
   </div>
+  {%- elsif section.settings.layout == 'compare2' -%}
+  <div class="vy-container vy-compare2">
+    <div class="vy-compare2__intro">
+      {%- if section.settings.eyebrow != blank -%}<p class="vy-eyebrow vy-compare2__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="vy-h2 vy-compare2__heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="vy-compare2__text rte">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}<a href="{{ section.settings.button_link | default: '#' }}" class="button button--primary vy-cta vy-compare2__btn">{{ section.settings.button_label }}<span aria-hidden="true">&nbsp;→</span></a>{%- endif -%}
+    </div>
+    <div class="vy-compare2__cards">
+      {%- assign ci = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          {%- assign ci = ci | plus: 1 -%}
+          {%- if ci == 2 -%}<span class="vy-compare2__arrow" aria-hidden="true">→</span>{%- endif -%}
+          <div class="vy-compare2__card vy-compare2__card--{{ block.settings.tone | default: 'neutral' }}" {{ block.shopify_attributes }}>
+            <span class="vy-compare2__media">
+              {%- if block.settings.image_url != blank -%}
+                <img src="{{ block.settings.image_url }}" width="400" height="300" loading="lazy" alt="{{ block.settings.title | escape }}">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.title != blank -%}<span class="vy-compare2__card-title">{{ block.settings.title }}</span>{%- endif -%}
+            {%- if block.settings.bullets != blank -%}
+              {%- assign lines = block.settings.bullets | newline_to_br | split: '<br />' -%}
+              <ul class="vy-compare2__bullets list-unstyled" role="list">
+                {%- for line in lines -%}
+                  {%- assign clean = line | strip -%}
+                  {%- if clean != blank -%}
+                    <li>
+                      <span class="vy-compare2__bullet-icon" aria-hidden="true">
+                        {%- if block.settings.tone == 'good' -%}{%- render 'custom-icon', icon: 'check_mark' -%}{%- else -%}{%- render 'custom-icon', icon: 'close' -%}{%- endif -%}
+                      </span>
+                      <span>{{ clean }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
   {%- else -%}
   <div class="vy-container vy-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
     <div class="vy-iwt__media vy-card">
@@ -230,6 +274,50 @@
     .vy-pcards { display: grid; grid-template-columns: 1.35fr 2fr; gap: 3.2rem; align-items: center; }
     .vy-pcards__intro { margin-bottom: 0; }
   }
+
+  /* ---- compare2 layout: intro + two comparison cards with an arrow ---- */
+  .vy-compare2 { display: grid; grid-template-columns: 1fr; gap: 2.8rem; }
+  .vy-compare2__heading { margin: 0.6rem 0 1.2rem; }
+  .vy-compare2__text { margin: 0 0 2rem; opacity: 0.82; max-width: 34rem; }
+  .vy-compare2__cards { display: flex; align-items: stretch; gap: 1rem; }
+  .vy-compare2__card {
+    flex: 1 1 0;
+    min-width: 0;
+    background: rgb(var(--color-background));
+    border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+    border-radius: 1.4rem;
+    padding: 1.4rem;
+    box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.05);
+  }
+  .vy-compare2__media {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: rgba(var(--color-foreground), 0.06);
+  }
+  .vy-compare2__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vy-compare2__card-title { display: block; font-weight: 700; font-size: 1.6rem; margin-bottom: 1rem; }
+  .vy-compare2__bullets { display: flex; flex-direction: column; gap: 0.8rem; margin: 0; font-size: 1.3rem; }
+  .vy-compare2__bullets li { display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.35; }
+  .vy-compare2__bullet-icon { flex: 0 0 auto; display: inline-flex; }
+  .vy-compare2__bullet-icon .svg-wrapper,
+  .vy-compare2__bullet-icon svg { width: 1.5rem; height: 1.5rem; }
+  .vy-compare2__card--bad .vy-compare2__bullet-icon { color: #b8503a; }
+  .vy-compare2__card--good { border-color: rgba(var(--color-button), 0.4); }
+  .vy-compare2__card--good .vy-compare2__bullet-icon { color: rgb(var(--color-button)); }
+  .vy-compare2__arrow {
+    flex: 0 0 auto;
+    align-self: center;
+    font-size: 2.4rem;
+    color: rgba(var(--color-foreground), 0.4);
+  }
+
+  @media screen and (min-width: 990px) {
+    .vy-compare2 { grid-template-columns: 0.9fr 1.7fr; align-items: center; gap: 3.6rem; }
+    .vy-compare2__cards { gap: 1.4rem; }
+  }
 {% endstylesheet %}
 {% schema %}
 {
@@ -261,7 +349,8 @@
       "label": "Layout",
       "options": [
         { "value": "media", "label": "Media + list (ảnh 1 bên)" },
-        { "value": "cards", "label": "Cards (intro trái + card ảnh phải)" }
+        { "value": "cards", "label": "Cards (intro trái + card ảnh phải)" },
+        { "value": "compare2", "label": "Compare 2 (intro trái + 2 thẻ so sánh)" }
       ],
       "default": "media"
     },
@@ -306,7 +395,19 @@
       "settings": [
         { "type": "text", "id": "image_url", "label": "Ảnh (URL CDN)" },
         { "type": "text", "id": "title", "label": "Tiêu đề", "default": "Cramped Toes" },
-        { "type": "textarea", "id": "text", "label": "Mô tả", "default": "Traditional shoes can squeeze your toes." }
+        { "type": "textarea", "id": "text", "label": "Mô tả", "default": "Traditional shoes can squeeze your toes." },
+        { "type": "textarea", "id": "bullets", "label": "Bullets (compare2, mỗi dòng 1 ý)" },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Tông (compare2)",
+          "options": [
+            { "value": "neutral", "label": "Trung tính" },
+            { "value": "bad", "label": "Xấu (✗ đỏ)" },
+            { "value": "good", "label": "Tốt (✓ xanh)" }
+          ],
+          "default": "neutral"
+        }
       ]
     },
     {

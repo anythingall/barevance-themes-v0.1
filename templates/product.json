@@ -120,40 +120,37 @@
     "problem": {
       "type": "custom-problem",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "eyebrow": "THE PROBLEM",
         "heading": "Your Feet Weren't Made to Be Squeezed.",
         "text": "<p>Traditional shoes can be narrow, stiff and heavy \u2014 leaving your feet tired and uncomfortable.</p>",
         "button_label": "Why Barefoot?",
-        "button_link": "/pages/why-barefoot"
+        "button_link": "/pages/why-barefoot",
+        "layout": "compare2"
       },
       "blocks": {
-        "l1": {
-          "type": "list_item",
+        "cmp1": {
+          "type": "card",
           "settings": {
-            "icon_style": "cross",
-            "text": "Narrow toe box cramps your toes"
+            "title": "Traditional Sneaker",
+            "tone": "bad",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1731001202618-452c0354e52f.jpg?v=1790089726",
+            "bullets": "Narrow toe box\nStiff sole\nHeavy and restrictive"
           }
         },
-        "l2": {
-          "type": "list_item",
+        "cmp2": {
+          "type": "card",
           "settings": {
-            "icon_style": "cross",
-            "text": "Stiff soles fight your natural stride"
-          }
-        },
-        "l3": {
-          "type": "list_item",
-          "settings": {
-            "icon_style": "cross",
-            "text": "Heavy and restrictive all day"
+            "title": "Mirox",
+            "tone": "good",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1732448393117-a91790b108d3.jpg?v=1790089726",
+            "bullets": "Roomy toe box\nFlexible sole\nLightweight and natural"
           }
         }
       },
       "block_order": [
-        "l1",
-        "l2",
-        "l3"
+        "cmp1",
+        "cmp2"
       ]
     },
     "benefits": {
