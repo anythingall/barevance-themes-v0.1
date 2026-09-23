@@ -545,3 +545,14 @@
     left: calc(7.6rem + 1.2rem + 2rem);
   }
 }
+
+/* PDP main media: fill the slide width (Dawn centers .product-media-container with
+   auto margins, leaving a ~25px gap next to the thumbnail rail). Remove that so the
+   main image sits a small, even 12px from the rail. */
+@media screen and (min-width: 990px) {
+  .vy-media-wrapper media-gallery > .slider-mobile-gutter .product-media-container {
+    margin-inline: 0;
+    width: 100%;
+    max-width: none;
+  }
+}
