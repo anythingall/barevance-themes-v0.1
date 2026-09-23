@@ -230,7 +230,11 @@
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      /* Instant swap (no opacity fade): a cross-fade leaves the rotating
+         promo text at ~0.5 opacity mid-transition, which on the dark bar
+         drops below 4.5:1 and trips axe color-contrast. Hidden items stay
+         opacity:0 (skipped by axe); the active item is always full-strength. */
+      visibility: hidden;
       pointer-events: none;
     }
     .vy-ann.is-rotating .vy-ann__item[data-ann-active] {
@@ -238,6 +242,7 @@
       left: auto;
       transform: none;
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
     }
   }
