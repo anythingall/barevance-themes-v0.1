@@ -137,18 +137,24 @@
 
   .vy-ann__loc {
     position: absolute;
-    right: 1.5rem;
+    /* Indent to sit just inside the centered content column instead of hugging
+       the viewport edge on wide screens. */
+    right: max(2rem, calc((100% - var(--page-width)) / 2 + 2rem));
     top: 50%;
     transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
+    gap: 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    /* Full-strength text so the currency reads clearly on the dark bar. */
+    color: rgb(var(--color-foreground));
+    opacity: 1;
   }
 
   .vy-ann__loc .vy-flag {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1;
   }
 
