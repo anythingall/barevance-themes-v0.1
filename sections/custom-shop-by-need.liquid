@@ -86,6 +86,9 @@
               {%- endif -%}
             </span>
             <span class="vy-sbn__overlay"></span>
+            {%- if section.settings.show_play -%}
+              <span class="vy-sbn__play" aria-hidden="true"></span>
+            {%- endif -%}
             <span class="vy-sbn__content">
               <span class="vy-sbn__labels">
                 {%- if block.settings.label != blank -%}
@@ -95,7 +98,9 @@
                   <span class="vy-sbn__sublabel">{{ block.settings.sublabel }}</span>
                 {%- endif -%}
               </span>
-              <span class="vy-sbn__arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+              {%- unless section.settings.show_play -%}
+                <span class="vy-sbn__arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+              {%- endunless -%}
             </span>
           </a>
         </li>
@@ -251,6 +256,32 @@
       font-size: 1.8rem;
     }
   }
+
+  /* Play badge (for a "See in Motion" video-style grid; show_play) */
+  .vy-sbn__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+  }
+
+  .vy-sbn__play::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 0.8rem 0 0.8rem 1.3rem;
+    border-color: transparent transparent transparent rgb(var(--brand-primary, 35, 69, 45));
+  }
 {% endstylesheet %}
 {% schema %}
 {
@@ -319,6 +350,12 @@
         { "value": "carousel", "label": "Cuộn ngang" }
       ],
       "default": "carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_play",
+      "label": "Show play badge (video style)",
+      "default": false
     }
   ],
   "blocks": [

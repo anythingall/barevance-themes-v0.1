@@ -123,7 +123,7 @@
         "color_scheme": "scheme-2",
         "eyebrow": "THE PROBLEM",
         "heading": "Your Feet Weren't Made to Be Squeezed.",
-        "text": "<p>Traditional shoes can be narrow, stiff and heavy — leaving your feet tired and uncomfortable.</p>",
+        "text": "<p>Traditional shoes can be narrow, stiff and heavy \u2014 leaving your feet tired and uncomfortable.</p>",
         "button_label": "Why Barefoot?",
         "button_link": "/pages/why-barefoot"
       },
@@ -285,8 +285,8 @@
           "type": "row",
           "settings": {
             "attribute": "Weight (US 9)",
-            "size1_value": "≈210g",
-            "size2_value": "≈215g"
+            "size1_value": "\u2248210g",
+            "size2_value": "\u2248215g"
           }
         },
         "r4": {
@@ -476,14 +476,14 @@
           "type": "item",
           "settings": {
             "question": "Is Mirox a barefoot shoe?",
-            "answer": "<p>Yes — Mirox uses a wide toe box, flexible sole and zero-drop platform for a natural-feeling stride.</p>"
+            "answer": "<p>Yes \u2014 Mirox uses a wide toe box, flexible sole and zero-drop platform for a natural-feeling stride.</p>"
           }
         },
         "q2": {
           "type": "item",
           "settings": {
             "question": "How much room should I have around my toes?",
-            "answer": "<p>Your toes should be able to spread with a little room at the front — not cramped, not sliding around.</p>"
+            "answer": "<p>Your toes should be able to spread with a little room at the front \u2014 not cramped, not sliding around.</p>"
           }
         },
         "q3": {
@@ -511,7 +511,7 @@
           "type": "item",
           "settings": {
             "question": "Can I return it if the size isn't right?",
-            "answer": "<p>Yes — we offer 30-day returns so you can find the right fit with confidence.</p>"
+            "answer": "<p>Yes \u2014 we offer 30-day returns so you can find the right fit with confidence.</p>"
           }
         }
       },
@@ -527,19 +527,145 @@
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
-        "color_scheme": "scheme-3",
-        "eyebrow": "MORE NATURAL STEPS. A HAPPIER YOU.",
+        "color_scheme": "scheme-1",
+        "eyebrow": "",
         "heading": "Give Your Feet Room to Move.",
         "text": "<p>Discover the barefoot feeling without giving up everyday style.</p>",
         "button_label": "Add to Cart",
         "button_link": "",
         "content_alignment": "left",
-        "overlay_opacity": 45
+        "overlay_opacity": 0,
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
+        "scrim": true,
+        "script_text": "More Natural Steps. A Happier You."
       }
     },
     "sticky": {
       "type": "custom-sticky-atc",
       "settings": {}
+    },
+    "made_everyday": {
+      "type": "custom-shop-by-need",
+      "blocks": {
+        "e1": {
+          "type": "need",
+          "settings": {
+            "label": "Walking",
+            "link_url": "/collections/walking",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
+          }
+        },
+        "e2": {
+          "type": "need",
+          "settings": {
+            "label": "Weekends",
+            "link_url": "/collections/all",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
+          }
+        },
+        "e3": {
+          "type": "need",
+          "settings": {
+            "label": "Errands",
+            "link_url": "/collections/everyday",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
+          }
+        },
+        "e4": {
+          "type": "need",
+          "settings": {
+            "label": "Active",
+            "link_url": "/collections/active",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124"
+          }
+        },
+        "e5": {
+          "type": "need",
+          "settings": {
+            "label": "Everyday",
+            "link_url": "/collections/everyday",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124"
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "Made for Your Everyday",
+        "subheading": "",
+        "heading_alignment": "center",
+        "columns": 5,
+        "image_ratio": "3 / 4",
+        "mobile_layout": "carousel"
+      }
+    },
+    "see_motion": {
+      "type": "custom-shop-by-need",
+      "blocks": {
+        "m1": {
+          "type": "need",
+          "settings": {
+            "label": "Walking Naturally",
+            "link_url": "",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
+          }
+        },
+        "m2": {
+          "type": "need",
+          "settings": {
+            "label": "Flexible Sole",
+            "link_url": "",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
+          }
+        },
+        "m3": {
+          "type": "need",
+          "settings": {
+            "label": "Toe Room",
+            "link_url": "",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
+          }
+        },
+        "m4": {
+          "type": "need",
+          "settings": {
+            "label": "Lightweight",
+            "link_url": "",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124"
+          }
+        },
+        "m5": {
+          "type": "need",
+          "settings": {
+            "label": "Everyday Comfort",
+            "link_url": "",
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "See Mirox in Motion",
+        "subheading": "Real movement. Real comfort. See what makes Mirox different.",
+        "heading_alignment": "left",
+        "columns": 5,
+        "image_ratio": "1 / 1",
+        "mobile_layout": "carousel",
+        "show_play": true
+      }
     }
   },
   "order": [
@@ -547,8 +673,10 @@
     "trust_bar",
     "problem",
     "benefits",
+    "see_motion",
     "ugc",
     "fit",
+    "made_everyday",
     "comparison",
     "bundle",
     "reviews",
