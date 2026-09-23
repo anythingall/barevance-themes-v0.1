@@ -16,19 +16,30 @@
     {%- endfor -%}
   </div>
   {%- if section.settings.show_localization -%}
-    {%- assign current_currency = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency -%}
+    {%- liquid
+      assign current_currency = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      # Only a real currency switcher when the store actually presents more than
+      # one currency. With a single currency (even across several shipping
+      # countries) show a clean static chip instead of duplicate "USD $" options.
+      assign ann_currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
+    -%}
     <div class="vy-ann__loc">
       {%- render 'custom-flag', currency: current_currency -%}
-      {%- if localization.available_countries.size > 1 -%}
+      {%- if ann_currencies.size > 1 -%}
         {%- form 'localization', class: 'vy-ann__loc-form' -%}
           <select class="vy-ann__loc-select" name="country_code" aria-label="Currency" onchange="this.form.submit()">
+            {%- assign seen_currencies = '' -%}
             {%- for country in localization.available_countries -%}
-              <option
-                value="{{ country.iso_code }}"
-                {%- if country.iso_code == localization.country.iso_code %} selected{% endif -%}
-              >
-                {{- country.currency.iso_code }} {{ country.currency.symbol -}}
-              </option>
+              {%- assign cur = country.currency.iso_code -%}
+              {%- unless seen_currencies contains cur -%}
+                <option
+                  value="{{ country.iso_code }}"
+                  {%- if country.iso_code == localization.country.iso_code %} selected{% endif -%}
+                >
+                  {{- country.currency.iso_code }} {{ country.currency.symbol -}}
+                </option>
+                {%- assign seen_currencies = seen_currencies | append: cur | append: ',' -%}
+              {%- endunless -%}
             {%- endfor -%}
           </select>
         {%- endform -%}
