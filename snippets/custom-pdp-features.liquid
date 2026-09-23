@@ -17,7 +17,7 @@
     {%- endfor -%}
   {%- else -%}
     {%- assign titles = 'Roomy Toe Box,Flexible Sole,Lightweight,All-Day Comfort' | split: ',' -%}
-    {%- assign icons = 'leaf,check_mark,fire,heart' | split: ',' -%}
+    {%- assign icons = 'hf-foot,hf-wave,hf-leaf,hf-heart' | split: ',' -%}
     {%- for t in titles -%}
       <li class="vy-pdp-features__item">
         <span class="vy-pdp-features__icon">{%- render 'custom-icon', icon: icons[forloop.index0] -%}</span>
@@ -28,16 +28,16 @@
 </ul>
 {% stylesheet %}
   .vy-pdp-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.4rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem 0.6rem;
     margin: 1.6rem 0;
     padding: 1.6rem 0;
     border-top: 0.1rem solid rgba(var(--color-foreground), 0.12);
     border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
   }
   .vy-pdp-features__item {
-    flex: 1 1 12rem;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

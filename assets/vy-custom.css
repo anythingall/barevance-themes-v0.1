@@ -477,3 +477,38 @@
   color: rgb(var(--color-foreground, 23 27 24));
   text-shadow: 0 0.1rem 0.6rem rgba(255, 255, 255, 0.6);
 }
+
+/* PDP gallery: vertical thumbnail rail on the LEFT of the main image (desktop),
+   matching the design. Dawn stacks thumbnails below by default. */
+@media screen and (min-width: 990px) {
+  .vy-media-wrapper media-gallery {
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+  .vy-media-wrapper media-gallery > .slider-mobile-gutter {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .vy-media-wrapper media-gallery > .thumbnail-slider {
+    order: 0;
+    flex: 0 0 8.4rem;
+    margin: 0;
+  }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    gap: 1rem;
+    overflow: visible;
+  }
+  .vy-media-wrapper .thumbnail-slider .thumbnail-list__item {
+    width: 8.4rem;
+    scroll-snap-align: none;
+  }
+  .vy-media-wrapper .thumbnail-slider .slider-buttons {
+    display: none;
+  }
+}

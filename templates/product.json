@@ -48,8 +48,8 @@
         }
       },
       "block_order": [
-        "pdp_rating",
         "title",
+        "pdp_rating",
         "price",
         "pdp_feats",
         "variant_picker",
