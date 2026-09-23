@@ -110,7 +110,8 @@
         "show_view_all": true,
         "swipe_on_mobile": true,
         "image_ratio": "square",
-        "collection": "best-sellers"
+        "collection": "best-sellers",
+        "view_all_style": "link"
       }
     },
     "product-grid": {
