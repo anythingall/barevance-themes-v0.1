@@ -16,10 +16,12 @@
     {%- endfor -%}
   </div>
   {%- if section.settings.show_localization -%}
+    {%- assign current_currency = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency -%}
     <div class="vy-ann__loc">
+      {%- render 'custom-flag', currency: current_currency -%}
       {%- if localization.available_countries.size > 1 -%}
         {%- form 'localization', class: 'vy-ann__loc-form' -%}
-          <select name="country_code" aria-label="Currency" onchange="this.form.submit()">
+          <select class="vy-ann__loc-select" name="country_code" aria-label="Currency" onchange="this.form.submit()">
             {%- for country in localization.available_countries -%}
               <option
                 value="{{ country.iso_code }}"
@@ -31,7 +33,7 @@
           </select>
         {%- endform -%}
       {%- else -%}
-        <span class="vy-ann__currency">{{ localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency }}</span>
+        <span class="vy-ann__currency">{{ current_currency }}</span>
       {%- endif -%}
     </div>
   {%- endif -%}
@@ -140,8 +142,50 @@
     transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
     font-size: 1.2rem;
     font-weight: 600;
+  }
+
+  .vy-ann__loc .vy-flag {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .vy-ann__loc-form {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Native select styled as the design chip: transparent, inherits bar color,
+     custom chevron on the right. */
+  .vy-ann__loc-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    padding: 0.2rem 1.6rem 0.2rem 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.2rem center;
+    background-size: 0.9rem;
+  }
+
+  .vy-ann__loc-select:focus-visible {
+    outline: 0.2rem solid currentColor;
+    outline-offset: 0.2rem;
+    border-radius: 0.4rem;
+  }
+
+  /* Option list renders in the OS menu — force readable dark text there. */
+  .vy-ann__loc-select option {
+    color: #171b18;
   }
 
   @media screen and (max-width: 749px) {
