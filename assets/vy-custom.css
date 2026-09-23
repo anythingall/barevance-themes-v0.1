@@ -464,7 +464,7 @@
    product metafields custom.gallery_badge / custom.gallery_caption. */
 .vy-media-wrapper { position: relative; }
 .vy-gallery-badge {
-  position: absolute; z-index: 3; top: 1.4rem; left: 1.4rem;
+  position: absolute; z-index: 3; top: 2rem; left: 2rem;
   background: rgb(var(--color-button, 35 69 45));
   color: rgb(var(--color-button-text, 255 255 255));
   font-size: 1.2rem; font-weight: 700; letter-spacing: 0.02em;
@@ -542,6 +542,6 @@
     border-radius: 1.6rem;
   }
   .vy-media-wrapper:has(.thumbnail-slider) .vy-gallery-badge {
-    left: calc(7.6rem + 1.2rem + 1.4rem);
+    left: calc(7.6rem + 1.2rem + 2rem);
   }
 }
