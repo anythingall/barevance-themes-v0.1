@@ -256,53 +256,149 @@
       "type": "custom-size-guide",
       "settings": {
         "color_scheme": "scheme-2",
-        "heading": "How Should Mirox Fit?",
+        "heading": "",
         "subheading": "Your toes should have room to spread.",
         "attr_label": "Measurement",
         "size1_label": "Standard",
         "size2_label": "Wide",
         "perfect_heading": "Best for",
-        "perfect_for": "<p>Best for normal to wide feet.</p>"
+        "perfect_for": "<p>Best for normal to wide feet.</p>",
+        "layout": "columns",
+        "col1_heading": "Product Details",
+        "col2_heading": "How Should Mirox Fit?",
+        "col2_note": "Still unsure? Try our Shoe Finder and get a personalized recommendation.",
+        "col2_cta_label": "Find My Voya",
+        "col2_cta_link": "",
+        "col3_heading": "Mirox Fit",
+        "col3_rating": "4.7 / 5"
       },
       "blocks": {
-        "r1": {
-          "type": "row",
+        "s1": {
+          "type": "spec",
           "settings": {
-            "attribute": "Toe room",
-            "size1_value": "Roomy",
-            "size2_value": "Extra roomy"
+            "label": "Upper",
+            "value": "Breathable mesh"
           }
         },
-        "r2": {
-          "type": "row",
+        "s2": {
+          "type": "spec",
           "settings": {
-            "attribute": "Flexibility",
-            "size1_value": "High",
-            "size2_value": "High"
+            "label": "Sole",
+            "value": "Flexible barefoot-style"
           }
         },
-        "r3": {
-          "type": "row",
+        "s3": {
+          "type": "spec",
           "settings": {
-            "attribute": "Weight (US 9)",
-            "size1_value": "\u2248210g",
-            "size2_value": "\u2248215g"
+            "label": "Closure",
+            "value": "Quick-lace system"
           }
         },
-        "r4": {
-          "type": "row",
+        "s4": {
+          "type": "spec",
           "settings": {
-            "attribute": "Drop",
-            "size1_value": "Zero drop",
-            "size2_value": "Zero drop"
+            "label": "Weight",
+            "value": "Approx. 210g (US 9)"
+          }
+        },
+        "s5": {
+          "type": "spec",
+          "settings": {
+            "label": "Toe Box",
+            "value": "Roomy fit"
+          }
+        },
+        "s6": {
+          "type": "spec",
+          "settings": {
+            "label": "Drop",
+            "value": "Zero drop (flat)"
+          }
+        },
+        "s7": {
+          "type": "spec",
+          "settings": {
+            "label": "Best For",
+            "value": "Walking, travel, everyday"
+          }
+        },
+        "c8": {
+          "type": "check",
+          "settings": {
+            "text": "Not too tight"
+          }
+        },
+        "c9": {
+          "type": "check",
+          "settings": {
+            "text": "Not too narrow"
+          }
+        },
+        "c10": {
+          "type": "check",
+          "settings": {
+            "text": "No pressure on toes"
+          }
+        },
+        "c11": {
+          "type": "check",
+          "settings": {
+            "text": "Shouldn't slide around"
+          }
+        },
+        "b12": {
+          "type": "bar",
+          "settings": {
+            "label": "Toe Room",
+            "level": 5
+          }
+        },
+        "b13": {
+          "type": "bar",
+          "settings": {
+            "label": "Width",
+            "level": 4
+          }
+        },
+        "b14": {
+          "type": "bar",
+          "settings": {
+            "label": "Flexibility",
+            "level": 5
+          }
+        },
+        "b15": {
+          "type": "bar",
+          "settings": {
+            "label": "Cushion",
+            "level": 3
+          }
+        },
+        "b16": {
+          "type": "bar",
+          "settings": {
+            "label": "Weight",
+            "level": 4
           }
         }
       },
       "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7",
+        "c8",
+        "c9",
+        "c10",
+        "c11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16"
       ]
     },
     "comparison": {

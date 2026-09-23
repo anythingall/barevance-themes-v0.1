@@ -1,54 +1,137 @@
 {%- comment -%}
-  vy-size-guide — "Will it fit?" section: product image + size table (2 sizes)
-  + a "Perfect for" box. Rows via blocks. Mobile: image top, table scrolls.
+  vy-size-guide — two layouts:
+  - "table": product image + size table (2 sizes) + a "Perfect for" box (original).
+  - "columns": 3-column PDP fit panel — Product Details (spec list) | How Should It Fit
+    (checklist + finder CTA) | Fit bars (label + 0–5 level). Blocks: spec / check / bar.
 {%- endcomment -%}
 
 <div class="vy-sizeguide color-{{ section.settings.color_scheme }} gradient vy-section">
   <div class="vy-container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="vy-h2 vy-sizeguide__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.subheading != blank -%}
-      <p class="vy-sizeguide__sub">{{ section.settings.subheading }}</p>
-    {%- endif -%}
-
-    <div class="vy-sizeguide__layout">
-      {%- if section.settings.image != blank -%}
-        <div class="vy-sizeguide__media vy-card">
-          {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-sizeguide__img', alt: section.settings.heading }}
-        </div>
+    {%- if section.settings.layout == 'columns' -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="vy-h2 vy-sizeguide__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
-
-      <div class="vy-table-scroll vy-sizeguide__tablewrap" tabindex="0" role="region" aria-label="Size chart (scroll horizontally)">
-        <table class="vy-sizeguide__table">
-          <thead>
-            <tr>
-              <th scope="col">{{ section.settings.attr_label }}</th>
-              <th scope="col">{{ section.settings.size1_label }}</th>
-              <th scope="col">{{ section.settings.size2_label }}</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div class="vy-sizeguide__cols">
+        {%- comment -%} Column 1: Product Details (spec blocks) {%- endcomment -%}
+        <div class="vy-sizeguide__col">
+          {%- if section.settings.col1_heading != blank -%}
+            <h3 class="vy-sizeguide__col-title">{{ section.settings.col1_heading }}</h3>
+          {%- endif -%}
+          <dl class="vy-sizeguide__specs">
             {%- for block in section.blocks -%}
-              <tr {{ block.shopify_attributes }}>
-                <th scope="row" class="vy-sizeguide__attr">{{ block.settings.attribute }}</th>
-                <td>{{ block.settings.size1_value }}</td>
-                <td>{{ block.settings.size2_value }}</td>
-              </tr>
+              {%- if block.type == 'spec' -%}
+                <div class="vy-sizeguide__spec" {{ block.shopify_attributes }}>
+                  <dt>{{ block.settings.label }}</dt>
+                  <dd>{{ block.settings.value }}</dd>
+                </div>
+              {%- endif -%}
             {%- endfor -%}
-          </tbody>
-        </table>
+          </dl>
+        </div>
+
+        {%- comment -%} Column 2: How should it fit (check blocks) + finder CTA {%- endcomment -%}
+        <div class="vy-sizeguide__col">
+          {%- if section.settings.col2_heading != blank -%}
+            <h3 class="vy-sizeguide__col-title">{{ section.settings.col2_heading }}</h3>
+          {%- endif -%}
+          <ul class="vy-sizeguide__checks list-unstyled" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'check' -%}
+                <li class="vy-sizeguide__check" {{ block.shopify_attributes }}>
+                  <span class="vy-sizeguide__check-icon" aria-hidden="true">{%- render 'custom-icon', icon: 'checkmark' -%}</span>
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+          {%- if section.settings.col2_note != blank or section.settings.col2_cta_label != blank -%}
+            <div class="vy-sizeguide__finder">
+              {%- if section.settings.col2_note != blank -%}
+                <p class="vy-sizeguide__finder-note">{{ section.settings.col2_note }}</p>
+              {%- endif -%}
+              {%- if section.settings.col2_cta_label != blank -%}
+                <a class="vy-sizeguide__finder-cta" href="{{ section.settings.col2_cta_link | default: '#' }}">
+                  {{ section.settings.col2_cta_label }}
+                  <span class="vy-sizeguide__finder-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Column 3: Fit bars (bar blocks) + overall rating {%- endcomment -%}
+        <div class="vy-sizeguide__col">
+          <div class="vy-sizeguide__col-titlerow">
+            {%- if section.settings.col3_heading != blank -%}
+              <h3 class="vy-sizeguide__col-title">{{ section.settings.col3_heading }}</h3>
+            {%- endif -%}
+            {%- if section.settings.col3_rating != blank -%}
+              <span class="vy-sizeguide__rating">{{ section.settings.col3_rating }}</span>
+            {%- endif -%}
+          </div>
+          <div class="vy-sizeguide__bars">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'bar' -%}
+                {%- assign lvl = block.settings.level | default: 0 -%}
+                {%- assign pct = lvl | times: 20 -%}
+                <div class="vy-sizeguide__bar" {{ block.shopify_attributes }}>
+                  <span class="vy-sizeguide__bar-label">{{ block.settings.label }}</span>
+                  <span class="vy-sizeguide__bar-track"><span class="vy-sizeguide__bar-fill" style="width: {{ pct }}%;"></span></span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
       </div>
 
-      {%- if section.settings.perfect_for != blank -%}
-        <div class="vy-sizeguide__perfect vy-card">
-          {%- if section.settings.perfect_heading != blank -%}
-            <h3 class="vy-sizeguide__perfect-heading">{{ section.settings.perfect_heading }}</h3>
-          {%- endif -%}
-          <div class="rte">{{ section.settings.perfect_for }}</div>
-        </div>
+    {%- else -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="vy-h2 vy-sizeguide__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
-    </div>
+      {%- if section.settings.subheading != blank -%}
+        <p class="vy-sizeguide__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="vy-sizeguide__layout">
+        {%- if section.settings.image != blank -%}
+          <div class="vy-sizeguide__media vy-card">
+            {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'vy-sizeguide__img', alt: section.settings.heading }}
+          </div>
+        {%- endif -%}
+
+        <div class="vy-table-scroll vy-sizeguide__tablewrap" tabindex="0" role="region" aria-label="Size chart (scroll horizontally)">
+          <table class="vy-sizeguide__table">
+            <thead>
+              <tr>
+                <th scope="col">{{ section.settings.attr_label }}</th>
+                <th scope="col">{{ section.settings.size1_label }}</th>
+                <th scope="col">{{ section.settings.size2_label }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'row' -%}
+                  <tr {{ block.shopify_attributes }}>
+                    <th scope="row" class="vy-sizeguide__attr">{{ block.settings.attribute }}</th>
+                    <td>{{ block.settings.size1_value }}</td>
+                    <td>{{ block.settings.size2_value }}</td>
+                  </tr>
+                {%- endif -%}
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+
+        {%- if section.settings.perfect_for != blank -%}
+          <div class="vy-sizeguide__perfect vy-card">
+            {%- if section.settings.perfect_heading != blank -%}
+              <h3 class="vy-sizeguide__perfect-heading">{{ section.settings.perfect_heading }}</h3>
+            {%- endif -%}
+            <div class="rte">{{ section.settings.perfect_for }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -79,7 +162,6 @@
   }
   .vy-sizeguide__table th { font-weight: 700; }
   .vy-sizeguide__attr { font-weight: 600; }
-  /* Keep the attribute (first) column in view while the size columns scroll. */
   .vy-sizeguide__table th:first-child,
   .vy-sizeguide__table td:first-child {
     position: sticky;
@@ -94,6 +176,94 @@
   }
   .vy-sizeguide__perfect-heading { margin: 0 0 1rem; font-size: 1.6rem; }
 
+  /* ---- Columns layout (PDP fit panel) ---- */
+  .vy-sizeguide__cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  .vy-sizeguide__col-title {
+    margin: 0 0 1.6rem;
+    font-size: 1.9rem;
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+    color: rgb(var(--color-foreground));
+  }
+
+  .vy-sizeguide__col-titlerow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .vy-sizeguide__rating {
+    font-weight: 700;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+    white-space: nowrap;
+  }
+
+  .vy-sizeguide__specs { margin: 0; }
+  .vy-sizeguide__spec {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.6rem;
+    padding: 0.9rem 0;
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+    font-size: 1.4rem;
+  }
+  .vy-sizeguide__spec dt { margin: 0; color: rgba(var(--color-foreground), 0.6); }
+  .vy-sizeguide__spec dd { margin: 0; font-weight: 600; text-align: right; }
+
+  .vy-sizeguide__checks { display: flex; flex-direction: column; gap: 1.2rem; margin: 0; }
+  .vy-sizeguide__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1.4rem;
+  }
+  .vy-sizeguide__check-icon {
+    flex: 0 0 auto;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+  }
+  .vy-sizeguide__check-icon .svg-wrapper,
+  .vy-sizeguide__check-icon svg { width: 1.8rem; height: 1.8rem; }
+
+  .vy-sizeguide__finder {
+    margin-top: 2rem;
+    padding: 1.8rem;
+    border-radius: 1.2rem;
+    background: rgba(var(--color-button), 0.08);
+  }
+  .vy-sizeguide__finder-note { margin: 0 0 1.2rem; font-size: 1.3rem; opacity: 0.85; }
+  .vy-sizeguide__finder-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: rgb(var(--color-accent-strong, var(--color-button)));
+  }
+  .vy-sizeguide__finder-arrow .svg-wrapper,
+  .vy-sizeguide__finder-arrow svg { width: 1.4rem; height: 1.4rem; }
+
+  .vy-sizeguide__bars { display: flex; flex-direction: column; gap: 1.4rem; }
+  .vy-sizeguide__bar { display: grid; gap: 0.6rem; }
+  .vy-sizeguide__bar-label { font-size: 1.4rem; }
+  .vy-sizeguide__bar-track {
+    height: 0.8rem;
+    border-radius: 999px;
+    background: rgba(var(--color-foreground), 0.12);
+    overflow: hidden;
+  }
+  .vy-sizeguide__bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: rgb(var(--color-button));
+  }
+
   @media screen and (min-width: 990px) {
     .vy-sizeguide__layout {
       flex-direction: row;
@@ -102,6 +272,11 @@
     .vy-sizeguide__media { flex: 0 0 22%; }
     .vy-sizeguide__tablewrap { flex: 1; }
     .vy-sizeguide__perfect { flex: 0 0 24%; }
+
+    .vy-sizeguide__cols {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+    }
   }
 {% endstylesheet %}
 {% schema %}
@@ -111,36 +286,70 @@
   "class": "vy-sizeguide-section",
   "settings": [
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "table", "label": "Size table (2 sizes)" },
+        { "value": "columns", "label": "Fit panel (3 columns)" }
+      ],
+      "default": "table"
+    },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Will It Fit?" },
+    { "type": "header", "content": "Table layout" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Designed for small to medium pets." },
     { "type": "image_picker", "id": "image", "label": "Ảnh (tuỳ chọn)" },
     { "type": "text", "id": "attr_label", "label": "Cột thuộc tính", "default": "Size" },
     { "type": "text", "id": "size1_label", "label": "Cột size 1", "default": "S" },
     { "type": "text", "id": "size2_label", "label": "Cột size 2", "default": "M" },
-    { "type": "header", "content": "Perfect for box" },
-    { "type": "text", "id": "perfect_heading", "label": "Tiêu đề", "default": "Perfect for:" },
-    { "type": "richtext", "id": "perfect_for", "label": "Nội dung", "default": "<ul><li>Pets up to 8 kg (17 lbs)</li><li>Up to 46 cm (18 in) length</li><li>Most small & medium breeds</li></ul>" }
+    { "type": "text", "id": "perfect_heading", "label": "Perfect for — tiêu đề", "default": "Perfect for:" },
+    { "type": "richtext", "id": "perfect_for", "label": "Perfect for — nội dung", "default": "<ul><li>Most small & medium breeds</li></ul>" },
+    { "type": "header", "content": "Columns layout — tiêu đề cột" },
+    { "type": "text", "id": "col1_heading", "label": "Cột 1 (Product details)", "default": "Product Details" },
+    { "type": "text", "id": "col2_heading", "label": "Cột 2 (How should it fit)", "default": "How Should It Fit?" },
+    { "type": "textarea", "id": "col2_note", "label": "Cột 2 — ghi chú finder", "default": "Still unsure? Try our Shoe Finder and get a personalized recommendation." },
+    { "type": "text", "id": "col2_cta_label", "label": "Cột 2 — nút", "default": "Find My Voya" },
+    { "type": "url", "id": "col2_cta_link", "label": "Cột 2 — link nút" },
+    { "type": "text", "id": "col3_heading", "label": "Cột 3 (Fit bars)", "default": "Fit" },
+    { "type": "text", "id": "col3_rating", "label": "Cột 3 — rating", "default": "4.7 / 5" }
   ],
   "blocks": [
     {
-      "type": "row",
-      "name": "Row",
+      "type": "spec",
+      "name": "Spec (cột 1)",
       "settings": [
-        { "type": "text", "id": "attribute", "label": "Thuộc tính", "default": "Bag Dimensions" },
-        { "type": "text", "id": "size1_value", "label": "Giá trị size 1", "default": "28 × 14 × 30 cm" },
-        { "type": "text", "id": "size2_value", "label": "Giá trị size 2", "default": "33 × 18 × 36 cm" }
+        { "type": "text", "id": "label", "label": "Nhãn", "default": "Upper" },
+        { "type": "text", "id": "value", "label": "Giá trị", "default": "Breathable mesh" }
+      ]
+    },
+    {
+      "type": "check",
+      "name": "Fit check (cột 2)",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Dòng", "default": "Not too tight" }
+      ]
+    },
+    {
+      "type": "bar",
+      "name": "Fit bar (cột 3)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Nhãn", "default": "Toe Room" },
+        { "type": "range", "id": "level", "label": "Mức (0–5)", "min": 0, "max": 5, "step": 1, "default": 4 }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Row (table)",
+      "settings": [
+        { "type": "text", "id": "attribute", "label": "Thuộc tính", "default": "Toe room" },
+        { "type": "text", "id": "size1_value", "label": "Giá trị size 1", "default": "Roomy" },
+        { "type": "text", "id": "size2_value", "label": "Giá trị size 2", "default": "Extra roomy" }
       ]
     }
   ],
   "presets": [
-    {
-      "name": "Size guide",
-      "blocks": [
-        { "type": "row", "settings": { "attribute": "Bag Dimensions (L×W×H)", "size1_value": "28 × 14 × 30 cm", "size2_value": "33 × 18 × 36 cm" } },
-        { "type": "row", "settings": { "attribute": "Max Pet Weight", "size1_value": "5 kg (11 lbs)", "size2_value": "8 kg (17 lbs)" } },
-        { "type": "row", "settings": { "attribute": "Recommended Size", "size1_value": "Small pets", "size2_value": "Small – Medium" } }
-      ]
-    }
+    { "name": "Size guide" }
   ]
 }
 {% endschema %}
