@@ -16,22 +16,35 @@
     {%- endfor -%}
   </div>
   {%- if section.settings.show_localization -%}
+    {%- liquid
+      assign current_currency = localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency
+      # Only a real currency switcher when the store actually presents more than
+      # one currency. With a single currency (even across several shipping
+      # countries) show a clean static chip instead of duplicate "USD $" options.
+      assign ann_currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
+    -%}
     <div class="vy-ann__loc">
-      {%- if localization.available_countries.size > 1 -%}
+      {%- render 'custom-flag', currency: current_currency -%}
+      {%- if ann_currencies.size > 1 -%}
         {%- form 'localization', class: 'vy-ann__loc-form' -%}
-          <select name="country_code" aria-label="Currency" onchange="this.form.submit()">
+          <select class="vy-ann__loc-select" name="country_code" aria-label="Currency" onchange="this.form.submit()">
+            {%- assign seen_currencies = '' -%}
             {%- for country in localization.available_countries -%}
-              <option
-                value="{{ country.iso_code }}"
-                {%- if country.iso_code == localization.country.iso_code %} selected{% endif -%}
-              >
-                {{- country.currency.iso_code }} {{ country.currency.symbol -}}
-              </option>
+              {%- assign cur = country.currency.iso_code -%}
+              {%- unless seen_currencies contains cur -%}
+                <option
+                  value="{{ country.iso_code }}"
+                  {%- if country.iso_code == localization.country.iso_code %} selected{% endif -%}
+                >
+                  {{- country.currency.iso_code }} {{ country.currency.symbol -}}
+                </option>
+                {%- assign seen_currencies = seen_currencies | append: cur | append: ',' -%}
+              {%- endunless -%}
             {%- endfor -%}
           </select>
         {%- endform -%}
       {%- else -%}
-        <span class="vy-ann__currency">{{ localization.country.currency.iso_code | default: cart.currency.iso_code | default: shop.currency }}</span>
+        <span class="vy-ann__currency">{{ current_currency }}</span>
       {%- endif -%}
     </div>
   {%- endif -%}
@@ -135,13 +148,61 @@
 
   .vy-ann__loc {
     position: absolute;
-    right: 1.5rem;
+    /* Indent to sit just inside the centered content column instead of hugging
+       the viewport edge on wide screens. */
+    right: max(2rem, calc((100% - var(--page-width)) / 2 + 2rem));
     top: 50%;
     transform: translateY(-50%);
     display: inline-flex;
     align-items: center;
-    font-size: 1.2rem;
+    gap: 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    /* Full-strength text so the currency reads clearly on the dark bar. */
+    color: rgb(var(--color-foreground));
+    opacity: 1;
+  }
+
+  .vy-ann__loc .vy-flag {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .vy-ann__loc-form {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Native select styled as the design chip: transparent, inherits bar color,
+     custom chevron on the right. */
+  .vy-ann__loc-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font: inherit;
     font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    padding: 0.2rem 1.6rem 0.2rem 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.2rem center;
+    background-size: 0.9rem;
+  }
+
+  .vy-ann__loc-select:focus-visible {
+    outline: 0.2rem solid currentColor;
+    outline-offset: 0.2rem;
+    border-radius: 0.4rem;
+  }
+
+  /* Option list renders in the OS menu — force readable dark text there. */
+  .vy-ann__loc-select option {
+    color: #171b18;
   }
 
   @media screen and (max-width: 749px) {

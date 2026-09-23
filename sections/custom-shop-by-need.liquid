@@ -69,7 +69,7 @@
           <a class="vy-sbn__card" href="{{ sbn_href }}">
             <span class="vy-sbn__media">
               {%- if block.settings.image_url != blank -%}
-                <img class="vy-sbn__img" src="{{ block.settings.image_url }}" width="600" height="800" loading="lazy" alt="{{ block.settings.label | escape }}">
+                <img class="vy-sbn__img" src="{{ block.settings.image_url }}" width="600" height="800" loading="lazy" alt="">
               {%- elsif block.settings.image != blank -%}
                 {{
                   block.settings.image
@@ -79,7 +79,7 @@
                     widths: '300, 400, 600, 800',
                     sizes: '(min-width: 750px) 22vw, 44vw',
                     class: 'vy-sbn__img',
-                    alt: block.settings.label | escape
+                    alt: ''
                 }}
               {%- else -%}
                 {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'vy-sbn__img vy-sbn__img--placeholder' }}

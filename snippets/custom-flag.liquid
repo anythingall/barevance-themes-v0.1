@@ -1,0 +1,70 @@
+{% doc %}
+  Renders a flag emoji for a currency ISO code (design shows 🇺🇸 next to USD).
+  Falls back to a globe for anything unmapped. Reusable in the currency selector.
+  @param currency {String} 3-letter currency ISO code (e.g. "USD")
+  @example {% render 'custom-flag', currency: 'USD' %}
+{% enddoc %}
+{%- liquid
+  assign cc = currency | upcase
+  case cc
+    when 'USD'
+      assign flag = '🇺🇸'
+    when 'EUR'
+      assign flag = '🇪🇺'
+    when 'GBP'
+      assign flag = '🇬🇧'
+    when 'VND'
+      assign flag = '🇻🇳'
+    when 'CAD'
+      assign flag = '🇨🇦'
+    when 'AUD'
+      assign flag = '🇦🇺'
+    when 'NZD'
+      assign flag = '🇳🇿'
+    when 'JPY'
+      assign flag = '🇯🇵'
+    when 'CNY'
+      assign flag = '🇨🇳'
+    when 'HKD'
+      assign flag = '🇭🇰'
+    when 'SGD'
+      assign flag = '🇸🇬'
+    when 'KRW'
+      assign flag = '🇰🇷'
+    when 'INR'
+      assign flag = '🇮🇳'
+    when 'THB'
+      assign flag = '🇹🇭'
+    when 'MYR'
+      assign flag = '🇲🇾'
+    when 'IDR'
+      assign flag = '🇮🇩'
+    when 'PHP'
+      assign flag = '🇵🇭'
+    when 'CHF'
+      assign flag = '🇨🇭'
+    when 'SEK'
+      assign flag = '🇸🇪'
+    when 'NOK'
+      assign flag = '🇳🇴'
+    when 'DKK'
+      assign flag = '🇩🇰'
+    when 'AED'
+      assign flag = '🇦🇪'
+    when 'SAR'
+      assign flag = '🇸🇦'
+    when 'BRL'
+      assign flag = '🇧🇷'
+    when 'MXN'
+      assign flag = '🇲🇽'
+    when 'ZAR'
+      assign flag = '🇿🇦'
+    when 'PLN'
+      assign flag = '🇵🇱'
+    when 'TRY'
+      assign flag = '🇹🇷'
+    else
+      assign flag = '🌐'
+  endcase
+-%}
+<span class="vy-flag" aria-hidden="true">{{ flag }}</span>

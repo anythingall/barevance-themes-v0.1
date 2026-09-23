@@ -36,7 +36,7 @@
         <table class="vy-compare__table vy-compare__table--models">
           <thead>
             <tr>
-              <th class="vy-compare__feature-col">{{ section.settings.feature_label }}</th>
+              <th class="vy-compare__feature-col" scope="col">{{ section.settings.feature_label }}</th>
               {%- for i in (1..4) -%}
                 {%- assign k_name = 'col' | append: i | append: '_name' -%}
                 {%- assign k_img = 'col' | append: i | append: '_image' -%}
@@ -45,7 +45,7 @@
                 {%- assign cimg = section.settings[k_img] -%}
                 {%- assign chl = section.settings[k_hl] -%}
                 {%- if cname != blank -%}
-                  <th class="vy-compare__model{% if chl %} is-highlight{% endif %}">
+                  <th class="vy-compare__model{% if chl %} is-highlight{% endif %}" scope="col">
                     {%- if cimg != blank -%}
                       <span class="vy-compare__model-img"><img src="{{ cimg }}" width="120" height="120" loading="lazy" alt="{{ cname | escape }}"></span>
                     {%- endif -%}
@@ -59,7 +59,7 @@
             {%- for block in section.blocks -%}
               {%- if block.type == 'model_row' -%}
                 <tr {{ block.shopify_attributes }}>
-                  <td class="vy-compare__feature">{{ block.settings.feature }}</td>
+                  <th class="vy-compare__feature" scope="row">{{ block.settings.feature }}</th>
                   {%- for i in (1..4) -%}
                     {%- assign k_name = 'col' | append: i | append: '_name' -%}
                     {%- assign cname = section.settings[k_name] -%}
@@ -73,10 +73,10 @@
                           {%- if rating >= 3 -%}
                             {%- render 'custom-compare-mark', state: 'check' -%}
                           {%- else -%}
-                            <span class="vy-compare__dash" aria-label="not included">—</span>
+                            <span class="vy-compare__dash" role="img" aria-label="not included">—</span>
                           {%- endif -%}
                         {%- else -%}
-                          <span class="vy-compare__stars" aria-label="{{ rating }} out of 5">
+                          <span class="vy-compare__stars" role="img" aria-label="{{ rating }} out of 5">
                             {%- for s in (1..5) -%}
                               <span class="vy-compare__star{% if s <= rating %} is-on{% endif %}" aria-hidden="true">★</span>
                             {%- endfor -%}
@@ -102,16 +102,16 @@
       <table class="vy-compare__table">
         <thead>
           <tr>
-            <th class="vy-compare__feature-col">{{ section.settings.feature_label }}</th>
-            <th class="vy-compare__us-col">{{ section.settings.us_label }}</th>
-            <th>{{ section.settings.others_label }}</th>
+            <th class="vy-compare__feature-col" scope="col">{{ section.settings.feature_label }}</th>
+            <th class="vy-compare__us-col" scope="col">{{ section.settings.us_label }}</th>
+            <th scope="col">{{ section.settings.others_label }}</th>
           </tr>
         </thead>
         <tbody>
           {%- for block in section.blocks -%}
             {%- if block.type == 'row' -%}
             <tr {{ block.shopify_attributes }}>
-              <td class="vy-compare__feature">{{ block.settings.feature }}</td>
+              <th class="vy-compare__feature" scope="row">{{ block.settings.feature }}</th>
               <td class="vy-compare__us">
                 {%- render 'custom-compare-mark', state: block.settings.us -%}
               </td>
@@ -185,6 +185,13 @@
 
   .vy-compare__table th {
     font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  /* Body row-label cells are <th scope="row"> for a11y; keep them visually
+     identical to the data cells (not bold like column headers). */
+  .vy-compare__table tbody th.vy-compare__feature {
+    font-weight: 400;
     font-size: 1.5rem;
   }
 
