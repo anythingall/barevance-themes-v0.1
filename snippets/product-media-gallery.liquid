@@ -341,3 +341,62 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
+{% stylesheet %}
+  /* Scrollable thumbnail rail (desktop "thumbnail" layout): a bounded vertical
+     column with a vertical scrollbar only. No horizontal scroll, thumbnails
+     shown full width (they shrink to fit once the scrollbar reserves space). */
+  @media screen and (min-width: 990px) {
+    .product--thumbnail .thumbnail-slider {
+      max-height: 62rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      /* Hide the scrollbar so it consumes no width — the column is only ~76px,
+         and a visible scrollbar would clip the thumbnails. Wheel/trackpad scroll
+         still works. */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .product--thumbnail .thumbnail-slider::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    /* keep it a simple vertical column — neutralize the mobile horizontal slider */
+    .product--thumbnail .thumbnail-slider .thumbnail-list {
+      overflow: visible;
+    }
+    .product--thumbnail .thumbnail-slider .thumbnail-list__item {
+      scroll-snap-align: none;
+    }
+    .product--thumbnail .thumbnail-slider .slider-buttons {
+      display: none;
+    }
+  }
+
+  /* Tablet range: thumbnails sit below the image. Show them as a single-row
+     HORIZONTAL scroller instead of a wrapping 4-column grid. */
+  @media screen and (min-width: 750px) and (max-width: 989.98px) {
+    .product--thumbnail .thumbnail-slider .thumbnail-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 0.8rem;
+      scroll-snap-type: x proximity;
+      /* hide the scrollbar (scroll still works via wheel/trackpad/drag) */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .product--thumbnail .thumbnail-slider .thumbnail-list::-webkit-scrollbar {
+      height: 0;
+      display: none;
+    }
+    .product--thumbnail .thumbnail-slider .thumbnail-list__item {
+      flex: 0 0 auto;
+      width: 8rem;
+      scroll-snap-align: start;
+    }
+  }
+{% endstylesheet %}

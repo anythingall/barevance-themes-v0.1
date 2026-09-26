@@ -59,6 +59,7 @@
         "media_size": "large",
         "mobile_thumbnails": "hide",
         "image_zoom": "lightbox",
+        "max_media": 0,
         "padding_top": 36,
         "padding_bottom": 12
       }
