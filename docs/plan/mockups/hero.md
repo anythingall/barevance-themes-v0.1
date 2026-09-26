@@ -58,6 +58,8 @@
 - [ ] AC-7 Script accent is right-of-content, **does not overlap** the content box (rects don't intersect) at 1440 and at 375 (mobile).
 - [ ] AC-8 Heading color `getComputedStyle` = rgb(23,27,24) `#171B18`; pill button bg = `#23452D`.
 - [ ] AC-9 No top gap: hero `getBoundingClientRect().top` ≈ header bottom (gap ≤ 1px).
+- [ ] AC-10 **Mobile order**: buttons render **above** features (CTA under the subheading), matching desktop — `buttons.top < features.top` at 375.
+- [ ] AC-11 **Mobile features = 2×2 grid** (not a 3+1 wrap); desktop stays 4-in-a-row.
 
 ## 7. Self-diff gate (run BEFORE showing the user)
 Assert AC-1…AC-9 via `browser_evaluate` on the live render (measured). Record results. Present only when all pass, then overlay-compare (design crop over live) per §5 of the skill.

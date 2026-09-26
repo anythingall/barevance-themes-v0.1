@@ -469,6 +469,28 @@
     display: none;
   }
 
+  /* Buttons before features at every width (mobile matched to desktop) so the
+     primary CTA sits right under the subheading instead of below the icons. */
+  .vy-hero--overlay .vy-hero__buttons { order: 4; }
+  .vy-hero--overlay .vy-hero__features { order: 5; }
+
+  /* Mobile: balanced 2x2 feature grid instead of a lopsided 3+1 wrap.
+     Two equal columns that span the content width, each item centered in its
+     half — avoids the features bunching into the left with dead space right. */
+  @media screen and (max-width: 989px) {
+    .vy-hero--overlay .vy-hero__features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      gap: 1.8rem 1.2rem;
+      width: 100%;
+      max-width: 34rem;
+    }
+    .vy-hero--overlay .vy-hero__feature {
+      max-width: 14rem;
+    }
+  }
+
   /* Match design: dark eyebrow, dark bold icons + 2-line labels, darker sub, CTA arrow */
   .vy-hero--overlay .vy-hero__eyebrow {
     color: rgb(var(--color-foreground));
