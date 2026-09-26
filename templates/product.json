@@ -63,53 +63,6 @@
         "padding_bottom": 12
       }
     },
-    "trust_bar": {
-      "type": "custom-trust-badges",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "padding": "compact"
-      },
-      "blocks": {
-        "b1": {
-          "type": "badge",
-          "settings": {
-            "icon": "leaf",
-            "title": "Wide Toe Box",
-            "subtitle": "More space for your toes"
-          }
-        },
-        "b2": {
-          "type": "badge",
-          "settings": {
-            "icon": "check_mark",
-            "title": "Flexible Sole",
-            "subtitle": "Moves with every step"
-          }
-        },
-        "b3": {
-          "type": "badge",
-          "settings": {
-            "icon": "star",
-            "title": "Zero Drop",
-            "subtitle": "A natural, balanced posture"
-          }
-        },
-        "b4": {
-          "type": "badge",
-          "settings": {
-            "icon": "fire",
-            "title": "Lightweight",
-            "subtitle": "Less bulk, more freedom"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
-    },
     "problem": {
       "type": "custom-problem",
       "settings": {
@@ -787,7 +740,6 @@
   },
   "order": [
     "main",
-    "trust_bar",
     "problem",
     "benefits",
     "see_motion",
