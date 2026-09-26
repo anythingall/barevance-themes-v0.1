@@ -348,78 +348,6 @@
         "b16"
       ]
     },
-    "comparison": {
-      "type": "custom-comparison-table",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "Compare with Other Voya Shoes",
-        "heading_alignment": "left",
-        "feature_label": "",
-        "us_label": "Mirox",
-        "others_label": "Others",
-        "mode": "models",
-        "col1_name": "Mirox",
-        "col1_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113",
-        "col1_highlight": true,
-        "col2_name": "Solyn",
-        "col2_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
-        "col2_highlight": false,
-        "col3_name": "Neuro",
-        "col3_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1513654233834-19416b6eed13.jpg?v=1790091117",
-        "col3_highlight": false,
-        "col4_name": "FluxTrail",
-        "col4_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
-        "col4_highlight": false
-      },
-      "blocks": {
-        "cm1": {
-          "type": "model_row",
-          "settings": {
-            "feature": "Everyday",
-            "r1": 5,
-            "r2": 4,
-            "r3": 5,
-            "r4": 3
-          }
-        },
-        "cm2": {
-          "type": "model_row",
-          "settings": {
-            "feature": "Walking",
-            "r1": 5,
-            "r2": 5,
-            "r3": 4,
-            "r4": 4
-          }
-        },
-        "cm3": {
-          "type": "model_row",
-          "settings": {
-            "feature": "Travel",
-            "r1": 4,
-            "r2": 5,
-            "r3": 3,
-            "r4": 4
-          }
-        },
-        "cm4": {
-          "type": "model_row",
-          "settings": {
-            "feature": "Outdoor",
-            "r1": 3,
-            "r2": 3,
-            "r3": 3,
-            "r4": 5
-          }
-        }
-      },
-      "block_order": [
-        "cm1",
-        "cm2",
-        "cm3",
-        "cm4"
-      ]
-    },
     "bundle": {
       "type": "custom-pricing-tiers",
       "settings": {
@@ -747,7 +675,6 @@
     "ugc",
     "fit",
     "made_everyday",
-    "comparison",
     "bundle",
     "reviews",
     "faq",
