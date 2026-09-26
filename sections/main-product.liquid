@@ -81,7 +81,13 @@
           {%- if vy_gallery_badge != blank -%}
             <span class="vy-gallery-badge">{{ vy_gallery_badge }}</span>
           {%- endif -%}
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- liquid
+            assign media_limit = section.settings.max_media
+            if media_limit == 0 or media_limit == blank
+              assign media_limit = product.media.size
+            endif
+          -%}
+          {% render 'product-media-gallery', variant_images: variant_images, limit: media_limit %}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
@@ -2233,6 +2239,17 @@
       ],
       "default": "stacked",
       "label": "t:sections.main-product.settings.gallery_layout.label"
+    },
+    {
+      "type": "range",
+      "id": "max_media",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "default": 5,
+      "unit": "img",
+      "label": "Max gallery images",
+      "info": "Limit how many product images show in the gallery. 0 = show all."
     },
     {
       "type": "select",
