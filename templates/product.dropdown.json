@@ -34,12 +34,6 @@
             "custom_liquid": "{% render 'custom-pdp-rating' %}"
           }
         },
-        "pdp_feats": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'custom-pdp-features' %}"
-          }
-        },
         "pdp_trust": {
           "type": "custom_liquid",
           "settings": {
@@ -51,7 +45,6 @@
         "pdp_rating",
         "title",
         "price",
-        "pdp_feats",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
