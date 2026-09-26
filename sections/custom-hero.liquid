@@ -463,6 +463,12 @@
     padding: 2.4rem 1.5rem 3rem;
   }
 
+  /* Hide the corner script accent on mobile overlay — it overlapped the eyebrow/H1.
+     Re-shown, right-aligned and vertically centered, at >=990px below. */
+  .vy-hero--overlay .vy-hero__media-caption {
+    display: none;
+  }
+
   /* Match design: dark eyebrow, dark bold icons + 2-line labels, darker sub, CTA arrow */
   .vy-hero--overlay .vy-hero__eyebrow {
     color: rgb(var(--color-foreground));
@@ -512,13 +518,24 @@
     }
 
     .vy-hero--overlay .vy-hero__content {
-      flex: 0 1 72rem;
-      max-width: 72rem;
+      /* Text column = page gutter + a stable ~56rem text width, so the gutter
+         padding is NOT subtracted from a fixed cap (that collapsed text to ~29rem
+         on wide screens and broke the H1 into one-word lines). */
+      flex: 0 1 auto;
+      max-width: calc((100vw - var(--page-width, 130rem)) / 2 + 5rem + 56rem);
       min-height: 0;
       justify-content: center;
       padding-block: 6rem;
       padding-right: 3rem;
       padding-left: max(2rem, calc((100vw - var(--page-width, 130rem)) / 2 + 5rem));
+    }
+
+    /* Cap the H1 so it wraps to the design's two lines ("Give Your Feet" /
+       "Room to Move.") — wide enough to fit "Give Your Feet" (462px @66px) and
+       "Room to Move." (475px) on their own lines, narrow enough to keep
+       "Give Your Feet Room" (662px) from fitting line 1. */
+    .vy-hero--overlay .vy-hero__heading {
+      max-width: 50rem;
     }
 
     .vy-hero--overlay .vy-hero__buttons { order: 4; }
@@ -527,6 +544,7 @@
     .vy-hero--overlay .vy-hero__rating { order: 6; }
 
     .vy-hero--overlay .vy-hero__media-caption {
+      display: block;
       color: #1c2a1f;
       text-shadow: none;
       right: 4rem;
