@@ -1,11 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "trust": {
-      "type": "custom-trust-badges",
+    "banner_hero": {
+      "type": "custom-hero",
+      "blocks": {
+        "b1": {
+          "type": "button",
+          "settings": {
+            "label": "Shop Best Sellers",
+            "link": "/collections/best-sellers",
+            "style": "primary"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Find Your Voya",
+            "link": "/collections/all",
+            "style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
-        "padding": "compact"
-      },
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1696964904681-7ae16f82ceef.jpg?v=1790085849",
+        "media_style": "overlay",
+        "media_caption": "More Freedom Every Step.",
+        "desktop_media_placement": "left",
+        "mobile_media_position": "below",
+        "section_height": "large",
+        "eyebrow": "BAREFOOT SHOES",
+        "heading": "Made to Move Naturally",
+        "heading_highlight": "",
+        "subheading": "<p>Wide toe boxes, flexible soles and lightweight comfort for everyday movement.</p>",
+        "footnote": "",
+        "content_alignment": "left"
+      }
+    },
+    "trust": {
+      "type": "custom-trust-badges",
       "blocks": {
         "b1": {
           "type": "badge",
@@ -45,68 +90,68 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "padding": "compact"
+      }
     },
     "shop_by_need": {
       "type": "custom-shop-by-need",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "What Are You Looking For?",
-        "subheading": "Find the perfect pair for your lifestyle.",
-        "heading_alignment": "left",
-        "link_label": "View All Categories",
-        "link_url": "/collections",
-        "columns": 6,
-        "image_ratio": "3 / 4",
-        "mobile_layout": "carousel"
-      },
       "blocks": {
         "n1": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125",
             "label": "Everyday Comfort",
-            "link_url": "/collections/everyday",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
+            "sublabel": "",
+            "link_url": "/collections/everyday"
           }
         },
         "n2": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124",
             "label": "Walking & Travel",
-            "link_url": "/collections/walking",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
+            "sublabel": "",
+            "link_url": "/collections/walking"
           }
         },
         "n3": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124",
             "label": "Active & Training",
-            "link_url": "/collections/active",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
+            "sublabel": "",
+            "link_url": "/collections/active"
           }
         },
         "n4": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124",
             "label": "Outdoor & Trail",
-            "link_url": "/collections/outdoor",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1780043355014-19d3c859b4bb.jpg?v=1790090124"
+            "sublabel": "",
+            "link_url": "/collections/outdoor"
           }
         },
         "n5": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124",
             "label": "Casual Style",
-            "link_url": "/collections/casual",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1788368153428-4070e1141d43.jpg?v=1790090124"
+            "sublabel": "",
+            "link_url": "/collections/casual"
           }
         },
         "n6": {
           "type": "need",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1772867692023-e66c1997f0e8.jpg?v=1790090125",
             "label": "Boots & Cold Weather",
-            "link_url": "/collections/boots",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1772867692023-e66c1997f0e8.jpg?v=1790090125"
+            "sublabel": "",
+            "link_url": "/collections/boots"
           }
         }
       },
@@ -117,31 +162,57 @@
         "n4",
         "n5",
         "n6"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "eyebrow": "",
+        "heading": "What Are You Looking For?",
+        "subheading": "Find the perfect pair for your lifestyle.",
+        "heading_alignment": "left",
+        "link_label": "View All Categories",
+        "link_url": "/collections",
+        "columns": 6,
+        "image_ratio": "3 / 4",
+        "mobile_layout": "carousel",
+        "show_play": false
+      }
     },
     "favorites": {
       "type": "featured-collection",
       "settings": {
+        "type_visibility": "all",
+        "collection": "best-sellers",
+        "products_to_show": 5,
         "title": "Customer Favorites",
+        "heading_size": "h1",
         "description": "<p>Start with the shoes customers love most.</p>",
         "show_description": true,
-        "products_to_show": 5,
+        "description_style": "body",
         "columns_desktop": 5,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
         "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
         "show_rating": true,
         "quick_add": "none",
-        "show_view_all": true,
+        "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "image_ratio": "square",
-        "collection": "best-sellers",
-        "view_all_style": "link"
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
         "products_per_page": 16,
-        "columns_desktop": 4,
+        "columns_desktop": 5,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
@@ -152,35 +223,12 @@
         "enable_filtering": true,
         "filter_type": "vertical",
         "enable_sorting": true,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 36
       }
     },
     "comparison": {
       "type": "custom-comparison-table",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "heading": "Compare Our Best Sellers",
-        "heading_alignment": "left",
-        "feature_label": "",
-        "us_label": "Mirox",
-        "others_label": "Others",
-        "mode": "models",
-        "mark_style": "checks",
-        "col1_name": "Mirox",
-        "col1_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113",
-        "col1_highlight": true,
-        "col2_name": "Solyn",
-        "col2_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
-        "col2_highlight": false,
-        "col3_name": "Neuro",
-        "col3_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1513654233834-19416b6eed13.jpg?v=1790091117",
-        "col3_highlight": false,
-        "col4_name": "FluxTrail",
-        "col4_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
-        "col4_highlight": false
-      },
       "blocks": {
         "cc1": {
           "type": "model_row",
@@ -239,18 +287,33 @@
         "cc3",
         "cc4",
         "cc5"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-2",
+        "heading": "Compare Our Best Sellers",
+        "heading_alignment": "left",
+        "feature_label": "",
+        "mode": "models",
+        "mark_style": "checks",
+        "us_label": "Mirox",
+        "others_label": "Others",
+        "col1_name": "Mirox",
+        "col1_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1580750809045-46b9aba1dd24.jpg?v=1790091113",
+        "col1_highlight": true,
+        "col2_name": "Solyn",
+        "col2_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
+        "col2_highlight": false,
+        "col3_name": "Neuro",
+        "col3_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1513654233834-19416b6eed13.jpg?v=1790091117",
+        "col3_highlight": false,
+        "col4_name": "FluxTrail",
+        "col4_image": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
+        "col4_highlight": false
+      }
     },
     "shoe_finder": {
       "type": "custom-shoe-finder",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "eyebrow": "SHOE FINDER",
-        "heading": "Still Not Sure Which Voya Is Right for You?",
-        "subheading": "Take our 30-second shoe finder and get a personalized recommendation.",
-        "default_result_url": "/collections/best-sellers",
-        "cta_final": "See My Match"
-      },
       "blocks": {
         "q1": {
           "type": "question",
@@ -271,8 +334,13 @@
           "settings": {
             "question": "How do you like your fit?",
             "option_1_label": "Roomy & relaxed",
+            "option_1_url": "",
             "option_2_label": "Snug & secure",
-            "option_3_label": "Somewhere in between"
+            "option_2_url": "",
+            "option_3_label": "Somewhere in between",
+            "option_3_url": "",
+            "option_4_label": "",
+            "option_4_url": ""
           }
         },
         "q3": {
@@ -280,8 +348,13 @@
           "settings": {
             "question": "Pick your style",
             "option_1_label": "Minimal & modern",
+            "option_1_url": "",
             "option_2_label": "Sporty",
-            "option_3_label": "Casual everyday"
+            "option_2_url": "",
+            "option_3_label": "Casual everyday",
+            "option_3_url": "",
+            "option_4_label": "",
+            "option_4_url": ""
           }
         }
       },
@@ -289,56 +362,60 @@
         "q1",
         "q2",
         "q3"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-2",
+        "eyebrow": "SHOE FINDER",
+        "heading": "Still Not Sure Which Voya Is Right for You?",
+        "subheading": "Take our 30-second shoe finder and get a personalized recommendation.",
+        "default_result_url": "/collections/best-sellers",
+        "cta_next": "Next",
+        "cta_back": "Back",
+        "cta_final": "See My Match"
+      }
     },
     "reviews": {
       "type": "custom-reviews",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "source": "blocks",
-        "heading": "Loved by Voya Customers",
-        "heading_alignment": "left",
-        "columns": 4
-      },
       "blocks": {
         "r1": {
           "type": "review",
           "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_c0169607-ee08-48c1-82dd-ecb8e8d60bd7.jpg?v=1790128083",
             "stars": 5,
             "text": "I feel like I'm walking barefoot. So comfortable!",
             "name": "Emily R.",
-            "badge": "Verified Customer",
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_c0169607-ee08-48c1-82dd-ecb8e8d60bd7.jpg?v=1790128083"
+            "badge": "Verified Customer"
           }
         },
         "r2": {
           "type": "review",
           "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_27fddbf2-0705-4e15-9506-1e3d07fea5de.jpg?v=1790128083",
             "stars": 5,
             "text": "Finally, enough room for my toes. Game changer.",
             "name": "Jason T.",
-            "badge": "Verified Customer",
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_27fddbf2-0705-4e15-9506-1e3d07fea5de.jpg?v=1790128083"
+            "badge": "Verified Customer"
           }
         },
         "r3": {
           "type": "review",
           "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300.jpg?v=1790128083",
             "stars": 5,
             "text": "Lightweight and comfortable all day. My go-to shoes now.",
             "name": "Sarah K.",
-            "badge": "Verified Customer",
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300.jpg?v=1790128083"
+            "badge": "Verified Customer"
           }
         },
         "r4": {
           "type": "review",
           "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_41367795-d935-4b0a-a012-35b200bb60ec.jpg?v=1790129005",
             "stars": 5,
             "text": "Perfect for travel. Stylish and super comfortable.",
             "name": "Mark S.",
-            "badge": "Verified Customer",
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_41367795-d935-4b0a-a012-35b200bb60ec.jpg?v=1790129005"
+            "badge": "Verified Customer"
           }
         }
       },
@@ -347,49 +424,55 @@
         "r2",
         "r3",
         "r4"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "layout": "stack",
+        "image_url": "",
+        "left_heading": "Real People. Real Comfort.",
+        "left_subheading": "See how Voya fits into everyday life.",
+        "button_label": "Watch Customer Stories",
+        "button_link": "",
+        "show_play": true,
+        "source": "blocks",
+        "eyebrow": "",
+        "heading": "Loved by Voya Customers",
+        "heading_alignment": "left",
+        "columns": 4
+      }
     },
     "education": {
       "type": "custom-education-cards",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "New to Barefoot Shoes?",
-        "subheading": "Here's everything you need to know before making the switch.",
-        "heading_alignment": "left",
-        "link_label": "View All Guides",
-        "link_url": "/blogs/news",
-        "columns": 3,
-        "mobile_layout": "stack"
-      },
       "blocks": {
         "e1": {
           "type": "card",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125",
             "title": "What Are Barefoot Shoes?",
             "text": "Learn the benefits and how they work.",
             "link_label": "Learn More",
-            "link_url": "/pages/why-barefoot",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1560420649-7b0f72761768.jpg?v=1790090125"
+            "link_url": "/pages/why-barefoot"
           }
         },
         "e2": {
           "type": "card",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124",
             "title": "How Should Barefoot Shoes Fit?",
             "text": "Get the right size and fit for maximum comfort.",
             "link_label": "Size Guide",
-            "link_url": "/pages/size-guide",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1541233033-cbece0bc703f.jpg?v=1790090124"
+            "link_url": "/pages/size-guide"
           }
         },
         "e3": {
           "type": "card",
           "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124",
             "title": "How to Transition",
             "text": "Tips for making the switch comfortably.",
             "link_label": "Learn More",
-            "link_url": "/pages/transition",
-            "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1773476518655-bc6fe5815ae7.jpg?v=1790090124"
+            "link_url": "/pages/transition"
           }
         }
       },
@@ -397,26 +480,35 @@
         "e1",
         "e2",
         "e3"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "eyebrow": "",
+        "heading": "New to Barefoot Shoes?",
+        "subheading": "Here's everything you need to know before making the switch.",
+        "heading_alignment": "left",
+        "link_label": "View All Guides",
+        "link_url": "/blogs/news",
+        "columns": 3,
+        "mobile_layout": "stack"
+      }
     },
     "faq": {
       "type": "custom-faq",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "source": "blocks",
-        "heading": "Frequently Asked Questions",
-        "heading_alignment": "left",
-        "columns": "2",
-        "view_all_label": "View All FAQs",
-        "view_all_link": "/pages/faq",
-        "narrow": false
-      },
       "blocks": {
         "q1": {
           "type": "item",
           "settings": {
             "question": "How should barefoot shoes fit?",
             "answer": "<p>Your toes should have room to spread, with a snug (not tight) midfoot and heel.</p>"
+          }
+        },
+        "q4": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 1–2 business days with tracking.</p>"
           }
         },
         "q2": {
@@ -426,25 +518,18 @@
             "answer": "<p>Most customers stay true to size. If between sizes or wide-footed, size up.</p>"
           }
         },
-        "q3": {
-          "type": "item",
-          "settings": {
-            "question": "Can I return them if they don't fit?",
-            "answer": "<p>Yes \u2014 30-day returns so you can find the right fit with confidence.</p>"
-          }
-        },
-        "q4": {
-          "type": "item",
-          "settings": {
-            "question": "How long does shipping take?",
-            "answer": "<p>Orders ship within 1\u20132 business days with tracking.</p>"
-          }
-        },
         "q5": {
           "type": "item",
           "settings": {
             "question": "Are Voya shoes suitable for everyday walking?",
-            "answer": "<p>Yes \u2014 Voya is designed for everyday walking, travel and light activity.</p>"
+            "answer": "<p>Yes — Voya is designed for everyday walking, travel and light activity.</p>"
+          }
+        },
+        "q3": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return them if they don't fit?",
+            "answer": "<p>Yes — 30-day returns so you can find the right fit with confidence.</p>"
           }
         },
         "q6": {
@@ -462,62 +547,41 @@
         "q5",
         "q3",
         "q6"
-      ]
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "source": "blocks",
+        "heading": "Frequently Asked Questions",
+        "view_all_label": "View All FAQs",
+        "view_all_link": "/pages/faq",
+        "show_guarantee": false,
+        "guarantee_scheme": "",
+        "guarantee_badge": "30 DAYS",
+        "guarantee_heading": "Love It or Get Your Money Back",
+        "guarantee_text": "We're confident you'll love it. If not, return it within 30 days for a full refund.",
+        "heading_alignment": "left",
+        "columns": "2",
+        "narrow": false
+      }
     },
     "cta": {
       "type": "custom-cta-banner",
       "settings": {
+        "type_visibility": "all",
         "color_scheme": "scheme-1",
+        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
+        "scrim": true,
+        "overlay_opacity": 0,
         "eyebrow": "",
         "heading": "Ready to Give Your Feet More Room?",
         "text": "<p>Discover a more natural way to move. Healthier feet. Happier you.</p>",
         "button_label": "Shop Best Sellers",
         "button_link": "/collections/best-sellers",
-        "content_alignment": "left",
-        "overlay_opacity": 0,
-        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1464822759023-fed622ff2c3b.jpg?v=1790135335",
-        "scrim": true,
-        "script_text": "A More Natural You."
-      }
-    },
-    "banner_hero": {
-      "type": "custom-hero",
-      "blocks": {
-        "b1": {
-          "type": "button",
-          "settings": {
-            "label": "Shop Best Sellers",
-            "link": "/collections/best-sellers",
-            "style": "primary"
-          }
-        },
-        "b2": {
-          "type": "button",
-          "settings": {
-            "label": "Find Your Voya",
-            "link": "/collections/all",
-            "style": "secondary"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "desktop_media_placement": "left",
-        "mobile_media_position": "below",
-        "section_height": "large",
-        "content_alignment": "left",
-        "eyebrow": "BAREFOOT SHOES",
-        "heading": "Made to Move Naturally",
-        "heading_highlight": "",
-        "subheading": "<p>Wide toe boxes, flexible soles and lightweight comfort for everyday movement.</p>",
-        "footnote": "",
-        "media_style": "overlay",
-        "media_caption": "More Freedom Every Step.",
-        "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1696964904681-7ae16f82ceef.jpg?v=1790085849"
+        "button2_label": "",
+        "button2_link": "",
+        "script_text": "A More Natural You.",
+        "content_alignment": "left"
       }
     }
   },
