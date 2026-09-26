@@ -54,10 +54,12 @@
       </h2>
     {%- endif -%}
 
+    {%- comment -%} On a product page, tiers with no product of their own fall back to the current product. {%- endcomment -%}
+    {%- assign vy_page_product = product -%}
     <div class="vy-tiers__grid" style="--tier-cols: {{ section.blocks.size | at_most: 4 }};">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign product = block.settings.product
+          assign product = block.settings.product | default: vy_page_product
           assign qty = block.settings.quantity | at_least: 1
           assign variant = product.selected_or_first_available_variant
           assign unit_price = variant.price | default: product.price
