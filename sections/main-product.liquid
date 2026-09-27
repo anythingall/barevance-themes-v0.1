@@ -107,6 +107,14 @@
                   >
                     {{- block.settings.text -}}
                   </p>
+                {%- when 'text_with_background' -%}
+                  <div
+                    class="product__text-bg color-{{ block.settings.color_scheme }} gradient inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                    style="--vy-text-bg-radius: {{ block.settings.corner_radius }}px; text-align: {{ block.settings.text_alignment }};"
+                    {{ block.shopify_attributes }}
+                  >
+                    {{- block.settings.text -}}
+                  </div>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
                     <h1>{{ product.title | escape }}</h1>
@@ -812,6 +820,56 @@
           ],
           "default": "body",
           "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+        }
+      ]
+    },
+    {
+      "type": "text_with_background",
+      "name": "Text with background",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Text block",
+          "label": "Text"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "label": "Text style",
+          "options": [
+            { "value": "body", "label": "Body" },
+            { "value": "subtitle", "label": "Subtitle" },
+            { "value": "uppercase", "label": "Uppercase" }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Background color scheme",
+          "default": "scheme-2"
         }
       ]
     },

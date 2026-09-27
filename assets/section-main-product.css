@@ -1281,6 +1281,21 @@ a.product__text {
   margin-bottom: var(--icon-size);
 }
 
+/* Text block with background */
+.product__info-container .product__text-bg {
+  margin: 1.5rem 0;
+  padding: 1.4rem 1.8rem;
+  border-radius: var(--vy-text-bg-radius, 1.2rem);
+}
+
+.product__info-container .product__text-bg > :first-child {
+  margin-top: 0;
+}
+
+.product__info-container .product__text-bg > :last-child {
+  margin-bottom: 0;
+}
+
 /* Match icon-with-text heading typography to the body/inventory text */
 .product__info-container .icon-with-text .h4 {
   font-family: var(--font-body-family);
