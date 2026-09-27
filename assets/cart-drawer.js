@@ -77,6 +77,11 @@ class CartDrawer extends HTMLElement {
   }
 
   renderContents(parsedState) {
+    // The is-empty state class lives on the <cart-drawer> element (see cart-drawer.liquid),
+    // but historically only .drawer__inner was cleared here — so adding from an empty cart
+    // left <cart-drawer class="is-empty">, whose CSS hid the freshly rendered items until a
+    // page reload. Clear it on the element too (renderContents only runs after an add).
+    this.classList.remove('is-empty');
     this.querySelector('.drawer__inner').classList.contains('is-empty') &&
       this.querySelector('.drawer__inner').classList.remove('is-empty');
     this.productId = parsedState.id;
