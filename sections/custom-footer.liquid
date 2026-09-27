@@ -51,6 +51,15 @@
                 {%- endfor -%}
               </ul>
             </nav>
+          {%- elsif block.type == 'text' -%}
+            <div class="vy-footer__col vy-footer__col--text" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h2 class="vy-footer__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.subtext != blank -%}
+                <div class="vy-footer__text rte">{{ block.settings.subtext }}</div>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         {%- endfor -%}
       </div>
@@ -239,6 +248,28 @@
     text-underline-offset: 0.3rem;
   }
 
+  /* Text column */
+  .vy-footer__text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    opacity: 0.85;
+    max-width: 32rem;
+  }
+
+  .vy-footer__text p {
+    margin: 0 0 0.9rem;
+  }
+
+  .vy-footer__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .vy-footer__text a {
+    color: rgb(var(--color-foreground));
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+
   /* Newsletter */
   .vy-footer__news-text {
     font-size: 1.4rem;
@@ -416,6 +447,14 @@
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
         { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text column",
+      "settings": [
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Contact Details" },
+        { "type": "richtext", "id": "subtext", "label": "Text", "default": "<p>Email: hello@barevance.com<br>Customer service: Mon–Fri, 9:00 AM – 5:00 PM</p>" }
       ]
     }
   ],
