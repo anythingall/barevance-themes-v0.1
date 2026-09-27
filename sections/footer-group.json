@@ -32,7 +32,7 @@
           "type": "menu",
           "settings": {
             "heading": "Our Policy",
-            "menu": "footer-our-policy"
+            "menu": "customer-account-main-menu"
           }
         }
       },
