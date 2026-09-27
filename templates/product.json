@@ -33,6 +33,12 @@
             "swatch_shape": "circle"
           }
         },
+        "pdp_stock": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-pdp-inventory' %}"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -60,6 +66,7 @@
         "pdp_rating",
         "price",
         "variant_picker",
+        "pdp_stock",
         "quantity_selector",
         "buy_buttons",
         "pdp_trust",
