@@ -448,7 +448,7 @@
         "layout": "stack",
         "image_url": "",
         "left_heading": "Real People. Real Comfort.",
-        "left_subheading": "See how Voya fits into everyday life.",
+        "left_subheading": "See how Barevance fits into everyday life.",
         "button_label": "Watch Customer Stories",
         "button_link": "",
         "show_play": true,
@@ -486,8 +486,8 @@
         "q5": {
           "type": "item",
           "settings": {
-            "question": "Are Voya shoes suitable for everyday walking?",
-            "answer": "<p>Yes — Voya is designed for everyday walking, travel and light activity.</p>"
+            "question": "Are Barevance shoes suitable for everyday walking?",
+            "answer": "<p>Yes — Barevance is designed for everyday walking, travel and light activity.</p>"
           }
         },
         "q3": {

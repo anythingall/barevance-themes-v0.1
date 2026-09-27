@@ -23,7 +23,7 @@
         "b2": {
           "type": "button",
           "settings": {
-            "label": "Find Your Voya",
+            "label": "Find Your Barevance",
             "link": "/collections/all",
             "style": "secondary"
           }
@@ -367,7 +367,7 @@
         "type_visibility": "all",
         "color_scheme": "scheme-2",
         "eyebrow": "SHOE FINDER",
-        "heading": "Still Not Sure Which Voya Is Right for You?",
+        "heading": "Still Not Sure Which Barevance Is Right for You?",
         "subheading": "Take our 30-second shoe finder and get a personalized recommendation.",
         "default_result_url": "/collections/best-sellers",
         "cta_next": "Next",
@@ -431,13 +431,13 @@
         "layout": "stack",
         "image_url": "",
         "left_heading": "Real People. Real Comfort.",
-        "left_subheading": "See how Voya fits into everyday life.",
+        "left_subheading": "See how Barevance fits into everyday life.",
         "button_label": "Watch Customer Stories",
         "button_link": "",
         "show_play": true,
         "source": "blocks",
         "eyebrow": "",
-        "heading": "Loved by Voya Customers",
+        "heading": "Loved by Barevance Customers",
         "heading_alignment": "left",
         "columns": 4
       }
@@ -521,8 +521,8 @@
         "q5": {
           "type": "item",
           "settings": {
-            "question": "Are Voya shoes suitable for everyday walking?",
-            "answer": "<p>Yes — Voya is designed for everyday walking, travel and light activity.</p>"
+            "question": "Are Barevance shoes suitable for everyday walking?",
+            "answer": "<p>Yes — Barevance is designed for everyday walking, travel and light activity.</p>"
           }
         },
         "q3": {
