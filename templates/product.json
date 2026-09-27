@@ -58,9 +58,32 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
+        "custom_liquid_QUxLxj": {
+          "type": "custom_liquid",
+          "name": "Product Description",
+          "settings": {
+            "custom_liquid": "<div class=\"product__accordion accordion quick-add-hidden\">\n  <details id=\"Details-description-{{ section.id }}\" open>\n    <summary>\n      <div class=\"summary__title\">\n        <h2 class=\"h4 accordion__title inline-richtext\">Description</h2>\n      </div>\n      {{- 'icon-caret.svg' | inline_asset_content -}}\n    </summary>\n    <div class=\"accordion__content rte\">{{ product.description }}</div>\n  </details>\n</div>"
+          }
+        },
+        "collapsible_tab_Q3WGJD": {
+          "type": "collapsible_tab",
+          "name": "Shipping Information",
+          "settings": {
+            "heading": "Shipping Information",
+            "icon": "none",
+            "content": "<p>- We offer free shipping on all UK orders - delivery is always on us.<br/>- Estimated delivery: <strong>6–11 </strong>business days total (<strong>1–2 </strong>business days processing + <strong>5–9 </strong>business days transit), Monday - Friday.<br/>For full details, see our <a href=\"/policies/shipping-policy\" title=\"Shipping Policy\">Shipping Policy</a>.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_nHg7mq": {
+          "type": "collapsible_tab",
+          "name": "Shipping Information",
+          "settings": {
+            "heading": "Return & Exchanges",
+            "icon": "none",
+            "content": "<p>- You have <strong>30 </strong>days from the day you receive your order to request a return.<br/>- We don't charge any restocking or handling fees.<br/>- Return postage is paid by the customer, unless the item is faulty, damaged, or incorrect, in which case we cover it.<br/>For full details, see our <a href=\"https://www.hauteboutique.co.uk/policies/refund-policy\">Refund Policy</a>.</p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -71,7 +94,9 @@
         "icon_with_text",
         "quantity_selector",
         "buy_buttons",
-        "description"
+        "custom_liquid_QUxLxj",
+        "collapsible_tab_Q3WGJD",
+        "collapsible_tab_nHg7mq"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -188,6 +213,73 @@
         "columns": 4,
         "card_container": false,
         "mobile_layout": "carousel"
+      }
+    },
+    "reviews": {
+      "type": "custom-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_c0169607-ee08-48c1-82dd-ecb8e8d60bd7.jpg?v=1790128083",
+            "stars": 5,
+            "text": "Plenty of room for my toes. Super comfortable.",
+            "name": "Jessica L.",
+            "badge": "Verified"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_27fddbf2-0705-4e15-9506-1e3d07fea5de.jpg?v=1790128083",
+            "stars": 5,
+            "text": "Lightweight and perfect for travel.",
+            "name": "Daniel K.",
+            "badge": "Verified"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300.jpg?v=1790128083",
+            "stars": 5,
+            "text": "Best everyday shoes I've ever owned.",
+            "name": "Rachel M.",
+            "badge": "Verified"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_41367795-d935-4b0a-a012-35b200bb60ec.jpg?v=1790129005",
+            "stars": 5,
+            "text": "Great quality and stylish too.",
+            "name": "Tom S.",
+            "badge": "Verified"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "layout": "stack",
+        "image_url": "",
+        "left_heading": "Real People. Real Comfort.",
+        "left_subheading": "See how Barevance fits into everyday life.",
+        "button_label": "Watch Customer Stories",
+        "button_link": "",
+        "show_play": true,
+        "source": "blocks",
+        "eyebrow": "",
+        "heading": "What Customers Are Saying",
+        "heading_alignment": "left",
+        "columns": 4
       }
     },
     "see_motion": {
@@ -398,73 +490,6 @@
         "cta_link": "/collections/best-sellers",
         "heading_alignment": "center",
         "button_label": "Shop Bundle Deals"
-      }
-    },
-    "reviews": {
-      "type": "custom-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_c0169607-ee08-48c1-82dd-ecb8e8d60bd7.jpg?v=1790128083",
-            "stars": 5,
-            "text": "Plenty of room for my toes. Super comfortable.",
-            "name": "Jessica L.",
-            "badge": "Verified"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_27fddbf2-0705-4e15-9506-1e3d07fea5de.jpg?v=1790128083",
-            "stars": 5,
-            "text": "Lightweight and perfect for travel.",
-            "name": "Daniel K.",
-            "badge": "Verified"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300.jpg?v=1790128083",
-            "stars": 5,
-            "text": "Best everyday shoes I've ever owned.",
-            "name": "Rachel M.",
-            "badge": "Verified"
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "avatar_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/300_41367795-d935-4b0a-a012-35b200bb60ec.jpg?v=1790129005",
-            "stars": 5,
-            "text": "Great quality and stylish too.",
-            "name": "Tom S.",
-            "badge": "Verified"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
-      ],
-      "settings": {
-        "type_visibility": "all",
-        "color_scheme": "scheme-1",
-        "layout": "stack",
-        "image_url": "",
-        "left_heading": "Real People. Real Comfort.",
-        "left_subheading": "See how Barevance fits into everyday life.",
-        "button_label": "Watch Customer Stories",
-        "button_link": "",
-        "show_play": true,
-        "source": "blocks",
-        "eyebrow": "",
-        "heading": "What Customers Are Saying",
-        "heading_alignment": "left",
-        "columns": 4
       }
     },
     "faq": {
