@@ -113,7 +113,7 @@
           assign per_unit = pay_total | divided_by: qty
         -%}
         <div class="vy-tiers__card vy-card {% if block.settings.highlight %}is-highlight{% endif %}{% if vy_buyable %} vy-tiers__card--select{% if forloop.index0 == vy_def_bidx %} is-selected{% endif %}{% endif %}"
-          {%- if vy_buyable %} role="radio" aria-checked="{% if forloop.index0 == vy_def_bidx %}true{% else %}false{% endif %}" tabindex="{% if forloop.index0 == vy_def_bidx %}0{% else %}-1{% endif %}" data-tiers-tile data-variant-id="{{ variant.id }}" data-qty="{{ qty }}" data-total="{% if block.settings.price_text != blank %}{{ block.settings.price_text | escape }}{% else %}{{ pay_total | money }}{% endif %}" data-available="{{ variant.available }}" data-label="{{ block.settings.label | default: product.title | escape }}" data-save="{{ block.settings.save_text | escape }}" data-page-product="{% if block.settings.product == blank %}true{% else %}false{% endif %}"{% endif -%}
+          {%- if vy_buyable %} role="radio" aria-checked="{% if forloop.index0 == vy_def_bidx %}true{% else %}false{% endif %}" tabindex="{% if forloop.index0 == vy_def_bidx %}0{% else %}-1{% endif %}" data-tiers-tile data-variant-id="{{ variant.id }}" data-qty="{{ qty }}" data-discount="{{ discount }}" data-total="{% if block.settings.price_text != blank %}{{ block.settings.price_text | escape }}{% else %}{{ pay_total | money }}{% endif %}" data-available="{{ variant.available }}" data-label="{{ block.settings.label | default: product.title | escape }}" data-save="{{ block.settings.save_text | escape }}" data-page-product="{% if block.settings.product == blank %}true{% else %}false{% endif %}"{% endif -%}
           {{ block.shopify_attributes }}>
           {%- if vy_buyable -%}<span class="vy-tiers__check" aria-hidden="true">{%- render 'custom-icon', icon: 'checkmark' -%}</span>{%- endif -%}
           {%- unless tiers_split -%}
@@ -151,11 +151,15 @@
               <span class="vy-tiers__price-now">
                 {%- if block.settings.price_text != blank -%}{{ block.settings.price_text }}{%- else -%}{{ pay_total | money }}{%- endif -%}
               </span>
+              {%- if block.settings.price_text == blank and discount > 0 and orig_total > pay_total -%}
+                <s class="vy-tiers__price-was">{{ orig_total | money }}</s>
+              {%- endif -%}
             </div>
             {%- if block.settings.save_text != blank -%}
               <span class="vy-tiers__save {% if block.settings.save_text contains 'Save' or block.settings.save_text contains 'save' %}is-save{% endif %}">{{ block.settings.save_text }}</span>
             {%- elsif discount > 0 -%}
-              <span class="vy-tiers__save is-save">Save {{ discount }}%</span>
+              {%- assign save_amt = orig_total | minus: pay_total -%}
+              <span class="vy-tiers__save is-save">Save {{ save_amt | money }} ({{ discount }}%)</span>
             {%- endif -%}
           {%- else -%}
           <div class="vy-tiers__card-top">
@@ -216,6 +220,24 @@
         </div>
       {%- endfor -%}
     </div>
+    {%- if vy_buyable and section.settings.enable_mix -%}
+      {%- assign vy_mix_product = section.blocks.first.settings.product | default: vy_page_product -%}
+      {%- if vy_mix_product != blank and vy_mix_product.variants.size > 1 -%}
+        <script type="application/json" data-tiers-variants>[{%- for v in vy_mix_product.variants -%}{%- unless forloop.first -%},{%- endunless -%}{"id":{{ v.id }},"title":{{ v.title | json }},"price":{{ v.price }},"available":{{ v.available }}}{%- endfor -%}]</script>
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="vy-tiers__mixform" data-ajax-cart data-tiers-mixform hidden></form>
+        <div class="vy-tiers__modal" data-tiers-modal hidden>
+          <div class="vy-tiers__modal-backdrop" data-tiers-close></div>
+          <div class="vy-tiers__modal-box" role="dialog" aria-modal="true" aria-label="Choose your pairs">
+            <button type="button" class="vy-tiers__modal-x" data-tiers-close aria-label="Close">{%- render 'custom-icon', icon: 'close' -%}</button>
+            <h3 class="vy-tiers__modal-title">Choose your <span data-mix-count>2</span> pairs</h3>
+            <p class="vy-tiers__modal-sub">Mix colours and sizes — your bundle discount applies automatically at checkout.</p>
+            <div class="vy-tiers__modal-slots" data-mix-slots></div>
+            <p class="vy-tiers__modal-total" data-mix-total></p>
+            <button type="button" class="button button--primary vy-cta vy-tiers__modal-add" data-mix-add>Add bundle to cart</button>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </div>
 
@@ -265,7 +287,59 @@
   });
   var mainForm=document.querySelector('form[data-type="add-to-cart-form"]');
   if(mainForm)mainForm.addEventListener('change',function(){ if(tiles[cur]&&tiles[cur].getAttribute('data-page-product')==='true'&&idIn)idIn.value=resolveId(tiles[cur]); });
-  form.addEventListener('submit',function(){ if(tiles[cur]&&idIn)idIn.value=resolveId(tiles[cur]); },true);
+
+  var CUR='{{ cart.currency.iso_code | default: shop.currency }}';
+  function money(cents){ try{ return new Intl.NumberFormat(undefined,{style:'currency',currency:CUR}).format(cents/100); }catch(e){ return '$'+(cents/100).toFixed(2); } }
+  var vjson=root.querySelector('[data-tiers-variants]'),variants=[];
+  if(vjson){ try{ variants=JSON.parse(vjson.textContent)||[]; }catch(e){} }
+  var modal=root.querySelector('[data-tiers-modal]'),
+      mixform=root.querySelector('[data-tiers-mixform]'),
+      slotsEl=modal&&modal.querySelector('[data-mix-slots]'),
+      totalEl=modal&&modal.querySelector('[data-mix-total]'),
+      countEl=modal&&modal.querySelector('[data-mix-count]'),
+      mixAdd=modal&&modal.querySelector('[data-mix-add]'),
+      lastFocus=null;
+  var mixEnabled=!!(modal&&mixform&&variants.length>1);
+  function availVariants(){ return variants.filter(function(v){return v.available;}); }
+  function findVar(id){ for(var i=0;i<variants.length;i++){ if(String(variants[i].id)===String(id))return variants[i]; } return null; }
+  function optionsHtml(sel){ return availVariants().map(function(v){ return '<option value="'+v.id+'"'+(String(v.id)===String(sel)?' selected':'')+'>'+String(v.title||'').replace(/</g,'&lt;')+'</option>'; }).join(''); }
+  function recalcTotal(disc){
+    if(!totalEl)return;
+    var sum=0; [].forEach.call(slotsEl.querySelectorAll('select'),function(s){ var v=findVar(s.value); if(v)sum+=v.price; });
+    var pay=Math.round(sum*(100-disc)/100),html='Total: '+money(pay);
+    if(disc>0&&sum>pay){ html+=' <span class="vy-tiers__modal-save">· Save '+money(sum-pay)+' ('+disc+'%)</span>'; }
+    totalEl.innerHTML=html;
+  }
+  function closeMix(){ if(modal){ modal.hidden=true; if(lastFocus&&lastFocus.focus)lastFocus.focus(); } }
+  function openMix(qty,disc,defId){
+    if(!mixEnabled)return false;
+    if(countEl)countEl.textContent=qty;
+    var opts=optionsHtml(defId),rows='';
+    for(var i=0;i<qty;i++){ rows+='<div class="vy-tiers__slot"><span class="vy-tiers__slot-n" aria-hidden="true">'+(i+1)+'</span><label style="flex:1"><span class="visually-hidden">Pair '+(i+1)+'</span><select>'+opts+'</select></label></div>'; }
+    slotsEl.innerHTML=rows;
+    [].forEach.call(slotsEl.querySelectorAll('select'),function(s){ s.addEventListener('change',function(){recalcTotal(disc);}); });
+    mixAdd.onclick=function(){
+      var items=[].map.call(slotsEl.querySelectorAll('select'),function(s){return s.value;}).filter(Boolean);
+      if(!items.length)return;
+      mixform.innerHTML=items.map(function(id,k){return '<input type="hidden" name="items['+k+'][id]" value="'+id+'"><input type="hidden" name="items['+k+'][quantity]" value="1">';}).join('');
+      closeMix();
+      if(mixform.requestSubmit)mixform.requestSubmit(); else mixform.submit();
+    };
+    recalcTotal(disc);
+    lastFocus=document.activeElement; modal.hidden=false;
+    var f=slotsEl.querySelector('select'); if(f)f.focus();
+    return true;
+  }
+  if(modal){
+    [].forEach.call(modal.querySelectorAll('[data-tiers-close]'),function(el){ el.addEventListener('click',closeMix); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!modal.hidden)closeMix(); });
+  }
+  form.addEventListener('submit',function(e){
+    var t=tiles[cur]; if(!t)return;
+    var q=parseInt(t.getAttribute('data-qty')||'1',10),disc=parseInt(t.getAttribute('data-discount')||'0',10);
+    if(mixEnabled&&q>1){ e.preventDefault(); e.stopImmediatePropagation(); openMix(q,disc,resolveId(t)); return; }
+    if(idIn)idIn.value=resolveId(t);
+  },true);
   select(cur);
 })();
 </script>
@@ -552,6 +626,24 @@
   .vy-tiers__buyform { margin: 0; }
   .vy-tiers__help { margin: 1rem 0.2rem 0; font-size: 1.3rem; font-weight: 600; color: rgb(var(--brand-primary, 35, 69, 45)); min-height: 1.2rem; }
   .vy-tiers__cta[disabled] { opacity: .5; cursor: not-allowed; }
+  .vy-tiers--split .vy-tiers__price { gap: 0.8rem; flex-wrap: wrap; }
+  .vy-tiers--split .vy-tiers__price-was { text-decoration: line-through; font-size: 1.5rem; font-weight: 600; color: rgba(var(--color-foreground), 0.5); opacity: 1; }
+  /* Mix-and-match modal */
+  .vy-tiers__modal { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1.6rem; }
+  .vy-tiers__modal[hidden] { display: none; }
+  .vy-tiers__modal-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .5); }
+  .vy-tiers__modal-box { position: relative; background: rgb(var(--color-background)); border-radius: 1.4rem; max-width: 46rem; width: 100%; max-height: 85vh; overflow-y: auto; padding: 2.6rem 2rem 2rem; box-shadow: 0 2rem 5rem rgba(0, 0, 0, .3); }
+  .vy-tiers__modal-x { position: absolute; top: 1.1rem; right: 1.1rem; background: none; border: 0; cursor: pointer; padding: .5rem; line-height: 0; color: inherit; }
+  .vy-tiers__modal-x .svg-wrapper, .vy-tiers__modal-x svg { width: 1.6rem; height: 1.6rem; }
+  .vy-tiers__modal-title { margin: 0 0 .4rem; font-size: 1.9rem; }
+  .vy-tiers__modal-sub { margin: 0 0 1.6rem; font-size: 1.3rem; opacity: .75; }
+  .vy-tiers__modal-slots { display: grid; gap: 1rem; margin-bottom: 1.4rem; }
+  .vy-tiers__slot { display: flex; align-items: center; gap: 1rem; }
+  .vy-tiers__slot-n { flex: 0 0 auto; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: rgba(var(--color-foreground), .07); display: inline-flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 600; }
+  .vy-tiers__slot select { flex: 1; width: 100%; min-height: 4.4rem; }
+  .vy-tiers__modal-total { font-size: 1.6rem; font-weight: 700; margin: 0 0 1.2rem; text-align: center; }
+  .vy-tiers__modal-total .vy-tiers__modal-save { color: rgb(var(--brand-primary, 35, 69, 45)); }
+  .vy-tiers__modal-add { width: 100%; }
 {% endstylesheet %}
 {% schema %}
 {
@@ -588,6 +680,7 @@
       "default": "grid"
     },
     { "type": "checkbox", "id": "split_buyable", "label": "Split: cho phép chọn & Add to Cart", "default": true },
+    { "type": "checkbox", "id": "enable_mix", "label": "Split: mix màu/size khi mua nhiều đôi (modal)", "default": true },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your Set" },
     { "type": "textarea", "id": "subheading", "label": "Subheading (split)", "default": "Mix colors and styles for your lifestyle." },
     { "type": "url", "id": "cta_link", "label": "CTA link (split)" },
