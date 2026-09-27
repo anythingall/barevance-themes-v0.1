@@ -31,7 +31,9 @@
 <div class="vy-iwt color-{{ section.settings.color_scheme }} gradient vy-section">
   <div class="vy-container vy-iwt__inner media-{{ media_placement }} mobile-{{ mobile_pos }}">
     <div class="vy-iwt__media vy-card">
-      {%- if section.settings.image != blank -%}
+      {%- if section.settings.image_url != blank -%}
+        <img class="vy-iwt__image" src="{{ section.settings.image_url }}" width="1400" height="1400" loading="lazy" alt="{{ section.settings.heading | escape }}">
+      {%- elsif section.settings.image != blank -%}
         {{
           section.settings.image
           | image_url: width: 1400
@@ -209,6 +211,7 @@
     { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
     { "type": "header", "content": "Media" },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_url", "label": "Image (URL CDN)" },
     {
       "type": "select",
       "id": "desktop_media_placement",

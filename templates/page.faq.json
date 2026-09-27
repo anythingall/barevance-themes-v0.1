@@ -24,7 +24,7 @@
       "type": "custom-faq",
       "blocks": {
         "q1": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>You have 30 days from delivery to request a return for a full refund.</p>" } },
-        "q2": { "type": "item", "settings": { "question": "How do I return an item?", "answer": "<p>Email us your order number and we'll send return instructions. You then have 14 days to post the unused item back with its tags.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "How do I return an item?", "answer": "<p>Email us your order number and we'll send return instructions. You then have 14 days to post the unworn item back with its tags.</p>" } },
         "q3": { "type": "item", "settings": { "question": "Can I exchange for a different size?", "answer": "<p>The fastest way is to return the original and place a new order for the size you'd like.</p>" } }
       },
       "block_order": ["q1", "q2", "q3"],
@@ -33,19 +33,19 @@
     "faq_fit": {
       "type": "custom-faq",
       "blocks": {
-        "q1": { "type": "item", "settings": { "question": "What size fits my pet?", "answer": "<p>Our totes are designed for small to medium pets up to 8 kg (17 lbs). Check the size guide on each product page for exact dimensions.</p>" } },
-        "q2": { "type": "item", "settings": { "question": "Is the tote comfortable and safe?", "answer": "<p>Yes — soft breathable interior, a peekaboo window so your pet can see out, and a secure zipper closure.</p>" } },
-        "q3": { "type": "item", "settings": { "question": "How do I clean it?", "answer": "<p>Wipe clean for everyday care, or hand wash cold and air dry. Avoid tumble drying.</p>" } }
+        "q1": { "type": "item", "settings": { "question": "How do I choose the right size?", "answer": "<p>Most customers stay true to their usual size. Measure your foot length and check the <a href=\"/pages/size-guide\">size guide</a> for the exact fit. If you're between sizes, we recommend sizing up.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "Do barefoot shoes fit differently?", "answer": "<p>They have a naturally wider toe box so your toes can spread, plus a thin, flexible zero-drop sole. They fit true to size — roomier at the toes, secure at the heel.</p>" } },
+        "q3": { "type": "item", "settings": { "question": "How do I care for my shoes?", "answer": "<p>Wipe clean for everyday care, or hand wash cold and air dry. Avoid tumble drying to keep the materials in shape.</p>" } }
       },
       "block_order": ["q1", "q2", "q3"],
-      "settings": { "color_scheme": "scheme-1", "heading": "Size & Fit", "heading_alignment": "left", "columns": "1", "narrow": true }
+      "settings": { "color_scheme": "scheme-1", "heading": "Sizing & Fit", "heading_alignment": "left", "columns": "1", "narrow": true }
     },
     "contact": {
       "type": "custom-cta-banner",
       "settings": {
         "color_scheme": "scheme-3",
         "heading": "Still have questions?",
-        "text": "<p>Our team is here to help. Email us at info@gleamgarage.com — we reply within 24 hours.</p>",
+        "text": "<p>Our team is here to help. Email us at alonewolf1102@gmail.com — we reply within 24 hours.</p>",
         "button_label": "Contact Us",
         "button_link": "/pages/contact",
         "content_alignment": "center",

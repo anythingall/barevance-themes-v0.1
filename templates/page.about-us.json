@@ -4,8 +4,8 @@
       "type": "rich-text",
       "blocks": {
         "eyebrow": { "type": "caption", "settings": { "caption": "Our Story", "text_style": "caption-with-letter-spacing" } },
-        "heading": { "type": "heading", "settings": { "heading": "Made for pets. Loved by their people.", "heading_size": "h1" } },
-        "text": { "type": "text", "settings": { "text": "<p>We started with one simple idea: pets deserve to explore the world in comfort and style — and the people who love them deserve products made with the same care.</p>" } }
+        "heading": { "type": "heading", "settings": { "heading": "Barefoot shoes for real, everyday life.", "heading_size": "h1" } },
+        "text": { "type": "text", "settings": { "text": "<p>We started with one simple idea: feet are meant to move naturally. So we build barefoot shoes that give them room to spread, bend and feel the ground — with the comfort and style to wear them everywhere.</p>" } }
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 28 }
@@ -13,26 +13,26 @@
     "story": {
       "type": "custom-image-with-text",
       "blocks": {
-        "l1": { "type": "list_item", "settings": { "text": "Designed with love and tested by real pets" } },
-        "l2": { "type": "list_item", "settings": { "text": "Premium materials built to last" } },
-        "l3": { "type": "list_item", "settings": { "text": "A community of thousands of happy pet parents" } }
+        "l1": { "type": "list_item", "settings": { "text": "Wide toe box and zero-drop, foot-shaped design" } },
+        "l2": { "type": "list_item", "settings": { "text": "Thin, flexible soles that move with you" } },
+        "l3": { "type": "list_item", "settings": { "text": "Premium materials built to last" } }
       },
       "block_order": ["l1", "l2", "l3"],
       "settings": {
         "color_scheme": "scheme-1",
         "eyebrow": "Why we do it",
-        "heading": "Built with love for pets and the people who adore them.",
-        "text": "<p>Every product is designed for comfort, safety and style — then tested in real life, on real adventures. From coffee runs to weekend getaways, we make gear that keeps your pet part of every moment.</p>",
+        "heading": "Built for natural movement, made to be worn everywhere.",
+        "text": "<p>Every pair is designed around the shape of a real foot — a wide toe box, a thin flexible sole and a zero-drop platform — then tested on real walks. From morning coffee runs to weekend trails, we make shoes that keep you moving.</p>",
         "desktop_media_placement": "left",
-        "image": "shopify://shop_images/hf_20260903_023027_07b73f22-dfdd-4173-b3b8-3580108002ce.png"
+        "image_url": "https://cdn.shopify.com/s/files/1/0725/0264/0737/files/FANG6613_1d2142a2-b39b-44d6-95a8-90b41ab5762a.jpg"
       }
     },
     "values": {
       "type": "custom-icon-benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "heart", "title": "Thoughtful Design", "text": "Every detail is made for pets and their humans." } },
-        "b2": { "type": "benefit", "settings": { "icon": "check_mark", "title": "Quality You Can Trust", "text": "Premium materials for safety, comfort and durability." } },
-        "b3": { "type": "benefit", "settings": { "icon": "paw_print", "title": "A Community of Pet Lovers", "text": "Join thousands of happy pet parents around the world." } }
+        "b1": { "type": "benefit", "settings": { "icon": "leaf", "title": "Natural Movement", "text": "A wide toe box and zero-drop platform for how feet are meant to move." } },
+        "b2": { "type": "benefit", "settings": { "icon": "check_mark", "title": "Quality You Can Trust", "text": "Premium materials for comfort, grip and lasting durability." } },
+        "b3": { "type": "benefit", "settings": { "icon": "heart", "title": "Loved by Real People", "text": "Thousands of happy barefoot walkers around the world." } }
       },
       "block_order": ["b1", "b2", "b3"],
       "settings": { "color_scheme": "scheme-2", "heading": "What we stand for", "columns": 3, "card_container": true }
@@ -41,10 +41,10 @@
       "type": "custom-cta-banner",
       "settings": {
         "color_scheme": "scheme-3",
-        "image": "shopify://shop_images/hf_20260903_023027_e421ab79-ea19-4ac9-b584-f2bd6d9b552f.png",
+        "image_url": "https://cdn.shopify.com/s/files/1/0725/0264/0737/files/FANG6598_fb10919b-c461-4340-b4c7-ab0c21bd54d2.jpg",
         "overlay_opacity": 55,
-        "heading": "Join the Family",
-        "text": "<p>Explore our collection and give your pet the comfort they deserve.</p>",
+        "heading": "Find Your Pair",
+        "text": "<p>Explore the collection and give your feet the freedom they deserve.</p>",
         "button_label": "Shop Now",
         "button_link": "shopify://collections/all",
         "content_alignment": "center"
