@@ -5,7 +5,7 @@
       "blocks": {
         "eyebrow": { "type": "caption", "settings": { "caption": "Contact", "text_style": "caption-with-letter-spacing" } },
         "heading": { "type": "heading", "settings": { "heading": "We'd love to hear from you.", "heading_size": "h1" } },
-        "text": { "type": "text", "settings": { "text": "<p>Questions about an order, sizing or anything else? Email <strong>info@gleamgarage.com</strong> — we reply within 24 hours, Monday–Friday, 9am–5pm.</p>" } }
+        "text": { "type": "text", "settings": { "text": "<p>Questions about an order, sizing or anything else? Email <strong>alonewolf1102@gmail.com</strong> — we reply within 24 hours, Monday–Friday, 9am–5pm.</p>" } }
       },
       "block_order": ["eyebrow", "heading", "text"],
       "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 24 }
@@ -13,7 +13,7 @@
     "info": {
       "type": "custom-trust-badges",
       "blocks": {
-        "i1": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "Email Us", "subtitle": "info@gleamgarage.com" } },
+        "i1": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "Email Us", "subtitle": "alonewolf1102@gmail.com" } },
         "i2": { "type": "badge", "settings": { "icon": "heart", "title": "Support Hours", "subtitle": "Mon–Fri, 9am–5pm" } },
         "i3": { "type": "badge", "settings": { "icon": "return", "title": "Easy Returns", "subtitle": "30-day money back" } }
       },

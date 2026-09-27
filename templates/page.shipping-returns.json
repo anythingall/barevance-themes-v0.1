@@ -35,7 +35,7 @@
       "type": "custom-faq",
       "blocks": {
         "q1": { "type": "item", "settings": { "question": "What is your return policy?", "answer": "<p>You have 30 days from delivery to request a return for a full refund on unused items with tags.</p>" } },
-        "q2": { "type": "item", "settings": { "question": "How do I start a return?", "answer": "<p>Email info@gleamgarage.com with your order number. We'll send a prepaid label and instructions — you then have 14 days to post it back.</p>" } },
+        "q2": { "type": "item", "settings": { "question": "How do I start a return?", "answer": "<p>Email alonewolf1102@gmail.com with your order number. We'll send a prepaid label and instructions — you then have 14 days to post it back.</p>" } },
         "q3": { "type": "item", "settings": { "question": "When will I get my refund?", "answer": "<p>Refunds are processed within 3–5 business days of us receiving your return, back to your original payment method.</p>" } },
         "q4": { "type": "item", "settings": { "question": "Can I exchange for a different size?", "answer": "<p>The fastest way is to return the original and place a new order for the size you'd like.</p>" } }
       },
@@ -47,7 +47,7 @@
       "settings": {
         "color_scheme": "scheme-3",
         "heading": "Need help with an order?",
-        "text": "<p>Our team is here for you — email info@gleamgarage.com and we'll reply within 24 hours.</p>",
+        "text": "<p>Our team is here for you — email alonewolf1102@gmail.com and we'll reply within 24 hours.</p>",
         "button_label": "Contact Us",
         "button_link": "/pages/contact",
         "content_alignment": "center",
