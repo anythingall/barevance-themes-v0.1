@@ -13,6 +13,7 @@
     "store_type": "v3",
     "logo": "shopify://shop_images/logo-white-background_2.png",
     "logo_width": 90,
+    "favicon": "shopify://shop_images/logo_white_background.png",
     "type_header_font": "manrope_n8",
     "heading_scale": 110,
     "type_body_font": "inter_n4",
