@@ -288,6 +288,7 @@
         "cc4",
         "cc5"
       ],
+      "disabled": true,
       "settings": {
         "type_visibility": "all",
         "color_scheme": "scheme-2",

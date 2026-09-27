@@ -25,14 +25,14 @@
           "type": "menu",
           "settings": {
             "heading": "Information",
-            "menu": "footer-company"
+            "menu": "footer-information"
           }
         },
         "care": {
           "type": "menu",
           "settings": {
             "heading": "Our Policy",
-            "menu": "footer-help"
+            "menu": "footer-our-policy"
           }
         }
       },
