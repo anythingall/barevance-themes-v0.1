@@ -41,6 +41,18 @@
             "show_inventory_quantity": true
           }
         },
+        "icon_with_text": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "truck",
+            "heading_1": "Free shipping on orders over $40",
+            "icon_2": "return",
+            "heading_2": "Not satisfied? Return within 30 days for a full refund",
+            "icon_3": "none",
+            "heading_3": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -69,6 +81,7 @@
         "price",
         "variant_picker",
         "inventory",
+        "icon_with_text",
         "quantity_selector",
         "buy_buttons",
         "pdp_trust",
