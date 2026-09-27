@@ -1281,6 +1281,16 @@ a.product__text {
   margin-bottom: var(--icon-size);
 }
 
+/* Match icon-with-text heading typography to the body/inventory text */
+.product__info-container .icon-with-text .h4 {
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  font-size: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
 /* SKU block */
 
 .product__sku.visibility-hidden::after {
