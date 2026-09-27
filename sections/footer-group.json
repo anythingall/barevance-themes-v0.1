@@ -24,14 +24,14 @@
         "about": {
           "type": "menu",
           "settings": {
-            "heading": "About",
+            "heading": "Information",
             "menu": "footer-company"
           }
         },
         "care": {
           "type": "menu",
           "settings": {
-            "heading": "Help",
+            "heading": "Our Policy",
             "menu": "footer-help"
           }
         }
@@ -50,11 +50,11 @@
         "tagline": "Move Naturally. Live Fully.",
         "description": "Comfortable, stylish barefoot shoes designed for everyday life. More freedom for your feet.",
         "show_social": true,
-        "newsletter_enable": true,
+        "newsletter_enable": false,
         "newsletter_heading": "Join Our Journey",
         "newsletter_text": "Get the latest updates, new releases and exclusive offers.",
         "payment_enable": true,
-        "show_policy": true
+        "show_policy": false
       }
     }
   },

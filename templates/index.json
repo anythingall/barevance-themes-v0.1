@@ -680,6 +680,41 @@
         "script_text": "Healthier Feet. Happier Lives.",
         "content_alignment": "left"
       }
+    },
+    "newsletter_m86j3B": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_EiWyWP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_Y3RRAC": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "email_form_qz7rg6": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_EiWyWP",
+        "paragraph_Y3RRAC",
+        "email_form_qz7rg6"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -694,6 +729,7 @@
     "finder_why",
     "bundle",
     "faq",
-    "cta"
+    "cta",
+    "newsletter_m86j3B"
   ]
 }
