@@ -512,6 +512,7 @@
         "b3",
         "b4"
       ],
+      "disabled": true,
       "settings": {
         "type_visibility": "all",
         "color_scheme": "scheme-1",
