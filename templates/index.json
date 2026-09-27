@@ -530,7 +530,7 @@
         "t1": {
           "type": "tier",
           "settings": {
-            "product": "mirox",
+            "product": "starstride",
             "quantity": 1,
             "discount_percent": 0,
             "label": "1 Pair",
@@ -546,14 +546,14 @@
         "t2": {
           "type": "tier",
           "settings": {
-            "product": "mirox",
+            "product": "starstride",
             "quantity": 2,
             "discount_percent": 10,
             "label": "2 Pairs",
             "badge": "",
             "highlight": false,
-            "price_text": "$139.99",
-            "save_text": "Save $19.99",
+            "price_text": "",
+            "save_text": "",
             "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1667999164629-3da22367bf46.jpg?v=1790091115",
             "image_url2": "",
             "image_url3": ""
@@ -562,14 +562,14 @@
         "t3": {
           "type": "tier",
           "settings": {
-            "product": "mirox",
+            "product": "starstride",
             "quantity": 3,
-            "discount_percent": 20,
+            "discount_percent": 15,
             "label": "3 Pairs",
             "badge": "Best Value",
             "highlight": true,
-            "price_text": "$179.99",
-            "save_text": "Save $59.98",
+            "price_text": "",
+            "save_text": "",
             "image_url": "https://cdn.shopify.com/s/files/1/0645/7383/3450/files/photo-1544441892-83af2e53ea48.jpg?v=1790091120",
             "image_url2": "",
             "image_url3": ""

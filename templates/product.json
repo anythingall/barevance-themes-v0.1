@@ -500,7 +500,7 @@
           "settings": {
             "product": "",
             "quantity": 3,
-            "discount_percent": 20,
+            "discount_percent": 15,
             "label": "3 Pairs",
             "badge": "Best Value",
             "highlight": true,

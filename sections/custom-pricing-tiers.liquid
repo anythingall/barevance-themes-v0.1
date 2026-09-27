@@ -31,7 +31,26 @@
 {%- render 'custom-cart-ajax' -%}
 {%- assign tiers_split = false -%}
 {%- if section.settings.layout == 'split' -%}{%- assign tiers_split = true -%}{%- endif -%}
-<div class="vy-tiers color-{{ section.settings.color_scheme }} gradient vy-section{% if tiers_split %} vy-tiers--split{% endif %}">
+{%- assign vy_page_product = product -%}
+{%- assign vy_buyable = false -%}
+{%- if tiers_split and section.settings.split_buyable -%}{%- assign vy_buyable = true -%}{%- endif -%}
+{%- assign vy_def_bidx = 0 -%}
+{%- assign vy_has_hl = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.highlight -%}{%- assign vy_def_bidx = forloop.index0 -%}{%- assign vy_has_hl = true -%}{%- endif -%}
+{%- endfor -%}
+{%- unless vy_has_hl -%}{%- assign vy_def_bidx = section.blocks.size | minus: 1 -%}{%- endunless -%}
+{%- assign vy_def_vid = '' -%}{%- assign vy_def_qty = 1 -%}{%- assign vy_def_avail = false -%}
+{%- for block in section.blocks -%}
+  {%- if forloop.index0 == vy_def_bidx -%}
+    {%- assign vy_dp = block.settings.product | default: vy_page_product -%}
+    {%- assign vy_def_qty = block.settings.quantity | at_least: 1 -%}
+    {%- assign vy_dv = vy_dp.selected_or_first_available_variant -%}
+    {%- assign vy_def_vid = vy_dv.id -%}
+    {%- assign vy_def_avail = vy_dv.available -%}
+  {%- endif -%}
+{%- endfor -%}
+<div id="vy-tiers-{{ section.id }}" class="vy-tiers color-{{ section.settings.color_scheme }} gradient vy-section{% if tiers_split %} vy-tiers--split{% endif %}{% if vy_buyable %} vy-tiers--buyable{% endif %}">
   <div class="vy-container">
     {%- if tiers_split -%}
       <div class="vy-tiers__intro">
@@ -41,7 +60,17 @@
         {%- if section.settings.subheading != blank -%}
           <p class="vy-tiers__sub">{{ section.settings.subheading }}</p>
         {%- endif -%}
-        {%- if section.settings.button_label != blank -%}
+        {%- if vy_buyable -%}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="vy-tiers__buyform" data-ajax-cart data-tiers-form>
+            <input type="hidden" name="id" value="{{ vy_def_vid }}" data-tiers-id>
+            <input type="hidden" name="quantity" value="{{ vy_def_qty }}" data-tiers-qty>
+            <button type="submit" name="add" class="button button--primary vy-cta vy-tiers__cta" data-tiers-add {% unless vy_def_avail %}disabled{% endunless %}>
+              <span data-tiers-label>{{ section.settings.button_label | default: 'Add to Cart' }}</span>
+              <span class="vy-tiers__cta-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
+            </button>
+          </form>
+          <p class="vy-tiers__help" data-tiers-help aria-live="polite"></p>
+        {%- elsif section.settings.button_label != blank -%}
           <a class="button button--primary vy-cta vy-tiers__cta" href="{{ section.settings.cta_link | default: '#' }}">
             {{ section.settings.button_label }}
             <span class="vy-tiers__cta-arrow" aria-hidden="true">{%- render 'custom-icon', icon: 'arrow' -%}</span>
@@ -83,7 +112,10 @@
 
           assign per_unit = pay_total | divided_by: qty
         -%}
-        <div class="vy-tiers__card vy-card {% if block.settings.highlight %}is-highlight{% endif %}" {{ block.shopify_attributes }}>
+        <div class="vy-tiers__card vy-card {% if block.settings.highlight %}is-highlight{% endif %}{% if vy_buyable %} vy-tiers__card--select{% if forloop.index0 == vy_def_bidx %} is-selected{% endif %}{% endif %}"
+          {%- if vy_buyable %} role="radio" aria-checked="{% if forloop.index0 == vy_def_bidx %}true{% else %}false{% endif %}" tabindex="{% if forloop.index0 == vy_def_bidx %}0{% else %}-1{% endif %}" data-tiers-tile data-variant-id="{{ variant.id }}" data-qty="{{ qty }}" data-total="{% if block.settings.price_text != blank %}{{ block.settings.price_text | escape }}{% else %}{{ pay_total | money }}{% endif %}" data-available="{{ variant.available }}" data-label="{{ block.settings.label | default: product.title | escape }}" data-save="{{ block.settings.save_text | escape }}" data-page-product="{% if block.settings.product == blank %}true{% else %}false{% endif %}"{% endif -%}
+          {{ block.shopify_attributes }}>
+          {%- if vy_buyable -%}<span class="vy-tiers__check" aria-hidden="true">{%- render 'custom-icon', icon: 'checkmark' -%}</span>{%- endif -%}
           {%- unless tiers_split -%}
             {%- if block.settings.badge != blank -%}
               <span class="vy-tiers__badge">{{ block.settings.badge }}</span>
@@ -122,6 +154,8 @@
             </div>
             {%- if block.settings.save_text != blank -%}
               <span class="vy-tiers__save {% if block.settings.save_text contains 'Save' or block.settings.save_text contains 'save' %}is-save{% endif %}">{{ block.settings.save_text }}</span>
+            {%- elsif discount > 0 -%}
+              <span class="vy-tiers__save is-save">Save {{ discount }}%</span>
             {%- endif -%}
           {%- else -%}
           <div class="vy-tiers__card-top">
@@ -184,6 +218,58 @@
     </div>
   </div>
 </div>
+
+{%- if vy_buyable -%}
+<script>
+(function(){
+  var root=document.getElementById('vy-tiers-{{ section.id }}');
+  if(!root)return;
+  var form=root.querySelector('[data-tiers-form]');
+  if(!form)return;
+  var idIn=form.querySelector('[data-tiers-id]'),qtyIn=form.querySelector('[data-tiers-qty]'),
+      lbl=form.querySelector('[data-tiers-label]'),addBtn=form.querySelector('[data-tiers-add]'),
+      help=root.querySelector('[data-tiers-help]'),
+      tiles=[].slice.call(root.querySelectorAll('[data-tiers-tile]')),cur=0;
+  if(!tiles.length)return;
+  tiles.forEach(function(t,i){ if(t.getAttribute('aria-checked')==='true')cur=i; });
+  function pageVariantId(){
+    var el=document.querySelector('form[data-type="add-to-cart-form"] [name="id"], product-form form [name="id"]');
+    return el&&el.value?el.value:null;
+  }
+  function resolveId(t){
+    if(t.getAttribute('data-page-product')==='true'){ var v=pageVariantId(); if(v)return v; }
+    return t.getAttribute('data-variant-id');
+  }
+  function select(i){
+    cur=i;
+    tiles.forEach(function(t,j){
+      var on=j===i;
+      t.classList.toggle('is-selected',on);
+      t.setAttribute('aria-checked',on?'true':'false');
+      t.setAttribute('tabindex',on?'0':'-1');
+    });
+    var t=tiles[i]; if(!t)return;
+    if(idIn)idIn.value=resolveId(t);
+    if(qtyIn)qtyIn.value=t.getAttribute('data-qty')||'1';
+    if(lbl)lbl.textContent='Add '+(t.getAttribute('data-label')||'')+' · '+(t.getAttribute('data-total')||'');
+    if(addBtn)addBtn.disabled=(t.getAttribute('data-available')!=='true');
+    if(help){ var s=t.getAttribute('data-save'); help.textContent=s?((t.getAttribute('data-label')||'')+' · '+s):''; }
+  }
+  tiles.forEach(function(t,i){
+    t.addEventListener('click',function(){ select(i); t.focus(); });
+    t.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(i); }
+      else if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); var n=(i+1)%tiles.length; tiles[n].focus(); select(n); }
+      else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); var p=(i+tiles.length-1)%tiles.length; tiles[p].focus(); select(p); }
+    });
+  });
+  var mainForm=document.querySelector('form[data-type="add-to-cart-form"]');
+  if(mainForm)mainForm.addEventListener('change',function(){ if(tiles[cur]&&tiles[cur].getAttribute('data-page-product')==='true'&&idIn)idIn.value=resolveId(tiles[cur]); });
+  form.addEventListener('submit',function(){ if(tiles[cur]&&idIn)idIn.value=resolveId(tiles[cur]); },true);
+  select(cur);
+})();
+</script>
+{%- endif -%}
 
 {%- else -%}{%- if request.design_mode -%}<div class="vy-hidden-note" style="padding:1.2rem 1.6rem;margin:0.4rem auto;max-width:60rem;border:0.1rem dashed rgba(128,128,128,0.55);border-radius:0.6rem;font-size:1.3rem;text-align:center;opacity:0.85;">Hidden on the current Store type (<b>{{ settings.store_type | default: 'v1' | upcase }}</b>). Shows on: <b>{{ section.settings.type_visibility | default: 'all' | upcase }}</b>. Change “Store type” in Theme settings, or this section’s “Show on store type”.</div>{%- endif -%}{%- endunless -%}
 
@@ -453,6 +539,19 @@
     font-weight: 600;
     padding: 0.3rem 0.9rem;
   }
+  /* Buyable split: selectable tiles + single Add-to-Cart */
+  .vy-tiers--buyable .vy-tiers__card--select { cursor: pointer; position: relative; }
+  .vy-tiers--split .vy-tiers__card--select { border: 0.2rem solid rgba(var(--color-foreground), 0.06); transition: border-color .15s, box-shadow .15s, transform .08s; }
+  .vy-tiers--split .vy-tiers__card--select:hover { box-shadow: 0 1.2rem 2.6rem rgba(0, 0, 0, .1); }
+  .vy-tiers--split .vy-tiers__card--select:active { transform: scale(.995); }
+  .vy-tiers--split .vy-tiers__card--select.is-selected { border-color: rgb(var(--brand-primary, 35, 69, 45)); box-shadow: 0 1.4rem 3rem rgba(35, 69, 45, .18); }
+  .vy-tiers__card--select:focus-visible { outline: 0.3rem solid rgba(var(--brand-primary, 35, 69, 45), .35); outline-offset: 0.2rem; }
+  .vy-tiers__check { position: absolute; top: 1rem; right: 1rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: rgb(var(--brand-primary, 35, 69, 45)); color: #fff; display: none; align-items: center; justify-content: center; z-index: 2; }
+  .vy-tiers__check .svg-wrapper, .vy-tiers__check svg { width: 1.3rem; height: 1.3rem; }
+  .vy-tiers__card--select.is-selected .vy-tiers__check { display: inline-flex; }
+  .vy-tiers__buyform { margin: 0; }
+  .vy-tiers__help { margin: 1rem 0.2rem 0; font-size: 1.3rem; font-weight: 600; color: rgb(var(--brand-primary, 35, 69, 45)); min-height: 1.2rem; }
+  .vy-tiers__cta[disabled] { opacity: .5; cursor: not-allowed; }
 {% endstylesheet %}
 {% schema %}
 {
@@ -488,6 +587,7 @@
       ],
       "default": "grid"
     },
+    { "type": "checkbox", "id": "split_buyable", "label": "Split: cho phép chọn & Add to Cart", "default": true },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Choose Your Set" },
     { "type": "textarea", "id": "subheading", "label": "Subheading (split)", "default": "Mix colors and styles for your lifestyle." },
     { "type": "url", "id": "cta_link", "label": "CTA link (split)" },
