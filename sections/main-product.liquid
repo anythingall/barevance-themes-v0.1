@@ -153,7 +153,7 @@
                   </div>
                 {%- when 'inventory' -%}
                   <p
-                    class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                    class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% unless product.selected_or_first_available_variant %} visibility-hidden{% endunless %}"
                     {{ block.shopify_attributes }}
                     id="Inventory-{{ section.id }}"
                     role="status"
@@ -200,6 +200,16 @@
                           {{- 'products.product.inventory_out_of_stock' | t -}}
                         {%- endif -%}
                       {%- endif -%}
+                    {%- elsif product.selected_or_first_available_variant.available -%}
+                      <span class="svg-wrapper" style="color: rgb(62, 214, 96)">
+                        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+                      </span>
+                      {{- 'products.product.inventory_in_stock' | t -}}
+                    {%- else -%}
+                      <span class="svg-wrapper" style="color: rgb(200, 200, 200)">
+                        {{- 'icon-inventory-status.svg' | inline_asset_content -}}
+                      </span>
+                      {{- 'products.product.inventory_out_of_stock' | t -}}
                     {%- endif -%}
                   </p>
                 {%- when 'description' -%}
