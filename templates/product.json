@@ -16,12 +16,6 @@
           "type": "title",
           "settings": {}
         },
-        "pdp_rating": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'custom-pdp-rating' %}"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -71,7 +65,6 @@
       },
       "block_order": [
         "title",
-        "pdp_rating",
         "price",
         "variant_picker",
         "inventory",
