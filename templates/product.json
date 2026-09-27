@@ -47,6 +47,39 @@
             "heading_3": ""
           }
         },
+        "text_with_background_CTY7DR": {
+          "type": "text_with_background",
+          "name": "BUY 2 PAIRS, SAVE 10% OFF",
+          "settings": {
+            "text": "<strong>&nbsp;BUY 2 PAIRS, SAVE 10% OFF&nbsp;</strong>",
+            "text_style": "body",
+            "text_alignment": "left",
+            "corner_radius": 12,
+            "color_scheme": "scheme-2"
+          }
+        },
+        "text_with_background_UtHnbN": {
+          "type": "text_with_background",
+          "name": "BUY 3 PAIRS, SAVE 15% OFF",
+          "settings": {
+            "text": "&nbsp;<strong> BUY 3 PAIRS, SAVE 15% OFF </strong>&nbsp;",
+            "text_style": "body",
+            "text_alignment": "left",
+            "corner_radius": 12,
+            "color_scheme": "scheme-2"
+          }
+        },
+        "text_with_background_Ketqc3": {
+          "type": "text_with_background",
+          "name": "BUY 4 PAIRS, SAVE 20% OFF",
+          "settings": {
+            "text": "&nbsp;<strong> BUY 4 PAIRS, SAVE 20% OFF </strong>&nbsp;",
+            "text_style": "body",
+            "text_alignment": "left",
+            "corner_radius": 12,
+            "color_scheme": "scheme-2"
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -92,6 +125,9 @@
         "variant_picker",
         "inventory",
         "icon_with_text",
+        "text_with_background_CTY7DR",
+        "text_with_background_UtHnbN",
+        "text_with_background_Ketqc3",
         "quantity_selector",
         "buy_buttons",
         "custom_liquid_QUxLxj",
