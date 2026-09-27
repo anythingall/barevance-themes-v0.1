@@ -1,68 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "style_preset": "voya",
+    "store_type": "v3",
+    "logo": "shopify://shop_images/logo-white-background_2.png",
     "logo_width": 90,
-    "customer_account_menu": "customer-account-main-menu",
-    "color_schemes": {
-      "scheme-1": {
-        "settings": {
-          "background": "#FBF6EF",
-          "background_gradient": "",
-          "text": "#3A2A1E",
-          "button": "#6E4A2E",
-          "button_label": "#FFFFFF",
-          "secondary_button_label": "#6E4A2E",
-          "shadow": "#3A2A1E"
-        }
-      },
-      "scheme-2": {
-        "settings": {
-          "background": "#F1E7D8",
-          "background_gradient": "",
-          "text": "#3A2A1E",
-          "button": "#6E4A2E",
-          "button_label": "#FFFFFF",
-          "secondary_button_label": "#6E4A2E",
-          "shadow": "#3A2A1E"
-        }
-      },
-      "scheme-3": {
-        "settings": {
-          "background": "#5A3E28",
-          "background_gradient": "",
-          "text": "#FBF6EF",
-          "button": "#C87A45",
-          "button_label": "#FFFFFF",
-          "secondary_button_label": "#FBF6EF",
-          "shadow": "#2A1D12"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "background": "#C87A45",
-          "background_gradient": "",
-          "text": "#FFFFFF",
-          "button": "#5A3E28",
-          "button_label": "#FFFFFF",
-          "secondary_button_label": "#FFFFFF",
-          "shadow": "#2A1D12"
-        }
-      },
-      "scheme-5": {
-        "settings": {
-          "background": "#3A2A1E",
-          "background_gradient": "",
-          "text": "#FBF6EF",
-          "button": "#C87A45",
-          "button_label": "#FFFFFF",
-          "secondary_button_label": "#FBF6EF",
-          "shadow": "#000000"
-        }
-      }
-    },
     "type_header_font": "manrope_n8",
     "heading_scale": 110,
     "type_body_font": "inter_n4",
     "body_scale": 100,
+    "type_accent_font": "manrope_n6",
+    "header_tagline": "",
+    "header_cta_label": "",
+    "header_cta_link": "shopify://collections/all",
+    "cart_promo_enabled": true,
     "page_width": 1300,
     "spacing_sections": 36,
     "spacing_grid_horizontal": 8,
@@ -150,6 +109,7 @@
     "drawer_shadow_horizontal_offset": 0,
     "drawer_shadow_vertical_offset": 4,
     "drawer_shadow_blur": 5,
+    "show_sale_badge": false,
     "badge_position": "top left",
     "badge_corner_radius": 40,
     "sale_badge_color_scheme": "scheme-4",
@@ -157,25 +117,25 @@
     "brand_headline": "",
     "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_twitter_link": "",
     "social_facebook_link": "https://facebook.com",
-    "social_pinterest_link": "https://pinterest.com",
     "social_instagram_link": "https://instagram.com",
-    "social_tiktok_link": "https://tiktok.com",
-    "social_tumblr_link": "",
-    "social_snapchat_link": "",
     "social_youtube_link": "https://youtube.com",
+    "social_tiktok_link": "https://tiktok.com",
+    "social_twitter_link": "",
+    "social_snapchat_link": "",
+    "social_pinterest_link": "https://pinterest.com",
+    "social_tumblr_link": "",
     "social_vimeo_link": "",
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": false,
-    "show_sale_badge": false,
     "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
+    "customer_account_menu": "customer-account-main-menu",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -190,13 +150,64 @@
         }
       }
     },
-    "type_accent_font": "manrope_n6",
-    "cart_promo_enabled": true,
-    "header_tagline": "",
-    "header_cta_label": "",
-    "header_cta_link": "shopify://collections/all",
-    "style_preset": "voya",
-    "store_type": "v3"
+    "content_for_index": [],
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#fbf6ef",
+          "background_gradient": "",
+          "text": "#3a2a1e",
+          "button": "#6e4a2e",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#6e4a2e",
+          "shadow": "#3a2a1e"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#f1e7d8",
+          "background_gradient": "",
+          "text": "#3a2a1e",
+          "button": "#6e4a2e",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#6e4a2e",
+          "shadow": "#3a2a1e"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#5a3e28",
+          "background_gradient": "",
+          "text": "#fbf6ef",
+          "button": "#c87a45",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#fbf6ef",
+          "shadow": "#2a1d12"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#c87a45",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#5a3e28",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#2a1d12"
+        }
+      },
+      "scheme-5": {
+        "settings": {
+          "background": "#3a2a1e",
+          "background_gradient": "",
+          "text": "#fbf6ef",
+          "button": "#c87a45",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#fbf6ef",
+          "shadow": "#000000"
+        }
+      }
+    }
   },
   "presets": {
     "Default": {
