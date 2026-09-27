@@ -1,29 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "intro": {
       "type": "rich-text",
       "blocks": {
-        "eyebrow": { "type": "caption", "settings": { "caption": "Contact", "text_style": "caption-with-letter-spacing" } },
-        "heading": { "type": "heading", "settings": { "heading": "We'd love to hear from you.", "heading_size": "h1" } },
-        "text": { "type": "text", "settings": { "text": "<p>Questions about an order, sizing or anything else? Email <strong>alonewolf1102@gmail.com</strong> — we reply within 24 hours, Monday–Friday, 9am–5pm.</p>" } }
+        "eyebrow": {
+          "type": "caption",
+          "settings": {
+            "caption": "Contact",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "We'd love to hear from you.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Store name</strong>: Haute Boutique<br/><strong>Company name</strong>: AEVERNA LTD<br/><strong>Company number</strong>: 17335957<br/><strong>Phone</strong>: <a href=\"tel:+447561575166\" title=\"tel:+447561575166\">+44 7561 575166</a>&nbsp;<br/><strong>Email</strong>: <a href=\"mailto:info@hauteboutique.co.uk\" title=\"mailto:info@hauteboutique.co.uk\">info@hauteboutique.co.uk</a>&nbsp;<br/><strong>Address</strong>: <a href=\"https://maps.google.com/?q=5+Brayford+Square,+Stepney+Green,+London+E1+0SG\" title=\"https://maps.google.com/?q=5+Brayford+Square,+Stepney+Green,+London+E1+0SG\">5 Brayford Square, Stepney Green, London E1 0SG, United Kingdom</a>&nbsp;<br/><strong>Customer service hours</strong>: Monday–Friday, 9:00 AM – 5:00 PM GMT (we aim to respond within&nbsp;<strong>24</strong>&nbsp;hours)<br/><br/></p>"
+          }
+        }
       },
-      "block_order": ["eyebrow", "heading", "text"],
-      "settings": { "color_scheme": "scheme-2", "desktop_content_position": "center", "content_alignment": "center", "padding_top": 52, "padding_bottom": 24 }
+      "block_order": [
+        "eyebrow",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 24
+      }
     },
     "info": {
       "type": "custom-trust-badges",
       "blocks": {
-        "i1": { "type": "badge", "settings": { "icon": "chat_bubble", "title": "Email Us", "subtitle": "alonewolf1102@gmail.com" } },
-        "i2": { "type": "badge", "settings": { "icon": "heart", "title": "Support Hours", "subtitle": "Mon–Fri, 9am–5pm" } },
-        "i3": { "type": "badge", "settings": { "icon": "return", "title": "Easy Returns", "subtitle": "30-day money back" } }
+        "i1": {
+          "type": "badge",
+          "settings": {
+            "icon": "chat_bubble",
+            "title": "Email Us",
+            "subtitle": "alonewolf1102@gmail.com"
+          }
+        },
+        "i2": {
+          "type": "badge",
+          "settings": {
+            "icon": "heart",
+            "title": "Support Hours",
+            "subtitle": "Mon–Fri, 9am–5pm"
+          }
+        },
+        "i3": {
+          "type": "badge",
+          "settings": {
+            "icon": "return",
+            "title": "Easy Returns",
+            "subtitle": "30-day money back"
+          }
+        }
       },
-      "block_order": ["i1", "i2", "i3"],
-      "settings": { "color_scheme": "scheme-1", "padding": "none" }
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
+      "disabled": true,
+      "settings": {
+        "type_visibility": "all",
+        "color_scheme": "scheme-1",
+        "padding": "none"
+      }
     },
     "form": {
       "type": "contact-form",
-      "settings": { "heading": "Send us a message", "heading_size": "h2", "color_scheme": "scheme-1", "padding_top": 28, "padding_bottom": 52 }
+      "settings": {
+        "heading": "Send us a message",
+        "heading_size": "h2",
+        "color_scheme": "scheme-1",
+        "padding_top": 28,
+        "padding_bottom": 52
+      }
     }
   },
-  "order": ["intro", "info", "form"]
+  "order": [
+    "intro",
+    "info",
+    "form"
+  ]
 }
