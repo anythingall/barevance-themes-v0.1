@@ -53,7 +53,7 @@
       {%- if use_mf -%}
         {%- for item in mf_faq -%}
           <details class="vy-faq__item">
-            <summary class="vy-faq__q vy-tap">
+            <summary class="vy-faq__q">
               <span>{{ item.question }}</span>
               <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'caret' -%}</span>
             </summary>
@@ -63,7 +63,7 @@
       {%- else -%}
         {%- for block in section.blocks -%}
           <details class="vy-faq__item" {{ block.shopify_attributes }}>
-            <summary class="vy-faq__q vy-tap">
+            <summary class="vy-faq__q">
               <span>{{ block.settings.question }}</span>
               <span class="vy-faq__icon">{%- render 'custom-icon', icon: 'caret' -%}</span>
             </summary>
@@ -243,6 +243,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    min-height: var(--tap-target);
     gap: 1rem;
     cursor: pointer;
     padding: 1.5rem 1.8rem;
@@ -260,6 +262,15 @@
     height: 1.4rem;
     transition: transform 0.2s ease;
     opacity: 0.6;
+  }
+
+  /* Make the collapsed caret clearly visible (was ~0.45 effective opacity). */
+  .vy-faq__icon {
+    flex: 0 0 auto;
+  }
+  .vy-faq__icon .svg-wrapper {
+    opacity: 1;
+    color: rgb(var(--color-foreground));
   }
 
   .vy-faq__item[open] .vy-faq__icon .svg-wrapper {
