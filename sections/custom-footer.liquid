@@ -253,7 +253,7 @@
     font-size: 1.4rem;
     line-height: 1.6;
     opacity: 0.85;
-    max-width: 32rem;
+    max-width: 40rem;
   }
 
   .vy-footer__text p {
@@ -264,7 +264,8 @@
     margin-bottom: 0;
   }
 
-  .vy-footer__text a {
+  .vy-footer .vy-footer__text a,
+  .vy-footer__text.rte a {
     color: rgb(var(--color-foreground));
     text-decoration: underline;
     text-underline-offset: 0.3rem;
@@ -424,7 +425,7 @@
     }
 
     .vy-footer__top--no-news .vy-footer__cols {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr) 1.8fr;
     }
 
     .vy-footer__bottom {
