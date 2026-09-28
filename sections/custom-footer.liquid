@@ -7,7 +7,7 @@
 
 <div class="vy-footer color-{{ section.settings.color_scheme }} gradient">
   <div class="vy-container vy-footer__inner">
-    <div class="vy-footer__top">
+    <div class="vy-footer__top{% unless section.settings.newsletter_enable %} vy-footer__top--no-news{% endunless %}">
       <div class="vy-footer__brand">
         {%- if section.settings.logo != blank -%}
           <span class="vy-footer__logo-wrap" style="--logo-w: {{ section.settings.logo_width | default: 150 }}px;">
@@ -416,6 +416,15 @@
       grid-template-columns: 1.4fr 2fr 1.3fr;
       gap: 5rem;
       align-items: start;
+    }
+
+    /* No newsletter: columns reclaim that space as a 4-across row */
+    .vy-footer__top--no-news {
+      grid-template-columns: 1.4fr 3.3fr;
+    }
+
+    .vy-footer__top--no-news .vy-footer__cols {
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .vy-footer__bottom {
