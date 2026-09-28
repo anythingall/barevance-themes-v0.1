@@ -626,46 +626,6 @@
         "color_scheme": "",
         "button_label": "Add to Cart"
       }
-    },
-    "1790639366da47031f": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_PTrEeD": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_PTrEeD"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "1790639420ce6302bb": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_f9Rqn4": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_f9Rqn4"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
@@ -678,8 +638,6 @@
     "bundle",
     "faq",
     "cta",
-    "sticky",
-    "1790639366da47031f",
-    "1790639420ce6302bb"
+    "sticky"
   ]
 }
