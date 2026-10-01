@@ -14,6 +14,7 @@
       "blocks": {
         "eyebrow": {
           "type": "caption",
+          "disabled": true,
           "settings": {
             "caption": "Contact",
             "text_style": "caption-with-letter-spacing",
@@ -30,7 +31,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Store name</strong>: Haute Boutique<br/><strong>Company name</strong>: AEVERNA LTD<br/><strong>Company number</strong>: 17335957<br/><strong>Phone</strong>: <a href=\"tel:+447561575166\" title=\"tel:+447561575166\">+44 7561 575166</a>&nbsp;<br/><strong>Email</strong>: <a href=\"mailto:info@hauteboutique.co.uk\" title=\"mailto:info@hauteboutique.co.uk\">info@hauteboutique.co.uk</a>&nbsp;<br/><strong>Address</strong>: <a href=\"https://maps.google.com/?q=5+Brayford+Square,+Stepney+Green,+London+E1+0SG\" title=\"https://maps.google.com/?q=5+Brayford+Square,+Stepney+Green,+London+E1+0SG\">5 Brayford Square, Stepney Green, London E1 0SG, United Kingdom</a>&nbsp;<br/><strong>Customer service hours</strong>: Monday–Friday, 9:00 AM – 5:00 PM GMT (we aim to respond within&nbsp;<strong>24</strong>&nbsp;hours)<br/><br/></p>"
+            "text": "<p><strong>Store name:</strong> Barevance<br/><strong>Company:</strong> LOVEYOUSMALL LLC<br/><strong>Entity ID:</strong> 2023-001352225<br/><strong>Email:</strong> <a href=\"mailto:info@barevance.com\">info@barevance.com</a>&nbsp;<br/><strong>Phone:</strong> <a href=\"tel:+16015648208\">+1 (601) 564-8208</a>&nbsp;<br/><strong>Address:</strong> 929 S Avocado St, Anaheim, CA 92805, US<br/><strong>Customer service hours:</strong> Monday–Friday, 9:00 AM – 5:00 PM (PT) (we aim to respond within 24 hours)<br/><br/></p>"
           }
         }
       },
