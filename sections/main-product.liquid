@@ -717,6 +717,59 @@
                   </product-recommendations>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
+                {%- when 'size_guide' -%}
+                  {%- assign sg_id = 'SizeGuide-' | append: section.id -%}
+                  <div class="vy-sg" {{ block.shopify_attributes }}>
+                    <button type="button" class="vy-sg__trigger" aria-haspopup="dialog" data-sg-open="{{ sg_id }}">
+                      {%- render 'custom-icon', icon: 'ruler' -%}
+                      <span>{{ block.settings.link_label | default: 'Size guide' }}</span>
+                    </button>
+                    <dialog id="{{ sg_id }}" class="vy-sg__modal" aria-label="{{ block.settings.heading | default: 'Size guide' | escape }}">
+                      <div class="vy-sg__inner">
+                        <button type="button" class="vy-sg__close" data-sg-close aria-label="Close">{%- render 'custom-icon', icon: 'close' -%}</button>
+                        <h2 class="vy-sg__title">{{ block.settings.heading | default: 'Size Guide' }}</h2>
+                        {%- if block.settings.subheading != blank -%}<p class="vy-sg__sub">{{ block.settings.subheading }}</p>{%- endif -%}
+                        <div class="vy-sg__scroll">
+                          <table class="vy-sg__table">
+                            <thead>
+                              <tr><th>US Women</th><th>US Men</th><th>EU</th><th>UK</th><th>Foot length (cm)</th></tr>
+                            </thead>
+                            <tbody>
+                              <tr><td>5</td><td>3</td><td>35–36</td><td>2.5–3</td><td>22.0</td></tr>
+                              <tr><td>6</td><td>4</td><td>36–37</td><td>3.5–4</td><td>22.9</td></tr>
+                              <tr><td>7</td><td>5</td><td>37–38</td><td>4.5–5</td><td>23.5</td></tr>
+                              <tr><td>7.5</td><td>5.5</td><td>38</td><td>5.5</td><td>24.1</td></tr>
+                              <tr><td>8–8.5</td><td>6–6.5</td><td>38–39</td><td>6–6.5</td><td>24.6</td></tr>
+                              <tr><td>9–9.5</td><td>7–7.5</td><td>40–41</td><td>7–7.5</td><td>25.4</td></tr>
+                              <tr><td>10–10.5</td><td>8–8.5</td><td>41–42</td><td>8–8.5</td><td>26.2</td></tr>
+                              <tr><td>11–11.5</td><td>9–9.5</td><td>42–43</td><td>9–9.5</td><td>27.0</td></tr>
+                              <tr><td>12–12.5</td><td>10–10.5</td><td>44–45</td><td>10–10.5</td><td>27.9</td></tr>
+                              <tr><td>13–13.5</td><td>11–11.5</td><td>45–46</td><td>11–11.5</td><td>28.6</td></tr>
+                              <tr><td>14</td><td>12</td><td>46–47</td><td>12</td><td>29.4</td></tr>
+                              <tr><td>15</td><td>13</td><td>47–48</td><td>13</td><td>30.2</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <p class="vy-sg__note">Measure your foot length and match it to the chart. Barefoot shoes fit best with a little room at the toes — if you're between sizes, size up.</p>
+                        <h3 class="vy-sg__h3">How to measure</h3>
+                        <ol class="vy-sg__measure">
+                          <li><strong>Stand on paper.</strong> Place your heel against a wall and stand with your weight evenly spread.</li>
+                          <li><strong>Mark &amp; measure.</strong> Mark the tip of your longest toe, then measure from the wall to the mark in centimetres.</li>
+                          <li><strong>Match the chart.</strong> Measure both feet and use the larger measurement to pick your size.</li>
+                        </ol>
+                      </div>
+                    </dialog>
+                  </div>
+                  <script>
+                    (function(){
+                      var d=document.getElementById('{{ sg_id }}'); if(!d||d.dataset.sgInit) return; d.dataset.sgInit='1';
+                      function close(){ if(d.close){try{d.close();}catch(e){d.removeAttribute('open');}} else {d.removeAttribute('open');} }
+                      function open(){ if(d.showModal){try{d.showModal();}catch(e){d.setAttribute('open','');}} else {d.setAttribute('open','');} }
+                      document.querySelectorAll('[data-sg-open="{{ sg_id }}"]').forEach(function(b){ b.addEventListener('click', open); });
+                      d.querySelectorAll('[data-sg-close]').forEach(function(b){ b.addEventListener('click', close); });
+                      d.addEventListener('click', function(e){ if(e.target===d) close(); });
+                    })();
+                  </script>
               {%- endcase -%}
             {%- endfor -%}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -950,6 +1003,16 @@
           "label": "t:sections.main-product.blocks.inventory.settings.show_inventory_quantity.label",
           "default": true
         }
+      ]
+    },
+    {
+      "type": "size_guide",
+      "name": "Size guide",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Size guide" },
+        { "type": "text", "id": "heading", "label": "Popup heading", "default": "Size Guide" },
+        { "type": "text", "id": "subheading", "label": "Popup subheading", "default": "Find your fit — foot length in centimetres (cm)" }
       ]
     },
     {
