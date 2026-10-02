@@ -1281,6 +1281,117 @@ a.product__text {
   margin-bottom: var(--icon-size);
 }
 
+/* Size guide block (trigger link + modal) */
+.vy-sg {
+  margin: 1.2rem 0 0;
+}
+.vy-sg__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: none;
+  border: 0;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: rgb(var(--color-foreground));
+  text-underline-offset: 0.4rem;
+}
+.vy-sg__trigger span {
+  text-decoration: underline;
+}
+.vy-sg__trigger .svg-wrapper {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.vy-sg__modal {
+  width: min(64rem, calc(100vw - 3rem));
+  max-height: calc(100vh - 6rem);
+  padding: 0;
+  border: 0;
+  border-radius: 1rem;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.25);
+}
+.vy-sg__modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+.vy-sg__inner {
+  position: relative;
+  padding: 2.6rem 2.8rem 3rem;
+}
+.vy-sg__close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+}
+.vy-sg__close .svg-wrapper {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.vy-sg__title {
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.vy-sg__sub {
+  font-size: 1.3rem;
+  opacity: 0.7;
+  margin: 0.4rem 0 1.8rem;
+}
+.vy-sg__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.vy-sg__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+.vy-sg__table th,
+.vy-sg__table td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.12);
+}
+.vy-sg__table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+.vy-sg__table tbody tr:nth-child(odd) {
+  background: rgba(var(--color-foreground), 0.03);
+}
+.vy-sg__note {
+  margin: 1.6rem 0 0;
+  padding: 1.2rem 1.4rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  border-left: 0.3rem solid rgba(var(--color-foreground), 0.3);
+  background: rgba(var(--color-foreground), 0.04);
+}
+.vy-sg__h3 {
+  font-size: 1.5rem;
+  margin: 2rem 0 0.8rem;
+}
+.vy-sg__measure {
+  margin: 0;
+  padding-left: 1.8rem;
+  font-size: 1.35rem;
+  line-height: 1.6;
+}
+.vy-sg__measure li {
+  margin-bottom: 0.6rem;
+}
+
 /* Text block with background */
 .product__info-container .product__text-bg {
   margin: 1.5rem 0;
