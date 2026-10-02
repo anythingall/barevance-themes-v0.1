@@ -1281,6 +1281,68 @@ a.product__text {
   margin-bottom: var(--icon-size);
 }
 
+/* Colour image swatches */
+.vy-color-fieldset {
+  border: 0;
+  margin: 0 0 1.6rem;
+  padding: 0;
+}
+.vy-color-fieldset .form__label {
+  margin-bottom: 0.8rem;
+}
+.vy-color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.vy-color-swatch__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.vy-color-swatch {
+  display: block;
+  width: 5.6rem;
+  cursor: pointer;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.18);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.03);
+  transition: border-color 0.15s ease;
+}
+.vy-color-swatch img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.vy-color-swatch__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0.4rem;
+}
+.vy-color-swatch:hover {
+  border-color: rgba(var(--color-foreground), 0.5);
+}
+.vy-color-swatch__input:checked + .vy-color-swatch {
+  border-color: rgb(var(--color-foreground));
+  box-shadow: 0 0 0 0.1rem rgb(var(--color-foreground));
+}
+.vy-color-swatch__input:focus-visible + .vy-color-swatch {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.2rem;
+}
+.vy-color-swatch__input.disabled + .vy-color-swatch {
+  opacity: 0.4;
+}
+
 /* Size guide block (trigger link + modal) */
 .vy-sg {
   margin: 1.2rem 0 0;

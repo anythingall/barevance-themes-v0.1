@@ -33,8 +33,31 @@
             assign picker_type = 'swatch'
           endif
         endif
+
+        assign is_color_images = false
+        if block.settings.color_image_swatches
+          assign oname = option.name | downcase
+          if oname contains 'color' or oname contains 'colour'
+            assign is_color_images = true
+          endif
+        endif
       -%}
-      {%- if picker_type == 'swatch' -%}
+      {%- if is_color_images -%}
+        <fieldset class="js product-form__input product-form__input--swatch vy-color-fieldset">
+          <legend class="form__label">
+            {{ option.name }}:
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
+          {% render 'custom-color-swatches',
+            product: product,
+            option: option,
+            section_id: section.id,
+            product_form_id: product_form_id
+          %}
+        </fieldset>
+      {%- elsif picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label">
             {{ option.name }}:
