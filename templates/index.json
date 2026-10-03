@@ -110,6 +110,7 @@
         },
         "t4": {
           "type": "badge",
+          "disabled": true,
           "settings": {
             "icon": "people",
             "title": "10,000+ Happy Customers",
@@ -585,6 +586,8 @@
         "type_visibility": "all",
         "color_scheme": "scheme-2",
         "layout": "split",
+        "split_buyable": true,
+        "enable_mix": true,
         "heading": "One Pair Is Good.<br>Two Makes Life Easier.",
         "subheading": "Mix colors and styles for your lifestyle.",
         "cta_link": "/collections/best-sellers",
