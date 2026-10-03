@@ -24,7 +24,8 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "dropdown",
-            "swatch_shape": "circle"
+            "swatch_shape": "circle",
+            "color_image_swatches": true
           }
         },
         "inventory": {
@@ -445,6 +446,7 @@
         "e4",
         "e5"
       ],
+      "disabled": true,
       "settings": {
         "type_visibility": "all",
         "color_scheme": "scheme-1",
